@@ -1,11 +1,11 @@
-// LocalNinja — site interactions
+// LocalNinja - site interactions
 // Contracts: JS only toggles classes / inline transforms; CSS owns all transitions.
 
 const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)');
 const finePointer = matchMedia('(pointer: fine)');
 
 /* ---------------------------------------------------------------- *
- * 1. Hero word rotator — moves .is-active across .rotator-word     *
+ * 1. Hero word rotator - moves .is-active across .rotator-word     *
  * ---------------------------------------------------------------- */
 function initRotator() {
   const words = document.querySelectorAll('.rotator .rotator-word');
@@ -38,7 +38,7 @@ function initRotator() {
 }
 
 /* ---------------------------------------------------------------- *
- * 2. Product card 3D tilt — inline transform, rAF-throttled        *
+ * 2. Product card 3D tilt - inline transform, rAF-throttled        *
  * ---------------------------------------------------------------- */
 function initTilt() {
   if (prefersReduced.matches || !finePointer.matches) return;
@@ -79,7 +79,7 @@ function initTilt() {
 }
 
 /* ---------------------------------------------------------------- *
- * 3. Scroll reveal — .reveal gains .is-visible once in view        *
+ * 3. Scroll reveal - .reveal gains .is-visible once in view        *
  * ---------------------------------------------------------------- */
 function initReveal() {
   const targets = document.querySelectorAll('.reveal');
@@ -106,7 +106,7 @@ function initReveal() {
 }
 
 /* ---------------------------------------------------------------- *
- * 4. Mobile nav — toggles .nav-open on .site-header                *
+ * 4. Mobile nav - toggles .nav-open on .site-header                *
  * ---------------------------------------------------------------- */
 function initNav() {
   const header = document.querySelector('.site-header');

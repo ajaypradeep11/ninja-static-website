@@ -1,4 +1,4 @@
-# LocalNinja Static Website — Design Spec
+# LocalNinja Static Website - Design Spec
 
 **Date:** 2026-07-09 · **Status:** Approved by Ajay
 
@@ -18,21 +18,21 @@ NinjaCommerce, NinjaHR, NinjaLearn. Black-dominant theme with yellow accents
 
 ## Sections
 
-1. **Hero (`#home`)** — Full-viewport black. Sticky header: circular logo mark +
+1. **Hero (`#home`)** - Full-viewport black. Sticky header: circular logo mark +
    "LocalNinja" wordmark, anchor nav, yellow "Get in touch" mailto button
-   (`mailto:ceotwopeace@gmail.com` — placeholder, easy to change). Headline
+   (`mailto:ceotwopeace@gmail.com` - placeholder, easy to change). Headline
    "We build ninjas for" + auto-rotating word every ~2.5 s:
    **ecommerce** (yellow) → **HR** (blue) → **learning** (green). Mascot image
    floats beside copy with a subtle bob.
-2. **About (`#about`)** — Statement about who LocalNinja is, plus three
+2. **About (`#about`)** - Statement about who LocalNinja is, plus three
    "how we operate" points (small, fast, quality-obsessed). Placeholder copy.
-3. **Products (`#products`)** — Three cards: NinjaCommerce (yellow #FFD84D),
+3. **Products (`#products`)** - Three cards: NinjaCommerce (yellow #FFD84D),
    NinjaHR (blue #4DA3FF), NinjaLearn (green #4ADE80). Rest state: dark card,
    colored icon + name. Hover: 3D tilt-toward-cursor, lift, colored glow/border
    flood. Each card: one-line pitch + 3 feature bullets.
-4. **Team (`#team`)** — Ajay and Aleena, circular initial-avatars (photos
+4. **Team (`#team`)** - Ajay and Aleena, circular initial-avatars (photos
    swap in later), name + role.
-5. **Footer** — brand, mini nav, `© 2026 LocalNinja. All rights reserved.`
+5. **Footer** - brand, mini nav, `© 2026 LocalNinja. All rights reserved.`
 
 ## Behavior contract (JS ↔ CSS)
 
@@ -41,7 +41,7 @@ NinjaCommerce, NinjaHR, NinjaLearn. Black-dominant theme with yellow accents
   enter/exit transition and per-accent color.
 - **Tilt:** JS sets inline `transform` on `.product-card` from mousemove
   (perspective rotateX/rotateY + translate lift), resets on leave. CSS must not
-  fight card transform on hover — hover styling uses border/box-shadow/inner
+  fight card transform on hover - hover styling uses border/box-shadow/inner
   elements.
 - **Reveal:** elements with `.reveal` get `.is-visible` from an
   IntersectionObserver. CSS defines hidden/visible states.

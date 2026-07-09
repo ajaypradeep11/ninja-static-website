@@ -1,12 +1,12 @@
 /* ============================================================
-   LocalNinja — style.css
+   LocalNinja - style.css
    Black-dominant premium dark theme, brand yellow accent.
    Fonts: Sora (display) / Inter (body), loaded in index.html.
    JS contracts honored here:
-     .rotator-word.is-active   — rotator visibility (JS toggles)
-     .reveal.is-visible        — scroll reveal (IntersectionObserver)
-     .site-header.nav-open     — mobile nav dropdown
-     .product-card             — JS owns inline transform (tilt);
+     .rotator-word.is-active   - rotator visibility (JS toggles)
+     .reveal.is-visible        - scroll reveal (IntersectionObserver)
+     .site-header.nav-open     - mobile nav dropdown
+     .product-card             - JS owns inline transform (tilt);
                                  CSS never sets transform on hover.
    ============================================================ */
 
@@ -114,7 +114,7 @@ button {
   color: #0a0a0a;
 }
 
-/* Custom scrollbar (WebKit) — quiet, on-theme */
+/* Custom scrollbar (WebKit) - quiet, on-theme */
 ::-webkit-scrollbar {
   width: 12px;
 }
@@ -159,7 +159,7 @@ button {
   margin-top: 0.6rem;
 }
 
-/* Kicker — small blade-stroke label */
+/* Kicker - small blade-stroke label */
 .kicker {
   display: flex;
   align-items: center;
@@ -307,7 +307,7 @@ button {
   font-size: 0.85rem;
 }
 
-/* Hamburger — hidden on desktop */
+/* Hamburger - hidden on desktop */
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -354,7 +354,7 @@ button {
   overflow: hidden;
 }
 
-/* Faint dot grid across the hero — barely there */
+/* Faint dot grid across the hero - barely there */
 .hero::before {
   content: "";
   position: absolute;
@@ -682,7 +682,7 @@ button {
     0 100%,
     0 var(--cut)
   );
-  /* JS sets inline transform (tilt) on mousemove — CSS must not
+  /* JS sets inline transform (tilt) on mousemove - CSS must not
      set transform on :hover. Transition keeps JS updates smooth. */
   transition:
     transform 0.15s ease,
@@ -757,7 +757,7 @@ button {
   opacity: 1;
 }
 
-/* Targeting brackets on the two square corners — lock on when hovered */
+/* Targeting brackets on the two square corners - lock on when hovered */
 .card-frame {
   position: absolute;
   inset: 10px;
