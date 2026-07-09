@@ -480,6 +480,47 @@ button {
   }
 }
 
+/* --- Mascot life: blinking + sneaky glance (hero SVG only) --- */
+
+.mascot .eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 4.6s ease-in-out infinite;
+}
+
+.mascot .eyes {
+  animation: glance 9s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%,
+  88%,
+  96%,
+  100% {
+    transform: scaleY(1);
+  }
+  92% {
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes glance {
+  0%,
+  30%,
+  72%,
+  100% {
+    transform: translateX(0);
+  }
+  36%,
+  48% {
+    transform: translateX(-14px);
+  }
+  54%,
+  66% {
+    transform: translateX(14px);
+  }
+}
+
 /* --- Scroll hint: mouse-style pill --- */
 
 .scroll-hint {
