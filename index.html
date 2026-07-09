@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LocalNinja — Silent. Swift. Effective.</title>
+    <meta
+      name="description"
+      content="LocalNinja builds focused digital products: NinjaCommerce for ecommerce, NinjaHR for people operations, and NinjaLearn for learning."
+    />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <div class="nav-inner container">
+        <a class="brand" href="#home" aria-label="LocalNinja home">
+          <img class="brand-mark" src="/logo.png" alt="" width="40" height="40" />
+          <span class="brand-name">Local<span class="brand-accent">Ninja</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#products">Products</a>
+          <a href="#team">Team</a>
+        </nav>
+        <a class="btn btn-primary nav-cta" href="mailto:ceotwopeace@gmail.com">Get in touch</a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============ HERO ============ -->
+      <section class="hero" id="home">
+        <div class="hero-inner container">
+          <div class="hero-copy">
+            <p class="kicker">Silent. Swift. Effective.</p>
+            <h1 class="hero-title">
+              We build ninjas for
+              <span class="rotator" aria-live="polite">
+                <span class="rotator-word is-active" data-accent="commerce">ecommerce</span>
+                <span class="rotator-word" data-accent="hr">HR</span>
+                <span class="rotator-word" data-accent="learn">learning</span>
+              </span>
+            </h1>
+            <p class="hero-sub">
+              LocalNinja crafts sharp, focused software — an ecommerce engine, a people
+              platform, and a learning studio — built to strike fast and never miss.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#products">Meet the ninjas</a>
+              <a class="btn btn-ghost" href="#about">What we do</a>
+            </div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <img class="mascot" src="/logo.png" alt="" width="320" height="320" />
+          </div>
+        </div>
+        <a class="scroll-hint" href="#about" aria-label="Scroll to about section">
+          <span class="scroll-hint-dot"></span>
+        </a>
+      </section>
+
+      <!-- ============ ABOUT ============ -->
+      <section class="about section" id="about">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="kicker">About us</p>
+            <h2>Small clan. Sharp blades.</h2>
+          </div>
+          <p class="about-statement reveal">
+            LocalNinja is a product studio with one belief: great software should move
+            like a ninja — quietly, precisely, and exactly where it's needed. We design
+            and build three focused products that help businesses sell, manage their
+            people, and grow their skills, without the bloat that slows everyone down.
+          </p>
+          <div class="about-points">
+            <div class="point reveal">
+              <span class="point-num">01</span>
+              <h3>Stay small</h3>
+              <p>
+                A tight clan beats a slow army. We keep the team lean so decisions are
+                fast and every product has a real owner.
+              </p>
+            </div>
+            <div class="point reveal">
+              <span class="point-num">02</span>
+              <h3>Strike fast</h3>
+              <p>
+                We ship early, learn from real users, and iterate relentlessly. Momentum
+                is our favorite weapon.
+              </p>
+            </div>
+            <div class="point reveal">
+              <span class="point-num">03</span>
+              <h3>Leave no trace of friction</h3>
+              <p>
+                Every screen earns its place. If a feature doesn't serve the mission, it
+                doesn't ship. Quality is non-negotiable.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PRODUCTS ============ -->
+      <section class="products section" id="products">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="kicker">Our products</p>
+            <h2>Three ninjas, three missions.</h2>
+          </div>
+          <div class="product-grid">
+            <article class="product-card reveal" data-accent="commerce">
+              <div class="product-icon" aria-hidden="true">🛒</div>
+              <h3 class="product-name">NinjaCommerce</h3>
+              <p class="product-pitch">
+                A lightning-fast ecommerce engine that turns browsers into buyers.
+              </p>
+              <ul class="product-features">
+                <li>Storefronts that load in a blink</li>
+                <li>Inventory, orders &amp; payments in one dojo</li>
+                <li>Built-in analytics that speak human</li>
+              </ul>
+              <span class="product-tag">Ecommerce</span>
+            </article>
+
+            <article class="product-card reveal" data-accent="hr">
+              <div class="product-icon" aria-hidden="true">🧑‍💼</div>
+              <h3 class="product-name">NinjaHR</h3>
+              <p class="product-pitch">
+                People operations without the paperwork — hire, manage, and grow your clan.
+              </p>
+              <ul class="product-features">
+                <li>Onboarding flows that run themselves</li>
+                <li>Leave, payroll &amp; records in one place</li>
+                <li>Reviews and goals people actually use</li>
+              </ul>
+              <span class="product-tag">HR platform</span>
+            </article>
+
+            <article class="product-card reveal" data-accent="learn">
+              <div class="product-icon" aria-hidden="true">📚</div>
+              <h3 class="product-name">NinjaLearn</h3>
+              <p class="product-pitch">
+                A learning studio that turns knowledge into skill, one lesson at a time.
+              </p>
+              <ul class="product-features">
+                <li>Course builder with zero learning curve</li>
+                <li>Quizzes, paths &amp; certificates</li>
+                <li>Progress tracking for every student</li>
+              </ul>
+              <span class="product-tag">Learning</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TEAM ============ -->
+      <section class="team section" id="team">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="kicker">The clan</p>
+            <h2>The ninjas behind LocalNinja.</h2>
+          </div>
+          <div class="team-grid">
+            <div class="team-card reveal">
+              <div class="avatar" aria-hidden="true"><span>AJ</span></div>
+              <h3 class="team-name">Ajay</h3>
+              <p class="team-role">Co-founder</p>
+            </div>
+            <div class="team-card reveal">
+              <div class="avatar" aria-hidden="true"><span>AL</span></div>
+              <h3 class="team-name">Aleena</h3>
+              <p class="team-role">Co-founder</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="brand" href="#top">
+          <img class="brand-mark" src="/logo.png" alt="" width="32" height="32" />
+          <span class="brand-name">Local<span class="brand-accent">Ninja</span></span>
+        </a>
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#products">Products</a>
+          <a href="#team">Team</a>
+        </nav>
+        <p class="copyright">© 2026 LocalNinja. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
