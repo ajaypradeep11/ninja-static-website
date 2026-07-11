@@ -260,16 +260,25 @@ button {
   flex-shrink: 0;
 }
 
-/* Logo shown as a round badge everywhere */
-.brand-mark,
+/* Keep the animated hero mascot circular. */
 .mascot {
   border-radius: 50%;
 }
 
 .brand-mark {
-  width: 40px;
-  height: 40px;
-  box-shadow: 0 0 0 1px rgba(255, 216, 77, 0.35);
+  width: 52px;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
 }
 
 .brand-name {
@@ -1043,8 +1052,8 @@ button {
 }
 
 .site-footer .brand-mark {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
 }
 
 .site-footer .brand-name {
