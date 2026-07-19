@@ -30,6 +30,7 @@
   --yellow: #ffd84d;
   --blue: #4da3ff;
   --green: #4ade80;
+  --purple: #c084fc;
 
   /* Type */
   --font-display: "Sora", system-ui, sans-serif;
@@ -1080,6 +1081,125 @@ button {
   color: var(--text-dim);
 }
 
+/* ---------- Solutions page (/solutions.html) ---------- */
+
+.solutions-hero {
+  position: relative;
+  padding-block: calc(var(--header-h) + clamp(3rem, 8vw, 5rem)) clamp(2rem, 6vw, 3.5rem);
+  overflow: hidden;
+}
+
+/* Same faint dot grid as the homepage hero */
+.solutions-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 34px 34px;
+  mask-image: radial-gradient(ellipse 90% 75% at 50% 45%, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 45%, #000 30%, transparent 75%);
+  pointer-events: none;
+}
+
+.solutions-hero .container {
+  position: relative;
+}
+
+.solutions-title {
+  margin-top: 0.9rem;
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.solutions-sub {
+  margin-top: 1.25rem;
+  max-width: 52ch;
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  color: var(--text-body);
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+}
+
+.service-card {
+  --accent: var(--yellow);
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  border-radius: var(--radius-card);
+  padding: 1.75rem 1.6rem 1.9rem;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.service-card[data-accent="commerce"] {
+  --accent: var(--yellow);
+}
+.service-card[data-accent="hr"] {
+  --accent: var(--blue);
+}
+.service-card[data-accent="learn"] {
+  --accent: var(--green);
+}
+.service-card[data-accent="design"] {
+  --accent: var(--purple);
+}
+
+.service-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  box-shadow: 0 14px 40px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.service-card .unit-code {
+  margin-bottom: 0.6rem;
+}
+
+.service-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.service-desc {
+  margin-top: 0.6rem;
+  font-size: 0.97rem;
+  color: var(--text-body);
+}
+
+.service-card .product-features {
+  margin-bottom: 0;
+}
+
+.solutions-cta {
+  padding-top: 0;
+}
+
+.cta-panel {
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: clamp(2.25rem, 6vw, 3.5rem) var(--gutter);
+}
+
+.cta-panel h2 {
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+}
+
+.cta-panel p {
+  margin: 0.9rem auto 1.75rem;
+  max-width: 48ch;
+  color: var(--text-body);
+}
+
 /* ---------- Reveal on scroll (JS adds .is-visible) ---------- */
 
 .reveal {
@@ -1098,13 +1218,19 @@ button {
 /* Stagger inside grids */
 .about-points .reveal:nth-child(2),
 .product-grid .reveal:nth-child(2),
+.service-grid .reveal:nth-child(2),
 .team-grid .reveal:nth-child(2) {
   transition-delay: 0.12s;
 }
 
 .about-points .reveal:nth-child(3),
-.product-grid .reveal:nth-child(3) {
+.product-grid .reveal:nth-child(3),
+.service-grid .reveal:nth-child(3) {
   transition-delay: 0.24s;
+}
+
+.service-grid .reveal:nth-child(4) {
+  transition-delay: 0.36s;
 }
 
 /* ---------- Responsive ---------- */
@@ -1125,6 +1251,7 @@ button {
   }
 
   .product-grid,
+  .service-grid,
   .about-points {
     grid-template-columns: 1fr;
     max-width: 540px;

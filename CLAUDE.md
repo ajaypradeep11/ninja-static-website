@@ -4,11 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A one-page static marketing site for LocalNinja (black theme, yellow/blue/green
-accents) introducing three products — NinjaCommerce, NinjaBusiness (HR),
-NinjaLearn. Vite + vanilla JS/CSS, no framework, no backend, no CMS. Design
-rationale and behavior contracts live in
-`docs/superpowers/specs/2026-07-09-localninja-site-design.md`.
+A static marketing site for LocalNinja (black theme, yellow/blue/green/purple
+accents) introducing three products — NinjaCommerce, NinjaSolution (services),
+NinjaLearn — plus a `/solutions.html` services page for NinjaSolution. Vite +
+vanilla JS/CSS, no framework, no backend, no CMS. Design rationale and behavior
+contracts live in `docs/superpowers/specs/2026-07-09-localninja-site-design.md`
+and `docs/superpowers/specs/2026-07-18-ninjasolution-services-page-design.md`.
 
 ## Commands
 
@@ -42,12 +43,17 @@ before treating work as done.
 
 ## Architecture
 
-Everything lives in three files plus assets:
+Everything lives in a few files plus assets:
 
-- `index.html` — full page markup, single file, no templating. All four
-  sections (`#home`, `#about`, `#products`, `#team`) plus header/footer live
-  here as static HTML. CSS is linked directly (`<link href="/src/style.css">`),
-  **not** imported from `main.js` — don't move it into JS.
+- `index.html` — homepage markup, no templating. All four sections (`#home`,
+  `#about`, `#products`, `#team`) plus header/footer live here as static HTML.
+  CSS is linked directly (`<link href="/src/style.css">`), **not** imported
+  from `main.js` — don't move it into JS.
+- `solutions.html` — NinjaSolution services page (linked from the Unit 02
+  product card). Reuses `style.css`/`main.js` unchanged; service cards are
+  `.service-card` (no 3D tilt — that stays exclusive to `.product-card`).
+  Any new page must be added to `vite.config.js` `rollupOptions.input` or the
+  build won't emit it.
 - `src/main.js` — all interactivity, loaded as an ES module
   (`<script type="module">`). Structured as four independent `init*()`
   functions called from one `init()`: hero word rotator, product card 3D tilt,
