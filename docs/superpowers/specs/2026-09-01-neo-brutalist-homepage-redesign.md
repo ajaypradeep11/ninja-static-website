@@ -72,9 +72,9 @@ content. `solutions.html` (the old NinjaSolution page) is removed.
 6. **About + Team** (`#about`) — two columns. Left: kicker "About us",
    `WE ARE` / `LOCALNINJA`(highlighted), two paragraphs, three stat tiles
    (placeholders: `3 Products`, `6 Services`, `2026 Founded`). Right: "The
-   team" with five bordered cards in a 3-column grid (2 on ≤640px): Ajay —
-   Co-founder and Aleena — Owner (with LinkedIn links), plus Frontend Ninja,
-   Backend Ninja and Cloud Ninja. Every card uses the mascot SVG in a blue
+   team" with six bordered cards in a 3-column grid (2 on ≤640px): Ajay —
+   Co-founder and Aleena — Owner (with LinkedIn links), plus AI Specialist
+   Ninja, Frontend Ninja, Backend Ninja and Cloud Ninja. Every card uses the mascot SVG in a blue
    bordered square as its avatar — no photos.
 7. **Contact** (`#contact`) — `#4da3ff` band. Left: kicker "Get in touch",
    `LET'S BUILD` / `SOMETHING` / `SHARP`(black block, white text), email and
