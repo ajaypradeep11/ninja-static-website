@@ -1,85 +1,8 @@
 // LocalNinja - site interactions
-// Contracts: JS only toggles classes / inline transforms; CSS owns all transitions.
-
-const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)');
-const finePointer = matchMedia('(pointer: fine)');
+// Contracts: JS only toggles classes / builds URLs; CSS owns all transitions.
 
 /* ---------------------------------------------------------------- *
- * 1. Hero word rotator - moves .is-active across .rotator-word     *
- * ---------------------------------------------------------------- */
-function initRotator() {
-  const words = document.querySelectorAll('.rotator .rotator-word');
-  if (words.length < 2) return;
-
-  const INTERVAL = 2600;
-  let index = Math.max(0, [...words].findIndex((w) => w.classList.contains('is-active')));
-  let timer = null;
-
-  const advance = () => {
-    words[index].classList.remove('is-active');
-    index = (index + 1) % words.length;
-    words[index].classList.add('is-active');
-  };
-
-  const start = () => {
-    if (timer === null) timer = setInterval(advance, INTERVAL);
-  };
-  const stop = () => {
-    clearInterval(timer);
-    timer = null;
-  };
-
-  // Pause while the tab is hidden so the word doesn't jump on return.
-  document.addEventListener('visibilitychange', () => {
-    document.hidden ? stop() : start();
-  });
-
-  start();
-}
-
-/* ---------------------------------------------------------------- *
- * 2. Product card 3D tilt - inline transform, rAF-throttled        *
- * ---------------------------------------------------------------- */
-function initTilt() {
-  if (prefersReduced.matches || !finePointer.matches) return;
-
-  const cards = document.querySelectorAll('.product-card');
-  if (!cards.length) return;
-
-  const MAX_DEG = 8;
-
-  cards.forEach((card) => {
-    let rafId = null;
-    let lastEvent = null;
-
-    const applyTilt = () => {
-      rafId = null;
-      if (!lastEvent) return;
-      const rect = card.getBoundingClientRect();
-      const dx = (lastEvent.clientX - rect.left) / rect.width - 0.5;  // -0.5 .. 0.5
-      const dy = (lastEvent.clientY - rect.top) / rect.height - 0.5;
-      const ry = (dx * 2 * MAX_DEG).toFixed(2);        // cursor right -> rotate right
-      const rx = (-dy * 2 * MAX_DEG).toFixed(2);       // cursor top -> tilt back
-      card.style.transform =
-        `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-8px) scale(1.02)`;
-    };
-
-    card.addEventListener('pointermove', (event) => {
-      lastEvent = event;
-      if (rafId === null) rafId = requestAnimationFrame(applyTilt);
-    });
-
-    card.addEventListener('pointerleave', () => {
-      if (rafId !== null) cancelAnimationFrame(rafId);
-      rafId = null;
-      lastEvent = null;
-      card.style.transform = '';
-    });
-  });
-}
-
-/* ---------------------------------------------------------------- *
- * 3. Scroll reveal - .reveal gains .is-visible once in view        *
+ * 1. Scroll reveal - .reveal gains .is-visible once in view        *
  * ---------------------------------------------------------------- */
 function initReveal() {
   const targets = document.querySelectorAll('.reveal');
@@ -106,7 +29,7 @@ function initReveal() {
 }
 
 /* ---------------------------------------------------------------- *
- * 4. Mobile nav - toggles .nav-open on .site-header                *
+ * 2. Mobile nav - toggles .nav-open on .site-header                *
  * ---------------------------------------------------------------- */
 function initNav() {
   const header = document.querySelector('.site-header');
@@ -126,14 +49,118 @@ function initNav() {
   header.querySelectorAll('.site-nav a').forEach((link) => {
     link.addEventListener('click', () => setOpen(false));
   });
+
+  // Dropdown groups (.has-menu) and their nested "Others" list.
+  const menus = header.querySelectorAll('.has-menu');
+  const closeMenus = () => {
+    menus.forEach((menu) => {
+      menu.classList.remove('is-open');
+      menu.querySelector('.nav-menu-toggle')?.setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  menus.forEach((menu) => {
+    const toggle = menu.querySelector('.nav-menu-toggle');
+    toggle?.addEventListener('click', () => {
+      const open = !menu.classList.contains('is-open');
+      closeMenus();
+      menu.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+
+    menu.querySelectorAll('.nav-others').forEach((group) => {
+      const sub = group.querySelector('.nav-others-toggle');
+      sub?.addEventListener('click', () => {
+        const open = !group.classList.contains('is-open');
+        group.classList.toggle('is-open', open);
+        sub.setAttribute('aria-expanded', String(open));
+      });
+    });
+
+    menu.querySelectorAll('.nav-menu a').forEach((link) => {
+      link.addEventListener('click', closeMenus);
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('.has-menu')) closeMenus();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenus();
+  });
+}
+
+/* ---------------------------------------------------------------- *
+ * 3. Services accordion - toggles .is-open on .service-row         *
+ * ---------------------------------------------------------------- */
+function initServices() {
+  const rows = document.querySelectorAll('.service-row');
+  if (!rows.length) return;
+
+  rows.forEach((row) => {
+    const toggle = row.querySelector('.service-toggle');
+    if (!toggle) return;
+
+    const setOpen = (open) => {
+      row.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+
+    // The whole row is a hit target, but clicks inside the details
+    // (e.g. selecting text) shouldn't collapse it.
+    row.addEventListener('click', (event) => {
+      if (event.target.closest('.service-details')) return;
+      setOpen(!row.classList.contains('is-open'));
+    });
+
+    row._setOpen = setOpen;
+  });
+
+  // Arriving via a #svc-* link (header dropdown) opens that row.
+  const openFromHash = () => {
+    const id = location.hash.slice(1);
+    if (!id) return;
+    const row = document.getElementById(id);
+    if (row?.classList.contains('service-row')) row._setOpen(true);
+  };
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
+}
+
+/* ---------------------------------------------------------------- *
+ * 4. Contact form - no backend; opens a prefilled mailto: link     *
+ * ---------------------------------------------------------------- */
+function initContactForm() {
+  const form = document.querySelector('#contact-form');
+  if (!form) return;
+
+  const TO = 'support@localninja.ca';
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    const name = String(data.get('name') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const message = String(data.get('message') || '').trim();
+
+    const subject = `Project enquiry from ${name}`;
+    const body = `${message}\n\n- ${name}\n${email}`;
+    const url =
+      `mailto:${TO}?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`;
+
+    window.location.href = url;
+  });
 }
 
 /* ---------------------------------------------------------------- */
 function init() {
-  initRotator();
-  initTilt();
   initReveal();
   initNav();
+  initServices();
+  initContactForm();
 }
 
 if (document.readyState !== 'loading') {

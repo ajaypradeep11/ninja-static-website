@@ -4,12 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A static marketing site for LocalNinja (black theme, yellow/blue/green/purple
-accents) introducing three products — NinjaCommerce, NinjaSolution (services),
-NinjaLearn — plus a `/solutions.html` services page for NinjaSolution. Vite +
-vanilla JS/CSS, no framework, no backend, no CMS. Design rationale and behavior
-contracts live in `docs/superpowers/specs/2026-07-09-localninja-site-design.md`
-and `docs/superpowers/specs/2026-07-18-ninjasolution-services-page-design.md`.
+A static marketing site for LocalNinja. The homepage is a single-page,
+neo-brutalist services site (white ground, black 3px borders + hard offset
+shadows, `#4da3ff` accent on the "Ninja" word and highlighted heading words)
+listing the company's 6 core services (plus an "Others" group), about/team, and a mailto-backed contact
+form. Vite + vanilla JS/CSS, no framework, no backend, no CMS. Design
+rationale and behavior contracts live in
+`docs/superpowers/specs/2026-09-01-neo-brutalist-homepage-redesign.md`;
+the older specs describe the previous homepage and the retired
+`solutions.html` page.
 
 ## Commands
 
@@ -45,35 +48,27 @@ before treating work as done.
 
 Everything lives in a few files plus assets:
 
-- `index.html` — homepage markup, no templating. All four sections (`#home`,
-  `#about`, `#products`, `#team`) plus header/footer live here as static HTML.
-  CSS is linked directly (`<link href="/src/style.css">`), **not** imported
-  from `main.js` — don't move it into JS.
-- `solutions.html` — NinjaSolution services page (linked from the Unit 02
-  product card). Reuses `style.css`/`main.js` unchanged; service cards are
-  `.service-card` (no 3D tilt — that stays exclusive to `.product-card`).
-  Any new page must be added to `vite.config.js` `rollupOptions.input` or the
-  build won't emit it.
+- `index.html` — homepage markup, no templating. Sections in order: header,
+  `#home` hero, marquee band, `#services` (6 numbered accordion rows + an
+  "Others" row; rows have `id="svc-*"` so the header dropdown can deep-link),
+  `#process` (six-step "How we work" cards), `#about` (+ team), `#contact`
+  (form), footer (`#products` links). CSS is linked directly
+  (`<link href="/src/style.css">`), **not** imported from `main.js` — don't
+  move it into JS.
+  Any new page must be added to `vite.config.js` `rollupOptions.input` or
+  the build won't emit it.
 - `src/main.js` — all interactivity, loaded as an ES module
-  (`<script type="module">`). Structured as four independent `init*()`
-  functions called from one `init()`: hero word rotator, product card 3D tilt,
-  scroll-reveal (IntersectionObserver), mobile nav toggle. Comment at the top
-  states the contract: **JS only toggles classes / sets inline transforms;
-  CSS owns all transitions/animations.**
-- `src/style.css` — all styling and animation/transition definitions.
-- `public/` — static assets served from site root (`logo.png`, `team/*.jpg`).
+  (`<script type="module">`). Three independent `init*()` functions called
+  from one `init()`: scroll-reveal (IntersectionObserver), mobile nav toggle,
+  services accordion, contact form (builds a `mailto:` URL). Comment at the top states the
+  contract: **JS only toggles classes / builds URLs; CSS owns all
+  transitions/animations.**
+- `src/style.css` — all styling and every animation/transition.
+- `public/` — static assets served from site root (`logo-animated.svg`,
+  `logo.png`, `team/*.jpg`).
 
 ### JS/CSS behavior contracts (don't break these)
 
-- **Rotator**: words are `span.rotator-word[data-accent]` inside
-  `span.rotator`; JS toggles `.is-active`, paused via
-  `visibilitychange` while the tab is hidden. CSS owns per-accent color and
-  enter/exit transition.
-- **Tilt**: JS sets inline `transform` on `.product-card` from
-  `pointermove` (rAF-throttled), clears it (`transform = ''`) on
-  `pointerleave`. Skipped entirely when `prefers-reduced-motion: reduce` or
-  no fine pointer. CSS must never set a hover `transform` on `.product-card`
-  — hover styling is border/box-shadow/inner-element only.
 - **Reveal**: elements with `.reveal` gain `.is-visible` once via an
   `IntersectionObserver` (threshold 0.15); falls back to revealing everything
   immediately if `IntersectionObserver` is unsupported. CSS defines the
@@ -81,5 +76,22 @@ Everything lives in a few files plus assets:
   `prefers-reduced-motion: reduce`.
 - **Mobile nav**: `.nav-toggle` button toggles `.nav-open` on `.site-header`
   and updates `aria-expanded`; clicking a nav link closes the menu.
+- **Services dropdown**: `.has-menu > .nav-menu-toggle` toggles `.is-open`
+  on `.has-menu` (click only — no hover-open); nested `.nav-others-toggle`
+  toggles `.is-open` on `.nav-others`. Outside click / Escape / following a
+  menu link closes it. Menu links are `#svc-*` hashes; `initServices()`
+  opens the matching row on `hashchange`/load.
+- **Services accordion**: `.service-row` click (or its `.service-toggle`
+  button) toggles `.is-open` and `aria-expanded`; CSS animates
+  `.service-details` height via `grid-template-rows` (instant under
+  reduced motion). Clicks inside `.service-details` don't collapse it.
+- **Contact form**: `#contact-form` submit is intercepted; after
+  `reportValidity()` JS sets `window.location.href` to a `mailto:` with the
+  subject/body prefilled. No network request, no backend.
+- **Marquee**: CSS-only (`.marquee-track` translates -50% over a duplicated
+  `.marquee-group`); stopped under `prefers-reduced-motion`.
+- **Display headings**: Syne 800 is ~1em wide per glyph. Single long words
+  (`SOLUTIONS`, `LOCALNINJA`) are what overflow on narrow screens — size
+  them with `vw` clamps per breakpoint rather than letting them wrap.
 
 All new motion/animation must be gated on `prefers-reduced-motion`.
