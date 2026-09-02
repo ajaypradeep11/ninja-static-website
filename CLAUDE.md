@@ -65,7 +65,7 @@ Everything lives in a few files plus assets:
   transitions/animations.**
 - `src/style.css` — all styling and every animation/transition.
 - `public/` — static assets served from site root (`logo-animated.svg`,
-  `logo.png`, `team/*.jpg`).
+  `logo.png`).
 
 ### JS/CSS behavior contracts (don't break these)
 
