@@ -1,0 +1,16 @@
+{
+  "name": "localninja-functions",
+  "private": true,
+  "description": "ChatGPT relay for the LocalNinja bot demos",
+  "main": "index.js",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "deploy": "firebase deploy --only functions"
+  },
+  "dependencies": {
+    "firebase-functions": "^6.1.0"
+  }
+}

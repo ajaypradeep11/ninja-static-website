@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NinjaLearn - LocalNinja project</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/logo-animated.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/work/shell.css" />
+    <link rel="stylesheet" href="/src/work/gallery.css" />
+    <style>.gal { --accent: #0891b2; }</style>
+  </head>
+  <body>
+    <header class="ln-bar">
+      <a class="ln-bar-brand" href="/#work"><img src="/logo-animated.svg" alt="" width="32" height="32" /><span class="ln-bar-name">Local<span class="ninja">Ninja</span></span></a>
+      <p class="ln-bar-title">Project · <strong>NinjaLearn</strong> learning platform <span class="ln-tag">Learning platform</span></p>
+      <a class="ln-bar-back" href="/#work">← Back to site</a>
+    </header>
+
+    <main class="gal">
+      <div class="gal-head">
+        <div>
+          <p class="kicker">Shipped product · Live at learn.localninja.ca</p>
+          <h1>NinjaLearn</h1>
+          <p class="lede">A browser-based platform for mastering software engineering by doing instead of reading. Every system-design and algorithm topic is a running simulation: crash servers, inject network partitions, flood rate limiters, race two pointers - and watch what happens. Six hubs, 122 interactive modules.</p>
+        </div>
+        <div class="gal-facts">
+          <div><span>Role</span>Full-stack developer</div>
+          <div><span>Stack</span>React · TypeScript · pure client-side simulation engines with zero runtime dependencies</div>
+          <div><span>Scale</span>6 hubs · 122 modules · 41 live system-design simulators with failure injection and auto-traffic</div>
+          <div><span>Links</span><em class="links"><a href="https://learn.localninja.ca" target="_blank" rel="noopener">learn.localninja.ca ↗</a></em></div>
+        </div>
+      </div>
+
+      <div class="gal-grid">
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-1" aria-label="Enlarge: Home">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/ninja-learn/live-home.jpg" alt="Home" loading="eager" />
+          </button>
+          <div class="cap">
+            <span class="n">01</span>
+            <h2>Home</h2>
+            <p>Six hubs under one roof: System Design, DSA Patterns, Programming Languages, Design Patterns, Software Architecture and Developers Den.</p>
+          </div>
+        </article>
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-2" aria-label="Enlarge: System design hub">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/ninja-learn/live-systemdesign.jpg" alt="System design hub" loading="lazy" />
+          </button>
+          <div class="cap">
+            <span class="n">02</span>
+            <h2>System design hub</h2>
+            <p>42 modules across 13 categories, connected by a pannable, zoomable mind map of 52 prerequisite links.</p>
+          </div>
+        </article>
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-3" aria-label="Enlarge: Caching simulator">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/ninja-learn/live-module-caching.jpg" alt="Caching simulator" loading="lazy" />
+          </button>
+          <div class="cap">
+            <span class="n">03</span>
+            <h2>Caching simulator</h2>
+            <p>A live module: turn on auto-traffic, watch hit rates, then kill a cache node and see the system respond in real time.</p>
+          </div>
+        </article>
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-4" aria-label="Enlarge: DSA patterns">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/ninja-learn/live-dsa.jpg" alt="DSA patterns" loading="lazy" />
+          </button>
+          <div class="cap">
+            <span class="n">04</span>
+            <h2>DSA patterns</h2>
+            <p>Algorithms you can step through - two pointers, sliding windows, graph traversals - with the state drawn as it changes.</p>
+          </div>
+        </article>
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-5" aria-label="Enlarge: Developers Den">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/ninja-learn/live-devden.jpg" alt="Developers Den" loading="lazy" />
+          </button>
+          <div class="cap">
+            <span class="n">05</span>
+            <h2>Developers Den</h2>
+            <p>The hub for tooling, workflows and the practical side of shipping software.</p>
+          </div>
+        </article>
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-6" aria-label="Enlarge: All hubs">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/ninja-learn/live-hubs.jpg" alt="All hubs" loading="lazy" />
+          </button>
+          <div class="cap">
+            <span class="n">06</span>
+            <h2>All hubs</h2>
+            <p>Progress across every hub at a glance - each one a set of simulations rather than pages of text.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="lightbox" id="lb-1" role="dialog" aria-label="Home">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/ninja-learn/live-home.jpg" alt="Home" loading="lazy" />
+      </div>
+      <div class="lightbox" id="lb-2" role="dialog" aria-label="System design hub">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/ninja-learn/live-systemdesign.jpg" alt="System design hub" loading="lazy" />
+      </div>
+      <div class="lightbox" id="lb-3" role="dialog" aria-label="Caching simulator">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/ninja-learn/live-module-caching.jpg" alt="Caching simulator" loading="lazy" />
+      </div>
+      <div class="lightbox" id="lb-4" role="dialog" aria-label="DSA patterns">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/ninja-learn/live-dsa.jpg" alt="DSA patterns" loading="lazy" />
+      </div>
+      <div class="lightbox" id="lb-5" role="dialog" aria-label="Developers Den">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/ninja-learn/live-devden.jpg" alt="Developers Den" loading="lazy" />
+      </div>
+      <div class="lightbox" id="lb-6" role="dialog" aria-label="All hubs">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/ninja-learn/live-hubs.jpg" alt="All hubs" loading="lazy" />
+      </div>
+    </main>
+
+    <footer class="ln-foot">
+      <span>Screens from the live product. Built by LocalNinja.</span>
+      <a href="/#contact">Want one for your business? →</a>
+    </footer>
+
+    <script type="module" src="/src/work/mockups.js"></script>
+  </body>
+</html>

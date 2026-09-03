@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Northshore Goods support - LocalNinja sample project</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/logo-animated.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/work/shell.css" />
+    <link rel="stylesheet" href="/src/work/bot.css" />
+    <link rel="stylesheet" href="/src/work/bot-store.css" />
+  </head>
+  <body>
+    <header class="ln-bar">
+      <a class="ln-bar-brand" href="/#work"><img src="/logo-animated.svg" alt="" width="32" height="32" /><span class="ln-bar-name">Local<span class="ninja">Ninja</span></span></a>
+      <p class="ln-bar-title">Sample project · <strong>Northshore Goods support</strong> <span class="ln-tag">Chatbot</span></p>
+      <a class="ln-bar-back" href="/#work">← Back to site</a>
+    </header>
+
+    <main class="ng">
+      <div class="ng-top">
+        <span class="brand">Northshore Goods</span>
+        <span class="crumbs">Help center · Orders &amp; returns</span>
+        <span class="me"><i>AR</i> Alex R.</span>
+      </div>
+
+      <div class="ng-grid">
+        <aside class="ng-side">
+          <h2>Your recent orders</h2>
+          <div class="order">
+            <div class="row"><b>#10421</b><span class="pill shipped">Shipped</span></div>
+            <p class="item">Trailhead 45L backpack · $189</p>
+            <div class="track"><span class="done">Placed</span><span class="done">Packed</span><span class="done">Shipped</span><span>Delivered</span></div>
+          </div>
+          <div class="order">
+            <div class="row"><b>#10387</b><span class="pill delivered">Delivered</span></div>
+            <p class="item">Merino base layer × 2 · $156</p>
+          </div>
+          <div class="order">
+            <div class="row"><b>#10455</b><span class="pill processing">Processing</span></div>
+            <p class="item">Camp stove · $79</p>
+          </div>
+
+          <h2 class="later">Try asking</h2>
+          <ul class="try-chips">
+            <li><button type="button" data-say>Where is order 10421?</button></li>
+            <li><button type="button" data-say>I want to return my base layers</button></li>
+            <li><button type="button" data-say>Can I exchange for a different size?</button></li>
+          </ul>
+
+          <div class="policy"><strong>Returns:</strong> 30 days, unworn, free label. Refunds 5-7 business days after we receive it.</div>
+        </aside>
+
+        <section class="ng-chat" data-bot="store" data-mode="chat" aria-label="Support conversation">
+          <div class="ctop">
+            <span class="avatar" aria-hidden="true">NG</span>
+            <p class="who"><strong>Northshore support</strong><span>Order status, returns and exchanges</span></p>
+            <span class="status-pill">Live</span>
+          </div>
+          <div class="messages" aria-live="polite"></div>
+          <form class="composer">
+            <input type="text" placeholder="Ask about an order…" aria-label="Message" autocomplete="off" />
+            <button class="send" type="submit" aria-label="Send">➤</button>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <footer class="ln-foot">
+      <span>Fictional business and data. Built by LocalNinja as a sample project.</span>
+      <a href="/#contact">Want one for your business? →</a>
+    </footer>
+
+    <script type="module" src="/src/work/bot.js"></script>
+  </body>
+</html>

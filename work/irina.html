@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IRINA - LocalNinja project</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/logo-animated.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/work/shell.css" />
+    <link rel="stylesheet" href="/src/work/gallery.css" />
+    <style>.gal { --accent: #d97706; }</style>
+  </head>
+  <body>
+    <header class="ln-bar">
+      <a class="ln-bar-brand" href="/#work"><img src="/logo-animated.svg" alt="" width="32" height="32" /><span class="ln-bar-name">Local<span class="ninja">Ninja</span></span></a>
+      <p class="ln-bar-title">Project · <strong>IRINA</strong> apparel engineering <span class="ln-tag">Custom software</span></p>
+      <a class="ln-bar-back" href="/#work">← Back to site</a>
+    </header>
+
+    <main class="gal">
+      <div class="gal-head">
+        <div>
+          <p class="kicker">In development · Parametric apparel engineering</p>
+          <h1>IRINA</h1>
+          <p class="lede">A workspace for taking a garment from idea to production geometry. Start from a reference image or a blank technical flat, assemble the garment from parametric foundations, adjust measurements and fit, validate, and export files for pattern review and cutter preparation. An uploaded image is evidence, never production geometry - everything is rebuilt from normalized measurements and manufacturing rules.</p>
+        </div>
+        <div class="gal-facts">
+          <div><span>Role</span>Full-stack developer</div>
+          <div><span>Stack</span>Next.js · NestJS · deterministic geometry engine · SVG / PDF / layered DXF export · guarded Gerber handoff</div>
+          <div><span>Principle</span>Image understanding proposes; formula-driven drafting decides</div>
+        </div>
+      </div>
+
+      <div class="gal-grid">
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-1" aria-label="Enlarge: Workspace dashboard">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/irina/dashboard.jpg" alt="Workspace dashboard" loading="eager" />
+          </button>
+          <div class="cap">
+            <span class="n">01</span>
+            <h2>Workspace dashboard</h2>
+            <p>Garments in progress, recent exports and the two ways to start: from a reference image or a blank flat.</p>
+          </div>
+        </article>
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-2" aria-label="Enlarge: Upload a reference">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/irina/upload-reference.jpg" alt="Upload a reference" loading="lazy" />
+          </button>
+          <div class="cap">
+            <span class="n">02</span>
+            <h2>Upload a reference</h2>
+            <p>Validated image intake. The system proposes a silhouette, landmarks and construction components - as suggestions to review, not geometry to cut.</p>
+          </div>
+        </article>
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-3" aria-label="Enlarge: Flat sketch studio">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/irina/flat-sketch-studio.jpg" alt="Flat sketch studio" loading="lazy" />
+          </button>
+          <div class="cap">
+            <span class="n">03</span>
+            <h2>Flat sketch studio</h2>
+            <p>Editable parametric technical flats, assembled from foundations and construction components.</p>
+          </div>
+        </article>
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-4" aria-label="Enlarge: Pattern studio">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/irina/pattern-studio.jpg" alt="Pattern studio" loading="lazy" />
+          </button>
+          <div class="cap">
+            <span class="n">04</span>
+            <h2>Pattern studio</h2>
+            <p>Deterministic drafting from normalized measurements: seam relationships, notches, grainlines and manufacturing rules applied every time.</p>
+          </div>
+        </article>
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-5" aria-label="Enlarge: Shirt editor">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/irina/manual-shirt-editor.jpg" alt="Shirt editor" loading="lazy" />
+          </button>
+          <div class="cap">
+            <span class="n">05</span>
+            <h2>Shirt editor</h2>
+            <p>Adjust measurements and fit on formula-driven components, validate the result, then export physical-size SVG/PDF and layered DXF.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="lightbox" id="lb-1" role="dialog" aria-label="Workspace dashboard">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/irina/dashboard.jpg" alt="Workspace dashboard" loading="lazy" />
+      </div>
+      <div class="lightbox" id="lb-2" role="dialog" aria-label="Upload a reference">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/irina/upload-reference.jpg" alt="Upload a reference" loading="lazy" />
+      </div>
+      <div class="lightbox" id="lb-3" role="dialog" aria-label="Flat sketch studio">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/irina/flat-sketch-studio.jpg" alt="Flat sketch studio" loading="lazy" />
+      </div>
+      <div class="lightbox" id="lb-4" role="dialog" aria-label="Pattern studio">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/irina/pattern-studio.jpg" alt="Pattern studio" loading="lazy" />
+      </div>
+      <div class="lightbox" id="lb-5" role="dialog" aria-label="Shirt editor">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/irina/manual-shirt-editor.jpg" alt="Shirt editor" loading="lazy" />
+      </div>
+    </main>
+
+    <footer class="ln-foot">
+      <span>Screens from the product in development. Built by LocalNinja.</span>
+      <a href="/#contact">Want one for your business? →</a>
+    </footer>
+
+    <script type="module" src="/src/work/mockups.js"></script>
+  </body>
+</html>

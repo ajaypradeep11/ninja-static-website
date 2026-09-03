@@ -1,0 +1,143 @@
+/* Shared shell for /work/* demo pages: the LocalNinja bar on top, the
+   sample product below. Each page brings its own stylesheet for the
+   product itself. */
+
+:root {
+  --ln-ink: #000;
+  --ln-paper: #fff;
+  --ln-accent: #4da3ff;
+  --ln-font: 'Manrope', system-ui, sans-serif;
+  --ln-display: 'Syne', 'Arial Black', sans-serif;
+  --ln-bar-h: 56px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--ln-font);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ln-accent);
+  outline-offset: 2px;
+}
+
+.ln-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: var(--ln-bar-h);
+  padding: 0 clamp(1rem, 3vw, 2rem);
+  background: var(--ln-paper);
+  color: var(--ln-ink);
+  border-bottom: 3px solid var(--ln-ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.ln-bar a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Same wordmark as the homepage header: Manrope 800, caps, tight tracking,
+   NINJA in the accent - just scaled to the slimmer bar. */
+.ln-bar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--ln-font);
+  font-weight: 800;
+  font-size: 1.2rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.ln-bar-brand img {
+  width: 40px;
+  height: 40px;
+}
+
+.ln-bar-brand .ninja {
+  color: var(--ln-accent);
+}
+
+.ln-bar-title {
+  margin-inline: auto;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: none;
+  color: #555;
+  text-align: center;
+}
+
+.ln-bar-title strong {
+  color: var(--ln-ink);
+}
+
+.ln-bar-back {
+  padding: 0.45rem 0.9rem;
+  border: 3px solid var(--ln-ink);
+  box-shadow: 3px 3px 0 var(--ln-ink);
+  background: var(--ln-accent);
+  white-space: nowrap;
+}
+
+.ln-tag {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border: 2px solid var(--ln-ink);
+  background: var(--ln-accent);
+  font-size: 0.65rem;
+}
+
+.ln-foot {
+  padding: 1.25rem clamp(1rem, 3vw, 2rem);
+  border-top: 3px solid var(--ln-ink);
+  background: var(--ln-paper);
+  color: #555;
+  font-size: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+}
+
+.ln-foot a {
+  color: var(--ln-ink);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid var(--ln-accent);
+}
+
+@media (max-width: 640px) {
+  .ln-bar-title {
+    display: none;
+  }
+}

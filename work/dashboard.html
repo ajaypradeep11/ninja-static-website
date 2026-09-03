@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pulse analytics - LocalNinja sample project</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/logo-animated.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/work/shell.css" />
+    <link rel="stylesheet" href="/src/work/dashboard.css" />
+  </head>
+  <body>
+    <header class="ln-bar">
+      <a class="ln-bar-brand" href="/#work"><img src="/logo-animated.svg" alt="" width="32" height="32" /><span class="ln-bar-name">Local<span class="ninja">Ninja</span></span></a>
+      <p class="ln-bar-title">Sample project · <strong>Pulse</strong> SaaS analytics <span class="ln-tag">Dashboard</span></p>
+      <a class="ln-bar-back" href="/#work">← Back to site</a>
+    </header>
+
+    <main class="pulse" id="pulse" data-current="overview">
+      <nav class="side" aria-label="Dashboard">
+        <div class="logo"><i></i> Pulse</div>
+        <button type="button" class="is-active" data-view="overview" aria-current="page"><span>▦</span> Overview</button>
+        <button type="button" data-view="customers"><span>👥</span> Customers</button>
+        <button type="button" data-view="revenue"><span>↗</span> Revenue</button>
+        <button type="button" data-view="growth"><span>◔</span> Growth</button>
+        <button type="button" data-view="events"><span>⚡</span> Events <em class="badge" id="unread-badge">5</em></button>
+        <button type="button" data-view="alerts"><span>🔔</span> Alerts</button>
+        <button type="button" data-view="team"><span>◎</span> Team</button>
+        <button type="button" data-view="integrations"><span>⇄</span> Integrations</button>
+        <button type="button" data-view="settings"><span>⚙</span> Settings</button>
+        <div class="org"><b>Acme Robotics</b><span id="org-plan">Growth plan · 14 seats</span></div>
+      </nav>
+
+      <section class="main">
+        <div class="topbar">
+          <div>
+            <h1 id="view-title">Overview</h1>
+            <p><span id="view-sub">All workspaces</span> · <span id="updated">Updated just now</span></p>
+          </div>
+          <button type="button" class="live" id="live" aria-pressed="false" title="Auto-refresh every 5 seconds"><i></i><span>Live off</span></button>
+          <div class="range" role="group" aria-label="Date range">
+            <button type="button" data-range="7d">7d</button>
+            <button type="button" class="is-active" data-range="30d">30d</button>
+            <button type="button" data-range="90d">90d</button>
+          </div>
+        </div>
+
+        <!-- ===================== OVERVIEW ===================== -->
+        <div class="view is-active" data-view-panel="overview">
+          <div class="kpis" role="group" aria-label="Key metrics - select one to chart it">
+            <button type="button" class="kpi" data-metric="mrr" aria-pressed="false">
+              <div class="label">MRR</div>
+              <div class="value" data-kpi-value="mrr">$48,210</div>
+              <div class="delta" data-kpi-delta="mrr">▲ 6.4% vs last period</div>
+            </button>
+            <button type="button" class="kpi is-active" data-metric="active" aria-pressed="true">
+              <div class="label">Active users</div>
+              <div class="value" data-kpi-value="active">12,904</div>
+              <div class="delta" data-kpi-delta="active">▲ 3.1% vs last period</div>
+            </button>
+            <button type="button" class="kpi" data-metric="churn" aria-pressed="false">
+              <div class="label">Churn</div>
+              <div class="value" data-kpi-value="churn">1.8%</div>
+              <div class="delta" data-kpi-delta="churn">▼ 0.3 pts vs last period</div>
+            </button>
+            <button type="button" class="kpi" data-metric="response" aria-pressed="false">
+              <div class="label">Avg. response <em class="alert-flag" id="resp-flag">above threshold</em></div>
+              <div class="value" data-kpi-value="response">212 ms</div>
+              <div class="delta down" data-kpi-delta="response">▲ 18 ms vs last period</div>
+            </button>
+          </div>
+
+          <div class="grid">
+            <div class="panel chart" data-chart data-range="30d" data-metric="active">
+              <h2><span id="chart-title">Daily active users</span> <b id="chart-total">12.9k</b><small id="chart-hint">Hover the line for daily values</small></h2>
+              <div class="chart-wrap" id="chart-wrap" tabindex="0" aria-label="Chart. Use left and right arrow keys to read daily values.">
+                <svg viewBox="0 0 600 220" role="img" aria-label="Line chart of the selected metric over the selected range" id="chart-svg">
+                  <defs>
+                    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.35" />
+                      <stop offset="1" stop-color="#22d3ee" stop-opacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <g>
+                    <line class="grid-line" x1="24" y1="24" x2="576" y2="24" />
+                    <line class="grid-line" x1="24" y1="82" x2="576" y2="82" />
+                    <line class="grid-line" x1="24" y1="139" x2="576" y2="139" />
+                    <line class="grid-line" x1="24" y1="196" x2="576" y2="196" />
+                  </g>
+                  <g data-for="7d">
+                    <path class="area" d="M24.0 29.2 L116.0 80.3 L208.0 24.0 L300.0 92.0 L392.0 60.4 L484.0 65.4 L576.0 136.5 L576.0 196 L24.0 196 Z" />
+                    <path class="series" d="M24.0 29.2 L116.0 80.3 L208.0 24.0 L300.0 92.0 L392.0 60.4 L484.0 65.4 L576.0 136.5" />
+                  </g>
+                  <g data-for="30d">
+                    <path class="area" d="M24.0 73.2 L43.0 110.0 L62.1 107.8 L81.1 141.4 L100.1 172.9 L119.2 171.5 L138.2 130.5 L157.2 158.8 L176.3 177.3 L195.3 155.9 L214.3 103.0 L233.4 86.6 L252.4 88.0 L271.4 32.2 L290.5 68.1 L309.5 24.0 L328.6 35.9 L347.6 62.2 L366.6 91.1 L385.7 101.1 L404.7 61.2 L423.7 83.9 L442.8 67.0 L461.8 44.5 L480.8 48.3 L499.9 34.8 L518.9 69.1 L537.9 103.7 L557.0 123.9 L576.0 97.3 L576.0 196 L24.0 196 Z" />
+                    <path class="series" d="M24.0 73.2 L43.0 110.0 L62.1 107.8 L81.1 141.4 L100.1 172.9 L119.2 171.5 L138.2 130.5 L157.2 158.8 L176.3 177.3 L195.3 155.9 L214.3 103.0 L233.4 86.6 L252.4 88.0 L271.4 32.2 L290.5 68.1 L309.5 24.0 L328.6 35.9 L347.6 62.2 L366.6 91.1 L385.7 101.1 L404.7 61.2 L423.7 83.9 L442.8 67.0 L461.8 44.5 L480.8 48.3 L499.9 34.8 L518.9 69.1 L537.9 103.7 L557.0 123.9 L576.0 97.3" />
+                  </g>
+                  <g data-for="90d">
+                    <path class="area" d="M24.0 188.0 L30.2 191.2 L36.4 187.5 L42.6 187.1 L48.8 190.7 L55.0 181.6 L61.2 175.0 L67.4 180.0 L73.6 176.6 L79.8 174.4 L86.0 163.2 L92.2 155.8 L98.4 159.7 L104.6 145.8 L110.8 154.1 L117.0 154.6 L123.2 146.5 L129.4 153.9 L135.6 152.6 L141.8 162.9 L148.0 157.1 L154.2 148.7 L160.4 145.3 L166.7 134.1 L172.9 137.4 L179.1 130.8 L185.3 126.9 L191.5 123.3 L197.7 122.8 L203.9 112.6 L210.1 99.6 L216.3 98.7 L222.5 93.0 L228.7 102.7 L234.9 96.0 L241.1 90.7 L247.3 76.5 L253.5 66.7 L259.7 70.7 L265.9 72.1 L272.1 66.2 L278.3 76.9 L284.5 76.4 L290.7 83.3 L296.9 91.6 L303.1 101.4 L309.3 93.0 L315.5 101.0 L321.7 105.9 L327.9 107.2 L334.1 96.1 L340.3 105.3 L346.5 105.1 L352.7 102.3 L358.9 90.9 L365.1 81.1 L371.3 70.3 L377.5 74.4 L383.7 75.0 L389.9 77.1 L396.1 65.7 L402.3 52.4 L408.5 59.8 L414.7 66.6 L420.9 72.0 L427.1 77.3 L433.3 76.1 L439.6 72.3 L445.8 76.8 L452.0 88.0 L458.2 88.6 L464.4 90.4 L470.6 87.1 L476.8 74.0 L483.0 67.5 L489.2 65.6 L495.4 61.0 L501.6 55.0 L507.8 64.9 L514.0 53.1 L520.2 44.3 L526.4 33.2 L532.6 24.0 L538.8 25.2 L545.0 26.3 L551.2 34.9 L557.4 29.9 L563.6 39.6 L569.8 49.2 L576.0 55.1 L576.0 196 L24.0 196 Z" />
+                    <path class="series" d="M24.0 188.0 L30.2 191.2 L36.4 187.5 L42.6 187.1 L48.8 190.7 L55.0 181.6 L61.2 175.0 L67.4 180.0 L73.6 176.6 L79.8 174.4 L86.0 163.2 L92.2 155.8 L98.4 159.7 L104.6 145.8 L110.8 154.1 L117.0 154.6 L123.2 146.5 L129.4 153.9 L135.6 152.6 L141.8 162.9 L148.0 157.1 L154.2 148.7 L160.4 145.3 L166.7 134.1 L172.9 137.4 L179.1 130.8 L185.3 126.9 L191.5 123.3 L197.7 122.8 L203.9 112.6 L210.1 99.6 L216.3 98.7 L222.5 93.0 L228.7 102.7 L234.9 96.0 L241.1 90.7 L247.3 76.5 L253.5 66.7 L259.7 70.7 L265.9 72.1 L272.1 66.2 L278.3 76.9 L284.5 76.4 L290.7 83.3 L296.9 91.6 L303.1 101.4 L309.3 93.0 L315.5 101.0 L321.7 105.9 L327.9 107.2 L334.1 96.1 L340.3 105.3 L346.5 105.1 L352.7 102.3 L358.9 90.9 L365.1 81.1 L371.3 70.3 L377.5 74.4 L383.7 75.0 L389.9 77.1 L396.1 65.7 L402.3 52.4 L408.5 59.8 L414.7 66.6 L420.9 72.0 L427.1 77.3 L433.3 76.1 L439.6 72.3 L445.8 76.8 L452.0 88.0 L458.2 88.6 L464.4 90.4 L470.6 87.1 L476.8 74.0 L483.0 67.5 L489.2 65.6 L495.4 61.0 L501.6 55.0 L507.8 64.9 L514.0 53.1 L520.2 44.3 L526.4 33.2 L532.6 24.0 L538.8 25.2 L545.0 26.3 L551.2 34.9 L557.4 29.9 L563.6 39.6 L569.8 49.2 L576.0 55.1" />
+                  </g>
+                  <g id="anno-layer" aria-label="Annotations"></g>
+                  <line class="cursor" id="chart-cursor" x1="24" y1="24" x2="24" y2="196" />
+                  <circle class="dot" id="chart-dot" cx="24" cy="24" r="4.5" />
+                  <text class="axis" x="24" y="18" id="ax-max">max 13.3k</text>
+                  <text class="axis" x="24" y="214" id="ax-start">Aug 4</text>
+                  <text class="axis" x="576" y="214" text-anchor="end">today</text>
+                </svg>
+                <div class="tip" id="chart-tip" aria-hidden="true"><b id="tip-value">12,904</b><span id="tip-date">Sep 2</span></div>
+              </div>
+              <form class="anno-form" id="anno-form" hidden>
+                <span class="anno-when">Note for <b class="mono" id="anno-date">Aug 21</b></span>
+                <label class="search"><span class="sr-only">Note text</span><input type="text" id="anno-text" maxlength="80" placeholder="What happened on this day? e.g. Pricing page redesign shipped" autocomplete="off" /></label>
+                <button type="submit" class="btn primary">Add note</button>
+                <button type="button" class="btn ghost" id="anno-cancel">Cancel</button>
+              </form>
+              <div class="anno-bar">
+                <p class="anno-hint" id="anno-hint">Notes <b id="anno-count">2</b> · click a point on the line (or press Enter while reading it) to add one</p>
+                <ul class="anno-list" id="anno-list" aria-label="Chart notes"></ul>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h2>Top features</h2>
+              <div class="bars">
+                <div><span>Reports</span><div class="track"><div class="fill" style="width:92%"></div></div><span class="n">8.1k</span></div>
+                <div><span>Alerts</span><div class="track"><div class="fill" style="width:71%"></div></div><span class="n">6.2k</span></div>
+                <div><span>Exports</span><div class="track"><div class="fill" style="width:54%"></div></div><span class="n">4.7k</span></div>
+                <div><span>API</span><div class="track"><div class="fill" style="width:38%"></div></div><span class="n">3.3k</span></div>
+                <div><span>Webhooks</span><div class="track"><div class="fill" style="width:22%"></div></div><span class="n">1.9k</span></div>
+              </div>
+            </div>
+
+            <div class="panel ask" id="ask">
+              <h2><span class="ask-title"><i aria-hidden="true">✦</i> Ask Pulse</span> <small>Plain-English questions, answered from this workspace's data</small></h2>
+              <form class="ask-form" id="ask-form" novalidate>
+                <label class="search"><span class="sr-only">Ask a question about your data</span><input type="text" id="ask-input" placeholder="e.g. Which customers are most at risk this month?" autocomplete="off" maxlength="120" /></label>
+                <button type="submit" class="btn primary" id="ask-submit">Ask</button>
+              </form>
+              <div class="chips ask-chips" role="group" aria-label="Suggested questions">
+                <button type="button" class="chip" data-ask="Why did churn drop this month?">Why did churn drop?</button>
+                <button type="button" class="chip" data-ask="Which customers are at risk?">Who is at risk?</button>
+                <button type="button" class="chip" data-ask="Where will MRR be in 3 months?">MRR in 3 months?</button>
+              </div>
+              <div class="ask-thinking" id="ask-thinking" aria-hidden="true"><i></i><i></i><i></i></div>
+              <div class="ask-answer" id="ask-answer" aria-live="polite" hidden>
+                <p class="ask-q" id="ask-q"></p>
+                <div class="ask-body">
+                  <div class="ask-stat" id="ask-stat"><b class="mono" id="ask-num"></b><small id="ask-label"></small></div>
+                  <div class="ask-viz" id="ask-viz"></div>
+                </div>
+                <p class="ask-text" id="ask-text"></p>
+                <div class="chips ask-follow" id="ask-follow" role="group" aria-label="Follow-up questions"></div>
+              </div>
+            </div>
+
+            <div class="panel events">
+              <h2>Recent events <button type="button" class="link-btn" data-view="events">View all <span id="ev-total">12</span> →</button></h2>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Time</th><th>Event</th><th>Account</th><th>Status</th></tr></thead>
+                  <tbody>
+                    <tr data-ev="ev1" data-sev="ok"><td class="mono">09:41:12</td><td><button type="button" class="row-btn">Subscription upgraded → Growth</button></td><td>Lumen Labs</td><td><span class="pill ok">ok</span></td></tr>
+                    <tr data-ev="ev2" data-sev="warn"><td class="mono">09:38:55</td><td><button type="button" class="row-btn">Webhook delivery retried (3/3)</button></td><td>Orbit Retail</td><td><span class="pill warn">warn</span></td></tr>
+                    <tr data-ev="ev3" data-sev="ok"><td class="mono">09:31:02</td><td><button type="button" class="row-btn">New workspace created</button></td><td>Kite Studio</td><td><span class="pill ok">ok</span></td></tr>
+                    <tr data-ev="ev4" data-sev="ok"><td class="mono">09:22:47</td><td><button type="button" class="row-btn">Export completed (14,203 rows)</button></td><td>Acme Robotics</td><td><span class="pill ok">ok</span></td></tr>
+                    <tr data-ev="ev5" data-sev="warn"><td class="mono">09:10:19</td><td><button type="button" class="row-btn">Payment failed, retry scheduled</button></td><td>Northwind</td><td><span class="pill warn">warn</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== CUSTOMERS ===================== -->
+        <div class="view" data-view-panel="customers">
+          <div class="toolbar">
+            <label class="search"><span class="sr-only">Search customers</span><input type="search" id="cust-search" placeholder="Search name or contact…" autocomplete="off" /></label>
+            <label class="select"><span class="sr-only">Plan</span>
+              <select id="cust-plan">
+                <option value="all">All plans</option>
+                <option value="scale">Scale</option>
+                <option value="growth">Growth</option>
+                <option value="starter">Starter</option>
+              </select>
+            </label>
+            <label class="select"><span class="sr-only">Health</span>
+              <select id="cust-health">
+                <option value="all">Any health</option>
+                <option value="healthy">Healthy</option>
+                <option value="risk">At risk</option>
+                <option value="dormant">Dormant</option>
+                <option value="new">New</option>
+              </select>
+            </label>
+            <p class="count" id="cust-count">12 of 278 customers loaded</p>
+          </div>
+
+          <div class="panel">
+            <div class="table-wrap">
+              <table class="cust-table" id="cust-table">
+                <thead>
+                  <tr>
+                    <th>Account</th>
+                    <th>Plan</th>
+                    <th aria-sort="none"><button type="button" class="sort" data-sort="seats">Seats</button></th>
+                    <th aria-sort="none"><button type="button" class="sort" data-sort="mrr">MRR</button></th>
+                    <th>Health</th>
+                    <th aria-sort="none"><button type="button" class="sort" data-sort="active">Last active</button></th>
+                  </tr>
+                </thead>
+                <tbody id="cust-rows">
+                  <tr data-cust="lumen" data-plan="growth" data-health="healthy" data-seats="22" data-mrr="1738" data-active="2" data-contact="Priya Shah"><td><button type="button" class="row-btn">Lumen Labs</button><small>Priya Shah</small></td><td><span class="plan growth">Growth</span></td><td class="mono">22</td><td class="mono">$1,738</td><td><span class="health healthy">Healthy</span></td><td class="mono">2 min ago</td></tr>
+                  <tr data-cust="orbit" data-plan="scale" data-health="risk" data-seats="48" data-mrr="3120" data-active="9" data-contact="Marcus Bell"><td><button type="button" class="row-btn">Orbit Retail</button><small>Marcus Bell</small></td><td><span class="plan scale">Scale</span></td><td class="mono">48</td><td class="mono">$3,120</td><td><span class="health risk">At risk</span></td><td class="mono">9 min ago</td></tr>
+                  <tr data-cust="kite" data-plan="starter" data-health="new" data-seats="4" data-mrr="99" data-active="14" data-contact="Ana Ribeiro"><td><button type="button" class="row-btn">Kite Studio</button><small>Ana Ribeiro</small></td><td><span class="plan starter">Starter</span></td><td class="mono">4</td><td class="mono">$99</td><td><span class="health new">New</span></td><td class="mono">14 min ago</td></tr>
+                  <tr data-cust="northwind" data-plan="growth" data-health="risk" data-seats="12" data-mrr="948" data-active="60" data-contact="Tom Okafor"><td><button type="button" class="row-btn">Northwind</button><small>Tom Okafor</small></td><td><span class="plan growth">Growth</span></td><td class="mono">12</td><td class="mono">$948</td><td><span class="health risk">At risk</span></td><td class="mono">1 h ago</td></tr>
+                  <tr data-cust="bramble" data-plan="scale" data-health="healthy" data-seats="35" data-mrr="2275" data-active="3" data-contact="Hannah Cole"><td><button type="button" class="row-btn">Bramble &amp; Co</button><small>Hannah Cole</small></td><td><span class="plan scale">Scale</span></td><td class="mono">35</td><td class="mono">$2,275</td><td><span class="health healthy">Healthy</span></td><td class="mono">3 min ago</td></tr>
+                  <tr data-cust="tidewater" data-plan="growth" data-health="healthy" data-seats="19" data-mrr="1501" data-active="22" data-contact="Dev Malhotra"><td><button type="button" class="row-btn">Tidewater Freight</button><small>Dev Malhotra</small></td><td><span class="plan growth">Growth</span></td><td class="mono">19</td><td class="mono">$1,501</td><td><span class="health healthy">Healthy</span></td><td class="mono">22 min ago</td></tr>
+                  <tr data-cust="pine" data-plan="starter" data-health="healthy" data-seats="6" data-mrr="149" data-active="1440" data-contact="Dr. Lena Park"><td><button type="button" class="row-btn">Pine Street Dental</button><small>Dr. Lena Park</small></td><td><span class="plan starter">Starter</span></td><td class="mono">6</td><td class="mono">$149</td><td><span class="health healthy">Healthy</span></td><td class="mono">yesterday</td></tr>
+                  <tr data-cust="sundial" data-plan="growth" data-health="healthy" data-seats="15" data-mrr="1185" data-active="75" data-contact="Jonas Weber"><td><button type="button" class="row-btn">Sundial Media</button><small>Jonas Weber</small></td><td><span class="plan growth">Growth</span></td><td class="mono">15</td><td class="mono">$1,185</td><td><span class="health healthy">Healthy</span></td><td class="mono">1 h ago</td></tr>
+                  <tr data-cust="copperline" data-plan="starter" data-health="dormant" data-seats="3" data-mrr="99" data-active="17280" data-contact="Sam Nguyen"><td><button type="button" class="row-btn">Copperline Coffee</button><small>Sam Nguyen</small></td><td><span class="plan starter">Starter</span></td><td class="mono">3</td><td class="mono">$99</td><td><span class="health dormant">Dormant</span></td><td class="mono">12 days ago</td></tr>
+                  <tr data-cust="verde" data-plan="growth" data-health="healthy" data-seats="9" data-mrr="711" data-active="180" data-contact="Rosa Delgado"><td><button type="button" class="row-btn">Verde Landscaping</button><small>Rosa Delgado</small></td><td><span class="plan growth">Growth</span></td><td class="mono">9</td><td class="mono">$711</td><td><span class="health healthy">Healthy</span></td><td class="mono">3 h ago</td></tr>
+                  <tr data-cust="atlas" data-plan="scale" data-health="healthy" data-seats="27" data-mrr="1755" data-active="45" data-contact="Grace Lindqvist"><td><button type="button" class="row-btn">Atlas Legal</button><small>Grace Lindqvist</small></td><td><span class="plan scale">Scale</span></td><td class="mono">27</td><td class="mono">$1,755</td><td><span class="health healthy">Healthy</span></td><td class="mono">45 min ago</td></tr>
+                  <tr data-cust="juniper" data-plan="starter" data-health="dormant" data-seats="2" data-mrr="99" data-active="12960" data-contact="Mia Torres"><td><button type="button" class="row-btn">Juniper Yoga</button><small>Mia Torres</small></td><td><span class="plan starter">Starter</span></td><td class="mono">2</td><td class="mono">$99</td><td><span class="health dormant">Dormant</span></td><td class="mono">9 days ago</td></tr>
+                </tbody>
+              </table>
+              <p class="empty" id="cust-empty" hidden>No customers match. Try a shorter search or clear the filters.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== REVENUE ===================== -->
+        <div class="view" data-view-panel="revenue">
+          <div class="rev-grid">
+            <div class="panel">
+              <h2>MRR by plan <b id="rev-mrr">$48,210</b></h2>
+              <div class="bars plans">
+                <div><span>Scale</span><div class="track"><div class="fill scale" style="width:44%"></div></div><span class="n">$21,410</span></div>
+                <div><span>Growth</span><div class="track"><div class="fill growth" style="width:39%"></div></div><span class="n">$18,600</span></div>
+                <div><span>Starter</span><div class="track"><div class="fill starter" style="width:17%"></div></div><span class="n">$8,200</span></div>
+              </div>
+              <p class="note">Scale accounts are 44% of revenue from 12 customers. 278 customers total.</p>
+            </div>
+
+            <div class="panel">
+              <h2>MRR movement <small>this month</small></h2>
+              <ul class="movement">
+                <li><span>Starting MRR</span><b class="mono">$45,306</b></li>
+                <li class="plus"><span>New business</span><b class="mono">+$3,120</b></li>
+                <li class="plus"><span>Expansion (seats added)</span><b class="mono">+$1,860</b></li>
+                <li class="minus"><span>Contraction (seats removed)</span><b class="mono">−$643</b></li>
+                <li class="minus"><span>Churn (5 accounts)</span><b class="mono">−$1,433</b></li>
+                <li class="total"><span>Ending MRR</span><b class="mono">$48,210</b></li>
+              </ul>
+            </div>
+
+            <div class="panel forecast">
+              <h2>What-if forecast</h2>
+              <p class="note">Drag churn to see where MRR lands if nothing else changes. Today: 1.8% churn, 6.4% net monthly growth.</p>
+              <label class="slider" for="fc-churn"><span>Monthly churn</span><output id="fc-churn-out">1.8%</output></label>
+              <input type="range" id="fc-churn" min="0.5" max="4" step="0.1" value="1.8" aria-describedby="fc-note" />
+              <div class="horizon" role="group" aria-label="Forecast horizon">
+                <button type="button" data-horizon="3" aria-pressed="false">3 mo</button>
+                <button type="button" data-horizon="6" class="is-active" aria-pressed="true">6 mo</button>
+                <button type="button" data-horizon="12" aria-pressed="false">12 mo</button>
+              </div>
+              <div class="fc-out">
+                <div><small>Projected MRR</small><b class="mono" id="fc-mrr">$69,950</b></div>
+                <div><small>ARR run-rate</small><b class="mono" id="fc-arr">$839k</b></div>
+                <div><small>Net growth / mo</small><b class="mono" id="fc-rate">6.4%</b></div>
+              </div>
+              <p class="note" id="fc-note">Each 1 pt of churn costs about 1.75 pts of net growth at your current mix.</p>
+            </div>
+
+            <div class="panel churn-list">
+              <h2>Churned this month <b>5 · $1,433</b></h2>
+              <ul>
+                <li><div><b>Fjord Analytics</b><small>Growth · 5 seats · $395 · "moved to in-house tooling"</small></div><button type="button" class="btn ghost" data-winback="Fjord Analytics">Win-back offer</button></li>
+                <li><div><b>Harbor Logistics</b><small>Growth · 6 seats · $474 · "too expensive for our size"</small></div><button type="button" class="btn ghost" data-winback="Harbor Logistics">Win-back offer</button></li>
+                <li><div><b>Pocket Pilates</b><small>Growth · 4 seats · $316 · "closed second studio"</small></div><button type="button" class="btn ghost" data-winback="Pocket Pilates">Win-back offer</button></li>
+                <li><div><b>Brightside Dental</b><small>Starter · $149 · card expired, no response</small></div><button type="button" class="btn ghost" data-winback="Brightside Dental">Win-back offer</button></li>
+                <li><div><b>Tinsel Studio</b><small>Starter · $99 · no reason given</small></div><button type="button" class="btn ghost" data-winback="Tinsel Studio">Win-back offer</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== EVENTS ===================== -->
+        <div class="view" data-view-panel="events">
+          <div class="toolbar">
+            <div class="chips" role="group" aria-label="Filter by severity">
+              <button type="button" class="chip is-active" data-sev-filter="all" aria-pressed="true">All <i id="sev-all">12</i></button>
+              <button type="button" class="chip" data-sev-filter="ok" aria-pressed="false">ok <i>7</i></button>
+              <button type="button" class="chip" data-sev-filter="warn" aria-pressed="false">warn <i>3</i></button>
+              <button type="button" class="chip" data-sev-filter="error" aria-pressed="false">error <i>2</i></button>
+            </div>
+            <button type="button" class="btn ghost" id="ack-all">Acknowledge all warnings</button>
+          </div>
+          <div class="banner" id="events-banner" hidden>
+            <span><b>Billing sync paused.</b> Stripe is disconnected, so invoice and payment events stop here until it is reconnected.</span>
+            <button type="button" class="btn ghost" data-view="integrations">Reconnect Stripe</button>
+          </div>
+          <div class="panel events">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Time</th><th>Event</th><th>Account</th><th>Status</th></tr></thead>
+                <tbody id="event-rows">
+                  <tr data-ev="ev1" data-sev="ok"><td class="mono">09:41:12</td><td><button type="button" class="row-btn">Subscription upgraded → Growth</button></td><td>Lumen Labs</td><td><span class="pill ok">ok</span></td></tr>
+                  <tr data-ev="ev2" data-sev="warn"><td class="mono">09:38:55</td><td><button type="button" class="row-btn">Webhook delivery retried (3/3)</button></td><td>Orbit Retail</td><td><span class="pill warn">warn</span></td></tr>
+                  <tr data-ev="ev3" data-sev="ok"><td class="mono">09:31:02</td><td><button type="button" class="row-btn">New workspace created</button></td><td>Kite Studio</td><td><span class="pill ok">ok</span></td></tr>
+                  <tr data-ev="ev4" data-sev="ok"><td class="mono">09:22:47</td><td><button type="button" class="row-btn">Export completed (14,203 rows)</button></td><td>Acme Robotics</td><td><span class="pill ok">ok</span></td></tr>
+                  <tr data-ev="ev5" data-sev="warn"><td class="mono">09:10:19</td><td><button type="button" class="row-btn">Payment failed, retry scheduled</button></td><td>Northwind</td><td><span class="pill warn">warn</span></td></tr>
+                  <tr data-ev="ev6" data-sev="error"><td class="mono">08:57:40</td><td><button type="button" class="row-btn">API rate limit hit (1,000 req/min)</button></td><td>Bramble &amp; Co</td><td><span class="pill err">error</span></td></tr>
+                  <tr data-ev="ev7" data-sev="ok"><td class="mono">08:44:03</td><td><button type="button" class="row-btn">Seats added (+3)</button></td><td>Tidewater Freight</td><td><span class="pill ok">ok</span></td></tr>
+                  <tr data-ev="ev8" data-sev="warn"><td class="mono">08:31:27</td><td><button type="button" class="row-btn">Alert rule fired: response &gt; 250 ms</button></td><td>Acme Robotics</td><td><span class="pill warn">warn</span></td></tr>
+                  <tr data-ev="ev9" data-sev="ok"><td class="mono">08:12:50</td><td><button type="button" class="row-btn">Report scheduled: Mondays 07:00</button></td><td>Pine Street Dental</td><td><span class="pill ok">ok</span></td></tr>
+                  <tr data-ev="ev10" data-sev="ok"><td class="mono">07:58:14</td><td><button type="button" class="row-btn">Login from new device (Lisbon, PT)</button></td><td>Kite Studio</td><td><span class="pill ok">ok</span></td></tr>
+                  <tr data-ev="ev11" data-sev="ok"><td class="mono">07:40:31</td><td><button type="button" class="row-btn">Invoice paid ($1,185.00)</button></td><td>Sundial Media</td><td><span class="pill ok">ok</span></td></tr>
+                  <tr data-ev="ev12" data-sev="error"><td class="mono">07:22:09</td><td><button type="button" class="row-btn">Webhook endpoint returned 500</button></td><td>Orbit Retail</td><td><span class="pill err">error</span></td></tr>
+                </tbody>
+              </table>
+              <p class="empty" id="ev-empty" hidden>Nothing with that severity in the last 24 hours.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== GROWTH ===================== -->
+        <div class="view" data-view-panel="growth">
+          <div class="rev-grid">
+            <div class="panel funnel-panel">
+              <h2>Conversion funnel <b>19 paid</b><small>last 30 days · select a stage to see what blocks the next one</small></h2>
+              <div class="funnel" role="group" aria-label="Funnel stages">
+                <button type="button" class="stage is-active" data-stage="visited" aria-pressed="true">
+                  <span class="stage-name">Visited</span>
+                  <span class="track"><span class="fill" style="--w:1"></span></span>
+                  <b class="mono">9,860</b>
+                  <small>pricing, docs and home</small>
+                </button>
+                <button type="button" class="stage" data-stage="signup" aria-pressed="false">
+                  <span class="stage-name">Signed up</span>
+                  <span class="track"><span class="fill" style="--w:0.042"></span></span>
+                  <b class="mono">412</b>
+                  <small>4.2% of visitors · 9,448 left</small>
+                </button>
+                <button type="button" class="stage" data-stage="activated" aria-pressed="false">
+                  <span class="stage-name">Activated</span>
+                  <span class="track"><span class="fill" style="--w:0.451"></span></span>
+                  <b class="mono">186</b>
+                  <small>45.1% of signups · 226 never connected data</small>
+                </button>
+                <button type="button" class="stage" data-stage="paid" aria-pressed="false">
+                  <span class="stage-name">Paid</span>
+                  <span class="track"><span class="fill" style="--w:0.102"></span></span>
+                  <b class="mono">19</b>
+                  <small>10.2% of activated · $3,120 new MRR</small>
+                </button>
+              </div>
+              <div class="stage-detail" id="stage-detail">
+                <small class="kicker" id="stage-kicker">Visited · 9,860</small>
+                <p id="stage-text">Visits split 4,410 organic, 3,120 paid search and 2,330 direct or referral. The pricing page takes 38% of them and /docs another 27%.</p>
+                <p class="blocker"><b>Top blocker</b><span id="stage-blocker">61% of pricing-page visitors leave without scrolling down to the Starter tier, which is the plan most of them would qualify for.</span></p>
+                <button type="button" class="btn primary" id="stage-action" data-stage="visited">Move Starter to the top of pricing</button>
+              </div>
+            </div>
+
+            <div class="panel cohort-panel">
+              <h2>Retention by weekly cohort <small>% of signups still active · select a cell for the exact figure</small></h2>
+              <div class="table-wrap">
+                <table class="cohort" id="cohort">
+                  <thead>
+                    <tr><th>Cohort</th><th>Size</th><th>W0</th><th>W1</th><th>W2</th><th>W3</th><th>W4</th><th>W5</th><th>W6</th><th>W7</th></tr>
+                  </thead>
+                  <tbody id="cohort-rows"></tbody>
+                </table>
+              </div>
+              <p class="cohort-detail mono" id="cohort-detail">Select a cell. Newer cohorts hold on better: week-4 retention went from 48% (Jul 13) to 52% (Aug 3).</p>
+              <div class="legend" aria-hidden="true"><span>40%</span><i></i><span>100%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== ALERTS ===================== -->
+        <div class="view" data-view-panel="alerts">
+          <div class="rev-grid">
+            <div class="panel rules-panel">
+              <h2>Alert rules <b id="rules-count">3</b><small>active</small></h2>
+              <ul class="rules" id="rules">
+                <li class="rule" data-rule="r1" data-enabled="true">
+                  <div class="rule-main"><b>Avg. response &gt; 250 ms for 5 min</b><small>Email · Slack #pulse-alerts · last fired today 08:31 · <em class="mono" data-rule-now="response">now 212 ms</em></small></div>
+                  <div class="rule-actions">
+                    <button type="button" class="switch" role="switch" aria-checked="true" aria-label="Rule enabled" data-rule-toggle><i></i></button>
+                    <button type="button" class="btn ghost" data-rule-test>Test</button>
+                    <button type="button" class="btn ghost" data-rule-delete>Delete</button>
+                  </div>
+                  <div class="confirm" hidden><span>Delete this rule?</span><button type="button" class="btn ghost danger-btn" data-rule-confirm>Yes, delete</button><button type="button" class="btn ghost" data-rule-keep>Keep</button></div>
+                </li>
+                <li class="rule" data-rule="r2" data-enabled="true">
+                  <div class="rule-main"><b>Churn &gt; 2.5% (trailing 30 d)</b><small>Email · last fired Jul 14 · <em class="mono" data-rule-now="churn">now 1.8%</em></small></div>
+                  <div class="rule-actions">
+                    <button type="button" class="switch" role="switch" aria-checked="true" aria-label="Rule enabled" data-rule-toggle><i></i></button>
+                    <button type="button" class="btn ghost" data-rule-test>Test</button>
+                    <button type="button" class="btn ghost" data-rule-delete>Delete</button>
+                  </div>
+                  <div class="confirm" hidden><span>Delete this rule?</span><button type="button" class="btn ghost danger-btn" data-rule-confirm>Yes, delete</button><button type="button" class="btn ghost" data-rule-keep>Keep</button></div>
+                </li>
+                <li class="rule" data-rule="r3" data-enabled="true">
+                  <div class="rule-main"><b>Active users drops by 15% day over day</b><small>Email · Slack #pulse-alerts · last fired Aug 12 · <em class="mono" data-rule-now="active">now 12,904</em></small></div>
+                  <div class="rule-actions">
+                    <button type="button" class="switch" role="switch" aria-checked="true" aria-label="Rule enabled" data-rule-toggle><i></i></button>
+                    <button type="button" class="btn ghost" data-rule-test>Test</button>
+                    <button type="button" class="btn ghost" data-rule-delete>Delete</button>
+                  </div>
+                  <div class="confirm" hidden><span>Delete this rule?</span><button type="button" class="btn ghost danger-btn" data-rule-confirm>Yes, delete</button><button type="button" class="btn ghost" data-rule-keep>Keep</button></div>
+                </li>
+              </ul>
+
+              <form class="rule-form" id="rule-form" novalidate>
+                <h3>New rule</h3>
+                <div class="rule-row">
+                  <label class="select"><span class="sr-only">Metric</span>
+                    <select id="rule-metric">
+                      <option value="response">Avg. response (ms)</option>
+                      <option value="active">Active users</option>
+                      <option value="mrr">MRR ($)</option>
+                      <option value="churn">Churn (%)</option>
+                      <option value="errors">Error rate (%)</option>
+                      <option value="payments">Failed payments (count)</option>
+                    </select>
+                  </label>
+                  <label class="select"><span class="sr-only">Condition</span>
+                    <select id="rule-cond">
+                      <option value="above">is above</option>
+                      <option value="below">is below</option>
+                      <option value="drops">drops by %</option>
+                      <option value="rises">rises by %</option>
+                    </select>
+                  </label>
+                  <label class="num"><span class="sr-only">Threshold</span><input type="number" id="rule-threshold" min="0" step="any" placeholder="300" /><span id="rule-unit">ms</span></label>
+                  <label class="select"><span class="sr-only">For how long</span>
+                    <select id="rule-window">
+                      <option value="5 min">for 5 min</option>
+                      <option value="30 min">for 30 min</option>
+                      <option value="1 h">for 1 h</option>
+                      <option value="1 day">for 1 day</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="rule-row channels" role="group" aria-label="Notify via">
+                  <label class="check"><input type="checkbox" id="rule-ch-email" checked /> Email</label>
+                  <label class="check" id="rule-ch-slack-label"><input type="checkbox" id="rule-ch-slack" disabled /> Slack <small id="rule-slack-hint">(connect Slack in Integrations)</small></label>
+                  <label class="check"><input type="checkbox" id="rule-ch-webhook" /> Webhook</label>
+                  <button type="submit" class="btn primary" id="rule-add">Add rule</button>
+                </div>
+                <p class="hint" id="rule-hint" hidden></p>
+              </form>
+            </div>
+
+            <div class="panel status-panel">
+              <h2>Public status page <small>status.pulse.app · what your customers see</small></h2>
+              <ul class="components" id="components">
+                <li><span>API</span><em class="mono" id="comp-latency">212 ms avg</em><span class="pill ok">Operational</span></li>
+                <li><span>Dashboard</span><span class="pill ok">Operational</span></li>
+                <li><span>Webhooks</span><span class="pill warn" id="comp-webhooks">Degraded</span></li>
+                <li><span>Exports</span><span class="pill ok">Operational</span></li>
+              </ul>
+              <div class="setting">
+                <div><b>Show API response time publicly</b><small>Customers see the 24-hour average next to the API row.</small></div>
+                <button type="button" class="switch" role="switch" aria-checked="true" id="st-latency" aria-label="Show API response time publicly"><i></i></button>
+              </div>
+              <div class="incident" id="incident" data-state="investigating">
+                <div class="incident-head"><b>Webhook delivery delays</b><span class="pill warn" id="inc-pill">Investigating</span></div>
+                <ol class="timeline" id="inc-timeline">
+                  <li><span class="mono">09:38</span><span><b>Investigating</b> — Deliveries to a small number of customer webhook endpoints are timing out. Retries are automatic and no events are lost.</span></li>
+                </ol>
+                <form class="inc-form" id="inc-form" novalidate>
+                  <label class="search"><span class="sr-only">Incident update</span><input type="text" id="inc-text" maxlength="140" placeholder="Post an update customers will see…" autocomplete="off" /></label>
+                  <button type="submit" class="btn ghost">Post update</button>
+                </form>
+              </div>
+              <div class="drawer-actions">
+                <button type="button" class="btn primary" data-status-preview>Preview as a customer</button>
+                <button type="button" class="btn ghost" id="inc-resolve">Mark incident resolved</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== TEAM ===================== -->
+        <div class="view" data-view-panel="team">
+          <div class="team-grid">
+            <div class="panel team-panel">
+              <h2>Members <b id="team-count">11</b><small id="team-of">of 14 seats</small></h2>
+              <form class="invite" id="invite-form" novalidate>
+                <label class="search"><span class="sr-only">Email to invite</span><input type="email" id="invite-email" placeholder="colleague@acmerobotics.com" autocomplete="off" /></label>
+                <label class="select"><span class="sr-only">Role</span>
+                  <select id="invite-role">
+                    <option value="Admin">Admin</option>
+                    <option value="Analyst" selected>Analyst</option>
+                    <option value="Viewer">Viewer</option>
+                  </select>
+                </label>
+                <button type="submit" class="btn primary">Invite</button>
+              </form>
+              <p class="hint" id="invite-hint" hidden></p>
+              <div class="table-wrap">
+                <table class="team" id="team-table">
+                  <thead><tr><th>Member</th><th>Role</th><th>Last active</th><th><span class="sr-only">Actions</span></th></tr></thead>
+                  <tbody id="team-rows">
+                    <tr data-member="riya@acmerobotics.com" data-owner="true"><td><b>Riya Menon</b><small>riya@acmerobotics.com · you</small></td><td><span class="role-fixed">Owner</span></td><td class="mono">now</td><td></td></tr>
+                    <tr data-member="nadia@acmerobotics.com"><td><b>Nadia Reyes</b><small>nadia@acmerobotics.com</small></td><td><label class="select"><span class="sr-only">Role for Nadia Reyes</span><select data-role><option>Admin</option><option>Analyst</option><option>Viewer</option></select></label></td><td class="mono">4 min ago</td><td><button type="button" class="btn ghost" data-remove>Remove</button><span class="confirm" hidden>Remove? <button type="button" class="btn ghost danger-btn" data-remove-confirm>Yes</button><button type="button" class="btn ghost" data-remove-keep>Keep</button></span></td></tr>
+                    <tr data-member="chen@acmerobotics.com"><td><b>Chen Wei</b><small>chen@acmerobotics.com</small></td><td><label class="select"><span class="sr-only">Role for Chen Wei</span><select data-role><option>Admin</option><option>Analyst</option><option>Viewer</option></select></label></td><td class="mono">1 h ago</td><td><button type="button" class="btn ghost" data-remove>Remove</button><span class="confirm" hidden>Remove? <button type="button" class="btn ghost danger-btn" data-remove-confirm>Yes</button><button type="button" class="btn ghost" data-remove-keep>Keep</button></span></td></tr>
+                    <tr data-member="ben@acmerobotics.com"><td><b>Ben Liu</b><small>ben@acmerobotics.com</small></td><td><label class="select"><span class="sr-only">Role for Ben Liu</span><select data-role><option>Admin</option><option selected>Analyst</option><option>Viewer</option></select></label></td><td class="mono">12 min ago</td><td><button type="button" class="btn ghost" data-remove>Remove</button><span class="confirm" hidden>Remove? <button type="button" class="btn ghost danger-btn" data-remove-confirm>Yes</button><button type="button" class="btn ghost" data-remove-keep>Keep</button></span></td></tr>
+                    <tr data-member="sofia@acmerobotics.com"><td><b>Sofia Marin</b><small>sofia@acmerobotics.com</small></td><td><label class="select"><span class="sr-only">Role for Sofia Marin</span><select data-role><option>Admin</option><option selected>Analyst</option><option>Viewer</option></select></label></td><td class="mono">35 min ago</td><td><button type="button" class="btn ghost" data-remove>Remove</button><span class="confirm" hidden>Remove? <button type="button" class="btn ghost danger-btn" data-remove-confirm>Yes</button><button type="button" class="btn ghost" data-remove-keep>Keep</button></span></td></tr>
+                    <tr data-member="omar@acmerobotics.com"><td><b>Omar Haddad</b><small>omar@acmerobotics.com</small></td><td><label class="select"><span class="sr-only">Role for Omar Haddad</span><select data-role><option>Admin</option><option selected>Analyst</option><option>Viewer</option></select></label></td><td class="mono">2 h ago</td><td><button type="button" class="btn ghost" data-remove>Remove</button><span class="confirm" hidden>Remove? <button type="button" class="btn ghost danger-btn" data-remove-confirm>Yes</button><button type="button" class="btn ghost" data-remove-keep>Keep</button></span></td></tr>
+                    <tr data-member="fatima@acmerobotics.com"><td><b>Fatima Noor</b><small>fatima@acmerobotics.com</small></td><td><label class="select"><span class="sr-only">Role for Fatima Noor</span><select data-role><option>Admin</option><option selected>Analyst</option><option>Viewer</option></select></label></td><td class="mono">yesterday</td><td><button type="button" class="btn ghost" data-remove>Remove</button><span class="confirm" hidden>Remove? <button type="button" class="btn ghost danger-btn" data-remove-confirm>Yes</button><button type="button" class="btn ghost" data-remove-keep>Keep</button></span></td></tr>
+                    <tr data-member="ines@acmerobotics.com"><td><b>Inês Costa</b><small>ines@acmerobotics.com</small></td><td><label class="select"><span class="sr-only">Role for Inês Costa</span><select data-role><option>Admin</option><option>Analyst</option><option selected>Viewer</option></select></label></td><td class="mono">3 h ago</td><td><button type="button" class="btn ghost" data-remove>Remove</button><span class="confirm" hidden>Remove? <button type="button" class="btn ghost danger-btn" data-remove-confirm>Yes</button><button type="button" class="btn ghost" data-remove-keep>Keep</button></span></td></tr>
+                    <tr data-member="leo@acmerobotics.com"><td><b>Leo Marsh</b><small>leo@acmerobotics.com</small></td><td><label class="select"><span class="sr-only">Role for Leo Marsh</span><select data-role><option>Admin</option><option>Analyst</option><option selected>Viewer</option></select></label></td><td class="mono">yesterday</td><td><button type="button" class="btn ghost" data-remove>Remove</button><span class="confirm" hidden>Remove? <button type="button" class="btn ghost danger-btn" data-remove-confirm>Yes</button><button type="button" class="btn ghost" data-remove-keep>Keep</button></span></td></tr>
+                    <tr data-member="jakub@acmerobotics.com"><td><b>Jakub Nowak</b><small>jakub@acmerobotics.com</small></td><td><label class="select"><span class="sr-only">Role for Jakub Nowak</span><select data-role><option>Admin</option><option>Analyst</option><option selected>Viewer</option></select></label></td><td class="mono">6 days ago</td><td><button type="button" class="btn ghost" data-remove>Remove</button><span class="confirm" hidden>Remove? <button type="button" class="btn ghost danger-btn" data-remove-confirm>Yes</button><button type="button" class="btn ghost" data-remove-keep>Keep</button></span></td></tr>
+                    <tr data-member="amara@acmerobotics.com"><td><b>Amara Okoye</b><small>amara@acmerobotics.com</small></td><td><label class="select"><span class="sr-only">Role for Amara Okoye</span><select data-role><option>Admin</option><option>Analyst</option><option selected>Viewer</option></select></label></td><td class="mono">2 weeks ago</td><td><button type="button" class="btn ghost" data-remove>Remove</button><span class="confirm" hidden>Remove? <button type="button" class="btn ghost danger-btn" data-remove-confirm>Yes</button><button type="button" class="btn ghost" data-remove-keep>Keep</button></span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="note">Admins manage alerts, integrations and billing. Analysts build reports and see every customer. Viewers see dashboards only.</p>
+            </div>
+
+            <div class="panel billing-panel">
+              <h2>Plan &amp; usage</h2>
+              <div class="meter">
+                <div class="meter-head"><span class="plan growth" id="plan-badge">Growth</span><b class="mono" id="seat-count">11 / 14 seats</b></div>
+                <div class="track"><div class="fill" id="seat-fill" style="transform:scaleX(0.786)"></div></div>
+              </div>
+              <ul class="movement">
+                <li><span>Seat price</span><b class="mono" id="seat-price">$79 / seat / mo</b></li>
+                <li><span>Current bill</span><b class="mono" id="bill-now">$1,106 / mo</b></li>
+                <li class="minus" id="overage-row" hidden><span>Projected overage</span><b class="mono" id="overage">+$0</b></li>
+                <li class="total"><span>Next invoice · Oct 2</span><b class="mono" id="bill-next">$1,106</b></li>
+              </ul>
+              <p class="note" id="plan-note">3 seats free. Pending invites reserve a seat until they are accepted or revoked.</p>
+              <div class="drawer-actions">
+                <button type="button" class="btn primary" id="upgrade">Upgrade to Scale · 25 seats for $1,625/mo</button>
+              </div>
+              <div class="confirm-box" id="upgrade-confirm" hidden>
+                <p>Switch Acme Robotics to <b>Scale</b>? You pay a prorated <b class="mono">$519</b> today for the 30 days to Oct 2, then <b class="mono">$1,625</b> a month for 25 seats at $65 each.</p>
+                <div class="drawer-actions">
+                  <button type="button" class="btn primary" id="upgrade-yes">Confirm upgrade</button>
+                  <button type="button" class="btn ghost" id="upgrade-no">Not now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== INTEGRATIONS ===================== -->
+        <div class="view" data-view-panel="integrations">
+          <p class="int-summary"><b id="int-count">1</b> of 4 connected · connecting a tool changes what shows up in Events, Alerts and the customer drawer.</p>
+          <div class="int-grid">
+            <article class="panel integration" data-int="slack" data-connected="false">
+              <div class="int-head"><i class="int-icon slack" aria-hidden="true">#</i><div><b>Slack</b><small>Alerts and the weekly digest in #pulse-alerts</small></div><span class="pill acked" data-int-pill>Not connected</span></div>
+              <p class="note">Every alert rule gains a Slack channel option and the on-call team gets pinged where they already are.</p>
+              <div class="int-foot"><small class="mono" data-int-meta>—</small><button type="button" class="btn primary" data-int-toggle aria-pressed="false">Connect</button></div>
+            </article>
+            <article class="panel integration" data-int="stripe" data-connected="true">
+              <div class="int-head"><i class="int-icon stripe" aria-hidden="true">S</i><div><b>Stripe</b><small>Invoices, payments, dunning</small></div><span class="pill ok" data-int-pill>Connected</span></div>
+              <p class="note">Billing events, MRR movement and failed-payment retries all come from here. Disconnecting pauses them.</p>
+              <div class="int-foot"><small class="mono" data-int-meta>synced 2 min ago · 278 customers</small><button type="button" class="btn ghost" data-int-toggle aria-pressed="true">Disconnect</button></div>
+            </article>
+            <article class="panel integration" data-int="hubspot" data-connected="false">
+              <div class="int-head"><i class="int-icon hubspot" aria-hidden="true">H</i><div><b>HubSpot</b><small>Two-way contact and deal sync</small></div><span class="pill acked" data-int-pill>Not connected</span></div>
+              <p class="note">"Open in CRM" on a customer jumps straight to their HubSpot record, and health scores sync back as a contact property.</p>
+              <div class="int-foot"><small class="mono" data-int-meta>—</small><button type="button" class="btn primary" data-int-toggle aria-pressed="false">Connect</button></div>
+            </article>
+            <article class="panel integration" data-int="segment" data-connected="false">
+              <div class="int-head"><i class="int-icon segment" aria-hidden="true">≡</i><div><b>Segment</b><small>Product events from your app and site</small></div><span class="pill acked" data-int-pill>Not connected</span></div>
+              <p class="note">Feeds the funnel and retention cohorts with page views and in-app events instead of the built-in tracker.</p>
+              <div class="int-foot"><small class="mono" data-int-meta>—</small><button type="button" class="btn primary" data-int-toggle aria-pressed="false">Connect</button></div>
+            </article>
+          </div>
+        </div>
+
+        <!-- ===================== SETTINGS ===================== -->
+        <div class="view" data-view-panel="settings">
+          <form class="settings" id="settings-form" novalidate>
+            <div class="panel">
+              <h2>Alerts</h2>
+              <div class="setting">
+                <div><b>Response-time alert</b><small>Notify when the rolling average goes above this for 5 minutes.</small></div>
+                <label class="num"><input type="number" id="set-threshold" name="threshold" min="50" max="2000" step="10" value="250" /> ms</label>
+              </div>
+              <div class="setting">
+                <div><b>Anomaly detection</b><small>Flag sudden drops in active users or spikes in errors.</small></div>
+                <button type="button" class="switch" role="switch" aria-checked="true" name="anomaly" aria-label="Anomaly detection"><i></i></button>
+              </div>
+              <div class="setting">
+                <div><b>Slack alerts</b><small>Post alerts to #pulse-alerts as well as email.</small></div>
+                <button type="button" class="switch" role="switch" aria-checked="false" name="slack" aria-label="Slack alerts"><i></i></button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h2>Reports</h2>
+              <div class="setting">
+                <div><b>Weekly digest</b><small>A one-page summary of MRR, users and churn.</small></div>
+                <button type="button" class="switch" role="switch" aria-checked="true" name="digest" aria-label="Weekly digest"><i></i></button>
+              </div>
+              <div class="setting">
+                <div><b>Send on</b><small>Digest arrives at 07:00 in your workspace timezone.</small></div>
+                <label class="select"><span class="sr-only">Digest day</span>
+                  <select id="set-day" name="day">
+                    <option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option>
+                  </select>
+                </label>
+              </div>
+              <div class="setting">
+                <div><b>Timezone</b><small>Used for daily rollups and the digest.</small></div>
+                <label class="select"><span class="sr-only">Timezone</span>
+                  <select id="set-tz" name="tz">
+                    <option>Europe/Lisbon</option><option>Europe/London</option><option>America/New_York</option><option>America/Los_Angeles</option><option>Asia/Singapore</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel danger">
+              <h2>Workspace</h2>
+              <div class="setting">
+                <div><b>Export everything</b><small>Customers, events and revenue as CSV. We email you a link when it's ready.</small></div>
+                <button type="button" class="btn ghost" id="export-all">Start export</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <div class="savebar" id="savebar" hidden>
+      <span>You have unsaved changes</span>
+      <button type="button" class="btn ghost" id="settings-discard">Discard</button>
+      <button type="button" class="btn primary" id="settings-save">Save changes</button>
+    </div>
+
+    <div class="scrim" id="scrim" hidden></div>
+    <aside class="drawer" id="drawer" role="dialog" aria-modal="false" aria-labelledby="drawer-title" hidden>
+      <div class="drawer-head">
+        <div>
+          <small id="drawer-kicker">Event</small>
+          <h2 id="drawer-title">Event detail</h2>
+        </div>
+        <button type="button" class="close" id="drawer-close" aria-label="Close panel">×</button>
+      </div>
+
+      <div class="drawer-body" data-drawer-mode="event">
+        <div class="drawer-event">
+          <dl class="facts">
+            <div><dt>Account</dt><dd id="d-account">—</dd></div>
+            <div><dt>Time</dt><dd class="mono" id="d-time">—</dd></div>
+            <div><dt>Status</dt><dd><span class="pill ok" id="d-pill">ok</span></dd></div>
+            <div><dt>Event ID</dt><dd class="mono" id="d-id">—</dd></div>
+          </dl>
+          <p class="summary" id="d-summary">—</p>
+          <h3>Payload</h3>
+          <pre class="payload mono" id="d-payload">{}</pre>
+          <div class="drawer-actions">
+            <button type="button" class="btn primary" id="d-ack">Acknowledge</button>
+            <button type="button" class="btn ghost" id="d-action">Retry</button>
+          </div>
+        </div>
+
+        <div class="drawer-cust">
+          <dl class="facts">
+            <div><dt>Contact</dt><dd id="c-contact">—</dd></div>
+            <div><dt>Plan</dt><dd id="c-plan">—</dd></div>
+            <div><dt>Seats</dt><dd class="mono" id="c-seats">—</dd></div>
+            <div><dt>MRR</dt><dd class="mono" id="c-mrr">—</dd></div>
+            <div><dt>Health</dt><dd><span class="health healthy" id="c-health">Healthy</span></dd></div>
+            <div><dt>Annual value</dt><dd class="mono" id="c-arr">—</dd></div>
+          </dl>
+          <p class="summary" id="c-summary">—</p>
+          <h3>Seat usage</h3>
+          <div class="bars">
+            <div><span>Active</span><div class="track"><div class="fill" id="c-usage-fill" style="transform:scaleX(0.8)"></div></div><span class="n" id="c-usage">18/22</span></div>
+          </div>
+          <div class="drawer-actions">
+            <button type="button" class="btn primary" id="c-primary">Send renewal reminder</button>
+            <button type="button" class="btn ghost" id="c-secondary">Open in CRM</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="modal" id="status-modal" hidden>
+      <div class="modal-scrim" data-modal-close></div>
+      <div class="modal-card status-page" role="dialog" aria-modal="true" aria-labelledby="status-modal-title">
+        <div class="browser"><i></i><i></i><i></i><span class="mono">status.pulse.app</span><button type="button" class="close" id="status-modal-close" data-modal-close aria-label="Close preview">×</button></div>
+        <div class="sp-body">
+          <div class="sp-head"><span class="sp-logo"><i></i> Pulse</span><h2 id="status-modal-title">System status</h2></div>
+          <p class="sp-banner" id="sp-banner" data-state="warn">Some systems are degraded</p>
+          <ul class="sp-components">
+            <li><span>API</span><em class="mono" id="sp-latency">212 ms avg · 24 h</em><span class="pill ok">Operational</span></li>
+            <li><span>Dashboard</span><span class="pill ok">Operational</span></li>
+            <li><span>Webhooks</span><span class="pill warn" id="sp-webhooks">Degraded</span></li>
+            <li><span>Exports</span><span class="pill ok">Operational</span></li>
+          </ul>
+          <div class="sp-uptime"><div class="uptime-bars" id="uptime-bars" role="img" aria-label="90-day uptime, 99.96%"></div><small>99.96% uptime · last 90 days</small></div>
+          <section class="sp-incident">
+            <h3 id="sp-inc-heading">Active incident</h3>
+            <b id="sp-inc-title">Webhook delivery delays</b>
+            <ol class="timeline" id="sp-timeline"></ol>
+          </section>
+          <form class="sp-subscribe" id="sp-subscribe" novalidate>
+            <label class="search"><span class="sr-only">Email for status updates</span><input type="email" id="sp-email" placeholder="you@company.com" autocomplete="off" /></label>
+            <button type="submit" class="btn primary">Subscribe to updates</button>
+          </form>
+          <p class="note" id="sp-sub-note" hidden></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <footer class="ln-foot">
+      <span>Fictional product and numbers. Built by LocalNinja as a sample project.</span>
+      <a href="/#contact">Want one for your business? →</a>
+    </footer>
+
+    <script type="module" src="/src/work/mockups.js"></script>
+    <script type="module" src="/src/work/dashboard.js"></script>
+  </body>
+</html>

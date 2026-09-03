@@ -16,47 +16,87 @@ configured they answer from canned scripts.
 - New `#work` section between `#process` and `#about`. Kicker "Sample
   projects", heading `THINGS WE'VE` `BUILT`(highlighted), note "Sample
   projects built to show our range - names and data are fictional."
-- Two labelled groups of brutalist cards (border, hard shadow, hover
-  lift): **UI / UX** (4) and **Chatbots & voice bots** (4). Each card:
-  colour swatch strip in the mockup's own palette, name, one-line pitch,
-  tag ("Web app", "Voice bot" …), "Open demo →".
+- Six brutalist tab buttons switch between card grids (border, hard
+  shadow, hover lift); only **UI / UX** is shown on load.
+  - **UI / UX** — everything: the four mockups followed by every real
+    project card (the same cards also appear under their own tabs).
+  - **Web development** — real projects with a "Live" ribbon: the
+    conversyai.com launch site and ajaypradeep.com (external links), plus
+    screen galleries for Conversy AI dashboard, NinjaHR, NinjaLearn,
+    CurricuLearn, IRINA and AI Interactive Story.
+  - **E-commerce** — the live localninja.ca anime store as a screen
+    gallery (captures of the live Shopify storefront: home, all products,
+    lamp collection, product page).
+  - **AI** — every AI project: Conversy AI site + dashboard, NinjaHR,
+    CurricuLearn, AI Interactive Story, and the four bot demos.
+  - **Chatbots** (2) and **Voice bots** (2) — the bot demos.
+  Screen galleries are `work/<slug>.html` pages sharing
+  `src/work/gallery.css` (facts box, browser-framed shots with numbered
+  captions, lightbox via `mockups.js` `data-open`/`data-close`); images
+  live in `public/work/<dir>/` and were sourced from the co-founder's
+  portfolio case studies.
 - Nav and footer gain "Work".
 
 ## Demo pages (`/work/*.html`)
 
-Every page shares `src/work/shell.css` + `src/work/shell.js`: a slim
-top bar (LocalNinja mark, "Sample project · <name>", "← Back to site")
+Every page shares `src/work/shell.css`: a slim top bar (LocalNinja mark, "Sample project · <name>", "← Back to site")
 and a footer line. Below the bar each page is its own world.
 
 ### UI / UX mockups
 
 | Slug | Product | Look | Interactions |
 |---|---|---|---|
-| `clinic` | Maple Clinic - patient booking | calm teal, rounded, sans | doctor → slot → confirm (3 steps) |
+| `clinic` | Maple Clinic - patient booking | the same clinic site chrome as `bot-clinic` (nav, hero, info strip; reuses `bot-clinic.css`) with the booking flow as the main section | hero doctor chips pre-select + scroll into the flow; doctor → slot → confirm (3 steps) |
 | `restaurant` | Ember & Oak - menu & ordering | dark, warm, serif headings | category tabs, add to cart, cart drawer |
 | `realty` | Northshore Realty - listings | airy white, photo-led, map placeholder | filter chips, listing → detail panel |
 | `dashboard` | Pulse - SaaS analytics | dark, dense, mono numbers | sidebar nav, range toggle re-draws inline SVG chart |
 
-No external images: visuals are CSS gradients and inline SVG. All
-interactions are class toggles handled in `src/work/mockups.js`.
+No external images: visuals are CSS gradients and inline SVG. Generic
+interactions are class toggles handled in `src/work/mockups.js`; the
+`dashboard`, `restaurant` and `clinic` pages add a page module
+(`src/work/<slug>.js`) for deeper product flows:
+
+- **Pulse** — sidebar switches real views (Overview, Customers with
+  search/filter/sort, Revenue with a churn what-if forecast, Events with
+  severity filters, Settings with dirty-state save); KPI tiles re-target
+  the chart; chart hover/keyboard tooltip; "Live" auto-refresh with an
+  updated-ago counter; customer and event detail drawers with actions.
+- **Ember & Oak** — dietary filter chips, dish detail modal with
+  modifiers, cart lines with quantity/remove and subtotal/HST/tip/total,
+  pickup vs dine-in with time slots and table number, three-step checkout
+  (details → fake payment → confirmation with a live order tracker),
+  busy-kitchen banner.
+- **Maple Clinic** — visit-type picker that filters eligible doctors, a
+  month calendar with closed days, taken slots with a waitlist, "earliest
+  available", reason-for-visit with counter, post-booking calendar /
+  reminder toggles, and a patient portal (My visits with reschedule and
+  cancel-with-confirm, Messages with auto-reply, Profile with save state).
 
 ### Bot demos
 
 | Slug | Bot | Mode | Fictional business data in system prompt |
 |---|---|---|---|
-| `bot-clinic` | Maple Clinic assistant | chat | doctors, hours, visit types |
-| `bot-restaurant` | Ember & Oak host | voice | seating, hours, party sizes |
+| (on `clinic`) | Maple Clinic assistant | chat | doctors, hours, visit types |
+| (on `restaurant`) | Ember & Oak host | voice | seating, hours, party sizes |
 | `bot-store` | Northshore Goods support | chat | three sample orders, return policy |
-| `bot-realty` | Northshore Realty lead bot | voice | listings, neighbourhoods, budgets |
+| (on `realty`) | Northshore Realty lead bot | voice | listings, neighbourhoods, budgets |
 
-Layout: scenario panel (what the bot does, "Try saying…" chips) beside a
-phone frame holding the widget. Widget (`src/work/bot.js`):
+The clinic, restaurant and realty bots live **on their mockup pages** as an
+on-site widget (`src/work/widget.css`, `.ln-widget`, themed per page with
+`--w-*` variables, minimisable via `data-toggle`): Maple Clinic gets a chat
+assistant, Ember & Oak a voice host (bottom-left, clear of the cart), and
+Northshore Realty a voice lead assistant. One page therefore serves both
+the UI/UX card and the Chatbot / Voice bot card (`#assistant` links). Only
+`bot-store` (Northshore Goods support) is a standalone page - a customer
+portal layout (`bot-store.css`) - because it has no web-app twin.
+
+Widget (`src/work/bot.js`):
 
 - Message list, typing indicator, text input. Voice mode adds a mic
   button (Web Speech API `SpeechRecognition`) and speaks replies with
   `speechSynthesis`; if recognition is unsupported the mic is hidden and
   text input remains.
-- Sends `POST /api/chat` `{ bot, messages }` (last 12 turns). On any
+- Chips are opt-in via `[data-say]`. Sends `POST /api/chat` `{ bot, messages }` (last 12 turns). On any
   non-OK response (503 `not_configured`, 429, network) it switches to
   **scripted mode**: replies come from a per-bot canned sequence and a
   small "Demo mode" badge appears. Scripted mode is the placeholder

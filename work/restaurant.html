@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ember &amp; Oak - LocalNinja sample project</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/logo-animated.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Manrope:wght@400;500;700;800&family=Fraunces:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/work/shell.css" />
+    <link rel="stylesheet" href="/src/work/bot.css" />
+    <link rel="stylesheet" href="/src/work/widget.css" />
+    <link rel="stylesheet" href="/src/work/restaurant.css" />
+    <style>.ln-widget{--w-accent:#e0762b;--w-accent-ink:#1a120c;--w-bg:#1f1916;--w-ink:#f4e9dc;--w-body:#15110f;--w-bot:#2a221e;--w-line:#3a302a;--w-chip:#2a221e;--w-input:#15110f;--w-muted:#a89a8c;} .eo-menu{padding-bottom:9rem;}</style>
+  </head>
+  <body>
+    <header class="ln-bar">
+      <a class="ln-bar-brand" href="/#work"><img src="/logo-animated.svg" alt="" width="32" height="32" /><span class="ln-bar-name">Local<span class="ninja">Ninja</span></span></a>
+      <p class="ln-bar-title">Sample project · <strong>Ember &amp; Oak</strong> menu &amp; ordering <span class="ln-tag">Ordering</span></p>
+      <a class="ln-bar-back" href="/#work">← Back to site</a>
+    </header>
+
+    <main class="eo">
+      <section class="eo-hero">
+        <p class="eyebrow">Toronto · Wood-fired kitchen</p>
+        <h1>Ember <em>&amp;</em> Oak</h1>
+        <p>Order ahead for pickup, or build your table's order before you arrive. Everything comes off the fire.</p>
+        <div class="hero-cta">
+          <button type="button" class="cta primary" data-eo-mode="pickup">Order for pickup</button>
+          <button type="button" class="cta" data-eo-mode="dinein">Build your table's order</button>
+          <button type="button" class="cta" data-eo-reserve-jump>Reserve a table</button>
+        </div>
+        <p class="hours">Tonight 5–10 pm · kitchen takes its last pickup at 9:45 pm</p>
+      </section>
+
+      <p class="eo-toast" data-eo-toast role="status" aria-live="polite"></p>
+
+      <section class="eo-menu" data-tabs>
+        <div class="view-switch">
+          <div class="seg" role="group" aria-label="Who is looking">
+            <button type="button" data-eo-view="guest" aria-pressed="true">Guest</button>
+            <button type="button" data-eo-view="kitchen" aria-pressed="false">Kitchen screen</button>
+          </div>
+          <p>Flip to see the same orders from the pass - tickets, bump buttons, the host's book.</p>
+        </div>
+        <div class="kitchen-bar">
+          <p class="kitchen-status">
+            <span class="dot" aria-hidden="true"></span>
+            <span data-eo-kitchen-text>Kitchen is on time · pickups running as quoted</span>
+          </p>
+          <button type="button" class="switch" data-eo-busy aria-pressed="false">
+            <span class="knob" aria-hidden="true"></span>
+            <span class="switch-label">Simulate a busy night</span>
+          </button>
+        </div>
+        <div class="busy-banner" data-eo-busy-banner>
+          <strong>The oven is slammed tonight.</strong> We've added 10 minutes to every pickup time so nothing leaves the pass before it's right.
+        </div>
+
+        <section class="specials" aria-labelledby="specials-title" data-eo-specials>
+          <div class="specials-head">
+            <h2 id="specials-title">From the fire tonight</h2>
+            <p>Two dishes we only cook while the coals are right. When they're gone, they're gone.</p>
+          </div>
+          <div class="specials-grid">
+            <article class="special" data-eo-special-card="cauli" data-diet="v gf">
+              <span class="art" style="--art:linear-gradient(135deg,#5a4a2a,#e2c07a)" aria-hidden="true"></span>
+              <h3>Whole roasted cauliflower</h3>
+              <span class="price">$24</span>
+              <p>Buried in the embers, brown butter, capers, golden raisins · V · GF</p>
+              <div class="special-foot">
+                <span class="left"><span class="dot" aria-hidden="true"></span><span data-eo-special-left aria-live="polite">8 left</span></span>
+                <button type="button" class="add" data-eo-special-add="cauli" aria-disabled="false">Add to order</button>
+              </div>
+            </article>
+            <article class="special" data-eo-special-card="lamb" data-diet="gf">
+              <span class="art" style="--art:linear-gradient(135deg,#4a1c1c,#c9553e)" aria-hidden="true"></span>
+              <h3>Lamb shoulder for two</h3>
+              <span class="price">$78</span>
+              <p>Six hours over oak, charred onions, mint, jus · serves two · GF</p>
+              <div class="special-foot">
+                <span class="left"><span class="dot" aria-hidden="true"></span><span data-eo-special-left aria-live="polite">5 left</span></span>
+                <button type="button" class="add" data-eo-special-add="lamb" aria-disabled="false">Add to order</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <div class="diet-bar">
+          <div class="diet-chips" role="group" aria-label="Filter the menu">
+            <button type="button" data-eo-diet="all" aria-pressed="true">Everything</button>
+            <button type="button" data-eo-diet="v" aria-pressed="false">Vegetarian</button>
+            <button type="button" data-eo-diet="gf" aria-pressed="false">Gluten-free</button>
+            <button type="button" data-eo-diet="spicy" aria-pressed="false">Spicy</button>
+          </div>
+          <div class="diet-right">
+            <button type="button" class="sort-btn" data-eo-sort aria-pressed="false">Sort: menu order</button>
+            <p class="diet-count" data-eo-count aria-live="polite">13 dishes</p>
+          </div>
+        </div>
+
+        <div class="tabs" role="tablist">
+          <button type="button" data-tab="starters">Starters</button>
+          <button type="button" data-tab="fire" class="is-active">Wood-fired</button>
+          <button type="button" data-tab="sides">Sides</button>
+          <button type="button" data-tab="desserts">Desserts</button>
+        </div>
+
+        <div data-panel="starters">
+          <article class="dish" data-rating="4.7" data-reviews="86" data-diet="v gf" data-allergens="Tree nuts (hazelnut), dairy" data-story="Whole leeks are buried in the embers until the outer leaves go black, then peeled back to the sweet, silky heart. The romesco is made with last week's fire-roasted peppers." data-mods="Make it spicy|0;Extra romesco|2;No hazelnuts|0">
+            <span class="loved" aria-hidden="true">Most loved</span>
+            <button class="art" type="button" style="--art:linear-gradient(135deg,#2f4a2a,#6d8a3a)" data-eo-dish aria-label="Charred leeks - see details"></button>
+            <div class="body">
+              <h3>Charred leeks</h3>
+              <span class="price">$14</span>
+              <p>Romesco, hazelnut, brown butter</p>
+              <p class="tags"><span>V</span><span>GF</span></p>
+              <p class="rating"><span class="star" aria-hidden="true">★</span><span data-eo-rating-out>4.7</span><span class="sep" aria-hidden="true">·</span><span data-eo-reviews-out>86 reviews</span></p>
+              <div class="actions">
+                <button class="add" type="button" data-add="Charred leeks|14">Add to order</button>
+                <button class="more" type="button" data-eo-dish>Details</button>
+              </div>
+            </div>
+          </article>
+          <article class="dish" data-rating="4.8" data-reviews="143" data-diet="v" data-allergens="Dairy, gluten (sourdough)" data-story="Burrata from a small dairy in Niagara, torn open over tomatoes that sat at the mouth of the oven until they blistered. The sourdough is our own, baked at 6 am." data-mods="Gluten-free crackers instead of sourdough|1;Extra sourdough|3;Add prosciutto|5">
+            <span class="loved" aria-hidden="true">Most loved</span>
+            <button class="art" type="button" style="--art:linear-gradient(135deg,#7a2f2a,#c9553e)" data-eo-dish aria-label="Burrata - see details"></button>
+            <div class="body">
+              <h3>Burrata</h3>
+              <span class="price">$18</span>
+              <p>Blistered tomatoes, basil oil, sourdough</p>
+              <p class="tags"><span>V</span></p>
+              <p class="rating"><span class="star" aria-hidden="true">★</span><span data-eo-rating-out>4.8</span><span class="sep" aria-hidden="true">·</span><span data-eo-reviews-out>143 reviews</span></p>
+              <div class="actions">
+                <button class="add" type="button" data-add="Burrata|18">Add to order</button>
+                <button class="more" type="button" data-eo-dish>Details</button>
+              </div>
+            </div>
+          </article>
+          <article class="dish" data-rating="4.5" data-reviews="61" data-diet="spicy" data-allergens="Fish, gluten (rye), dairy" data-story="Ontario trout, cured overnight and cold-smoked over oak offcuts from the same wood we burn. The horseradish is grated to order, so it has a real kick." data-mods="Skip the rye crisps (gluten-free)|0;Go easy on the horseradish|0;Extra trout|6">
+            <span class="loved" aria-hidden="true">Most loved</span>
+            <button class="art" type="button" style="--art:linear-gradient(135deg,#3b4a5a,#8fa6b8)" data-eo-dish aria-label="Smoked trout - see details"></button>
+            <div class="body">
+              <h3>Smoked trout</h3>
+              <span class="price">$17</span>
+              <p>Horseradish cream, rye crisps, dill</p>
+              <p class="tags"><span>Spicy</span></p>
+              <p class="rating"><span class="star" aria-hidden="true">★</span><span data-eo-rating-out>4.5</span><span class="sep" aria-hidden="true">·</span><span data-eo-reviews-out>61 reviews</span></p>
+              <div class="actions">
+                <button class="add" type="button" data-add="Smoked trout|17">Add to order</button>
+                <button class="more" type="button" data-eo-dish>Details</button>
+              </div>
+            </div>
+          </article>
+          <p class="no-match">No starters match that filter. Try another section, or clear the filter.</p>
+        </div>
+
+        <div data-panel="fire" class="is-active">
+          <article class="dish" data-rating="4.9" data-reviews="312" data-diet="gf" data-allergens="None of the priority allergens" data-story="A whole bird, split and brined for a day, then roasted on the top rack where the heat is fiercest. The skin shatters; the salsa verde cuts through it." data-mods="Make it spicy|0;Extra salsa verde|2;Whole chicken instead|30">
+            <span class="loved" aria-hidden="true">Most loved</span>
+            <button class="art" type="button" style="--art:linear-gradient(135deg,#6b3a1c,#c8862e)" data-eo-dish aria-label="Half chicken - see details"></button>
+            <div class="body">
+              <h3>Half chicken</h3>
+              <span class="price">$34</span>
+              <p>Wood-roasted, salsa verde, jus</p>
+              <p class="tags"><span>GF</span></p>
+              <p class="rating"><span class="star" aria-hidden="true">★</span><span data-eo-rating-out>4.9</span><span class="sep" aria-hidden="true">·</span><span data-eo-reviews-out>312 reviews</span></p>
+              <div class="actions">
+                <button class="add" type="button" data-add="Half chicken|34">Add to order</button>
+                <button class="more" type="button" data-eo-dish>Details</button>
+              </div>
+            </div>
+          </article>
+          <article class="dish" data-rating="4.9" data-reviews="198" data-diet="gf" data-allergens="Dairy" data-story="Forty-five days dry-aged from a farm outside Guelph. Seared directly on the coals, rested twice, and finished with butter whipped with roasted marrow." data-mods="Medium-rare|0|temp;Rare|0|temp;Medium|0|temp;Well done|0|temp;Peppercorn sauce|4;Swap fries for grilled greens|3">
+            <span class="loved" aria-hidden="true">Most loved</span>
+            <button class="art" type="button" style="--art:linear-gradient(135deg,#4a1c1c,#a33a2a)" data-eo-dish aria-label="Dry-aged ribeye - see details"></button>
+            <div class="body">
+              <h3>Dry-aged ribeye</h3>
+              <span class="price">$68</span>
+              <p>Bone marrow butter, fries, 14 oz</p>
+              <p class="tags"><span>GF</span></p>
+              <p class="rating"><span class="star" aria-hidden="true">★</span><span data-eo-rating-out>4.9</span><span class="sep" aria-hidden="true">·</span><span data-eo-reviews-out>198 reviews</span></p>
+              <div class="actions">
+                <button class="add" type="button" data-add="Dry-aged ribeye|68">Add to order</button>
+                <button class="more" type="button" data-eo-dish>Details</button>
+              </div>
+            </div>
+          </article>
+          <article class="dish" data-rating="4.6" data-reviews="97" data-diet="gf" data-allergens="Fish" data-story="A whole Mediterranean sea bass stuffed with fennel and lemon, roasted in the oven's mouth until the skin blisters. Ask and we'll fillet it at the table." data-mods="Filleted at the table|0;Make it spicy|0;Extra lemon &amp; capers|1">
+            <span class="loved" aria-hidden="true">Most loved</span>
+            <button class="art" type="button" style="--art:linear-gradient(135deg,#2b4a4f,#6fa3a8)" data-eo-dish aria-label="Whole branzino - see details"></button>
+            <div class="body">
+              <h3>Whole branzino</h3>
+              <span class="price">$42</span>
+              <p>Lemon, fennel, capers</p>
+              <p class="tags"><span>GF</span></p>
+              <p class="rating"><span class="star" aria-hidden="true">★</span><span data-eo-rating-out>4.6</span><span class="sep" aria-hidden="true">·</span><span data-eo-reviews-out>97 reviews</span></p>
+              <div class="actions">
+                <button class="add" type="button" data-add="Whole branzino|42">Add to order</button>
+                <button class="more" type="button" data-eo-dish>Details</button>
+              </div>
+            </div>
+          </article>
+          <article class="dish" data-rating="4.8" data-reviews="124" data-diet="v" data-allergens="Gluten, dairy, egg" data-story="Whatever the forager brought this week - chanterelles and hen-of-the-woods right now - under a rough-puff pastry lid that bakes in the oven's dying heat." data-mods="Make it spicy|0;Add a fried egg|3;Side of jus|2">
+            <span class="loved" aria-hidden="true">Most loved</span>
+            <button class="art" type="button" style="--art:linear-gradient(135deg,#4a3a2a,#9a7a55)" data-eo-dish aria-label="Mushroom pie - see details"></button>
+            <div class="body">
+              <h3>Mushroom pie</h3>
+              <span class="price">$29</span>
+              <p>Wild mushrooms, thyme, flaky pastry</p>
+              <p class="tags"><span>V</span></p>
+              <p class="rating"><span class="star" aria-hidden="true">★</span><span data-eo-rating-out>4.8</span><span class="sep" aria-hidden="true">·</span><span data-eo-reviews-out>124 reviews</span></p>
+              <div class="actions">
+                <button class="add" type="button" data-add="Mushroom pie|29">Add to order</button>
+                <button class="more" type="button" data-eo-dish>Details</button>
+              </div>
+            </div>
+          </article>
+          <p class="no-match">Nothing from the fire matches that filter. Try another section, or clear the filter.</p>
+        </div>
+
+        <div data-panel="sides">
+          <article class="dish" data-rating="4.9" data-reviews="402" data-diet="v gf" data-allergens="Dairy" data-story="Yukon golds boiled in salted water, crushed by hand and roasted in the embers until the edges go glassy." data-mods="Extra crispy|0;Add pecorino|2;Make it spicy|0">
+            <span class="loved" aria-hidden="true">Most loved</span>
+            <button class="art" type="button" style="--art:linear-gradient(135deg,#5a4a2a,#c9a54a)" data-eo-dish aria-label="Ember potatoes - see details"></button>
+            <div class="body">
+              <h3>Ember potatoes</h3>
+              <span class="price">$11</span>
+              <p>Crushed, rosemary, garlic</p>
+              <p class="tags"><span>V</span><span>GF</span></p>
+              <p class="rating"><span class="star" aria-hidden="true">★</span><span data-eo-rating-out>4.9</span><span class="sep" aria-hidden="true">·</span><span data-eo-reviews-out>402 reviews</span></p>
+              <div class="actions">
+                <button class="add" type="button" data-add="Ember potatoes|11">Add to order</button>
+                <button class="more" type="button" data-eo-dish>Details</button>
+              </div>
+            </div>
+          </article>
+          <article class="dish" data-rating="4.4" data-reviews="77" data-diet="v gf spicy" data-allergens="Dairy" data-story="Rapini and gai lan, blanched then thrown straight on the grill grate. Finished with lemon, chili flakes and a snow of pecorino." data-mods="Less chili|0;Extra chili|0;No pecorino (vegan)|0">
+            <span class="loved" aria-hidden="true">Most loved</span>
+            <button class="art" type="button" style="--art:linear-gradient(135deg,#1f4a2a,#4f8a3a)" data-eo-dish aria-label="Grilled greens - see details"></button>
+            <div class="body">
+              <h3>Grilled greens</h3>
+              <span class="price">$12</span>
+              <p>Chili, lemon, pecorino</p>
+              <p class="tags"><span>V</span><span>GF</span><span>Spicy</span></p>
+              <p class="rating"><span class="star" aria-hidden="true">★</span><span data-eo-rating-out>4.4</span><span class="sep" aria-hidden="true">·</span><span data-eo-reviews-out>77 reviews</span></p>
+              <div class="actions">
+                <button class="add" type="button" data-add="Grilled greens|12">Add to order</button>
+                <button class="more" type="button" data-eo-dish>Details</button>
+              </div>
+            </div>
+          </article>
+          <article class="dish" data-rating="4.7" data-reviews="256" data-diet="v" data-allergens="Gluten, dairy" data-story="Our house loaf, a 36-hour ferment, served warm with butter we culture ourselves." data-mods="Extra butter|1;Add whipped ricotta|3">
+            <span class="loved" aria-hidden="true">Most loved</span>
+            <button class="art" type="button" style="--art:linear-gradient(135deg,#6a4a2a,#d8b07a)" data-eo-dish aria-label="Sourdough and butter - see details"></button>
+            <div class="body">
+              <h3>Sourdough & butter</h3>
+              <span class="price">$7</span>
+              <p>Cultured butter, flaky salt</p>
+              <p class="tags"><span>V</span></p>
+              <p class="rating"><span class="star" aria-hidden="true">★</span><span data-eo-rating-out>4.7</span><span class="sep" aria-hidden="true">·</span><span data-eo-reviews-out>256 reviews</span></p>
+              <div class="actions">
+                <button class="add" type="button" data-add="Sourdough & butter|7">Add to order</button>
+                <button class="more" type="button" data-eo-dish>Details</button>
+              </div>
+            </div>
+          </article>
+          <p class="no-match">No sides match that filter. Try another section, or clear the filter.</p>
+        </div>
+
+        <div data-panel="desserts">
+          <article class="dish" data-rating="4.9" data-reviews="233" data-diet="v gf" data-allergens="Dairy, egg" data-story="Baked hot and fast so the top burns and the middle stays almost liquid. Served with plums roasted in the last of the day's heat." data-mods="Extra plum|2;Add a scoop of vanilla|3">
+            <span class="loved" aria-hidden="true">Most loved</span>
+            <button class="art" type="button" style="--art:linear-gradient(135deg,#6a3a1a,#e8b96a)" data-eo-dish aria-label="Burnt basque cheesecake - see details"></button>
+            <div class="body">
+              <h3>Burnt basque cheesecake</h3>
+              <span class="price">$13</span>
+              <p>Roasted plum</p>
+              <p class="tags"><span>V</span><span>GF</span></p>
+              <p class="rating"><span class="star" aria-hidden="true">★</span><span data-eo-rating-out>4.9</span><span class="sep" aria-hidden="true">·</span><span data-eo-reviews-out>233 reviews</span></p>
+              <div class="actions">
+                <button class="add" type="button" data-add="Burnt basque cheesecake|13">Add to order</button>
+                <button class="more" type="button" data-eo-dish>Details</button>
+              </div>
+            </div>
+          </article>
+          <article class="dish" data-rating="4.6" data-reviews="88" data-diet="v gf" data-allergens="Dairy" data-story="Niagara peaches halved and set on the grill until the sugars catch. The honeycomb comes from hives twenty minutes from the restaurant." data-mods="Extra honeycomb|1.5;Without mascarpone (vegan)|0">
+            <span class="loved" aria-hidden="true">Most loved</span>
+            <button class="art" type="button" style="--art:linear-gradient(135deg,#a3552a,#f0a56a)" data-eo-dish aria-label="Wood-fired peach - see details"></button>
+            <div class="body">
+              <h3>Wood-fired peach</h3>
+              <span class="price">$12</span>
+              <p>Mascarpone, honeycomb</p>
+              <p class="tags"><span>V</span><span>GF</span></p>
+              <p class="rating"><span class="star" aria-hidden="true">★</span><span data-eo-rating-out>4.6</span><span class="sep" aria-hidden="true">·</span><span data-eo-reviews-out>88 reviews</span></p>
+              <div class="actions">
+                <button class="add" type="button" data-add="Wood-fired peach|12">Add to order</button>
+                <button class="more" type="button" data-eo-dish>Details</button>
+              </div>
+            </div>
+          </article>
+          <article class="dish" data-rating="4.8" data-reviews="171" data-diet="v" data-allergens="Gluten, dairy, egg" data-story="Seventy percent dark chocolate in a short pastry shell, finished with salt we smoke over the coals overnight." data-mods="Add a scoop of vanilla|3;Extra crème fraîche|1">
+            <span class="loved" aria-hidden="true">Most loved</span>
+            <button class="art" type="button" style="--art:linear-gradient(135deg,#2a1a14,#6b3a2a)" data-eo-dish aria-label="Dark chocolate tart - see details"></button>
+            <div class="body">
+              <h3>Dark chocolate tart</h3>
+              <span class="price">$13</span>
+              <p>Smoked salt, crème fraîche</p>
+              <p class="tags"><span>V</span></p>
+              <p class="rating"><span class="star" aria-hidden="true">★</span><span data-eo-rating-out>4.8</span><span class="sep" aria-hidden="true">·</span><span data-eo-reviews-out>171 reviews</span></p>
+              <div class="actions">
+                <button class="add" type="button" data-add="Dark chocolate tart|13">Add to order</button>
+                <button class="more" type="button" data-eo-dish>Details</button>
+              </div>
+            </div>
+          </article>
+          <p class="no-match">No desserts match that filter. Try another section, or clear the filter.</p>
+        </div>
+
+        <section class="kds" data-eo-kds aria-label="Staff screens">
+          <div class="kds-head">
+            <h2>The pass · Ember &amp; Oak</h2>
+            <p class="kds-stat">Open tickets <strong data-eo-kds-open>3</strong></p>
+            <p class="kds-stat">Served tonight <strong data-eo-kds-served>38</strong></p>
+            <p class="kds-stat">Fire <strong>480°C</strong></p>
+            <span class="kds-busy" data-eo-kds-busy>On time</span>
+          </div>
+          <div class="kds-tabs" role="tablist" aria-label="Staff screen">
+            <button type="button" role="tab" data-eo-kds-tab="tickets" aria-selected="true">Kitchen tickets</button>
+            <button type="button" role="tab" data-eo-kds-tab="host" aria-selected="false">Host stand</button>
+          </div>
+          <div class="kds-panel is-active" data-eo-kds-panel="tickets" role="tabpanel">
+            <div class="kds-cols">
+              <div class="kds-col"><h3>Received <span class="n" data-eo-kds-n="1">1</span></h3><div class="lane" data-eo-kds-col="1"></div></div>
+              <div class="kds-col"><h3>On the fire <span class="n" data-eo-kds-n="2">1</span></h3><div class="lane" data-eo-kds-col="2"></div></div>
+              <div class="kds-col"><h3>Ready · pass <span class="n" data-eo-kds-n="3">1</span></h3><div class="lane" data-eo-kds-col="3"></div></div>
+            </div>
+            <div class="kds-foot">
+              <div class="kds-stock">
+                <p class="label">Tonight's specials · 86 them when they're gone</p>
+                <div class="stock-row" data-eo-kds-stock-row="cauli"><span class="n">Whole roasted cauliflower</span><span class="left" data-eo-kds-stock="cauli">8 left</span><button type="button" class="btn-86" data-eo-kds-86="cauli" aria-pressed="false">86 it</button></div>
+                <div class="stock-row" data-eo-kds-stock-row="lamb"><span class="n">Lamb shoulder for two</span><span class="left" data-eo-kds-stock="lamb">5 left</span><button type="button" class="btn-86" data-eo-kds-86="lamb" aria-pressed="false">86 it</button></div>
+              </div>
+              <button type="button" class="kds-sim" data-eo-kds-incoming>Simulate an incoming ticket</button>
+            </div>
+          </div>
+          <div class="kds-panel" data-eo-kds-panel="host" role="tabpanel">
+            <div class="host-head">
+              <p class="kds-stat">Covers booked <strong data-eo-host-covers>14</strong></p>
+              <p class="kds-stat">Walk-in wait <strong>~20 min</strong></p>
+            </div>
+            <ul class="host-list" data-eo-host-list></ul>
+            <p class="host-note">A booking made on the site lands here the second the guest confirms - no phone call, no notebook.</p>
+          </div>
+        </section>
+      </section>
+
+      <section class="eo-reserve" id="reserve" data-eo-resv-step="pick" aria-labelledby="reserve-title">
+        <div class="sec-head">
+          <div>
+            <p class="eyebrow">Reservations</p>
+            <h2 id="reserve-title" tabindex="-1">Book a table</h2>
+          </div>
+          <p>Pick a night, tell us how many, tap the table you want. We hold it for five minutes while you fill in your name.</p>
+        </div>
+
+        <div class="resv-panel resv-pick">
+          <div class="resv">
+            <div class="resv-controls">
+              <p class="label">Which night</p>
+              <div class="chips" role="group" aria-label="Night">
+                <button type="button" data-eo-resv-date="tonight" aria-pressed="true">Tonight</button>
+                <button type="button" data-eo-resv-date="fri" aria-pressed="false">Fri</button>
+                <button type="button" data-eo-resv-date="sat" aria-pressed="false">Sat</button>
+                <button type="button" data-eo-resv-date="sun" aria-pressed="false">Sun</button>
+                <button type="button" aria-disabled="true" title="Closed Mondays">Mon</button>
+                <button type="button" data-eo-resv-date="tue" aria-pressed="false">Tue</button>
+              </div>
+              <p class="label">How many</p>
+              <div class="party">
+                <div class="qty" role="group" aria-label="Party size">
+                  <button type="button" data-eo-resv-party="-1" aria-label="One fewer">−</button>
+                  <span data-eo-resv-party-out>2</span>
+                  <button type="button" data-eo-resv-party="1" aria-label="One more">+</button>
+                </div>
+                <span class="party-note" data-eo-resv-party-note>Tables for two sit by the window.</span>
+              </div>
+              <p class="label">What time</p>
+              <div class="chips" role="group" aria-label="Time" data-eo-resv-times></div>
+              <p class="resv-summary" data-eo-resv-summary aria-live="polite"></p>
+            </div>
+            <div class="floor-wrap">
+              <p class="floor-legend"><span class="free">Free</span><span class="booked">Booked</span><span class="picked">Yours</span></p>
+              <div class="floor" data-eo-resv-floor role="group" aria-label="Floor plan">
+                <span class="zone room">Dining room</span>
+                <span class="zone patio">Patio</span>
+                <span class="oven" aria-hidden="true"><i>Oven</i></span>
+                <span class="window-strip" aria-hidden="true"></span>
+                <span class="divider" aria-hidden="true"></span>
+                <div data-eo-resv-tables></div>
+              </div>
+              <div class="resv-actions">
+                <button type="button" class="checkout resv-btn" data-eo-resv-hold aria-disabled="true">Tap a table to hold it</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="resv-panel resv-hold">
+          <div class="hold-card">
+            <div class="hold-top">
+              <h3 data-eo-resv-hold-title>Holding Table 6</h3>
+              <span class="hold-time" data-eo-resv-countdown>5:00</span>
+            </div>
+            <div class="hold-bar"><span data-eo-resv-hold-bar></span></div>
+            <p class="hold-sub" data-eo-resv-hold-text></p>
+            <div class="hold-form">
+              <div>
+                <label class="field"><span>Name</span><input type="text" autocomplete="name" placeholder="Priya Raman" data-eo-resv-name /></label>
+                <p class="field-error" data-eo-resv-name-error>We need a name for the book.</p>
+              </div>
+              <div>
+                <label class="field"><span>Mobile</span><input type="tel" autocomplete="tel" inputmode="tel" placeholder="416 555 0182" data-eo-resv-phone /></label>
+                <p class="field-error" data-eo-resv-phone-error>A mobile lets us text you if the table's ready early.</p>
+              </div>
+            </div>
+            <p class="label">Occasion</p>
+            <div class="chips" role="group" aria-label="Occasion">
+              <button type="button" data-eo-resv-occasion="" aria-pressed="true">Just dinner</button>
+              <button type="button" data-eo-resv-occasion="Birthday" aria-pressed="false">Birthday</button>
+              <button type="button" data-eo-resv-occasion="Anniversary" aria-pressed="false">Anniversary</button>
+              <button type="button" data-eo-resv-occasion="Business" aria-pressed="false">Business</button>
+            </div>
+            <div class="resv-actions">
+              <button type="button" class="checkout resv-btn" data-eo-resv-confirm>Confirm booking</button>
+              <button type="button" class="link-btn" data-eo-resv-cancel>Release the table</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="resv-panel resv-booked">
+          <div class="booked-card">
+            <div class="done-mark" aria-hidden="true">
+              <svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 25l7 7 13-15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="done-title">Booked · <span data-eo-resv-code>EO-R-000</span></h3>
+            <p class="booked-text" data-eo-resv-booked-text></p>
+            <p class="booked-note" data-eo-resv-booked-note></p>
+            <div class="resv-actions">
+              <button type="button" class="checkout resv-btn" data-eo-preorder>Pre-order for this table</button>
+              <button type="button" class="link-btn" data-eo-resv-again>Book another table</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="eo-gift" id="gift" aria-labelledby="gift-title">
+        <div class="sec-head">
+          <div>
+            <p class="eyebrow">Gift cards</p>
+            <h2 id="gift-title">Give someone a night by the fire</h2>
+          </div>
+          <p>Pick an amount, write a line, and it rides along with your order. No HST on gift cards - tax is charged when it's spent.</p>
+        </div>
+        <div class="gift">
+          <div class="gift-form">
+            <p class="label">Amount</p>
+            <div class="chips" role="group" aria-label="Amount">
+              <button type="button" data-eo-gift-amount="50" aria-pressed="false">$50</button>
+              <button type="button" data-eo-gift-amount="75" aria-pressed="false">$75</button>
+              <button type="button" data-eo-gift-amount="100" aria-pressed="true">$100</button>
+              <button type="button" data-eo-gift-amount="150" aria-pressed="false">$150</button>
+              <button type="button" data-eo-gift-amount="other" aria-pressed="false">Other</button>
+            </div>
+            <label class="field gift-custom" data-eo-gift-custom-wrap>
+              <span>Amount · $25 to $500</span>
+              <input type="text" inputmode="numeric" placeholder="120" data-eo-gift-custom />
+            </label>
+            <div class="two">
+              <label class="field"><span>To</span><input type="text" placeholder="Sam" data-eo-gift-to /></label>
+              <label class="field"><span>From</span><input type="text" placeholder="Priya" data-eo-gift-from /></label>
+            </div>
+            <p class="field-error" data-eo-gift-to-error>Who's it for? We print the name on the card.</p>
+            <label class="field">
+              <span>A line for the card</span>
+              <textarea rows="2" maxlength="90" placeholder="Happy birthday - order the ribeye, trust me." data-eo-gift-msg></textarea>
+            </label>
+            <p class="counter" data-eo-gift-count>0 / 90</p>
+            <p class="label">Delivery</p>
+            <div class="chips" role="group" aria-label="Delivery">
+              <button type="button" data-eo-gift-delivery="email" aria-pressed="true">Email it tonight</button>
+              <button type="button" data-eo-gift-delivery="print" aria-pressed="false">Print at home</button>
+            </div>
+          </div>
+          <div class="gift-preview">
+            <div class="gift-card" aria-hidden="true">
+              <div class="gc-top"><span class="brand">Ember <em>&amp;</em> Oak</span><span class="gc-amt" data-eo-gift-preview-amount>$100</span></div>
+              <p class="gc-msg" data-eo-gift-preview-msg>A night by the fire, on us.</p>
+              <div class="gc-bottom"><span data-eo-gift-preview-to>For you</span><span data-eo-gift-preview-from></span></div>
+            </div>
+            <button type="button" class="checkout" data-eo-gift-add>Add to order · $100</button>
+            <p class="gift-note">Cards never expire. Spend them on the site or at the counter under the copper hood.</p>
+          </div>
+        </div>
+      </section>
+
+      <button class="cart-fab" type="button" data-toggle="#cart" data-eo-fab>Your order <span class="count" data-cart-count>0</span></button>
+
+      <aside class="cart" id="cart" aria-label="Your order" data-eo-step="order">
+        <header>
+          <button type="button" class="back" data-eo-back aria-label="Back">←</button>
+          <span class="cart-title" data-eo-title tabindex="-1">Your order</span>
+          <button type="button" data-close aria-label="Close">×</button>
+        </header>
+        <ol class="steps" aria-label="Checkout progress">
+          <li data-step-name="order">Order</li>
+          <li data-step-name="details">Details</li>
+          <li data-step-name="payment">Pay</li>
+        </ol>
+
+        <div class="cart-body">
+          <section class="cart-step" data-eo-panel="order">
+            <div class="service" role="group" aria-label="How are you ordering?">
+              <button type="button" data-eo-service="pickup" aria-pressed="true">Pickup</button>
+              <button type="button" data-eo-service="dinein" aria-pressed="false">Dine-in</button>
+            </div>
+            <div class="service-panel" data-eo-service-panel="pickup">
+              <p class="label">Ready in</p>
+              <div class="slots" role="group" aria-label="Pickup time">
+                <button type="button" data-eo-slot="asap" data-mins="15" aria-pressed="false">ASAP <small data-slot-label>~15 min</small></button>
+                <button type="button" data-eo-slot="25" data-mins="25" aria-pressed="true"><span data-slot-label>25 min</span></button>
+                <button type="button" data-eo-slot="45" data-mins="45" aria-pressed="false"><span data-slot-label>45 min</span></button>
+                <button type="button" data-eo-slot="later" aria-pressed="false">Later</button>
+              </div>
+              <label class="field later" data-eo-later>
+                <span>Pickup time</span>
+                <select data-eo-later-select></select>
+              </label>
+              <p class="eta" data-eo-eta></p>
+            </div>
+            <div class="service-panel" data-eo-service-panel="dinein">
+              <label class="field">
+                <span>Table number</span>
+                <input type="text" inputmode="numeric" maxlength="3" placeholder="It's on the little brass plate" data-eo-table />
+              </label>
+              <p class="field-error" data-eo-table-error>We need your table number so the kitchen knows where this is going.</p>
+              <p class="eta" data-eo-eta-dinein>Your server sees the order the moment you send it.</p>
+            </div>
+
+            <div class="club" data-eo-club>
+              <button type="button" class="club-head" data-eo-club-toggle aria-expanded="false">
+                <span class="mark" aria-hidden="true">EC</span>
+                <strong>Ember Club</strong>
+                <span class="pts" data-eo-club-pts>420 pts</span>
+                <span class="chev" aria-hidden="true">⌄</span>
+              </button>
+              <div class="club-body">
+                <div class="club-bar"><span data-eo-club-bar></span></div>
+                <p class="club-note" data-eo-club-note>80 pts from a free dessert · 1 pt per $1 on food</p>
+                <div class="club-rewards" role="group" aria-label="Rewards">
+                  <button type="button" data-eo-club-redeem="bread" aria-pressed="false" aria-disabled="false"><span>Free sourdough &amp; butter</span><small>300 pts</small></button>
+                  <button type="button" data-eo-club-redeem="dessert" aria-pressed="false" aria-disabled="true"><span>Free burnt basque cheesecake</span><small>500 pts</small></button>
+                </div>
+              </div>
+            </div>
+
+            <ul data-cart-list></ul>
+            <p class="empty" data-cart-empty>Nothing yet - add something from the menu.</p>
+          </section>
+
+          <section class="cart-step" data-eo-panel="details">
+            <p class="step-intro">So we know who's collecting, and can text you when it's ready.</p>
+            <label class="field">
+              <span>Your name</span>
+              <input type="text" autocomplete="name" placeholder="Priya" data-eo-name />
+            </label>
+            <p class="field-error" data-eo-name-error>Tell us who to hand the bag to.</p>
+            <label class="field">
+              <span>Mobile</span>
+              <input type="tel" autocomplete="tel" inputmode="tel" placeholder="416 555 0182" data-eo-phone />
+            </label>
+            <p class="field-error" data-eo-phone-error>A mobile number lets us text you when it's on the pass.</p>
+            <label class="field">
+              <span>Anything the kitchen should know?</span>
+              <textarea rows="2" placeholder="Nut allergy at the table, please keep everything separate." data-eo-notes></textarea>
+            </label>
+            <label class="check">
+              <input type="checkbox" checked data-eo-sms />
+              <span>Text me when it's ready</span>
+            </label>
+          </section>
+
+          <section class="cart-step" data-eo-panel="payment">
+            <div class="card-visual" aria-hidden="true">
+              <span class="chip"></span>
+              <span class="card-num">•••• •••• •••• 4242</span>
+              <span class="card-meta"><span>P. RAMAN</span><span>08/28</span></span>
+            </div>
+            <div class="pay-options" role="group" aria-label="Payment method">
+              <button type="button" data-eo-pay="card" aria-pressed="true"><strong>Saved card</strong><span>Visa ending 4242</span></button>
+              <button type="button" data-eo-pay="wallet" aria-pressed="false"><strong>Phone wallet</strong><span>Face ID to confirm</span></button>
+              <button type="button" data-eo-pay="counter" aria-pressed="false"><strong>Pay at the counter</strong><span>Card or cash on pickup</span></button>
+            </div>
+            <button type="button" class="link-btn" data-eo-newcard aria-expanded="false">Use a different card</button>
+            <div class="new-card" data-eo-newcard-form>
+              <label class="field"><span>Card number</span><input type="text" inputmode="numeric" placeholder="1234 5678 9012 3456" autocomplete="cc-number" /></label>
+              <div class="two">
+                <label class="field"><span>Expiry</span><input type="text" inputmode="numeric" placeholder="MM/YY" autocomplete="cc-exp" /></label>
+                <label class="field"><span>CVC</span><input type="text" inputmode="numeric" placeholder="123" autocomplete="cc-csc" /></label>
+              </div>
+            </div>
+            <p class="secure">Card details never touch our servers - the demo stops here. Nothing is charged.</p>
+          </section>
+
+          <section class="cart-step done" data-eo-panel="done" data-stage="1">
+            <div class="done-mark" aria-hidden="true">
+              <svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 25l7 7 13-15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="done-title">Order <span data-eo-order-number>#EO-0000</span></h3>
+            <p class="done-eta" data-eo-done-eta></p>
+            <ol class="track" aria-label="Order progress">
+              <li data-eo-stage-name="1"><span class="pip" aria-hidden="true"></span><span data-eo-stage-label="1">Received</span></li>
+              <li data-eo-stage-name="2"><span class="pip" aria-hidden="true"></span><span data-eo-stage-label="2">In the oven</span></li>
+              <li data-eo-stage-name="3"><span class="pip" aria-hidden="true"></span><span data-eo-stage-label="3">Ready</span></li>
+            </ol>
+            <p class="track-note" data-eo-track-note aria-live="polite"></p>
+            <ul class="done-items" data-eo-done-items></ul>
+            <p class="done-contact" data-eo-done-contact></p>
+            <p class="done-club" data-eo-done-club></p>
+          </section>
+        </div>
+
+        <footer>
+          <div class="sums">
+            <div><span>Subtotal</span><span data-eo-subtotal>$0.00</span></div>
+            <div><span>HST 13%</span><span data-eo-tax>$0.00</span></div>
+            <div class="pts-row"><span>Ember Club</span><span data-eo-pts-earn>+0 pts</span></div>
+            <div class="tip-row">
+              <span>Tip</span>
+              <div class="tip-chips" role="group" aria-label="Tip">
+                <button type="button" data-eo-tip="0" aria-pressed="false">None</button>
+                <button type="button" data-eo-tip="0.10" aria-pressed="false">10%</button>
+                <button type="button" data-eo-tip="0.15" aria-pressed="true">15%</button>
+                <button type="button" data-eo-tip="0.20" aria-pressed="false">20%</button>
+              </div>
+              <span data-eo-tip-amount>$0.00</span>
+            </div>
+            <div class="total"><span>Total</span><span data-cart-total>$0.00</span></div>
+          </div>
+          <button class="checkout" type="button" data-eo-next>Checkout · pickup in 25 min</button>
+        </footer>
+      </aside>
+
+      <div class="eo-modal" id="dish-modal" data-eo-modal>
+        <div class="modal-backdrop" data-eo-modal-close></div>
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="dish-modal-title">
+          <button type="button" class="modal-close" data-eo-modal-close aria-label="Close">×</button>
+          <div class="modal-art" data-eo-modal-art aria-hidden="true"></div>
+          <div class="modal-body">
+            <div class="modal-head">
+              <h2 id="dish-modal-title" data-eo-modal-title>Dish</h2>
+              <span class="price" data-eo-modal-price>$0</span>
+            </div>
+            <p class="modal-desc" data-eo-modal-desc></p>
+            <div class="modal-rating">
+              <span data-eo-modal-rating>★ 4.8 · 143 reviews</span>
+              <div class="rate" role="group" aria-label="Rate this dish">
+                <button type="button" data-eo-rate="1" aria-label="1 star" aria-pressed="false">★</button>
+                <button type="button" data-eo-rate="2" aria-label="2 stars" aria-pressed="false">★</button>
+                <button type="button" data-eo-rate="3" aria-label="3 stars" aria-pressed="false">★</button>
+                <button type="button" data-eo-rate="4" aria-label="4 stars" aria-pressed="false">★</button>
+                <button type="button" data-eo-rate="5" aria-label="5 stars" aria-pressed="false">★</button>
+              </div>
+              <span class="rate-thanks" data-eo-rate-thanks aria-live="polite"></span>
+            </div>
+            <p class="modal-story" data-eo-modal-story></p>
+            <p class="modal-allergens"><strong>Contains:</strong> <span data-eo-modal-allergens></span></p>
+            <p class="label">Make it yours</p>
+            <div class="mods" data-eo-modal-mods role="group" aria-label="Options"></div>
+            <div class="modal-foot">
+              <div class="qty" role="group" aria-label="Quantity">
+                <button type="button" data-eo-modal-qty="-1" aria-label="One fewer">−</button>
+                <span data-eo-modal-qty-out>1</span>
+                <button type="button" data-eo-modal-qty="1" aria-label="One more">+</button>
+              </div>
+              <button type="button" class="checkout" data-eo-modal-add>Add to order · $0.00</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="ln-widget left" id="assistant" data-bot="restaurant" data-mode="voice" aria-label="Ember & Oak host">
+        <div class="wtop">
+          <span class="avatar" aria-hidden="true">EO</span>
+          <p class="who"><strong>Ember & Oak host</strong><span>Voice reservations · speak or type</span></p>
+          <span class="status-pill">Live</span>
+          <button class="wmin" type="button" data-collapse="#assistant" aria-label="Minimise assistant">–</button>
+        </div>
+        <div class="wchips" aria-label="Try saying">
+          <button type="button" data-say>Table for four on Friday at seven</button>
+          <button type="button" data-say>Do you have patio seating?</button>
+          <button type="button" data-say>It's my partner's birthday</button>
+        </div>
+        <div class="messages" aria-live="polite"></div>
+        <p class="voice-hint" aria-live="polite"></p>
+        <form class="composer">
+          <input type="text" placeholder="Speak or type…" aria-label="Message" autocomplete="off" />
+            <button class="mic" type="button" aria-label="Speak" aria-pressed="false">🎤</button>
+          <button class="send" type="submit" aria-label="Send">➤</button>
+        </form>
+      </aside>
+    </main>
+
+    <footer class="ln-foot">
+      <span>Fictional restaurant and menu. Built by LocalNinja as a sample project.</span>
+      <a href="/#contact">Want one for your business? →</a>
+    </footer>
+
+    <script type="module" src="/src/work/mockups.js"></script>
+    <script type="module" src="/src/work/bot.js"></script>
+    <script type="module" src="/src/work/restaurant.js"></script>
+  </body>
+</html>

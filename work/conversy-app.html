@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversy AI dashboard - LocalNinja project</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/logo-animated.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/work/shell.css" />
+    <link rel="stylesheet" href="/src/work/gallery.css" />
+    <style>.gal { --accent: #3b3bd6; }</style>
+  </head>
+  <body>
+    <header class="ln-bar">
+      <a class="ln-bar-brand" href="/#work"><img src="/logo-animated.svg" alt="" width="32" height="32" /><span class="ln-bar-name">Local<span class="ninja">Ninja</span></span></a>
+      <p class="ln-bar-title">Project · <strong>Conversy AI</strong> dashboard <span class="ln-tag">AI web app</span></p>
+      <a class="ln-bar-back" href="/#work">← Back to site</a>
+    </header>
+
+    <main class="gal">
+      <div class="gal-head">
+        <div>
+          <p class="kicker">Shipped product · Multi-tenant SaaS</p>
+          <h1>Conversy AI dashboard</h1>
+          <p class="lede">A no-code platform where small businesses deploy their own AI agents for bookings, billing questions, product Q&amp;A and escalations - through a shareable link or an embeddable chat widget. The app is behind a login, so here are the screens.</p>
+        </div>
+        <div class="gal-facts">
+          <div><span>Role</span>Head of technology · full-stack &amp; AI</div>
+          <div><span>Stack</span>React SPA · NestJS GraphQL API · Firestore · Gemini 2.5 Pro / 2.0 Flash</div>
+          <div><span>Shape</span>Workspace → business → agent tenancy, per-business knowledge stores, SSE streaming chat</div>
+          <div><span>Links</span><em class="links"><a href="https://conversyai.com" target="_blank" rel="noopener">conversyai.com ↗</a><a href="https://test.conversyai.com/dashboard" target="_blank" rel="noopener">app (login) ↗</a></em></div>
+        </div>
+      </div>
+
+      <div class="gal-grid">
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-1" aria-label="Enlarge: Home dashboard">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/conversy/dash.jpg" alt="Home dashboard" loading="eager" />
+          </button>
+          <div class="cap">
+            <span class="n">01</span>
+            <h2>Home dashboard</h2>
+            <p>One workspace, many businesses. Each business gets its own dashboard: conversations today, conversion and booking rates, pending escalations, and the agents running for it.</p>
+          </div>
+        </article>
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-2" aria-label="Enlarge: Train your agent - step 1 of 4">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/conversy/dash1.jpg" alt="Train your agent - step 1 of 4" loading="lazy" />
+          </button>
+          <div class="cap">
+            <span class="n">02</span>
+            <h2>Train your agent - step 1 of 4</h2>
+            <p>The no-code wizard. Describe what the agent should do, tick the capabilities (Q&amp;A, booking, payments, budgeting), name it, pick a tone - and optionally add a WhatsApp agent alongside.</p>
+          </div>
+        </article>
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-3" aria-label="Enlarge: Knowledge base - import from a website">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/conversy/dash2.jpg" alt="Knowledge base - import from a website" loading="lazy" />
+          </button>
+          <div class="cap">
+            <span class="n">03</span>
+            <h2>Knowledge base - import from a website</h2>
+            <p>Point the agent at a URL and it reads the important pages into a per-business knowledge store. PDFs and voice recordings work the same way.</p>
+          </div>
+        </article>
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-4" aria-label="Enlarge: Integrations">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/conversy/dash3.jpg" alt="Integrations" loading="lazy" />
+          </button>
+          <div class="cap">
+            <span class="n">04</span>
+            <h2>Integrations</h2>
+            <p>Per-agent overrides on top of global controls: WhatsApp Business, Stripe, Google Calendar and Gmail connect via OAuth so agents can book, charge and follow up for real.</p>
+          </div>
+        </article>
+        <article class="shot">
+          <button class="frame" type="button" data-open="#lb-5" aria-label="Enlarge: Growth insights">
+            <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img src="/work/conversy/dash5.jpg" alt="Growth insights" loading="lazy" />
+          </button>
+          <div class="cap">
+            <span class="n">05</span>
+            <h2>Growth insights</h2>
+            <p>Customer lifecycle from lead to paid, conversion and booking rates, and a growth score built from conversion, sentiment and repeat engagement.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="lightbox" id="lb-1" role="dialog" aria-label="Home dashboard">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/conversy/dash.jpg" alt="Home dashboard" loading="lazy" />
+      </div>
+      <div class="lightbox" id="lb-2" role="dialog" aria-label="Train your agent - step 1 of 4">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/conversy/dash1.jpg" alt="Train your agent - step 1 of 4" loading="lazy" />
+      </div>
+      <div class="lightbox" id="lb-3" role="dialog" aria-label="Knowledge base - import from a website">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/conversy/dash2.jpg" alt="Knowledge base - import from a website" loading="lazy" />
+      </div>
+      <div class="lightbox" id="lb-4" role="dialog" aria-label="Integrations">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/conversy/dash3.jpg" alt="Integrations" loading="lazy" />
+      </div>
+      <div class="lightbox" id="lb-5" role="dialog" aria-label="Growth insights">
+        <button type="button" data-close aria-label="Close">×</button>
+        <img src="/work/conversy/dash5.jpg" alt="Growth insights" loading="lazy" />
+      </div>
+    </main>
+
+    <footer class="ln-foot">
+      <span>Screens from the live product. Built by LocalNinja.</span>
+      <a href="/#contact">Want one for your business? →</a>
+    </footer>
+
+    <script type="module" src="/src/work/mockups.js"></script>
+  </body>
+</html>

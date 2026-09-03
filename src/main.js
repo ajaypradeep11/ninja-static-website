@@ -128,7 +128,26 @@ function initServices() {
 }
 
 /* ---------------------------------------------------------------- *
- * 4. Contact form - no backend; opens a prefilled mailto: link     *
+ * 4. Work tabs - one project group visible at a time               *
+ * ---------------------------------------------------------------- */
+function initWorkTabs() {
+  const tabs = document.querySelectorAll('.work-tab');
+  if (!tabs.length) return;
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => {
+        const active = t === tab;
+        t.classList.toggle('is-active', active);
+        t.setAttribute('aria-selected', String(active));
+        document.getElementById(t.dataset.workTab)?.classList.toggle('is-active', active);
+      });
+    });
+  });
+}
+
+/* ---------------------------------------------------------------- *
+ * 5. Contact form - no backend; opens a prefilled mailto: link     *
  * ---------------------------------------------------------------- */
 function initContactForm() {
   const form = document.querySelector('#contact-form');
@@ -160,6 +179,7 @@ function init() {
   initReveal();
   initNav();
   initServices();
+  initWorkTabs();
   initContactForm();
 }
 

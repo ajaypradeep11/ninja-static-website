@@ -1,0 +1,214 @@
+/* Screen gallery for shipped products we can't demo live (auth-gated apps). */
+.gal {
+  --ink: #0b0f1a;
+  --muted: #5b6270;
+  --line: #e4e7ee;
+  --accent: #3b3bd6;
+  min-height: calc(100vh - var(--ln-bar-h));
+  background: #f6f7fb;
+  color: var(--ink);
+}
+
+.gal-head {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem) 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 2rem 4rem;
+  align-items: end;
+}
+
+.gal-head .kicker {
+  margin: 0 0 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.gal-head h1 {
+  margin: 0;
+  font-family: var(--ln-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.gal-head .lede {
+  margin: 1.25rem 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 36rem;
+}
+
+.gal-facts {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.1rem 1.25rem;
+  border: 2px solid var(--ink);
+  background: #fff;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-size: 0.88rem;
+}
+
+.gal-facts div {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 0.75rem;
+}
+
+.gal-facts span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding-top: 0.15rem;
+}
+
+.gal-facts a {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.gal-facts .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  font-style: normal;
+}
+
+.gal-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem clamp(1rem, 3vw, 2rem) 4rem;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.shot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 280px);
+  gap: 1.5rem 2rem;
+  align-items: start;
+}
+
+.shot:nth-child(even) {
+  grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+}
+
+.shot:nth-child(even) .frame {
+  order: 2;
+}
+
+.frame {
+  display: block;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 8px 8px 0 var(--ink);
+  overflow: hidden;
+  cursor: zoom-in;
+  text-align: left;
+}
+
+.frame .bar {
+  display: flex;
+  gap: 6px;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--line);
+  background: #f1f2f7;
+}
+
+.frame .bar i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #cfd3dd;
+}
+
+.frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.shot .cap {
+  padding-top: 0.5rem;
+}
+
+.shot .cap .n {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.2rem 0.5rem;
+  border: 2px solid var(--ink);
+  background: #4da3ff;
+  font-family: var(--ln-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.shot .cap h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+}
+
+.shot .cap p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  place-items: center;
+  padding: 1.5rem;
+  background: rgba(11, 15, 26, 0.88);
+}
+
+.lightbox.is-open {
+  display: grid;
+}
+
+.lightbox img {
+  max-width: min(1400px, 100%);
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 44px;
+  height: 44px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .gal-head,
+  .shot,
+  .shot:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .shot:nth-child(even) .frame {
+    order: 0;
+  }
+}

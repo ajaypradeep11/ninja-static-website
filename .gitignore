@@ -1,3 +1,8 @@
 node_modules
 dist
 .DS_Store
+
+# Cloud Functions
+functions/node_modules
+firebase-debug.log
+.playwright-mcp/

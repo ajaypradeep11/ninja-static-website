@@ -8,11 +8,14 @@ A static marketing site for LocalNinja. The homepage is a single-page,
 neo-brutalist services site (white ground, black 3px borders + hard offset
 shadows, `#4da3ff` accent on the "Ninja" word and highlighted heading words)
 listing the company's 6 core services (plus an "Others" group), about/team, and a mailto-backed contact
-form. Vite + vanilla JS/CSS, no framework, no backend, no CMS. Design
-rationale and behavior contracts live in
-`docs/superpowers/specs/2026-09-01-neo-brutalist-homepage-redesign.md`;
-the older specs describe the previous homepage and the retired
-`solutions.html` page.
+form, plus a **Work** showcase of eight sample projects under `/work/`
+(four UI mockups, four chatbot / voice-bot demos). Vite + vanilla JS/CSS,
+no framework, no CMS. The only backend is one Firebase Cloud Function
+(`functions/`) that relays bot chats to OpenAI. Design rationale and
+behavior contracts live in
+`docs/superpowers/specs/2026-09-01-neo-brutalist-homepage-redesign.md`
+(homepage) and `docs/superpowers/specs/2026-09-02-work-showcase-design.md`
+(showcase + relay); older specs describe retired pages.
 
 ## Commands
 
@@ -44,15 +47,44 @@ Both run `npm ci && npm run build` on Node 22 before deploying, so a change
 that breaks the build will break deploys — verify `npm run build` succeeds
 before treating work as done.
 
+The Cloud Function is **not** deployed by CI. Deploy it manually with
+`firebase deploy --only functions` (needs `firebase login`, the Blaze plan,
+and the `OPENAI_API_KEY` secret set via `firebase functions:secrets:set`).
+`firebase.json` rewrites `/api/chat` to it; the Vite dev server proxies
+`/api` to `https://localninja.web.app` so local demos use the deployed relay.
+
 ## Architecture
 
 Everything lives in a few files plus assets:
 
+- `work/*.html` — eight demo pages, each listed in `vite.config.js`. They
+  share `src/work/shell.css` (LocalNinja top bar + footer) and otherwise
+  own their look: `clinic`, `restaurant`, `realty`, `dashboard` each have a
+  matching `src/work/<slug>.css` and use `src/work/mockups.js` (generic
+  data-attribute behaviours: steps, tabs, select groups, cart, filters,
+  overlays, chart ranges). `dashboard`, `restaurant` and `clinic` also
+  load a page module `src/work/<slug>.js` for their richer flows (views,
+  drawers, checkout, calendar, portal tabs); page modules use their own
+  `data-*` names and never re-implement the generic ones. `clinic`, `restaurant` and `realty` also embed
+  the bot as an on-site widget (`src/work/widget.css` + `bot.js`, root
+  `[data-bot][data-mode]`), so one page serves both a UI/UX card and a
+  bot card. `bot-store` is the only standalone bot page.
+  `conversy-app`, `ninja-hr`, `ninja-learn`, `curriculearn`, `irina`,
+  `story` and `ninja-commerce` are screenshot galleries
+  (`src/work/gallery.css`, images in `public/work/<dir>/`) for real
+  products; all share the same markup shape (facts box + `.shot` list +
+  `.lightbox` overlays).
+  Demo pages carry `<meta name="robots" content="noindex">`.
+- `functions/index.js` — the `chat` relay. Server-side system prompts per
+  bot id (`clinic`, `restaurant`, `store`, `realty`), input validation,
+  per-IP rate limit, `gpt-4o-mini`. Returns 503 `not_configured` without
+  the secret; the widget then switches to scripted replies.
 - `index.html` — homepage markup, no templating. Sections in order: header,
   `#home` hero, marquee band, `#services` (6 numbered accordion rows + an
   "Others" row; rows have `id="svc-*"` so the header dropdown can deep-link),
-  `#process` (six-step "How we work" cards), `#about` (+ team), `#contact`
-  (form), footer (`#products` links). CSS is linked directly
+  `#process` (six-step "How we work" cards), `#work` (showcase cards →
+  `/work/*.html`), `#about` (+ team), `#contact` (form), footer
+  (`#products` links). CSS is linked directly
   (`<link href="/src/style.css">`), **not** imported from `main.js` — don't
   move it into JS.
   Any new page must be added to `vite.config.js` `rollupOptions.input` or
@@ -60,7 +92,7 @@ Everything lives in a few files plus assets:
 - `src/main.js` — all interactivity, loaded as an ES module
   (`<script type="module">`). Three independent `init*()` functions called
   from one `init()`: scroll-reveal (IntersectionObserver), mobile nav toggle,
-  services accordion, contact form (builds a `mailto:` URL). Comment at the top states the
+  services accordion, work tabs, contact form (builds a `mailto:` URL). Comment at the top states the
   contract: **JS only toggles classes / builds URLs; CSS owns all
   transitions/animations.**
 - `src/style.css` — all styling and every animation/transition.
@@ -85,6 +117,14 @@ Everything lives in a few files plus assets:
   button) toggles `.is-open` and `aria-expanded`; CSS animates
   `.service-details` height via `grid-template-rows` (instant under
   reduced motion). Clicks inside `.service-details` don't collapse it.
+- **Work tabs**: `.work-tab[data-work-tab]` buttons toggle `.is-active`
+  (+ `aria-selected`) on themselves and on the matching `.work-grid` id;
+  six tabs (UI/UX, Web development, E-commerce, AI, Chatbots, Voice bots); only UI/UX is visible on load.
+- **Bot widget**: `bot.js` posts `{ bot, messages }` to `/api/chat`; any
+  non-OK response flips it to scripted mode (canned `SCRIPTS`, "Demo mode"
+  pill) for the rest of the session. Voice mode uses `SpeechRecognition`
+  + `speechSynthesis`; if recognition is missing it adds
+  `.voice-unsupported` and keeps the text input.
 - **Contact form**: `#contact-form` submit is intercepted; after
   `reportValidity()` JS sets `window.location.href` to a `mailto:` with the
   subject/body prefilled. No network request, no backend.

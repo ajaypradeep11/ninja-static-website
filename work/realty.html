@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Northshore Realty - LocalNinja sample project</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/logo-animated.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/work/shell.css" />
+    <link rel="stylesheet" href="/src/work/bot.css" />
+    <link rel="stylesheet" href="/src/work/widget.css" />
+    <link rel="stylesheet" href="/src/work/realty.css" />
+    <style>.ln-widget{--w-accent:#4f46e5;--w-accent-ink:#fff;--w-body:#f5f5fb;--w-line:#e2e4ee;} .ns-body{padding-bottom:9rem;}</style>
+  </head>
+  <body>
+    <header class="ln-bar">
+      <a class="ln-bar-brand" href="/#work"><img src="/logo-animated.svg" alt="" width="32" height="32" /><span class="ln-bar-name">Local<span class="ninja">Ninja</span></span></a>
+      <p class="ln-bar-title">Sample project · <strong>Northshore Realty</strong> listings <span class="ln-tag">Website</span></p>
+      <a class="ln-bar-back" href="/#work">← Back to site</a>
+    </header>
+
+    <main class="ns">
+      <div class="ns-top">
+        <span class="brand">Northshore<span>.</span></span>
+        <div class="search" aria-hidden="true">🔍 <strong>Vancouver</strong> · Buy · <span data-search-price>Any price</span> · <span data-search-beds>1+ beds</span></div>
+        <div class="ns-actions">
+          <button type="button" class="pill-btn" data-saved-open aria-haspopup="dialog"><span aria-hidden="true">♡</span> Saved <b data-saved-count>0</b></button>
+          <button type="button" class="pill-btn pill-btn-desk" data-desk-toggle aria-pressed="false"><span data-desk-label>Agent view</span></button>
+        </div>
+        <span class="agent"><i>MC</i> <span class="agent-name">Maya Chen</span></span>
+      </div>
+
+      <div class="filters" aria-label="Property type">
+        <button type="button" class="is-active" data-filter="all">All homes</button>
+        <button type="button" data-filter="condo">Condos</button>
+        <button type="button" data-filter="townhouse">Townhouses</button>
+        <button type="button" data-filter="detached">Detached</button>
+        <button type="button" data-filter="loft">Lofts</button>
+      </div>
+
+      <div class="refine" aria-label="Refine results">
+        <label class="refine-price">
+          <span>Max price <output data-price-out>Any price</output></span>
+          <input type="range" min="600000" max="2200000" step="50000" value="2200000" data-price aria-label="Maximum price" />
+        </label>
+        <label>
+          <span>Beds</span>
+          <select data-beds aria-label="Minimum bedrooms">
+            <option value="0">Any</option>
+            <option value="1">1+</option>
+            <option value="2">2+</option>
+            <option value="3">3+</option>
+            <option value="4">4+</option>
+          </select>
+        </label>
+        <label>
+          <span>Baths</span>
+          <select data-baths aria-label="Minimum bathrooms">
+            <option value="0">Any</option>
+            <option value="1">1+</option>
+            <option value="2">2+</option>
+            <option value="3">3+</option>
+          </select>
+        </label>
+        <label>
+          <span>Sort</span>
+          <select data-sort aria-label="Sort listings">
+            <option value="newest">Newest</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="size">Largest first</option>
+          </select>
+        </label>
+        <div class="refine-actions">
+          <button type="button" class="link-btn" data-reset-filters hidden>Clear filters</button>
+          <button type="button" class="pill-btn pill-btn-alert" data-alerts-open aria-haspopup="dialog"><span aria-hidden="true">🔔</span> Get alerts for this search</button>
+        </div>
+      </div>
+
+      <div class="ns-body">
+        <section class="results" data-filter-target>
+          <h2><span data-count>4 homes</span> <span>· sorted by <span data-sort-label>newest</span></span></h2>
+          <div class="cards" data-cards>
+            <div class="card-wrap" data-type="condo" data-home="1">
+              <button class="card" type="button" data-open="#detail-1">
+                <div class="photo" style="--photo:linear-gradient(160deg,#c7e6f5,#5eb3dd)"><span class="badge">Condo</span></div>
+                <div class="info">
+                  <div class="price">$925,000</div>
+                  <p class="addr">2288 W 4th Ave · Kitsilano</p>
+                  <div class="specs"><span><b>2</b> bd</span><span><b>2</b> ba</span><span><b>890</b> sq ft</span></div>
+                </div>
+              </button>
+              <button class="heart" type="button" data-save="1" aria-pressed="false" aria-label="Save 2288 W 4th Ave"><span aria-hidden="true">♡</span></button>
+            </div>
+            <div class="card-wrap" data-type="townhouse" data-home="2">
+              <button class="card" type="button" data-open="#detail-2">
+                <div class="photo" style="--photo:linear-gradient(160deg,#f3d9b1,#d9944f)"><span class="badge">Townhouse</span></div>
+                <div class="info">
+                  <div class="price">$1,290,000</div>
+                  <p class="addr">4120 Hastings St · Burnaby Heights</p>
+                  <div class="specs"><span><b>3</b> bd</span><span><b>2.5</b> ba</span><span><b>1,480</b> sq ft</span></div>
+                </div>
+              </button>
+              <button class="heart" type="button" data-save="2" aria-pressed="false" aria-label="Save 4120 Hastings St"><span aria-hidden="true">♡</span></button>
+            </div>
+            <div class="card-wrap" data-type="detached" data-home="3">
+              <button class="card" type="button" data-open="#detail-3">
+                <div class="photo" style="--photo:linear-gradient(160deg,#d6ead8,#7fb68a)"><span class="badge">Detached</span></div>
+                <div class="info">
+                  <div class="price">$2,100,000</div>
+                  <p class="addr">1560 Grand Blvd · North Vancouver</p>
+                  <div class="specs"><span><b>4</b> bd</span><span><b>3</b> ba</span><span><b>2,350</b> sq ft</span></div>
+                </div>
+              </button>
+              <button class="heart" type="button" data-save="3" aria-pressed="false" aria-label="Save 1560 Grand Blvd"><span aria-hidden="true">♡</span></button>
+            </div>
+            <div class="card-wrap" data-type="loft" data-home="4">
+              <button class="card" type="button" data-open="#detail-4">
+                <div class="photo" style="--photo:linear-gradient(160deg,#e3d5cf,#a37c6c)"><span class="badge">Loft</span></div>
+                <div class="info">
+                  <div class="price">$640,000</div>
+                  <p class="addr">55 E Cordova St · Gastown</p>
+                  <div class="specs"><span><b>1</b> bd</span><span><b>1</b> ba</span><span><b>720</b> sq ft</span></div>
+                </div>
+              </button>
+              <button class="heart" type="button" data-save="4" aria-pressed="false" aria-label="Save 55 E Cordova St"><span aria-hidden="true">♡</span></button>
+            </div>
+          </div>
+
+          <div class="empty" data-empty>
+            <h3>No homes match yet</h3>
+            <p>Maya lists three or four new homes a week. Turn on alerts and we will text you the moment one fits.</p>
+            <div class="row">
+              <button type="button" data-reset-filters>Clear filters</button>
+              <button type="button" class="primary" data-alerts-open>Get alerts</button>
+            </div>
+          </div>
+
+          <section class="sell" aria-labelledby="sell-h">
+            <div class="sell-copy">
+              <p class="eyebrow">Thinking of selling?</p>
+              <h3 id="sell-h">What's my home worth?</h3>
+              <p>An instant range from this month's Northshore sales. Maya confirms it in person within 24 hours - no obligation, no spam.</p>
+            </div>
+            <form class="sell-form" data-valuation>
+              <label class="sell-address"><span>Address</span><input type="text" required placeholder="e.g. 3312 W 11th Ave, Vancouver" data-val-address /></label>
+              <label><span>Type</span>
+                <select data-val-type>
+                  <option value="condo">Condo</option>
+                  <option value="townhouse">Townhouse</option>
+                  <option value="detached" selected>Detached</option>
+                  <option value="loft">Loft</option>
+                </select>
+              </label>
+              <label><span>Beds</span>
+                <select data-val-beds>
+                  <option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option>
+                </select>
+              </label>
+              <label><span>Baths</span>
+                <select data-val-baths>
+                  <option>1</option><option>1.5</option><option selected>2</option><option>2.5</option><option>3</option><option>3.5</option>
+                </select>
+              </label>
+              <button class="primary" type="submit">Get my estimate</button>
+            </form>
+            <div class="sell-result" data-val-result aria-live="polite">
+              <p class="eyebrow">Estimated value · <span data-val-desc></span></p>
+              <b data-val-range></b>
+              <p>Based on 14 comparable sales in the last 90 days. Renovations, views and lot size can move this by more than 10%, which is why Maya checks it in person.</p>
+              <button type="button" class="primary" data-val-agent>Have Maya confirm within 24h</button>
+            </div>
+          </section>
+        </section>
+
+        <aside class="map" aria-label="Map of listings">
+          <svg viewBox="0 0 480 360" role="img" aria-label="Map placeholder with four pins">
+            <path d="M0 300 C120 260 180 330 300 290 S440 240 480 270 V360 H0 Z" fill="#cfe5f2" />
+            <path d="M0 40 C90 70 140 20 230 60 S380 30 480 70" fill="none" stroke="#dde3ea" stroke-width="10" />
+            <path d="M60 0 V360 M240 0 V360 M400 0 V360 M0 150 H480 M0 230 H480" stroke="#e6ebf0" stroke-width="6" />
+            <g class="area" data-hood-open="kits" tabindex="0" role="button" aria-label="Kitsilano neighbourhood snapshot" transform="translate(150 222)"><rect x="-38" y="-10" width="76" height="20" rx="10" /><text x="0" y="4" text-anchor="middle">Kitsilano</text></g>
+            <g class="area" data-hood-open="heights" tabindex="0" role="button" aria-label="Burnaby Heights neighbourhood snapshot" transform="translate(360 152)"><rect x="-56" y="-10" width="112" height="20" rx="10" /><text x="0" y="4" text-anchor="middle">Burnaby Heights</text></g>
+            <g class="area" data-hood-open="northvan" tabindex="0" role="button" aria-label="North Vancouver neighbourhood snapshot" transform="translate(300 92)"><rect x="-58" y="-10" width="116" height="20" rx="10" /><text x="0" y="4" text-anchor="middle">North Vancouver</text></g>
+            <g class="area" data-hood-open="gastown" tabindex="0" role="button" aria-label="Gastown neighbourhood snapshot" transform="translate(200 292)"><rect x="-34" y="-10" width="68" height="20" rx="10" /><text x="0" y="4" text-anchor="middle">Gastown</text></g>
+            <g class="pin" data-open="#detail-1" data-home="1" transform="translate(150 190)"><rect x="-34" y="-14" width="68" height="28" rx="14" /><text x="0" y="5" text-anchor="middle">$925k</text></g>
+            <g class="pin" data-open="#detail-2" data-home="2" transform="translate(360 120)"><rect x="-34" y="-14" width="68" height="28" rx="14" /><text x="0" y="5" text-anchor="middle">$1,290k</text></g>
+            <g class="pin" data-open="#detail-3" data-home="3" transform="translate(300 60)"><rect x="-34" y="-14" width="68" height="28" rx="14" /><text x="0" y="5" text-anchor="middle">$2,100k</text></g>
+            <g class="pin" data-open="#detail-4" data-home="4" transform="translate(200 260)"><rect x="-34" y="-14" width="68" height="28" rx="14" /><text x="0" y="5" text-anchor="middle">$640k</text></g>
+          </svg>
+          <p class="map-hint" aria-hidden="true">Tap a neighbourhood for schools, transit and prices</p>
+
+          <div class="hood" data-hood-panel aria-live="polite">
+            <div class="hood-head">
+              <div>
+                <p class="eyebrow">Neighbourhood snapshot</p>
+                <h3 data-hood-name>Kitsilano</h3>
+              </div>
+              <button type="button" class="x" data-hood-close aria-label="Close snapshot">×</button>
+            </div>
+            <div class="hood-grid">
+              <div>Median sale price<b data-hood-median>$1,180,000</b></div>
+              <div>12-month change<b data-hood-change>+3.4%</b></div>
+              <div>Walk Score<b data-hood-walk>94</b></div>
+              <div>Avg days on market<b data-hood-dom>14</b></div>
+            </div>
+            <svg class="spark" viewBox="0 0 240 60" preserveAspectRatio="none" role="img" aria-label="12-month median price trend">
+              <path data-hood-spark-fill d="" />
+              <path data-hood-spark d="" />
+            </svg>
+            <ul class="hood-list">
+              <li><span aria-hidden="true">🏫</span> <span data-hood-schools></span></li>
+              <li><span aria-hidden="true">🚌</span> <span data-hood-transit></span></li>
+              <li><span aria-hidden="true">🏠</span> <span data-hood-homes></span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+
+      <section class="desk" id="desk" aria-label="Agent view">
+        <div class="desk-head">
+          <div>
+            <p class="eyebrow">Northshore · agent desk</p>
+            <h2>Good afternoon, Maya</h2>
+            <p>Wed 2 Sep · everything that came in from the website and the voice assistant, in one place.</p>
+          </div>
+          <div class="stats">
+            <div><b data-stat-leads>2</b><span>leads today</span></div>
+            <div><b data-stat-viewings>2</b><span>viewings this week</span></div>
+            <div><b data-stat-saves>62</b><span>saves this week</span></div>
+            <div><b data-stat-subs>41</b><span>alert subscribers</span></div>
+          </div>
+        </div>
+        <div class="desk-grid">
+          <section class="panel panel-leads" aria-labelledby="leads-h">
+            <header>
+              <h3 id="leads-h">Leads</h3>
+              <div class="seg" role="group" aria-label="Filter leads">
+                <button type="button" data-lead-filter="all" aria-pressed="true">All</button>
+                <button type="button" data-lead-filter="new" aria-pressed="false">New</button>
+                <button type="button" data-lead-filter="contacted" aria-pressed="false">Contacted</button>
+                <button type="button" data-lead-filter="booked" aria-pressed="false">Booked</button>
+              </div>
+            </header>
+            <ul class="lead-list" data-lead-list></ul>
+          </section>
+          <section class="panel" aria-labelledby="viewings-h">
+            <header><h3 id="viewings-h">Viewings this week</h3><span class="muted">Thu 3 - Sun 6 Sep</span></header>
+            <ul class="viewing-list" data-viewing-list></ul>
+          </section>
+          <section class="panel" aria-labelledby="hot-h">
+            <header><h3 id="hot-h">Hot listings</h3><span class="muted">saves · views · viewings</span></header>
+            <ol class="hot-list" data-hot-list></ol>
+          </section>
+          <section class="panel" aria-labelledby="valuations-h">
+            <header><h3 id="valuations-h">Valuation requests</h3><span class="muted">seller leads</span></header>
+            <ul class="val-list" data-val-list></ul>
+          </section>
+        </div>
+      </section>
+
+      <div class="detail" id="detail-1">
+        <div class="sheet" role="dialog" aria-label="2288 W 4th Ave · Kitsilano">
+          <div class="photo" style="--photo:linear-gradient(160deg,#c7e6f5,#5eb3dd)"><span class="badge">Condo</span></div>
+          <div class="content">
+            <h3>2288 W 4th Ave · Kitsilano</h3>
+            <div class="price">$925,000</div>
+            <div class="facts">
+              <div>Bedrooms<b>2</b></div>
+              <div>Bathrooms<b>2</b></div>
+              <div>Size<b>890 sq ft</b></div>
+              <div>Listed<b>6 days ago</b></div>
+              <div>Built<b>2009</b></div>
+              <div>Walk Score<b>94</b></div>
+            </div>
+            <p>Corner unit with a wraparound balcony, two blocks from the beach. In-suite laundry, one parking stall, pet-friendly building.</p>
+            <div class="tools">
+              <button type="button" class="tool" data-save="1" aria-pressed="false"><span aria-hidden="true" data-save-icon>♡</span> <span data-save-text>Save</span></button>
+              <button type="button" class="tool" data-mortgage-toggle="1" aria-expanded="false" aria-controls="mortgage-1">Estimate payments</button>
+              <button type="button" class="tool" data-hood-open="kits">Kitsilano snapshot</button>
+            </div>
+            <div class="sheet-extras" data-extras="1"></div>
+            <div class="row">
+              <button type="button" data-close>Close</button>
+              <button class="primary" type="button" data-book="1">Book a viewing with Maya</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail" id="detail-2">
+        <div class="sheet" role="dialog" aria-label="4120 Hastings St · Burnaby Heights">
+          <div class="photo" style="--photo:linear-gradient(160deg,#f3d9b1,#d9944f)"><span class="badge">Townhouse</span></div>
+          <div class="content">
+            <h3>4120 Hastings St · Burnaby Heights</h3>
+            <div class="price">$1,290,000</div>
+            <div class="facts">
+              <div>Bedrooms<b>3</b></div>
+              <div>Bathrooms<b>2.5</b></div>
+              <div>Size<b>1,480 sq ft</b></div>
+              <div>Listed<b>6 days ago</b></div>
+              <div>Built<b>2016</b></div>
+              <div>Walk Score<b>81</b></div>
+            </div>
+            <p>Three-level townhome with a fenced yard and roof deck. Newer kitchen, gas range, walking distance to Confederation Park.</p>
+            <div class="tools">
+              <button type="button" class="tool" data-save="2" aria-pressed="false"><span aria-hidden="true" data-save-icon>♡</span> <span data-save-text>Save</span></button>
+              <button type="button" class="tool" data-mortgage-toggle="2" aria-expanded="false" aria-controls="mortgage-2">Estimate payments</button>
+              <button type="button" class="tool" data-hood-open="heights">Burnaby Heights snapshot</button>
+            </div>
+            <div class="sheet-extras" data-extras="2"></div>
+            <div class="row">
+              <button type="button" data-close>Close</button>
+              <button class="primary" type="button" data-book="2">Book a viewing with Maya</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail" id="detail-3">
+        <div class="sheet" role="dialog" aria-label="1560 Grand Blvd · North Vancouver">
+          <div class="photo" style="--photo:linear-gradient(160deg,#d6ead8,#7fb68a)"><span class="badge">Detached</span></div>
+          <div class="content">
+            <h3>1560 Grand Blvd · North Vancouver</h3>
+            <div class="price">$2,100,000</div>
+            <div class="facts">
+              <div>Bedrooms<b>4</b></div>
+              <div>Bathrooms<b>3</b></div>
+              <div>Size<b>2,350 sq ft</b></div>
+              <div>Listed<b>6 days ago</b></div>
+              <div>Built<b>1958</b></div>
+              <div>Walk Score<b>68</b></div>
+            </div>
+            <p>Mid-century home on a 50×120 lot with mountain views. Legal two-bed suite below, detached garage, mature garden.</p>
+            <div class="tools">
+              <button type="button" class="tool" data-save="3" aria-pressed="false"><span aria-hidden="true" data-save-icon>♡</span> <span data-save-text>Save</span></button>
+              <button type="button" class="tool" data-mortgage-toggle="3" aria-expanded="false" aria-controls="mortgage-3">Estimate payments</button>
+              <button type="button" class="tool" data-hood-open="northvan">North Vancouver snapshot</button>
+            </div>
+            <div class="sheet-extras" data-extras="3"></div>
+            <div class="row">
+              <button type="button" data-close>Close</button>
+              <button class="primary" type="button" data-book="3">Book a viewing with Maya</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail" id="detail-4">
+        <div class="sheet" role="dialog" aria-label="55 E Cordova St · Gastown">
+          <div class="photo" style="--photo:linear-gradient(160deg,#e3d5cf,#a37c6c)"><span class="badge">Loft</span></div>
+          <div class="content">
+            <h3>55 E Cordova St · Gastown</h3>
+            <div class="price">$640,000</div>
+            <div class="facts">
+              <div>Bedrooms<b>1</b></div>
+              <div>Bathrooms<b>1</b></div>
+              <div>Size<b>720 sq ft</b></div>
+              <div>Listed<b>6 days ago</b></div>
+              <div>Built<b>1911</b></div>
+              <div>Walk Score<b>98</b></div>
+            </div>
+            <p>Heritage brick loft with 12-ft ceilings and original timber beams. Steel-framed windows, polished concrete, rooftop patio.</p>
+            <div class="tools">
+              <button type="button" class="tool" data-save="4" aria-pressed="false"><span aria-hidden="true" data-save-icon>♡</span> <span data-save-text>Save</span></button>
+              <button type="button" class="tool" data-mortgage-toggle="4" aria-expanded="false" aria-controls="mortgage-4">Estimate payments</button>
+              <button type="button" class="tool" data-hood-open="gastown">Gastown snapshot</button>
+            </div>
+            <div class="sheet-extras" data-extras="4"></div>
+            <div class="row">
+              <button type="button" data-close>Close</button>
+              <button class="primary" type="button" data-book="4">Book a viewing with Maya</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved homes drawer (slides in from the left, clear of the assistant) -->
+      <div class="ns-overlay drawer-overlay" id="saved">
+        <div class="drawer" role="dialog" aria-labelledby="saved-h">
+          <div class="drawer-head">
+            <div>
+              <p class="eyebrow">Your shortlist</p>
+              <h3 id="saved-h">Saved homes</h3>
+            </div>
+            <button type="button" class="x" data-close aria-label="Close saved homes">×</button>
+          </div>
+          <div class="drawer-body">
+            <p class="drawer-empty" data-saved-empty>Nothing saved yet. Tap the heart on any home to keep it here - then pick two or three to compare side by side.</p>
+            <ul class="saved-list" data-saved-list></ul>
+            <div class="drawer-cta" data-compare-bar>
+              <span data-compare-hint>Tick 2-3 homes to compare</span>
+              <button type="button" class="primary" data-compare-open disabled>Compare</button>
+            </div>
+            <h4>Your viewings</h4>
+            <p class="drawer-empty" data-my-viewings-empty>No viewings booked. Open any home and choose a time from Maya's calendar.</p>
+            <ul class="mini-list" data-my-viewings></ul>
+            <h4>Saved searches</h4>
+            <p class="drawer-empty" data-searches-empty>No alerts yet. Use "Get alerts for this search" above the results.</p>
+            <ul class="mini-list" data-searches></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compare modal -->
+      <div class="ns-overlay" id="compare">
+        <div class="ns-modal ns-modal-wide" role="dialog" aria-labelledby="compare-h">
+          <div class="modal-head">
+            <h3 id="compare-h">Compare homes</h3>
+            <button type="button" class="x" data-close aria-label="Close comparison">×</button>
+          </div>
+          <p class="muted">Best value in each row is highlighted. Monthly payment assumes 20% down, 4.75% over 25 years - the same defaults as the calculator.</p>
+          <div class="table-wrap"><table class="compare-table" data-compare-table></table></div>
+        </div>
+      </div>
+
+      <!-- Book a viewing modal -->
+      <div class="ns-overlay" id="book">
+        <div class="ns-modal" role="dialog" aria-labelledby="book-h">
+          <div class="modal-head">
+            <div>
+              <p class="eyebrow">Book a viewing</p>
+              <h3 id="book-h" data-book-addr>2288 W 4th Ave · Kitsilano</h3>
+            </div>
+            <button type="button" class="x" data-close aria-label="Close booking">×</button>
+          </div>
+          <div class="book-form" data-book-form>
+            <div class="seg" role="group" aria-label="Viewing type">
+              <button type="button" data-book-mode="In person" aria-pressed="true">In person</button>
+              <button type="button" data-book-mode="Video walkthrough" aria-pressed="false">Video walkthrough</button>
+            </div>
+            <p class="label">Maya is free on</p>
+            <div class="chips" data-book-days></div>
+            <p class="label">Time</p>
+            <div class="chips" data-book-times></div>
+            <p class="fine" data-book-hint>Grey times are already booked. Video walkthroughs take 20 minutes; in-person viewings about 45.</p>
+            <div class="two">
+              <label><span>Your name</span><input type="text" placeholder="Alex Rivera" data-book-name autocomplete="off" /></label>
+              <label><span>Mobile</span><input type="tel" placeholder="604 555 0142" data-book-phone autocomplete="off" /></label>
+            </div>
+            <div class="row">
+              <button type="button" data-close>Cancel</button>
+              <button type="button" class="primary" data-book-confirm disabled>Pick a time</button>
+            </div>
+          </div>
+          <div class="book-done" data-book-done>
+            <div class="check" aria-hidden="true">✓</div>
+            <h4>You're booked</h4>
+            <p data-book-summary></p>
+            <p class="fine">A text confirmation is on its way. Maya will send the lockbox and parking details the evening before.</p>
+            <div class="row">
+              <button type="button" data-book-calendar aria-pressed="false">Add to calendar</button>
+              <button type="button" class="primary" data-close>Done</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved search / alerts modal -->
+      <div class="ns-overlay" id="alerts">
+        <div class="ns-modal" role="dialog" aria-labelledby="alerts-h">
+          <div class="modal-head">
+            <div>
+              <p class="eyebrow">Never miss a listing</p>
+              <h3 id="alerts-h">Get alerts for homes like these</h3>
+            </div>
+            <button type="button" class="x" data-close aria-label="Close alerts">×</button>
+          </div>
+          <p class="summary" data-alert-summary>All homes · any price · any beds</p>
+          <form data-alert-form>
+            <label><span>Email</span><input type="email" required placeholder="you@example.com" data-alert-email autocomplete="off" /></label>
+            <p class="label">How often</p>
+            <div class="seg" role="group" aria-label="Alert frequency">
+              <button type="button" data-freq="instantly" aria-pressed="true">Instantly</button>
+              <button type="button" data-freq="daily" aria-pressed="false">Daily digest</button>
+              <button type="button" data-freq="weekly" aria-pressed="false">Weekly</button>
+            </div>
+            <p class="fine">New matches usually go out within an hour of hitting the MLS - ahead of the big portals.</p>
+            <div class="row">
+              <button type="button" data-close>Cancel</button>
+              <button type="submit" class="primary">Turn on alerts</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+      <aside class="ln-widget" id="assistant" data-bot="realty" data-mode="voice" aria-label="Northshore Realty assistant">
+        <div class="wtop">
+          <span class="avatar" aria-hidden="true">NR</span>
+          <p class="who"><strong>Maya's assistant</strong><span>Voice · listings, budgets, viewings</span></p>
+          <span class="status-pill">Live</span>
+          <button class="wmin" type="button" data-collapse="#assistant" aria-label="Minimise assistant">–</button>
+        </div>
+        <div class="wchips" aria-label="Try saying">
+          <button type="button" data-say>I'm looking for a two-bedroom in Kitsilano</button>
+          <button type="button" data-say>My budget is around one million</button>
+          <button type="button" data-say>Can I see the townhouse this weekend?</button>
+        </div>
+        <div class="messages" aria-live="polite"></div>
+        <p class="voice-hint" aria-live="polite"></p>
+        <form class="composer">
+          <input type="text" placeholder="Speak or type…" aria-label="Message" autocomplete="off" />
+            <button class="mic" type="button" aria-label="Speak" aria-pressed="false">🎤</button>
+          <button class="send" type="submit" aria-label="Send">➤</button>
+        </form>
+      </aside>
+    </main>
+
+    <footer class="ln-foot">
+      <span>Fictional brokerage and listings. Built by LocalNinja as a sample project.</span>
+      <a href="/#contact">Want one for your business? →</a>
+    </footer>
+
+    <script type="module" src="/src/work/mockups.js"></script>
+    <script type="module" src="/src/work/realty.js"></script>
+    <script type="module" src="/src/work/bot.js"></script>
+  </body>
+</html>

@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maple Clinic - LocalNinja sample project</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/logo-animated.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/work/shell.css" />
+    <link rel="stylesheet" href="/src/work/bot.css" />
+    <link rel="stylesheet" href="/src/work/widget.css" />
+    <link rel="stylesheet" href="/src/work/bot-clinic.css" />
+    <link rel="stylesheet" href="/src/work/clinic.css" />
+    <style>.ln-widget{--w-accent:#0f9d8a;--w-accent-ink:#fff;--w-body:#f4fbf9;--w-line:#d9e7e3;} .mc-strip{padding-bottom:9rem;}</style>
+  </head>
+  <body>
+    <header class="ln-bar">
+      <a class="ln-bar-brand" href="/#work"><img src="/logo-animated.svg" alt="" width="32" height="32" /><span class="ln-bar-name">Local<span class="ninja">Ninja</span></span></a>
+      <p class="ln-bar-title">Sample project · <strong>Maple Clinic</strong> patient booking <span class="ln-tag">Web app</span></p>
+      <a class="ln-bar-back" href="/#work">← Back to site</a>
+    </header>
+
+    <main class="mc mc-app">
+      <div class="mc-nav">
+        <span class="logo"><i>M</i> Maple Clinic</span>
+        <nav><a href="#book">Book</a><a href="#doctors">Doctors</a><a href="#info">Visits</a><a href="#assistant">Assistant</a></nav>
+        <a class="cta" href="#book">Book a visit</a>
+      </div>
+
+      <section class="mc-hero">
+        <div>
+          <p class="eyebrow">Family medicine · Halifax</p>
+          <h1>Book a visit <span>in three taps</span></h1>
+          <p>Pick a doctor, pick a time, confirm. No phone queue, no call-backs - and a text reminder the day before.</p>
+          <h2>Start with a doctor</h2>
+          <ul class="try-chips" id="doctors">
+            <li><button type="button" data-select-group="doctor" data-label="Dr. Priya Nair" data-scroll="#book">Dr. Nair · Family medicine</button></li>
+            <li><button type="button" data-select-group="doctor" data-label="Dr. Sam Okafor" data-scroll="#book">Dr. Okafor · Pediatrics</button></li>
+            <li><button type="button" data-select-group="doctor" data-label="Dr. Lena Roy" data-scroll="#book">Dr. Roy · Dermatology</button></li>
+          </ul>
+        </div>
+        <div class="mc-art" aria-hidden="true">
+          <div class="card one"><b>Dr. Priya Nair</b><span>Family medicine · next Tue 9:30</span></div>
+          <div class="card two"><b><span class="dot"></span>Same-day slots</b><span data-today-open>3 open this afternoon</span></div>
+          <div class="card three"><b>Reminder sent</b><span>Text · day before visit</span></div>
+        </div>
+      </section>
+
+      <section class="mc-book" id="book" aria-label="Book a visit">
+      <div class="app" data-steps data-step="1">
+        <div class="app-bar">
+          <span class="logo" aria-hidden="true">M</span>
+          <strong>Maple Clinic</strong>
+          <span class="today" aria-label="Demo date">Wed, Sep 2</span>
+          <button type="button" class="staff-btn" data-staff-open aria-expanded="false" aria-controls="cl-staff"><span aria-hidden="true">▦</span> Front desk</button>
+          <span class="user" data-initials aria-label="Signed in as Jordan Park">JP</span>
+        </div>
+
+        <div class="arrive" data-arrive data-state="due" hidden>
+          <span class="arrive-ico" aria-hidden="true">📍</span>
+          <div class="arrive-txt"><strong data-arrive-title>Maya's 14:15 with Dr. Okafor is today</strong><span data-arrive-sub>In the building? Check in from your phone - no line at reception.</span></div>
+          <div class="arrive-acts" data-arrive-acts><button class="btn btn-primary btn-sm" type="button" data-checkin="v0">I've arrived</button></div>
+        </div>
+
+        <div class="portal" role="tablist" aria-label="Patient portal">
+          <button type="button" role="tab" class="is-active" aria-selected="true" data-portal="book">Book</button>
+          <button type="button" role="tab" aria-selected="false" data-portal="visits">My visits <span class="badge" data-badge="visits">1</span></button>
+          <button type="button" role="tab" aria-selected="false" data-portal="results">Results <span class="badge is-alert" data-badge="results">1</span></button>
+          <button type="button" role="tab" aria-selected="false" data-portal="refills">Refills</button>
+          <button type="button" role="tab" aria-selected="false" data-portal="messages">Messages <span class="badge is-alert" data-badge="messages">1</span></button>
+          <button type="button" role="tab" aria-selected="false" data-portal="profile">Profile</button>
+        </div>
+
+        <!-- ============ Book ============ -->
+        <div class="pane is-active" role="tabpanel" data-portal-pane="book">
+        <ol class="stepper">
+          <li class="is-active" data-n="1"><span>Doctor</span></li>
+          <li data-n="2"><span>Date &amp; time</span></li>
+          <li data-n="3"><span>Confirm</span></li>
+        </ol>
+
+        <section class="panel panel-1">
+          <h2>Who is the visit for?</h2>
+          <p class="sub">Book for yourself or anyone on your family account. Their health card is already on file.</p>
+          <div class="people" role="group" aria-label="Patient">
+            <button type="button" class="person is-selected" data-patient="self" aria-pressed="true"><span class="ava" style="background:#0f9d8a">JP</span><strong>Jordan (you)</strong><span>38 · MSI on file</span></button>
+            <button type="button" class="person" data-patient="maya" aria-pressed="false"><span class="ava" style="background:#f59e0b">MP</span><strong>Maya Park</strong><span>Daughter · 6</span></button>
+            <button type="button" class="person" data-patient="ravi" aria-pressed="false"><span class="ava" style="background:#6366f1">RP</span><strong>Ravi Park</strong><span>Father · 71</span></button>
+          </div>
+          <p class="type-note" data-patient-note hidden></p>
+
+          <h3>What's it about? <small>(optional)</small></h3>
+          <p class="sub">Tap the closest match and we'll suggest the visit type, the right doctor and how soon.</p>
+          <div class="triage" role="group" aria-label="What the visit is about">
+            <button type="button" class="tri-chip" data-triage="skin" aria-pressed="false">Rash, mole or skin change</button>
+            <button type="button" class="tri-chip" data-triage="cold" aria-pressed="false">Cold, cough or fever</button>
+            <button type="button" class="tri-chip" data-triage="physical" aria-pressed="false">Yearly physical</button>
+            <button type="button" class="tri-chip" data-triage="child" aria-pressed="false">My child is unwell</button>
+            <button type="button" class="tri-chip" data-triage="refill" aria-pressed="false">Prescription running out</button>
+            <button type="button" class="tri-chip is-red" data-triage="emergency" aria-pressed="false">Chest pain or trouble breathing</button>
+          </div>
+          <div class="triage-out" data-triage-out hidden>
+            <p data-triage-text></p>
+            <div class="triage-acts" data-triage-acts>
+              <button class="btn btn-primary btn-sm" type="button" data-triage-go>Looks right - choose a time →</button>
+              <button class="btn btn-primary btn-sm" type="button" data-triage-refills hidden>Go to Refills →</button>
+              <button class="btn btn-ghost btn-sm" type="button" data-emergency-close>Clear</button>
+            </div>
+          </div>
+          <div class="emergency" data-emergency role="alert" hidden>
+            <strong>Please don't book online for this.</strong>
+            <p>Chest pain, trouble breathing or a severe allergic reaction needs emergency care now. <b>Call 911</b> or go to the QEII Emergency Department, 1799 Robie St. Not sure? Call <b>811</b> to speak with a nurse, any hour.</p>
+            <button class="btn btn-ghost btn-sm" type="button" data-emergency-close>I understand</button>
+          </div>
+
+          <h2 class="h2-gap">What kind of visit?</h2>
+          <p class="sub">The visit type sets the length and which doctors can see you.</p>
+          <div class="types" role="group" aria-label="Visit type">
+            <button type="button" class="type" data-visit="new" aria-pressed="false"><strong>New patient</strong><span>30 min</span></button>
+            <button type="button" class="type" data-visit="follow" aria-pressed="false"><strong>Follow-up</strong><span>15 min</span></button>
+            <button type="button" class="type is-selected" data-visit="annual" aria-pressed="true"><strong>Annual check-up</strong><span>30 min</span></button>
+            <button type="button" class="type" data-visit="skin" aria-pressed="false"><strong>Skin consult</strong><span>20 min</span></button>
+          </div>
+          <p class="type-note" data-type-note hidden></p>
+
+          <h3>Who would you like to see?</h3>
+          <p class="sub">Pick a doctor, or let us find the earliest opening for you.</p>
+          <div class="doctors">
+            <button class="doctor is-selected" type="button" data-select-group="doctor" data-label="Dr. Priya Nair" aria-pressed="true">
+              <span class="ava" style="background:#0f9d8a">PN</span>
+              <strong>Dr. Priya Nair</strong>
+              <span>Family medicine · Mon-Thu</span>
+              <span class="next">Next: Tue 9:30</span>
+            </button>
+            <button class="doctor" type="button" data-select-group="doctor" data-label="Dr. Sam Okafor" aria-pressed="false">
+              <span class="ava" style="background:#f59e0b">SO</span>
+              <strong>Dr. Sam Okafor</strong>
+              <span>Pediatrics · Tue-Fri</span>
+              <span class="next">Next: Wed 14:15</span>
+            </button>
+            <button class="doctor" type="button" data-select-group="doctor" data-label="Dr. Lena Roy" aria-pressed="false">
+              <span class="ava" style="background:#6366f1">LR</span>
+              <strong>Dr. Lena Roy</strong>
+              <span>Dermatology · Wed &amp; Fri</span>
+              <span class="next">Next: Fri 11:00</span>
+            </button>
+          </div>
+          <div class="actions">
+            <button class="btn btn-ghost" type="button" data-earliest>⚡ Earliest available</button>
+            <button class="btn btn-primary" type="button" data-go="2">Choose a time →</button>
+          </div>
+        </section>
+
+        <section class="panel panel-2">
+          <h2>When works for you?</h2>
+          <p class="sub">Showing availability for <strong data-out="doctor">Dr. Priya Nair</strong> · <span data-visit-out>Annual check-up · 30 min</span></p>
+          <div class="resched-banner" data-resched-banner hidden>
+            <p>Moving your <strong data-resched-from>visit</strong>. Pick a new date and time - your old slot is released when you confirm.</p>
+            <button class="btn btn-ghost btn-sm" type="button" data-resched-keep>Keep original time</button>
+          </div>
+
+          <div class="cal">
+            <div class="cal-head">
+              <button type="button" class="cal-nav" data-cal-nav="-1" aria-label="Previous month" disabled>‹</button>
+              <strong data-cal-title>September 2026</strong>
+              <button type="button" class="cal-nav" data-cal-nav="1" aria-label="Next month">›</button>
+            </div>
+            <div class="cal-dow" aria-hidden="true"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
+            <div class="cal-month is-active" data-month="2026-09" role="group" aria-label="September 2026">
+              <span class="cal-blank" aria-hidden="true"></span>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Tue, Sep 1" data-date="2026-09-01" aria-label="Tue, Sep 1">1</button>
+              <button type="button" aria-pressed="false" aria-current="date" data-select-group="day" data-label="Wed, Sep 2" data-date="2026-09-02" aria-label="Wed, Sep 2">2</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Thu, Sep 3" data-date="2026-09-03" aria-label="Thu, Sep 3">3</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Fri, Sep 4" data-date="2026-09-04" aria-label="Fri, Sep 4">4</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sat, Sep 5" data-date="2026-09-05" aria-label="Sat, Sep 5">5</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sun, Sep 6" data-date="2026-09-06" aria-label="Sun, Sep 6">6</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Mon, Sep 7" data-date="2026-09-07" aria-label="Mon, Sep 7">7</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Tue, Sep 8" data-date="2026-09-08" aria-label="Tue, Sep 8">8</button>
+              <button type="button" class="is-selected" aria-pressed="true" data-select-group="day" data-label="Wed, Sep 9" data-date="2026-09-09" aria-label="Wed, Sep 9">9</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Thu, Sep 10" data-date="2026-09-10" aria-label="Thu, Sep 10">10</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Fri, Sep 11" data-date="2026-09-11" aria-label="Fri, Sep 11">11</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sat, Sep 12" data-date="2026-09-12" aria-label="Sat, Sep 12">12</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sun, Sep 13" data-date="2026-09-13" aria-label="Sun, Sep 13">13</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Mon, Sep 14" data-date="2026-09-14" aria-label="Mon, Sep 14">14</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Tue, Sep 15" data-date="2026-09-15" aria-label="Tue, Sep 15">15</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Wed, Sep 16" data-date="2026-09-16" aria-label="Wed, Sep 16">16</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Thu, Sep 17" data-date="2026-09-17" aria-label="Thu, Sep 17">17</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Fri, Sep 18" data-date="2026-09-18" aria-label="Fri, Sep 18">18</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sat, Sep 19" data-date="2026-09-19" aria-label="Sat, Sep 19">19</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sun, Sep 20" data-date="2026-09-20" aria-label="Sun, Sep 20">20</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Mon, Sep 21" data-date="2026-09-21" aria-label="Mon, Sep 21">21</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Tue, Sep 22" data-date="2026-09-22" aria-label="Tue, Sep 22">22</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Wed, Sep 23" data-date="2026-09-23" aria-label="Wed, Sep 23">23</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Thu, Sep 24" data-date="2026-09-24" aria-label="Thu, Sep 24">24</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Fri, Sep 25" data-date="2026-09-25" aria-label="Fri, Sep 25">25</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sat, Sep 26" data-date="2026-09-26" aria-label="Sat, Sep 26">26</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sun, Sep 27" data-date="2026-09-27" aria-label="Sun, Sep 27">27</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Mon, Sep 28" data-date="2026-09-28" aria-label="Mon, Sep 28">28</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Tue, Sep 29" data-date="2026-09-29" aria-label="Tue, Sep 29">29</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Wed, Sep 30" data-date="2026-09-30" aria-label="Wed, Sep 30">30</button>
+            </div>
+            <div class="cal-month" data-month="2026-10" role="group" aria-label="October 2026">
+              <span class="cal-blank" aria-hidden="true"></span>
+              <span class="cal-blank" aria-hidden="true"></span>
+              <span class="cal-blank" aria-hidden="true"></span>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Thu, Oct 1" data-date="2026-10-01" aria-label="Thu, Oct 1">1</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Fri, Oct 2" data-date="2026-10-02" aria-label="Fri, Oct 2">2</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sat, Oct 3" data-date="2026-10-03" aria-label="Sat, Oct 3">3</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sun, Oct 4" data-date="2026-10-04" aria-label="Sun, Oct 4">4</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Mon, Oct 5" data-date="2026-10-05" aria-label="Mon, Oct 5">5</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Tue, Oct 6" data-date="2026-10-06" aria-label="Tue, Oct 6">6</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Wed, Oct 7" data-date="2026-10-07" aria-label="Wed, Oct 7">7</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Thu, Oct 8" data-date="2026-10-08" aria-label="Thu, Oct 8">8</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Fri, Oct 9" data-date="2026-10-09" aria-label="Fri, Oct 9">9</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sat, Oct 10" data-date="2026-10-10" aria-label="Sat, Oct 10">10</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sun, Oct 11" data-date="2026-10-11" aria-label="Sun, Oct 11">11</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Mon, Oct 12" data-date="2026-10-12" aria-label="Mon, Oct 12">12</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Tue, Oct 13" data-date="2026-10-13" aria-label="Tue, Oct 13">13</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Wed, Oct 14" data-date="2026-10-14" aria-label="Wed, Oct 14">14</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Thu, Oct 15" data-date="2026-10-15" aria-label="Thu, Oct 15">15</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Fri, Oct 16" data-date="2026-10-16" aria-label="Fri, Oct 16">16</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sat, Oct 17" data-date="2026-10-17" aria-label="Sat, Oct 17">17</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sun, Oct 18" data-date="2026-10-18" aria-label="Sun, Oct 18">18</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Mon, Oct 19" data-date="2026-10-19" aria-label="Mon, Oct 19">19</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Tue, Oct 20" data-date="2026-10-20" aria-label="Tue, Oct 20">20</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Wed, Oct 21" data-date="2026-10-21" aria-label="Wed, Oct 21">21</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Thu, Oct 22" data-date="2026-10-22" aria-label="Thu, Oct 22">22</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Fri, Oct 23" data-date="2026-10-23" aria-label="Fri, Oct 23">23</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sat, Oct 24" data-date="2026-10-24" aria-label="Sat, Oct 24">24</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sun, Oct 25" data-date="2026-10-25" aria-label="Sun, Oct 25">25</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Mon, Oct 26" data-date="2026-10-26" aria-label="Mon, Oct 26">26</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Tue, Oct 27" data-date="2026-10-27" aria-label="Tue, Oct 27">27</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Wed, Oct 28" data-date="2026-10-28" aria-label="Wed, Oct 28">28</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Thu, Oct 29" data-date="2026-10-29" aria-label="Thu, Oct 29">29</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Fri, Oct 30" data-date="2026-10-30" aria-label="Fri, Oct 30">30</button>
+              <button type="button" aria-pressed="false" data-select-group="day" data-label="Sat, Oct 31" data-date="2026-10-31" aria-label="Sat, Oct 31">31</button>
+            </div>
+            <p class="cal-hint" data-cal-hint>Dr. Nair sees patients Mon-Thu.</p>
+          </div>
+
+          <h3 class="slots-title">Times on <strong data-out="day">Wed, Sep 9</strong></h3>
+          <div class="slots">
+            <div class="slot"><button type="button" data-select-group="slot">8:30</button><button type="button" class="wl" data-waitlist="8:30" aria-pressed="false">Waitlist</button></div>
+            <div class="slot"><button type="button" data-select-group="slot">9:00</button><button type="button" class="wl" data-waitlist="9:00" aria-pressed="false">Waitlist</button></div>
+            <div class="slot"><button type="button" class="is-selected" data-select-group="slot" aria-pressed="true">9:30</button><button type="button" class="wl" data-waitlist="9:30" aria-pressed="false">Waitlist</button></div>
+            <div class="slot"><button type="button" data-select-group="slot">10:15</button><button type="button" class="wl" data-waitlist="10:15" aria-pressed="false">Waitlist</button></div>
+            <div class="slot"><button type="button" data-select-group="slot">11:00</button><button type="button" class="wl" data-waitlist="11:00" aria-pressed="false">Waitlist</button></div>
+            <div class="slot"><button type="button" data-select-group="slot">13:30</button><button type="button" class="wl" data-waitlist="13:30" aria-pressed="false">Waitlist</button></div>
+            <div class="slot"><button type="button" data-select-group="slot">14:15</button><button type="button" class="wl" data-waitlist="14:15" aria-pressed="false">Waitlist</button></div>
+            <div class="slot"><button type="button" data-select-group="slot">15:45</button><button type="button" class="wl" data-waitlist="15:45" aria-pressed="false">Waitlist</button></div>
+          </div>
+          <p class="slots-note" data-slots-note>6 times open · 2 taken. Join the waitlist for a taken time and we'll text you if it frees up.</p>
+
+          <div class="actions">
+            <button class="btn btn-ghost" type="button" data-go="1">← Back</button>
+            <button class="btn btn-primary" type="button" data-go="3">Review booking →</button>
+          </div>
+        </section>
+
+        <section class="panel panel-3">
+          <h2>Confirm your visit</h2>
+          <p class="sub">Check the details, tell us briefly what it's about, and you're done.</p>
+          <p class="earliest-note" data-earliest-note hidden>⚡ We picked the earliest opening across your eligible doctors. Change anything with ← Back.</p>
+          <div class="summary">
+            <div><span>Patient</span><strong data-patient-out>Jordan Park (you)</strong></div>
+            <div><span>Doctor</span><strong data-out="doctor">Dr. Priya Nair</strong></div>
+            <div><span>Date</span><strong data-out="day">Wed, Sep 9</strong></div>
+            <div><span>Time</span><strong data-out="slot">9:30</strong></div>
+            <div><span>Visit type</span><strong data-visit-out>Annual check-up · 30 min</strong></div>
+            <div data-resched-row hidden><span>Replaces</span><strong data-resched-from>-</strong></div>
+          </div>
+          <div class="field">
+            <label for="cl-reason">Reason for visit <small>(optional - the doctor reads this before you arrive)</small></label>
+            <textarea id="cl-reason" rows="3" maxlength="200" placeholder="e.g. Yearly physical - also want to ask about sleep."></textarea>
+            <span class="count" data-count aria-live="polite">0/200</span>
+          </div>
+          <div class="field">
+            <label for="cl-phone">Phone for reminders</label>
+            <input id="cl-phone" type="tel" value="(902) 555-0142" />
+          </div>
+          <label class="check-row">
+            <input id="cl-card" type="checkbox" checked />
+            <span><strong>Remind me to bring my health card</strong><small>We'll add it to your reminder text. New patients also need photo ID.</small></span>
+          </label>
+          <div class="actions">
+            <button class="btn btn-ghost" type="button" data-go="2">← Back</button>
+            <button class="btn btn-primary" type="button" data-go="4" data-confirm>Confirm booking</button>
+          </div>
+        </section>
+
+        <section class="panel panel-4">
+          <div class="success">
+            <div class="check" aria-hidden="true">✓</div>
+            <h2 data-success-title>You're booked</h2>
+            <p class="sub"><strong data-out="day">Wed, Sep 9</strong> at <strong data-out="slot">9:30</strong> with <strong data-out="doctor">Dr. Priya Nair</strong></p>
+            <span class="ref" data-success-ref>MC-4821</span>
+
+            <ul class="after" aria-label="After booking">
+              <li>
+                <label class="switch-row">
+                  <input type="checkbox" class="switch" data-reminder checked />
+                  <span><strong>Text me a reminder</strong><small data-reminder-text>The day before, to (902) 555-0142</small></span>
+                </label>
+              </li>
+              <li>
+                <button type="button" class="row-btn" data-cal-add aria-pressed="false">
+                  <span class="ico" aria-hidden="true">📅</span>
+                  <span><strong data-cal-add-label>Add to calendar</strong><small data-cal-add-sub>Google, Apple or Outlook - 30 min block with the clinic address</small></span>
+                </button>
+              </li>
+              <li class="after-card" data-card-line>
+                <span class="ico" aria-hidden="true">🪪</span>
+                <span><strong>Bring your health card</strong><small>Reception scans it at check-in - arrive 10 minutes early.</small></span>
+              </li>
+            </ul>
+
+            <div class="actions" style="justify-content:center">
+              <button class="btn btn-ghost" type="button" data-go="1" data-book-another>Book another</button>
+              <button class="btn btn-primary" type="button" data-portal-go="visits">See my visits</button>
+            </div>
+          </div>
+        </section>
+        </div>
+
+        <!-- ============ My visits ============ -->
+        <div class="pane" role="tabpanel" data-portal-pane="visits">
+          <section class="panel-plain">
+            <h2>My visits</h2>
+            <p class="sub">Upcoming visits first. Reception will ask for the reference code.</p>
+            <ul class="visits" data-visits aria-label="Upcoming visits"></ul>
+            <h3>Past</h3>
+            <ul class="visits past" aria-label="Past visits">
+              <li class="visit is-past">
+                <div class="when"><b>Aug</b><span>20</span><small>Thu</small></div>
+                <div class="what"><strong>Dr. Priya Nair</strong><span>Blood work review · 15 min · 10:15</span><span class="ref-sm">MC-4655 · Results shared in Messages</span></div>
+                <div class="acts"><button class="btn btn-ghost btn-sm" type="button" data-book-again="Dr. Priya Nair|follow">Book again</button></div>
+              </li>
+              <li class="visit is-past">
+                <div class="when"><b>Jun</b><span>12</span><small>Fri</small></div>
+                <div class="what"><strong>Dr. Lena Roy</strong><span>Skin consult · 20 min · 11:00</span><span class="ref-sm">MC-4302</span></div>
+                <div class="acts"><button class="btn btn-ghost btn-sm" type="button" data-book-again="Dr. Lena Roy|skin">Book again</button></div>
+              </li>
+            </ul>
+          </section>
+        </div>
+
+        <!-- ============ Results ============ -->
+        <div class="pane" role="tabpanel" data-portal-pane="results">
+          <section class="panel-plain">
+            <h2>Results</h2>
+            <p class="sub">Released here the moment your doctor signs off - with a note in plain language, not just numbers.</p>
+            <ul class="results" aria-label="Test results">
+              <li class="result is-new" data-result>
+                <button type="button" class="result-head" data-result-toggle aria-expanded="true" aria-controls="cl-res-1">
+                  <span class="when"><b>Aug</b><span>20</span></span>
+                  <span class="what"><strong>Blood work · 4 tests</strong><span>Ordered by Dr. Priya Nair · released Aug 21</span></span>
+                  <span class="pill is-ok">Normal · 1 note</span>
+                  <span class="chev" aria-hidden="true">›</span>
+                </button>
+                <div class="result-body" id="cl-res-1">
+                  <p class="res-note"><b>Dr. Nair's note</b> Everything is in the normal range. Your ferritin (stored iron) is at the low end, which fits the tiredness you mentioned. Nothing urgent - let's talk diet and whether a supplement makes sense at a short follow-up.</p>
+                  <div class="res-table-wrap">
+                    <table class="res-table">
+                      <thead><tr><th scope="col">Test</th><th scope="col">Your value</th><th scope="col">Normal range</th><th scope="col">Flag</th></tr></thead>
+                      <tbody>
+                        <tr><th scope="row">Hemoglobin</th><td>128 g/L</td><td>120-160</td><td><span class="flag is-ok">Normal</span></td></tr>
+                        <tr><th scope="row">Ferritin</th><td>18 µg/L</td><td>15-200</td><td><span class="flag is-low">Low end</span></td></tr>
+                        <tr><th scope="row">Total cholesterol</th><td>4.6 mmol/L</td><td>under 5.2</td><td><span class="flag is-ok">Normal</span></td></tr>
+                        <tr><th scope="row">Fasting glucose</th><td>5.1 mmol/L</td><td>3.9-5.5</td><td><span class="flag is-ok">Normal</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="result-acts">
+                    <button class="btn btn-primary btn-sm" type="button" data-book-again="Dr. Priya Nair|follow">Book the 15-min follow-up</button>
+                    <button class="btn btn-ghost btn-sm" type="button" data-ask-result="Hi Dr. Nair - about my Aug 20 ferritin result: ">Ask Dr. Nair a question</button>
+                  </div>
+                </div>
+              </li>
+              <li class="result" data-result>
+                <button type="button" class="result-head" data-result-toggle aria-expanded="false" aria-controls="cl-res-2">
+                  <span class="when"><b>Jun</b><span>12</span></span>
+                  <span class="what"><strong>Skin biopsy · left shoulder</strong><span>Dr. Lena Roy · released Jun 19</span></span>
+                  <span class="pill is-ok">Benign</span>
+                  <span class="chev" aria-hidden="true">›</span>
+                </button>
+                <div class="result-body" id="cl-res-2" hidden>
+                  <p class="res-note"><b>Dr. Roy's note</b> The sample is benign - a harmless seborrheic keratosis. No treatment needed. Keep an eye on it and book a skin consult if it changes shape, colour or starts to itch.</p>
+                  <div class="result-acts">
+                    <button class="btn btn-ghost btn-sm" type="button" data-book-again="Dr. Lena Roy|skin">Book a skin consult</button>
+                    <button class="btn btn-ghost btn-sm" type="button" data-ask-result="Hi Dr. Roy - about the Jun 12 biopsy on my shoulder: ">Ask Dr. Roy a question</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <p class="cal-hint">Results older than two years are in your full record - ask the front desk in Messages.</p>
+          </section>
+        </div>
+
+        <!-- ============ Refills ============ -->
+        <div class="pane" role="tabpanel" data-portal-pane="refills">
+          <section class="panel-plain">
+            <h2>Prescription refills</h2>
+            <p class="sub">No visit needed for a renewal. Your doctor reviews the request and we send it straight to your pharmacy.</p>
+            <form class="refill" data-refill-form>
+              <h3>Which medication?</h3>
+              <div class="meds" role="group" aria-label="Medication">
+                <button type="button" class="med" data-med="Cetirizine 10 mg" data-med-doc="Dr. Priya Nair" aria-pressed="false"><strong>Cetirizine 10 mg</strong><span>Allergies · once daily · Dr. Nair · last filled Jun 30 · 0 refills left</span></button>
+                <button type="button" class="med" data-med="Salbutamol inhaler 100 mcg" data-med-doc="Dr. Priya Nair" aria-pressed="false"><strong>Salbutamol inhaler 100 mcg</strong><span>As needed · Dr. Nair · last filled May 14 · 1 refill left</span></button>
+                <button type="button" class="med" data-med="Betamethasone 0.1% cream" data-med-doc="Dr. Lena Roy" aria-pressed="false"><strong>Betamethasone 0.1% cream</strong><span>Twice daily · Dr. Roy · last filled Jun 12 · 0 refills left</span></button>
+              </div>
+              <div class="field">
+                <label for="cl-rx-pharm">Send it to</label>
+                <select id="cl-rx-pharm">
+                  <option selected>Shoppers Drug Mart - Quinpool Rd</option>
+                  <option>Lawtons Drugs - Spring Garden Rd</option>
+                  <option>Costco Pharmacy - Bayers Lake</option>
+                </select>
+              </div>
+              <h3>How soon do you need it?</h3>
+              <div class="urgency" role="group" aria-label="Urgency">
+                <button type="button" data-urgency="days" aria-pressed="true"><strong>I have a few days left</strong><span>Usually within 2 business days</span></button>
+                <button type="button" data-urgency="out" aria-pressed="false"><strong>I'm out today</strong><span>Flagged urgent · usually same day</span></button>
+              </div>
+              <p class="type-note" data-refill-note>Pick a medication to see who reviews it and how long it usually takes.</p>
+              <div class="actions">
+                <span class="rx-hint">Controlled medications and anything not on this list need a visit.</span>
+                <button class="btn btn-primary" type="submit" data-refill-send disabled>Send request</button>
+              </div>
+            </form>
+            <h3>Requests</h3>
+            <ul class="rx-list" data-refill-list aria-label="Refill requests">
+              <li class="visits-empty" data-refill-empty>No open requests. Approved refills also show up in Messages.</li>
+            </ul>
+          </section>
+        </div>
+
+        <!-- ============ Messages ============ -->
+        <div class="pane" role="tabpanel" data-portal-pane="messages">
+          <section class="panel-plain">
+            <h2>Messages</h2>
+            <p class="sub">Secure messages with the front desk and your doctor. Not for emergencies - call 911.</p>
+            <ol class="thread" data-thread aria-label="Conversation with Maple Clinic">
+              <li class="msg them"><span class="from">Maple Clinic · Aug 21</span><p>Hi Jordan - your blood work from Aug 20 is in. Everything is in the normal range; Dr. Nair added a note about iron being on the lower end.</p></li>
+              <li class="msg me"><span class="from">You · Aug 21</span><p>Great, thank you. Do I still need a follow-up?</p></li>
+              <li class="msg them is-unread"><span class="from">Dr. Priya Nair · Aug 22</span><p>A quick 15-minute follow-up in the next few weeks would be good, so we can talk through diet and whether a supplement makes sense.</p><button class="btn btn-primary btn-sm" type="button" data-book-again="Dr. Priya Nair|follow">Book the follow-up</button></li>
+            </ol>
+            <form class="composer2" data-thread-form>
+              <label class="sr-only" for="cl-msg">Message</label>
+              <input id="cl-msg" type="text" placeholder="Write to the clinic…" autocomplete="off" maxlength="300" />
+              <button class="btn btn-primary" type="submit">Send</button>
+            </form>
+          </section>
+        </div>
+
+        <!-- ============ Profile ============ -->
+        <div class="pane" role="tabpanel" data-portal-pane="profile">
+          <section class="panel-plain">
+            <h2>Profile</h2>
+            <p class="sub">What the clinic has on file. Changes apply to your next booking.</p>
+            <form class="profile" data-profile-form>
+              <div class="field"><label for="cl-name">Full name</label><input id="cl-name" name="name" type="text" value="Jordan Park" required /></div>
+              <div class="field"><label for="cl-dob">Date of birth</label><input id="cl-dob" name="dob" type="text" value="1988-04-17" /></div>
+              <div class="field"><label for="cl-pphone">Mobile</label><input id="cl-pphone" name="phone" type="tel" value="(902) 555-0142" /></div>
+              <div class="field"><label for="cl-email">Email</label><input id="cl-email" name="email" type="email" value="jordan.park@example.com" /></div>
+              <div class="field"><label for="cl-ins">Coverage</label>
+                <select id="cl-ins" name="insurance">
+                  <option selected>MSI (Nova Scotia)</option>
+                  <option>Blue Cross</option>
+                  <option>Sun Life</option>
+                  <option>Pay per visit</option>
+                </select>
+              </div>
+              <div class="field"><label for="cl-hc">Health card number</label><input id="cl-hc" name="hc" type="text" value="4402 118 736" /></div>
+              <div class="field wide"><label for="cl-pharm">Preferred pharmacy</label><input id="cl-pharm" name="pharmacy" type="text" value="Shoppers Drug Mart - Quinpool Rd" /></div>
+              <div class="field wide"><label for="cl-remind-via">Reminders by</label>
+                <select id="cl-remind-via" name="remindvia">
+                  <option selected>Text</option>
+                  <option>Email</option>
+                  <option>Text and email</option>
+                </select>
+              </div>
+              <div class="prefs wide">
+                <label class="switch-row"><input type="checkbox" class="switch" name="sms" checked /><span><strong>Text reminders</strong><small>The day before each visit</small></span></label>
+                <label class="switch-row"><input type="checkbox" class="switch" name="emailsum" /><span><strong>Email visit summaries</strong><small>After each visit, from your doctor</small></span></label>
+              </div>
+              <div class="actions wide">
+                <button class="btn btn-ghost" type="button" data-profile-discard disabled>Discard changes</button>
+                <button class="btn btn-primary" type="submit" data-profile-save disabled>Saved</button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+
+      <div class="cl-modal" data-modal>
+        <div class="cl-modal-card" role="dialog" aria-modal="true" aria-labelledby="cl-dlg-title" aria-describedby="cl-dlg-body" tabindex="-1">
+          <button class="cl-modal-x" type="button" data-modal-close aria-label="Close dialog">×</button>
+          <h3 id="cl-dlg-title">Are you sure?</h3>
+          <p id="cl-dlg-body"></p>
+          <div class="actions">
+            <button class="btn btn-ghost" type="button" data-modal-close data-modal-cancel>Go back</button>
+            <button class="btn btn-primary" type="button" data-modal-ok>Confirm</button>
+          </div>
+        </div>
+      </div>
+      <div class="cl-toast" role="status" aria-live="polite" data-toast></div>
+
+      <div class="wl-note" data-wlnote role="dialog" aria-labelledby="cl-wl-title" aria-describedby="cl-wl-body" tabindex="-1" hidden>
+        <button class="cl-modal-x" type="button" data-wlnote-dismiss aria-label="Dismiss">×</button>
+        <span class="wl-ico" aria-hidden="true">🔔</span>
+        <h3 id="cl-wl-title">A time just opened up</h3>
+        <p id="cl-wl-body" data-wlnote-body></p>
+        <div class="wl-acts">
+          <button class="btn btn-primary btn-sm" type="button" data-wlnote-take>Take it</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-wlnote-dismiss>No thanks, keep me listed</button>
+        </div>
+      </div>
+
+      <div class="staff" id="cl-staff" data-staff role="dialog" aria-modal="true" aria-labelledby="cl-staff-title" tabindex="-1">
+        <div class="staff-inner">
+          <div class="staff-head">
+            <div>
+              <p class="eyebrow">Front desk · Wed, Sep 2 · 13:45</p>
+              <h2 id="cl-staff-title">Today at Maple Clinic</h2>
+              <p class="sub">The same booking data, from reception's side. Status changes here show up on the patient's phone instantly.</p>
+            </div>
+            <button class="btn btn-ghost btn-sm" type="button" data-staff-close>← Back to patient view</button>
+          </div>
+          <div class="staff-kpis" data-staff-kpis aria-label="Today at a glance"></div>
+          <div class="staff-cols">
+            <section class="staff-board" aria-label="Today's schedule">
+              <div class="staff-filter" role="group" aria-label="Doctor">
+                <button type="button" data-staff-doc="all" aria-pressed="true">All doctors</button>
+                <button type="button" data-staff-doc="Dr. Priya Nair" aria-pressed="false">Dr. Nair</button>
+                <button type="button" data-staff-doc="Dr. Sam Okafor" aria-pressed="false">Dr. Okafor</button>
+                <button type="button" data-staff-doc="Dr. Lena Roy" aria-pressed="false">Dr. Roy</button>
+              </div>
+              <div class="board" data-staff-board></div>
+            </section>
+            <aside class="staff-side">
+              <section>
+                <h3>Waitlist</h3>
+                <ul class="side-list" data-staff-waitlist></ul>
+              </section>
+              <section>
+                <h3>Refill requests</h3>
+                <ul class="side-list" data-staff-refills></ul>
+              </section>
+              <section>
+                <h3>Unconfirmed visits</h3>
+                <ul class="side-list" data-staff-unconfirmed></ul>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </div>
+      </section>
+
+      <section class="mc-strip" id="info" aria-label="Clinic info">
+        <div><b>Hours</b>Mon-Fri 8:00-17:00. Same-day visits most afternoons.</div>
+        <div><b>Three doctors</b>Family medicine, pediatrics and dermatology under one roof.</div>
+        <div><b>Prefer to chat?</b>The same booking runs through the assistant in the corner - try it.</div>
+      </section>
+      <aside class="ln-widget" id="assistant" data-bot="clinic" data-mode="chat" aria-label="Maple Clinic assistant">
+        <div class="wtop">
+          <span class="avatar" aria-hidden="true">M</span>
+          <p class="who"><strong>Maple Clinic assistant</strong><span>Books visits · replies in seconds</span></p>
+          <span class="status-pill">Live</span>
+          <button class="wmin" type="button" data-collapse="#assistant" aria-label="Minimise assistant">–</button>
+        </div>
+        <div class="wchips" aria-label="Try saying">
+          <button type="button" data-say>I need a skin consult next week</button>
+          <button type="button" data-say>Book a check-up with Dr. Nair</button>
+          <button type="button" data-say>Anything Thursday morning?</button>
+        </div>
+        <div class="messages" aria-live="polite"></div>
+        <form class="composer">
+          <input type="text" placeholder="Type a message…" aria-label="Message" autocomplete="off" />
+          <button class="send" type="submit" aria-label="Send">➤</button>
+        </form>
+      </aside>
+    </main>
+
+    <footer class="ln-foot">
+      <span>Fictional clinic and data. Built by LocalNinja as a sample project.</span>
+      <a href="/#contact">Want one for your business? →</a>
+    </footer>
+
+    <script type="module" src="/src/work/mockups.js"></script>
+    <script type="module" src="/src/work/bot.js"></script>
+    <script type="module" src="/src/work/clinic.js"></script>
+  </body>
+</html>
