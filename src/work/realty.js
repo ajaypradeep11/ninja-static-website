@@ -3,7 +3,8 @@
 // data-collapse, data-say). This module layers the buyer tools on top -
 // refine filters + sort, save / compare, mortgage calculator, neighbourhood
 // snapshot, viewing booking, saved-search alerts, home valuation - and the
-// brokerage's side: the agent desk (leads, viewings, hot listings).
+// brokerage's side: the agent desk (leads, viewings, hot listings, and
+// listing flags - open house / under offer - that show to buyers at once).
 // Listeners are delegated at document level so they run after the
 // element-level handlers in mockups.js.
 // Contract: JS only toggles classes / attributes / text and builds strings.
@@ -58,6 +59,8 @@ const escapeHtml = (s) =>
 const money = (n) => '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 const short = (n) => (n >= 1000000 ? `$${(n / 1000000).toFixed(n % 1000000 === 0 ? 0 : 2).replace(/0$/, '')}M` : `$${Math.round(n / 1000)}k`);
 const fullAddr = (h) => `${h.addr} · ${HOODS[h.hood].name}`;
+// Smooth scrolling is motion too - fall back to an instant jump under reduced motion.
+const scrollBehavior = () => (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth');
 
 const state = {
   saved: new Set(),
@@ -84,8 +87,13 @@ const state = {
   ],
   valuations: [{ address: '3312 W 11th Ave, Vancouver', type: 'detached', beds: 3, baths: 2, status: 'Appointment Fri 10:00' }],
   searches: [],
+  // Listing flags set from the agent desk. Ravi hosts the open house so it
+  // never collides with Maya's viewing slots above.
+  openHouse: new Set([3]),
+  underOffer: new Set(),
   toastTimer: 0,
 };
+const OPEN_HOUSE = 'Sat 5 Sep · 13:00–15:00';
 
 /* ---------- money maths ---------- */
 
@@ -581,6 +589,49 @@ const requestValuation = () => {
   renderDesk();
 };
 
+/* ---------- listing flags (agent desk -> buyer side) ---------- */
+
+const syncFlags = (id) => {
+  const h = HOMES[id];
+  const open = state.openHouse.has(id);
+  const offer = state.underOffer.has(id);
+  const badge = $(`[data-flag="${id}"]`);
+  if (badge) {
+    badge.hidden = !open && !offer;
+    badge.textContent = offer ? 'Under offer' : open ? 'Open house Sat' : '';
+    badge.classList.toggle('is-offer', offer);
+    badge.classList.toggle('is-open-house', open && !offer);
+  }
+  const line = $(`[data-flag-line="${id}"]`);
+  if (line) {
+    line.hidden = !open && !offer;
+    line.classList.toggle('is-offer', offer);
+    line.textContent = offer
+      ? `Under offer · an accepted offer is in place. Maya still shows ${h.addr} in case it falls through - book a viewing to be first in line.`
+      : open
+        ? `Open house ${OPEN_HOUSE} · hosted by Ravi Dhillon. Just drop in, no booking needed.`
+        : '';
+  }
+  $(`.pin[data-home="${id}"]`)?.classList.toggle('is-offer', offer);
+};
+
+const renderListings = () => {
+  const list = $('[data-listing-list]');
+  if (!list) return;
+  list.innerHTML = IDS.map((id) => HOMES[id])
+    .map(
+      (h) => `<li class="listing">
+        <span class="thumb" style="--photo:${h.photo}"></span>
+        <div class="listing-main"><b>${escapeHtml(h.addr)}</b><span>${money(h.price)} · ${escapeHtml(HOODS[h.hood].name)} · listed 6 days ago</span></div>
+        <div class="listing-actions">
+          <button type="button" data-flag-open="${h.id}" aria-pressed="${String(state.openHouse.has(h.id))}">${state.openHouse.has(h.id) ? `Open house ${OPEN_HOUSE}` : 'Add open house'}</button>
+          <button type="button" data-flag-offer="${h.id}" aria-pressed="${String(state.underOffer.has(h.id))}">${state.underOffer.has(h.id) ? 'Under offer' : 'Mark under offer'}</button>
+        </div>
+      </li>`
+    )
+    .join('');
+};
+
 /* ---------- agent desk ---------- */
 
 const renderDesk = () => {
@@ -669,7 +720,7 @@ const toggleDesk = () => {
   if (on) {
     closeHood();
     renderDesk();
-    $('#desk')?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    $('#desk')?.scrollIntoView({ block: 'start', behavior: scrollBehavior() });
   }
 };
 
@@ -685,6 +736,8 @@ function init() {
   applyFilters();
   renderSaved();
   renderDesk();
+  IDS.forEach(syncFlags);
+  renderListings();
 
   document.addEventListener('click', (event) => {
     const t = event.target;
@@ -754,7 +807,7 @@ function init() {
       const fromSheet = el.closest('.detail');
       if (fromSheet) fromSheet.classList.remove('is-open');
       openHood(el.dataset.hoodOpen);
-      if (fromSheet || window.innerWidth <= 900) $('.map')?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      if (fromSheet || window.innerWidth <= 900) $('.map')?.scrollIntoView({ block: 'nearest', behavior: scrollBehavior() });
       return;
     }
     if (hit('[data-hood-close]')) {
@@ -859,6 +912,25 @@ function init() {
         if (v.reminded) toast(`Reminder sent to ${v.who} for ${dayLabel(v.day)} ${v.time}`);
         renderDesk();
       }
+      return;
+    }
+
+    if ((el = hit('[data-flag-open]'))) {
+      const id = Number(el.dataset.flagOpen);
+      if (state.openHouse.has(id)) state.openHouse.delete(id);
+      else state.openHouse.add(id);
+      syncFlags(id);
+      renderListings();
+      toast(state.openHouse.has(id) ? `Open house ${OPEN_HOUSE} added to ${HOMES[id].addr} · buyers see it now` : `Open house removed from ${HOMES[id].addr}`);
+      return;
+    }
+    if ((el = hit('[data-flag-offer]'))) {
+      const id = Number(el.dataset.flagOffer);
+      if (state.underOffer.has(id)) state.underOffer.delete(id);
+      else state.underOffer.add(id);
+      syncFlags(id);
+      renderListings();
+      toast(state.underOffer.has(id) ? `${HOMES[id].addr} marked under offer · alert subscribers get an update` : `${HOMES[id].addr} is back on the market`);
       return;
     }
 

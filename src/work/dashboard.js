@@ -62,6 +62,10 @@ const VIEWS = {
   customers: ['Customers', '278 accounts · 12 loaded'],
   revenue: ['Revenue', 'September 2026 · USD'],
   events: ['Events', 'Last 24 hours'],
+  growth: ['Growth', 'Funnel and retention · last 30 days'],
+  alerts: ['Alerts', '3 rules · status.pulse.app'],
+  team: ['Team', '11 members · Growth plan'],
+  integrations: ['Integrations', '1 of 4 connected'],
   settings: ['Settings', 'Acme Robotics workspace'],
 };
 
@@ -191,6 +195,7 @@ function drawChart() {
     g.querySelector('.area').setAttribute('d', `${line} L${X1} ${Y1} L${X0} ${Y1} Z`);
   });
   updateChartLabels();
+  renderAnnotations();
   hideTip();
 }
 
@@ -241,6 +246,8 @@ function showTip(idx) {
   dot.setAttribute('cy', y.toFixed(1));
   $('#tip-value').textContent = METRICS[state.metric].value(vals[idx]);
   $('#tip-date').textContent = idx === n - 1 ? 'today' : dateLabel(idx, n);
+  const note = annoAt(idx, n);
+  if (note) $('#tip-date').textContent += ` · ${note}`;
   const rect = svg.getBoundingClientRect();
   const px = (x / 600) * rect.width;
   const py = (y / 220) * rect.height;
@@ -379,6 +386,7 @@ function refresh() {
   setKpi('active');
   setKpi('response');
   applyThreshold();
+  syncLatency();
   if (state.metric === 'active' || state.metric === 'response') drawChart();
   pushLiveEvent();
   renderUpdated();
@@ -543,7 +551,8 @@ function initCustomers() {
     b.classList.add('is-done');
   });
   $('#c-secondary')?.addEventListener('click', (e) => {
-    toast(`Opening ${e.currentTarget.dataset.customer} in HubSpot… (demo - no CRM connected)`);
+    const who = e.currentTarget.dataset.customer;
+    toast(state.crm ? `Opened ${who} in HubSpot: contact, open deals and health score are in sync.` : `Opening ${who} in HubSpot… (connect HubSpot in Integrations to sync deals)`);
   });
 }
 
@@ -873,8 +882,10 @@ function closeDrawer() {
 function initDrawer() {
   $('#drawer-close')?.addEventListener('click', closeDrawer);
   $('#scrim')?.addEventListener('click', closeDrawer);
+  // Escape closes the topmost overlay: status preview, then the note
+  // form on the chart, then the drawer.
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeDrawer();
+    if (e.key === 'Escape') closeTopmost();
   });
 }
 
@@ -964,6 +975,968 @@ function initSettings() {
   applyThreshold();
 }
 
+/* ======================================================================
+   Added product flows. Same contract as above: JS toggles classes /
+   attributes / text and builds strings; CSS owns every transition.
+     - Ask Pulse (keyword-routed plain-English answers with a mini chart)
+     - Chart annotations (click a point -> note -> marker + list)
+     - Growth view: conversion funnel with blockers, cohort retention grid
+     - Alerts view: rules list + builder, public status page (staff side)
+       and the customer-facing preview modal
+     - Team view: invites, roles, remove-with-confirm, plan & seat meter
+       with overage and upgrade
+     - Integrations: connect toggles that change Events, Alerts and the
+       customer drawer
+   ====================================================================== */
+
+/* ---------- shared: events log + overlay stack ---------- */
+
+// Appends an event to both event tables (same row shape as live events)
+// so actions taken elsewhere on the page show up in the log.
+function addEvent({ title, account, sev = 'ok', kicker = 'Event', summary = '', payload = {}, action = null }) {
+  const id = `ev${state.nextEventId++}`;
+  EVENTS[id] = { kicker, summary, payload, action };
+  const pillClass = sev === 'error' ? 'err' : sev;
+  const row = `<tr data-ev="${id}" data-sev="${sev}" class="is-new"><td class="mono">${clockLabel()}</td><td><button type="button" class="row-btn">${escapeHtml(title)}</button></td><td>${escapeHtml(account)}</td><td><span class="pill ${pillClass}">${sev}</span></td></tr>`;
+  $('#event-rows')?.insertAdjacentHTML('afterbegin', row);
+  const recent = $('[data-view-panel="overview"] .events tbody');
+  if (recent) {
+    recent.insertAdjacentHTML('afterbegin', row);
+    const rows = $$('tr', recent);
+    if (rows.length > 5) rows[rows.length - 1].remove();
+  }
+  applySevFilter();
+  recountEvents();
+  return id;
+}
+
+const hhmm = () => clockLabel().slice(0, 5);
+
+function closeTopmost() {
+  if (closeStatusModal()) return;
+  if (closeAnnoForm()) return;
+  closeDrawer();
+}
+
+// Keeps every "now 212 ms" style readout in step with the KPI tiles.
+function syncLatency() {
+  const v = state.values;
+  $$('[data-rule-now="response"]').forEach((el) => (el.textContent = `now ${Math.round(v.response)} ms`));
+  $$('[data-rule-now="active"]').forEach((el) => (el.textContent = `now ${fmtInt(v.active)}`));
+  $$('[data-rule-now="churn"]').forEach((el) => (el.textContent = `now ${v.churn.toFixed(1)}%`));
+  const c = $('#comp-latency');
+  if (c) c.textContent = `${Math.round(v.response)} ms avg`;
+  const s = $('#sp-latency');
+  if (s) s.textContent = `${Math.round(v.response)} ms avg · 24 h`;
+}
+
+/* ---------- ask pulse ---------- */
+
+const fmtPct1 = (v) => `${v.toFixed(1)}%`;
+const fmtKs = (v) => `$${fmtK(v)}`;
+
+function vizBars(items, hot, fmt, label) {
+  const w = 280;
+  const h = 76;
+  const top = 14;
+  const bottom = 12;
+  const gap = 6;
+  const bw = (w - gap * (items.length - 1)) / items.length;
+  const max = Math.max(...items.map((it) => it[1])) || 1;
+  const usable = h - top - bottom;
+  const bars = items
+    .map(([name, v], i) => {
+      const bh = Math.max(2, (v / max) * usable);
+      const x = i * (bw + gap);
+      const y = top + usable - bh;
+      const cx = (x + bw / 2).toFixed(1);
+      return `<rect${i === hot ? ' class="hot"' : ''} x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${bh.toFixed(1)}" rx="2" /><text class="v" x="${cx}" y="${(y - 3).toFixed(1)}" text-anchor="middle">${escapeHtml(fmt(v))}</text><text x="${cx}" y="${h - 2}" text-anchor="middle">${escapeHtml(name)}</text>`;
+    })
+    .join('');
+  const desc = items.map(([name, v]) => `${name} ${fmt(v)}`).join(', ');
+  return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${escapeHtml(label)}: ${escapeHtml(desc)}">${bars}</svg>`;
+}
+
+// Each answer is keyword-routed; the numbers are the ones already on the
+// page (KPIs, revenue, funnel, team) so the assistant never contradicts it.
+const ASK = [
+  {
+    keys: ['churn', 'cancel', 'leav', 'lost', 'left'],
+    num: () => `${state.values.churn.toFixed(1)}%`,
+    label: 'churn · ▼ 0.3 pts vs August',
+    viz: () => vizBars([['Apr', 2.4], ['May', 2.3], ['Jun', 2.2], ['Jul', 2.1], ['Aug', 2.1], ['Sep', 1.8]], 5, fmtPct1, 'Monthly churn'),
+    text: '5 accounts churned this month ($1,433 MRR) against 8 in August. The whole drop is on the Growth plan: 3 Growth accounts left instead of 6, and the two that gave a reason cited cost or in-house tooling, not the product.\nThe likeliest cause is onboarding checklist v2 (Aug 14): week-1 retention for new cohorts rose from 71% to 80%. Starter churn is flat at 2 accounts a month.',
+    follow: ['Which customers are at risk?', 'Where will MRR be in 3 months?', 'Show me the retention cohorts|growth'],
+  },
+  {
+    keys: ['risk', 'at-risk', 'unhappy', 'worried', 'renew'],
+    num: () => '$4,068',
+    label: 'MRR at risk · 2 accounts · 8.4% of MRR',
+    viz: () => vizBars([['Orbit Retail', 3120], ['Northwind', 948]], 0, fmtKs, 'MRR at risk by account'),
+    text: 'Orbit Retail ($3,120, Scale): logins are down 40% month over month, 14 of 48 seats have not been used in 30 days and renewal is in 18 days. Marcus Bell has not opened the last two digests.\nNorthwind ($948, Growth): the September invoice was declined today (insufficient funds). A retry is scheduled for Sep 5 and Tom Okafor has been emailed.',
+    follow: ['Open Orbit Retail|customers', 'Why did churn drop this month?', 'Who are our biggest customers?'],
+  },
+  {
+    keys: ['mrr', 'revenue', 'forecast', 'month', 'arr', 'grow', 'project'],
+    num: () => '$58,070',
+    label: 'projected MRR in 3 months · 6.4% net growth',
+    viz: () => vizBars([['now', 48210], ['Oct', 51300], ['Nov', 54580], ['Dec', 58070]], 3, fmtKs, 'MRR projection'),
+    text: "At today's 1.8% churn and 6.4% net monthly growth, MRR reaches $58,070 in December, $69,950 by March and $101,490 in a year (a $1.22M ARR run-rate).\nEach point of churn costs about 1.75 points of growth: at 2.5% churn the 3-month figure is $56,090 instead. The what-if slider in Revenue lets you try other numbers.",
+    follow: ['Try the what-if forecast|revenue', 'Why did churn drop this month?', 'Which customers are at risk?'],
+  },
+  {
+    keys: ['biggest', 'largest', 'top customer', 'best customer', 'by plan', 'scale', 'whale'],
+    num: () => '$21,410',
+    label: 'from 12 Scale accounts · 44% of MRR',
+    viz: () => vizBars([['Scale', 21410], ['Growth', 18600], ['Starter', 8200]], 0, fmtKs, 'MRR by plan'),
+    text: "Orbit Retail ($3,120), Bramble & Co ($2,275), Atlas Legal ($1,755) and Lumen Labs ($1,738) are the four largest accounts loaded on this page; together they are 18% of MRR.\n12 Scale customers bring 44% of revenue and the other 266 accounts share the remaining $26,800 - so Orbit Retail's at-risk status matters more than one account in 278 suggests.",
+    follow: ['Which customers are at risk?', 'Open the customer list|customers', 'Where will MRR be in 3 months?'],
+  },
+  {
+    keys: ['response', 'latency', 'slow', ' ms', 'api', 'speed', 'fast'],
+    num: () => `${Math.round(state.values.response)} ms`,
+    label: () => `avg. API response · ▲ 18 ms vs last period · alert at ${state.threshold} ms`,
+    viz: () => vizBars([['reports', 341], ['events', 188], ['customers', 142], ['exports', 96]], 0, (v) => `${v} ms`, 'Response time by endpoint'),
+    text: 'The increase is almost entirely /v1/reports/run, which averaged 341 ms today. The rolling average peaked at 291 ms at 08:31 and fired the 250 ms rule once; a second bump came at 08:57 when Bramble & Co pushed 2,140 requests over its rate limit.\nEvery other endpoint is within 5 ms of last week.',
+    follow: ['See the alert rules|alerts', 'How many active users do we have?', 'Which customers are at risk?'],
+  },
+  {
+    keys: ['active', 'users', 'usage', 'engag', 'daily', 'dau', 'feature', 'using'],
+    num: () => fmtInt(state.values.active),
+    label: 'daily active users · ▲ 3.1% vs last period',
+    viz: () => vizBars([['Reports', 8100], ['Alerts', 6200], ['Exports', 4700], ['API', 3300], ['Webhooks', 1900]], 0, fmtK, 'Users by feature'),
+    text: 'Reports is the most-used feature (8,100 users today) and Alerts is growing fastest, up 22% since the rules builder shipped.\nWebhooks are used by 1,900 accounts, mostly on Scale - that is the group affected by this morning\'s delivery delays, which is why the incident is on the public status page.',
+    follow: ['Why is the API slower?', 'Who are our biggest customers?', 'How is the signup funnel doing?'],
+  },
+  {
+    keys: ['signup', 'sign up', 'sign-up', 'funnel', 'conver', 'trial', 'visit', 'activat'],
+    num: () => '4.2%',
+    label: 'visitor → signup · 412 signups in 30 days',
+    viz: () => vizBars([['Visited', 9860], ['Signed up', 412], ['Activated', 186], ['Paid', 19]], 3, fmtInt, 'Conversion funnel'),
+    text: '9,860 visitors, 412 signups (4.2%), 186 activated (45.1%) and 19 paid (10.2%) - $3,120 of new MRR. The biggest leak is activation: 226 signups never connected a data source, and 140 of them last saw an empty dashboard.\nThe Growth view lists the top blocker at each stage with a one-click task.',
+    follow: ['Open the funnel|growth', 'Why did churn drop this month?', 'Where will MRR be in 3 months?'],
+  },
+  {
+    keys: ['seat', 'bill', 'invoice', 'plan', 'upgrade', 'cost', 'pay', 'price'],
+    num: () => `${$$('#team-rows tr').length} / ${PLANS[billing.plan].seats}`,
+    label: () => `seats used · ${PLANS[billing.plan].name} plan · ${fmtMoney(billing.bill)} / mo`,
+    viz: () => {
+      const used = $$('#team-rows tr').length;
+      const cap = PLANS[billing.plan].seats;
+      return vizBars([['Used', used], ['Free', Math.max(0, cap - used)]], 0, fmtInt, 'Seats');
+    },
+    text: () =>
+      billing.plan === 'scale'
+        ? `Acme Robotics is on Scale: 25 seats at $65, $1,625 a month, next invoice Oct 2. ${$$('#team-rows tr').length} seats are in use, so there is room for the Q4 hires without touching the plan.`
+        : `Acme Robotics has ${$$('#team-rows tr').length} of 14 Growth seats filled ($79 each, $1,106 a month, next invoice Oct 2). At the current hiring pace of 2 seats a month you run out in November.\nScale is 25 seats at $65 - $1,625 a month - and is cheaper than Growth once you pass 20 seats.`,
+    follow: ['Open Team & billing|team', 'Who are our biggest customers?', 'Where will MRR be in 3 months?'],
+  },
+];
+
+const ASK_DEFAULT = {
+  text: 'I can answer questions about churn, MRR and forecasts, active users, API response time, at-risk or biggest customers, the signup funnel, and your plan and seats. Try one of these:',
+  follow: ['Why did churn drop this month?', 'Which customers are at risk?', 'Why is the API slower?'],
+};
+
+function routeAsk(q) {
+  const s = ` ${q.toLowerCase()} `;
+  let best = null;
+  let bestScore = 0;
+  ASK.forEach((a) => {
+    const score = a.keys.reduce((n, k) => n + (s.includes(k) ? 1 : 0), 0);
+    if (score > bestScore) {
+      best = a;
+      bestScore = score;
+    }
+  });
+  return best;
+}
+
+const val = (v) => (typeof v === 'function' ? v() : v);
+
+let askTimer = 0;
+function ask(question) {
+  const panel = $('#ask');
+  const q = question.trim();
+  if (!panel || !q) {
+    $('#ask-input')?.focus();
+    return;
+  }
+  $('#ask-input').value = q;
+  panel.classList.add('is-thinking');
+  $('#ask-thinking').setAttribute('aria-hidden', 'false');
+  clearTimeout(askTimer);
+  askTimer = setTimeout(() => {
+    const a = routeAsk(q);
+    $('#ask-q').textContent = q;
+    const stat = $('#ask-stat');
+    const viz = $('#ask-viz');
+    if (a) {
+      stat.hidden = false;
+      $('#ask-num').textContent = val(a.num);
+      $('#ask-label').textContent = val(a.label);
+      viz.innerHTML = val(a.viz);
+      viz.hidden = false;
+      $('#ask-text').textContent = val(a.text);
+    } else {
+      stat.hidden = true;
+      viz.hidden = true;
+      $('#ask-text').textContent = ASK_DEFAULT.text;
+    }
+    $('#ask-follow').innerHTML = (a || ASK_DEFAULT).follow
+      .map((f) => {
+        const [label, view] = f.split('|');
+        return view
+          ? `<button type="button" class="chip go" data-ask-goto="${view}">${escapeHtml(label)} →</button>`
+          : `<button type="button" class="chip" data-ask="${escapeHtml(label)}">${escapeHtml(label)}</button>`;
+      })
+      .join('');
+    panel.classList.remove('is-thinking');
+    $('#ask-thinking').setAttribute('aria-hidden', 'true');
+    $('#ask-answer').hidden = false;
+  }, 650);
+}
+
+function initAsk() {
+  const form = $('#ask-form');
+  if (!form) return;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    ask($('#ask-input').value);
+  });
+  $('#ask').addEventListener('click', (e) => {
+    const chip = e.target.closest('[data-ask], [data-ask-goto]');
+    if (!chip) return;
+    if (chip.dataset.askGoto) {
+      switchView(chip.dataset.askGoto);
+      const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    } else ask(chip.dataset.ask);
+  });
+}
+
+/* ---------- chart annotations ---------- */
+
+// days = days before TODAY, so a note stays on the same date whichever
+// range or metric is shown.
+const annos = [
+  { id: 1, days: 19, text: 'Onboarding checklist v2 rolled out' },
+  { id: 2, days: 7, text: 'Pricing page redesign shipped' },
+];
+let annoSeq = 3;
+let annoDays = -1;
+
+function annoLabel(days) {
+  if (days === 0) return 'today';
+  const d = new Date(TODAY);
+  d.setDate(d.getDate() - days);
+  return `${MONTHS[d.getMonth()]} ${d.getDate()}`;
+}
+
+function annoAt(idx, n) {
+  const days = n - 1 - idx;
+  return annos.find((a) => a.days === days)?.text || '';
+}
+
+function renderAnnotations() {
+  const layer = $('#anno-layer');
+  const list = $('#anno-list');
+  if (!layer || !list) return;
+  const vals = state.series[currentRange()];
+  if (!vals) return;
+  const n = vals.length;
+  const b = bounds(vals);
+  layer.innerHTML = annos
+    .filter((a) => a.days <= n - 1)
+    .map((a) => {
+      const i = n - 1 - a.days;
+      const x = xAt(i, n);
+      const y = yAt(vals[i], b);
+      return `<g class="anno" data-anno="${a.id}"><title>${escapeHtml(annoLabel(a.days))} · ${escapeHtml(a.text)}</title><line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${Y0}" y2="${Y1}" /><rect x="${(x - 3).toFixed(1)}" y="${Y0 - 10}" width="6" height="6" rx="1.5" /><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4" /></g>`;
+    })
+    .join('');
+  list.innerHTML = annos
+    .slice()
+    .sort((p, q) => q.days - p.days)
+    .map(
+      (a) =>
+        `<li data-anno="${a.id}"${a.days <= n - 1 ? '' : ' class="is-off" title="Outside the selected range"'}><b class="mono">${annoLabel(a.days)}</b><em>${escapeHtml(a.text)}</em><button type="button" class="anno-del" data-anno-del="${a.id}" aria-label="Delete note for ${annoLabel(a.days)}">×</button></li>`,
+    )
+    .join('');
+  $('#anno-count').textContent = String(annos.length);
+}
+
+function openAnnoForm(idx) {
+  const form = $('#anno-form');
+  const n = (state.series[currentRange()] || []).length;
+  if (!form || !n) return;
+  annoDays = n - 1 - Math.max(0, Math.min(n - 1, idx));
+  $('#anno-date').textContent = annoLabel(annoDays);
+  const existing = annos.find((a) => a.days === annoDays);
+  const input = $('#anno-text');
+  input.value = existing ? existing.text : '';
+  form.querySelector('[type="submit"]').textContent = existing ? 'Update note' : 'Add note';
+  form.hidden = false;
+  input.focus({ preventScroll: true });
+}
+
+function closeAnnoForm() {
+  const form = $('#anno-form');
+  if (!form || form.hidden) return false;
+  form.hidden = true;
+  annoDays = -1;
+  $('#chart-wrap')?.focus({ preventScroll: true });
+  return true;
+}
+
+function setHotAnno(id, on) {
+  $$(`[data-anno="${id}"]`).forEach((el) => el.classList.toggle('is-hot', on));
+}
+
+function initAnnotations() {
+  const svg = $('#chart-svg');
+  const wrap = $('#chart-wrap');
+  const form = $('#anno-form');
+  if (!svg || !wrap || !form) return;
+  svg.addEventListener('click', (e) => {
+    const rect = svg.getBoundingClientRect();
+    const n = (state.series[currentRange()] || []).length;
+    if (!n || !rect.width) return;
+    const usable = ((e.clientX - rect.left) / rect.width) * 600 - X0;
+    openAnnoForm(Math.round((usable / (X1 - X0)) * (n - 1)));
+  });
+  wrap.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' || state.tipIdx < 0) return;
+    e.preventDefault();
+    openAnnoForm(state.tipIdx);
+  });
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const text = $('#anno-text').value.trim();
+    if (!text) {
+      $('#anno-text').focus();
+      return;
+    }
+    const existing = annos.find((a) => a.days === annoDays);
+    if (existing) existing.text = text;
+    else annos.push({ id: annoSeq++, days: annoDays, text });
+    const when = annoLabel(annoDays);
+    renderAnnotations();
+    form.hidden = true;
+    annoDays = -1;
+    toast(existing ? `Note for ${when} updated.` : `Note added to ${when}. It shows on every metric and range that includes that day.`);
+  });
+  $('#anno-cancel').addEventListener('click', closeAnnoForm);
+  $('#anno-list').addEventListener('click', (e) => {
+    const del = e.target.closest('[data-anno-del]');
+    if (!del) return;
+    const id = Number(del.dataset.annoDel);
+    const i = annos.findIndex((a) => a.id === id);
+    if (i < 0) return;
+    const [gone] = annos.splice(i, 1);
+    renderAnnotations();
+    toast(`Note for ${annoLabel(gone.days)} deleted.`);
+  });
+  // Hovering a marker highlights its list entry and vice versa.
+  const panel = $('.panel.chart');
+  panel.addEventListener('pointerover', (e) => {
+    const el = e.target.closest('[data-anno]');
+    if (el) setHotAnno(el.dataset.anno, true);
+  });
+  panel.addEventListener('pointerout', (e) => {
+    const el = e.target.closest('[data-anno]');
+    if (el) setHotAnno(el.dataset.anno, false);
+  });
+  // The range buttons swap the visible series; markers must follow.
+  $$('[data-range]').forEach((b) => b.addEventListener('click', renderAnnotations));
+  renderAnnotations();
+}
+
+/* ---------- growth: funnel ---------- */
+
+const STAGES = {
+  visited: {
+    kicker: 'Visited · 9,860',
+    text: 'Visits split 4,410 organic, 3,120 paid search and 2,330 direct or referral. The pricing page takes 38% of them and /docs another 27%.',
+    blocker: '61% of pricing-page visitors leave without scrolling down to the Starter tier, which is the plan most of them would qualify for.',
+    action: 'Move Starter to the top of pricing',
+  },
+  signup: {
+    kicker: 'Signed up · 412 · 4.2% of visitors',
+    text: '412 signups in 30 days: 61% from the pricing page, 24% from docs and 15% from referrals. The median visitor signs up on their second visit, two days after the first.',
+    blocker: 'The signup form asks for company size and a phone number before the email is confirmed. 38% of people who start the form abandon on that step.',
+    action: 'Make phone number optional',
+  },
+  activated: {
+    kicker: 'Activated · 186 · 45.1% of signups',
+    text: '186 accounts connected a data source within 7 days - Stripe first for 58% of them, Segment for 24%. Median time from signup to first chart is 26 minutes.',
+    blocker: '226 signups never connected data. 140 of them are still on trial with an empty dashboard as the last thing they saw, and none received a follow-up.',
+    action: 'Send the "connect Stripe in 2 minutes" email',
+  },
+  paid: {
+    kicker: 'Paid · 19 · $3,120 new MRR',
+    text: '19 converted: 11 Starter ($1,089), 7 Growth ($1,519) and 1 Scale ($512). Median time from activation to first payment is 9 days, well inside the 14-day trial.',
+    blocker: '167 activated accounts are still on trial and 71% of them have never opened the Plans page. The trial-ending email goes out on day 13 with no link to it.',
+    action: 'Add "Choose a plan" to the day-10 email',
+  },
+};
+const STAGE_TASK = {
+  visited: 'Task created for the growth team: reorder pricing tiers, Starter first. Owner: Nadia Reyes, due Sep 9.',
+  signup: 'Task created: drop the phone number requirement from signup. Owner: Chen Wei, due Sep 5.',
+  activated: 'Email queued to 140 trial accounts with no data source. Sends tomorrow at 09:00 in each account\'s timezone.',
+  paid: 'Task created: add a Plans link to the day-10 trial email. Owner: Nadia Reyes, due Sep 8.',
+};
+const stageDone = new Set();
+
+function showStage(name) {
+  const s = STAGES[name];
+  if (!s) return;
+  $$('[data-stage].stage').forEach((b) => {
+    const on = b.dataset.stage === name;
+    b.classList.toggle('is-active', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
+  $('#stage-kicker').textContent = s.kicker;
+  $('#stage-text').textContent = s.text;
+  $('#stage-blocker').textContent = s.blocker;
+  const btn = $('#stage-action');
+  btn.dataset.stage = name;
+  const done = stageDone.has(name);
+  btn.textContent = done ? 'Task created ✓' : s.action;
+  btn.disabled = done;
+  btn.classList.toggle('is-done', done);
+}
+
+function initFunnel() {
+  if (!$('#stage-detail')) return;
+  $$('[data-stage].stage').forEach((b) => b.addEventListener('click', () => showStage(b.dataset.stage)));
+  $('#stage-action').addEventListener('click', (e) => {
+    const name = e.currentTarget.dataset.stage;
+    stageDone.add(name);
+    showStage(name);
+    toast(STAGE_TASK[name]);
+  });
+}
+
+/* ---------- growth: cohorts ---------- */
+
+// Weekly signup cohorts (Mondays) and % still active in each later week.
+// The five newest cohorts add up to the 412 signups in the funnel.
+const COHORTS = [
+  { label: 'Jul 13', size: 86, weeks: [100, 71, 60, 53, 48, 45, 43, 42] },
+  { label: 'Jul 20', size: 91, weeks: [100, 72, 61, 54, 49, 46, 44] },
+  { label: 'Jul 27', size: 89, weeks: [100, 74, 63, 56, 50, 47] },
+  { label: 'Aug 3', size: 94, weeks: [100, 76, 65, 57, 52] },
+  { label: 'Aug 10', size: 101, weeks: [100, 77, 66, 58] },
+  { label: 'Aug 17', size: 97, weeks: [100, 79, 68] },
+  { label: 'Aug 24', size: 88, weeks: [100, 80] },
+  { label: 'Aug 31', size: 32, weeks: [100] },
+];
+
+function initCohorts() {
+  const body = $('#cohort-rows');
+  if (!body) return;
+  body.innerHTML = COHORTS.map((c, ci) => {
+    const cells = [];
+    for (let w = 0; w < 8; w++) {
+      const v = c.weeks[w];
+      cells.push(
+        v === undefined
+          ? '<td class="na" aria-label="Not yet reached">·</td>'
+          : `<td><button type="button" class="cell" data-cohort="${ci}" data-week="${w}" aria-pressed="false" style="--v:${(v / 100).toFixed(2)}" aria-label="${c.label} cohort, week ${w}: ${v}%">${v}%</button></td>`,
+      );
+    }
+    return `<tr><td class="label">${c.label}</td><td class="size">${c.size}</td>${cells.join('')}</tr>`;
+  }).join('');
+  body.addEventListener('click', (e) => {
+    const cell = e.target.closest('[data-cohort]');
+    if (!cell) return;
+    $$('#cohort-rows .cell').forEach((b) => b.setAttribute('aria-pressed', String(b === cell)));
+    const c = COHORTS[Number(cell.dataset.cohort)];
+    const w = Number(cell.dataset.week);
+    const pct = c.weeks[w];
+    const people = Math.round((c.size * pct) / 100);
+    const oldest = COHORTS[0].weeks[w];
+    let compare = '';
+    if (w > 0 && c !== COHORTS[0]) {
+      const diff = pct - oldest;
+      compare = diff === 0 ? ` Same as the Jul 13 cohort at week ${w}.` : ` That is ${Math.abs(diff)} pts ${diff > 0 ? 'better' : 'worse'} than the Jul 13 cohort (${oldest}%) at the same week.`;
+    } else if (w === 0) compare = ' Week 0 is the signup week itself.';
+    $('#cohort-detail').textContent = `${c.label} cohort · week ${w}: ${pct}% of ${c.size} signups (${people} people) still active.${compare}`;
+  });
+}
+
+/* ---------- alerts: rules ---------- */
+
+const RULE_META = {
+  response: { name: 'Avg. response', unit: 'ms', now: () => `now ${Math.round(state.values.response)} ms` },
+  active: { name: 'Active users', unit: 'users', now: () => `now ${fmtInt(state.values.active)}` },
+  mrr: { name: 'MRR', unit: '$', now: () => `now ${fmtMoney(state.values.mrr)}` },
+  churn: { name: 'Churn', unit: '%', now: () => `now ${state.values.churn.toFixed(1)}%` },
+  errors: { name: 'Error rate', unit: '%', now: () => 'now 0.4%' },
+  payments: { name: 'Failed payments', unit: 'failures', now: () => 'now 1 today' },
+};
+let ruleSeq = 4;
+
+function ruleUnit() {
+  const cond = $('#rule-cond').value;
+  const m = RULE_META[$('#rule-metric').value];
+  $('#rule-unit').textContent = cond === 'drops' || cond === 'rises' ? '%' : m.unit;
+}
+
+function ruleChannels(li) {
+  return li.querySelector('.rule-main small').textContent.split(' · ')[0];
+}
+
+function recountRules() {
+  const on = $$('#rules .rule[data-enabled="true"]').length;
+  $('#rules-count').textContent = String(on);
+  VIEWS.alerts[1] = `${on} rule${on === 1 ? '' : 's'} · status.pulse.app`;
+  if (state.view === 'alerts') $('#view-sub').textContent = VIEWS.alerts[1];
+}
+
+function ruleTitle(metric, cond, threshold, windowLabel) {
+  const m = RULE_META[metric];
+  const t = threshold.toLocaleString('en-US');
+  if (cond === 'drops' || cond === 'rises') return `${m.name} ${cond} by ${t}% over ${windowLabel}`;
+  const value = m.unit === '$' ? `$${t}` : m.unit === '%' ? `${t}%` : `${t} ${m.unit}`;
+  return `${m.name} ${cond === 'above' ? '>' : '<'} ${value} for ${windowLabel}`;
+}
+
+function initRules() {
+  const list = $('#rules');
+  const form = $('#rule-form');
+  if (!list || !form) return;
+  list.addEventListener('click', (e) => {
+    const li = e.target.closest('.rule');
+    if (!li) return;
+    const title = li.querySelector('.rule-main b').textContent;
+    if (e.target.closest('[data-rule-toggle]')) {
+      const sw = e.target.closest('[data-rule-toggle]');
+      const on = li.dataset.enabled !== 'true';
+      li.dataset.enabled = String(on);
+      sw.setAttribute('aria-checked', String(on));
+      recountRules();
+      toast(on ? `Rule enabled: ${title}.` : `Rule paused: ${title}. It will not notify anyone until you turn it back on.`);
+    } else if (e.target.closest('[data-rule-test]')) {
+      const channels = ruleChannels(li);
+      const now = li.querySelector('[data-rule-now]')?.textContent || '';
+      toast(`Test alert sent via ${channels}: "${title}" (${now}). Check your inbox.`);
+      addEvent({
+        title: `Test alert: ${title}`,
+        account: 'Acme Robotics',
+        kicker: 'Alerts',
+        summary: `Riya Menon sent a test of the rule "${title}" via ${channels}. Nothing is wrong - this was a manual test from the Alerts page.`,
+        payload: { rule: title, channels: channels.split(' · '), test: true, current: now.replace('now ', '') },
+      });
+    } else if (e.target.closest('[data-rule-delete]')) {
+      li.classList.add('is-confirming');
+      li.querySelector('.confirm').hidden = false;
+      li.querySelector('[data-rule-confirm]').focus();
+    } else if (e.target.closest('[data-rule-keep]')) {
+      li.classList.remove('is-confirming');
+      li.querySelector('.confirm').hidden = true;
+      li.querySelector('[data-rule-delete]').focus();
+    } else if (e.target.closest('[data-rule-confirm]')) {
+      li.remove();
+      recountRules();
+      toast(`Rule deleted: ${title}.`);
+    }
+  });
+
+  $('#rule-metric').addEventListener('change', ruleUnit);
+  $('#rule-cond').addEventListener('change', ruleUnit);
+  ruleUnit();
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const hint = $('#rule-hint');
+    const metric = $('#rule-metric').value;
+    const cond = $('#rule-cond').value;
+    const threshold = Number($('#rule-threshold').value);
+    const windowLabel = $('#rule-window').value;
+    if (!$('#rule-threshold').value || !Number.isFinite(threshold) || threshold <= 0) {
+      hint.textContent = 'Enter a threshold above 0.';
+      hint.hidden = false;
+      $('#rule-threshold').focus();
+      return;
+    }
+    const channels = [];
+    if ($('#rule-ch-email').checked) channels.push('Email');
+    if ($('#rule-ch-slack').checked && !$('#rule-ch-slack').disabled) channels.push('Slack #pulse-alerts');
+    if ($('#rule-ch-webhook').checked) channels.push('Webhook');
+    if (!channels.length) {
+      hint.textContent = 'Pick at least one channel to notify.';
+      hint.hidden = false;
+      return;
+    }
+    hint.hidden = true;
+    const title = ruleTitle(metric, cond, threshold, windowLabel);
+    const id = `r${ruleSeq++}`;
+    list.insertAdjacentHTML(
+      'beforeend',
+      `<li class="rule is-new" data-rule="${id}" data-enabled="true">
+        <div class="rule-main"><b>${escapeHtml(title)}</b><small>${channels.join(' · ')} · never fired · <em class="mono" data-rule-now="${metric}">${RULE_META[metric].now()}</em></small></div>
+        <div class="rule-actions">
+          <button type="button" class="switch" role="switch" aria-checked="true" aria-label="Rule enabled" data-rule-toggle><i></i></button>
+          <button type="button" class="btn ghost" data-rule-test>Test</button>
+          <button type="button" class="btn ghost" data-rule-delete>Delete</button>
+        </div>
+        <div class="confirm" hidden><span>Delete this rule?</span><button type="button" class="btn ghost danger-btn" data-rule-confirm>Yes, delete</button><button type="button" class="btn ghost" data-rule-keep>Keep</button></div>
+      </li>`,
+    );
+    $('#rule-threshold').value = '';
+    recountRules();
+    toast(`Rule added: ${title}. Notifying ${channels.join(' and ')}.`);
+  });
+
+  // Settings' response-time threshold and rule r1 are the same number.
+  $('#settings-save')?.addEventListener('click', () => {
+    const b = $('[data-rule="r1"] .rule-main b');
+    if (b) b.textContent = `Avg. response > ${state.threshold} ms for 5 min`;
+  });
+  recountRules();
+}
+
+/* ---------- alerts: public status page (staff side + preview) ---------- */
+
+const status = { resolved: false, subscribers: 143, resolvedAt: '' };
+
+function timelineItem(kind, text) {
+  return `<li class="is-new"><span class="mono">${hhmm()}</span><span><b>${kind}</b> — ${escapeHtml(text)}</span></li>`;
+}
+
+function initStatus() {
+  const panel = $('.status-panel');
+  if (!panel) return;
+  $('#st-latency').addEventListener('click', (e) => {
+    const sw = e.currentTarget;
+    const on = sw.getAttribute('aria-checked') !== 'true';
+    sw.setAttribute('aria-checked', String(on));
+    $('#comp-latency').hidden = !on;
+    $('#sp-latency').hidden = !on;
+    toast(on ? 'Customers now see the 24-hour API response time on status.pulse.app.' : 'API response time hidden from the public status page.');
+  });
+  $('#inc-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = $('#inc-text');
+    const text = input.value.trim();
+    if (!text) {
+      input.focus();
+      return;
+    }
+    $('#inc-timeline').insertAdjacentHTML('beforeend', timelineItem(status.resolved ? 'Post-mortem' : 'Update', text));
+    input.value = '';
+    toast(`Update posted to status.pulse.app and emailed to ${status.subscribers} subscribers.`);
+  });
+  $('#inc-resolve').addEventListener('click', (e) => {
+    if (status.resolved) return;
+    status.resolved = true;
+    status.resolvedAt = hhmm();
+    $('#inc-timeline').insertAdjacentHTML('beforeend', timelineItem('Resolved', 'Deliveries to every endpoint have been normal for 15 minutes. The 41 queued events for the affected endpoint were delivered in order.'));
+    $('#incident').dataset.state = 'resolved';
+    const pill = $('#inc-pill');
+    pill.className = 'pill ok';
+    pill.textContent = 'Resolved';
+    const comp = $('#comp-webhooks');
+    comp.className = 'pill ok';
+    comp.textContent = 'Operational';
+    const b = e.currentTarget;
+    b.disabled = true;
+    b.classList.add('is-done');
+    b.textContent = 'Resolved ✓';
+    toast(`Incident resolved at ${status.resolvedAt}. Webhooks show Operational and ${status.subscribers} subscribers were emailed.`);
+  });
+  $$('[data-status-preview]').forEach((b) => b.addEventListener('click', () => openStatusModal(b)));
+  $$('[data-modal-close]').forEach((b) => b.addEventListener('click', () => closeStatusModal()));
+  $('#sp-subscribe').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = $('#sp-email');
+    const email = input.value.trim();
+    const note = $('#sp-sub-note');
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    note.classList.toggle('is-err', !ok);
+    note.textContent = ok ? `Subscribed. ${email} will get an email for every incident update and resolution. (${status.subscribers + 1} subscribers)` : 'Enter a valid email address, like you@company.com.';
+    note.hidden = false;
+    if (ok) {
+      status.subscribers += 1;
+      input.value = '';
+    } else input.focus();
+  });
+}
+
+let modalTimer = 0;
+let modalReturn = null;
+function openStatusModal(trigger) {
+  const modal = $('#status-modal');
+  if (!modal) return;
+  // Mirror the staff-side state into the customer view.
+  const banner = $('#sp-banner');
+  banner.dataset.state = status.resolved ? 'ok' : 'warn';
+  banner.textContent = status.resolved ? 'All systems operational' : 'Some systems are degraded';
+  const wh = $('#sp-webhooks');
+  wh.className = status.resolved ? 'pill ok' : 'pill warn';
+  wh.textContent = status.resolved ? 'Operational' : 'Degraded';
+  $('#sp-inc-heading').textContent = status.resolved ? `Resolved today at ${status.resolvedAt}` : 'Active incident';
+  $('#sp-timeline').innerHTML = $('#inc-timeline').innerHTML.replace(/ class="is-new"/g, '');
+  $('#sp-sub-note').hidden = true;
+  syncLatency();
+  modalReturn = trigger || null;
+  clearTimeout(modalTimer);
+  modal.hidden = false;
+  requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('is-open')));
+  $('#status-modal-close').focus({ preventScroll: true });
+}
+
+function closeStatusModal() {
+  const modal = $('#status-modal');
+  if (!modal || modal.hidden) return false;
+  modal.classList.remove('is-open');
+  clearTimeout(modalTimer);
+  modalTimer = setTimeout(() => (modal.hidden = true), 260);
+  if (modalReturn && modalReturn.isConnected) modalReturn.focus({ preventScroll: true });
+  modalReturn = null;
+  return true;
+}
+
+/* ---------- team & billing ---------- */
+
+const PLANS = {
+  growth: { name: 'Growth', seats: 14, price: 79 },
+  scale: { name: 'Scale', seats: 25, price: 65 },
+};
+const billing = { plan: 'growth', bill: 1106 };
+
+function memberName(tr) {
+  return tr.querySelector('td b').textContent.trim();
+}
+
+function renderBilling() {
+  const p = PLANS[billing.plan];
+  const used = $$('#team-rows tr').length;
+  const extra = Math.max(0, used - p.seats);
+  const included = p.seats * p.price;
+  const overage = extra * p.price;
+  billing.bill = included + overage;
+  $('#team-count').textContent = String(used);
+  $('#team-of').textContent = `of ${p.seats} seats`;
+  $('#seat-count').textContent = `${used} / ${p.seats} seats`;
+  $('#seat-fill').style.transform = `scaleX(${Math.min(1, used / p.seats).toFixed(3)})`;
+  $('.meter').classList.toggle('is-full', used >= p.seats);
+  const badge = $('#plan-badge');
+  badge.textContent = p.name;
+  badge.className = `plan ${billing.plan}`;
+  $('#seat-price').textContent = `$${p.price} / seat / mo`;
+  $('#bill-now').textContent = `${fmtMoney(included)} / mo`;
+  $('#overage-row').hidden = extra === 0;
+  $('#overage').textContent = `+${fmtMoney(overage)}`;
+  $('#bill-next').textContent = fmtMoney(included + overage);
+  const free = p.seats - used;
+  $('#plan-note').textContent =
+    extra > 0
+      ? `${extra} seat${extra === 1 ? '' : 's'} over plan. Extra seats bill at $${p.price} each on Oct 2${billing.plan === 'growth' ? ', or upgrade to Scale for 25 seats at $65' : ''}.`
+      : `${free} seat${free === 1 ? '' : 's'} free. Pending invites reserve a seat until they are accepted or revoked.`;
+  $('#org-plan').textContent = `${p.name} plan · ${p.seats} seats`;
+  VIEWS.team[1] = `${used} members · ${p.name} plan`;
+  if (state.view === 'team') $('#view-sub').textContent = VIEWS.team[1];
+}
+
+function initTeam() {
+  const rows = $('#team-rows');
+  const form = $('#invite-form');
+  if (!rows || !form) return;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = $('#invite-email');
+    const email = input.value.trim().toLowerCase();
+    const role = $('#invite-role').value;
+    const hint = $('#invite-hint');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      hint.textContent = 'Enter a work email, like name@acmerobotics.com.';
+      hint.hidden = false;
+      input.focus();
+      return;
+    }
+    if ($(`#team-rows tr[data-member="${CSS.escape(email)}"]`)) {
+      hint.textContent = `${email} is already on the team.`;
+      hint.hidden = false;
+      input.focus();
+      return;
+    }
+    const options = ['Admin', 'Analyst', 'Viewer'].map((r) => `<option${r === role ? ' selected' : ''}>${r}</option>`).join('');
+    rows.insertAdjacentHTML(
+      'beforeend',
+      `<tr data-member="${escapeHtml(email)}" class="is-pending is-new"><td><b>${escapeHtml(email)}</b><small>Invited · pending</small></td><td><label class="select"><span class="sr-only">Role for ${escapeHtml(email)}</span><select data-role>${options}</select></label></td><td class="mono">invite sent</td><td><button type="button" class="btn ghost" data-resend>Resend</button> <button type="button" class="btn ghost" data-remove>Revoke</button><span class="confirm" hidden>Revoke? <button type="button" class="btn ghost danger-btn" data-remove-confirm>Yes</button><button type="button" class="btn ghost" data-remove-keep>Keep</button></span></td></tr>`,
+    );
+    input.value = '';
+    renderBilling();
+    const p = PLANS[billing.plan];
+    const used = $$('#team-rows tr').length;
+    if (used > p.seats) {
+      hint.textContent = `That takes you to ${used} of ${p.seats} seats. The extra seat bills at $${p.price} on Oct 2${billing.plan === 'growth' ? ' - or upgrade to Scale for 25 seats' : ''}.`;
+      hint.hidden = false;
+    } else hint.hidden = true;
+    toast(`Invite sent to ${email} as ${role}. It expires in 7 days and reserves a seat until then.`);
+    addEvent({
+      title: `Team invite sent (${role})`,
+      account: 'Acme Robotics',
+      kicker: 'Team',
+      summary: `Riya Menon invited ${email} to the Acme Robotics workspace as ${role}. The invite expires in 7 days.`,
+      payload: { invitee: email, role: role.toLowerCase(), expires_in_days: 7, seats_used: used, seats_in_plan: p.seats },
+    });
+  });
+
+  rows.addEventListener('change', (e) => {
+    const sel = e.target.closest('[data-role]');
+    if (!sel) return;
+    const tr = sel.closest('tr');
+    toast(`${memberName(tr)} is now ${sel.value === 'Admin' ? 'an' : 'a'} ${sel.value}.`);
+  });
+
+  rows.addEventListener('click', (e) => {
+    const tr = e.target.closest('tr');
+    if (!tr) return;
+    const td = tr.lastElementChild;
+    if (e.target.closest('[data-remove]')) {
+      td.classList.add('is-confirming');
+      td.querySelector('.confirm').hidden = false;
+      td.querySelector('[data-remove-confirm]').focus();
+    } else if (e.target.closest('[data-remove-keep]')) {
+      td.classList.remove('is-confirming');
+      td.querySelector('.confirm').hidden = true;
+      td.querySelector('[data-remove]').focus();
+    } else if (e.target.closest('[data-remove-confirm]')) {
+      const name = memberName(tr);
+      const pending = tr.classList.contains('is-pending');
+      tr.remove();
+      renderBilling();
+      $('#invite-hint').hidden = true;
+      toast(pending ? `Invite to ${name} revoked. The seat is free again.` : `${name} removed from the workspace. Their seat is free again.`);
+    } else if (e.target.closest('[data-resend]')) {
+      const b = e.target.closest('[data-resend]');
+      b.disabled = true;
+      b.textContent = 'Sent ✓';
+      toast(`Invite re-sent to ${memberName(tr)}.`);
+    }
+  });
+
+  $('#upgrade').addEventListener('click', () => {
+    $('#upgrade-confirm').hidden = false;
+    $('#upgrade-yes').focus();
+  });
+  $('#upgrade-no').addEventListener('click', () => {
+    $('#upgrade-confirm').hidden = true;
+    $('#upgrade').focus();
+  });
+  $('#upgrade-yes').addEventListener('click', () => {
+    billing.plan = 'scale';
+    $('#upgrade-confirm').hidden = true;
+    const b = $('#upgrade');
+    b.disabled = true;
+    b.classList.add('is-done');
+    b.textContent = 'On Scale ✓ · 25 seats at $65';
+    renderBilling();
+    $('#invite-hint').hidden = true;
+    toast('Upgraded to Scale. $519 charged to the card ending 4242; 25 seats are available now and the next invoice is $1,625 on Oct 2.');
+    addEvent({
+      title: 'Subscription upgraded → Scale',
+      account: 'Acme Robotics',
+      kicker: 'Billing',
+      summary: 'Riya Menon moved Acme Robotics from Growth to Scale. A prorated $519 was charged to the card ending 4242; 25 seats are now licensed at $65 each.',
+      payload: { from: 'growth', to: 'scale', seats: 25, proration: 519, card: '4242', status: 'succeeded' },
+    });
+  });
+  renderBilling();
+}
+
+/* ---------- integrations ---------- */
+
+const INTS = {
+  slack: {
+    on: 'connected just now · #pulse-alerts',
+    off: '—',
+    connect: 'Slack connected. Every alert rule can now post to #pulse-alerts.',
+    disconnect: 'Slack disconnected. Rules that used Slack fall back to email.',
+  },
+  stripe: {
+    on: 'synced just now · 278 customers',
+    off: 'billing sync paused',
+    connect: 'Stripe reconnected. Invoices, payments and MRR movement are syncing again.',
+    disconnect: 'Stripe disconnected. Billing events stop until it is reconnected - see the notice in Events.',
+  },
+  hubspot: {
+    on: 'synced just now · 278 contacts, 41 open deals',
+    off: '—',
+    connect: 'HubSpot connected. "Open in CRM" on a customer now jumps to their record, and health scores sync back hourly.',
+    disconnect: 'HubSpot disconnected. Health scores stop syncing to contacts.',
+  },
+  segment: {
+    on: 'receiving events · 1.2M this month',
+    off: '—',
+    connect: 'Segment connected. The funnel and cohorts now use page views and in-app events from your own tracking plan.',
+    disconnect: 'Segment disconnected. The funnel falls back to the built-in tracker.',
+  },
+};
+
+function connected(name) {
+  return $(`[data-int="${name}"]`)?.dataset.connected === 'true';
+}
+
+function applyIntegrations() {
+  const slack = connected('slack');
+  const cb = $('#rule-ch-slack');
+  if (cb) {
+    cb.disabled = !slack;
+    if (!slack) cb.checked = false;
+    $('#rule-slack-hint').hidden = slack;
+    $('#rule-ch-slack-label').classList.toggle('is-off', !slack);
+  }
+  const banner = $('#events-banner');
+  if (banner) banner.hidden = connected('stripe');
+  state.crm = connected('hubspot');
+  const crmBtn = $('#c-secondary');
+  if (crmBtn) crmBtn.textContent = state.crm ? 'Open in HubSpot' : 'Open in CRM';
+  const funnelNote = $('.funnel-panel h2 small');
+  if (funnelNote) funnelNote.textContent = `last 30 days · ${connected('segment') ? 'via Segment' : 'built-in tracker'} · select a stage to see what blocks the next one`;
+  const n = $$('[data-int][data-connected="true"]').length;
+  $('#int-count').textContent = String(n);
+  VIEWS.integrations[1] = `${n} of 4 connected`;
+  if (state.view === 'integrations') $('#view-sub').textContent = VIEWS.integrations[1];
+}
+
+function initIntegrations() {
+  const cards = $$('[data-int]');
+  if (!cards.length) return;
+  cards.forEach((card) => {
+    const name = card.dataset.int;
+    const meta = INTS[name];
+    const btn = card.querySelector('[data-int-toggle]');
+    const label = card.querySelector('.int-head b').textContent;
+    btn.addEventListener('click', () => {
+      const on = card.dataset.connected !== 'true';
+      card.dataset.connected = String(on);
+      const pill = card.querySelector('[data-int-pill]');
+      pill.className = on ? 'pill ok' : 'pill acked';
+      pill.textContent = on ? 'Connected' : 'Not connected';
+      btn.className = on ? 'btn ghost' : 'btn primary';
+      btn.textContent = on ? 'Disconnect' : 'Connect';
+      btn.setAttribute('aria-pressed', String(on));
+      card.querySelector('[data-int-meta]').textContent = on ? meta.on : meta.off;
+      applyIntegrations();
+      toast(on ? meta.connect : meta.disconnect);
+      addEvent({
+        title: `${label} ${on ? 'connected' : 'disconnected'}`,
+        account: 'Acme Robotics',
+        sev: on ? 'ok' : 'warn',
+        kicker: 'Integrations',
+        summary: `Riya Menon ${on ? 'connected' : 'disconnected'} ${label} from the Integrations page. ${on ? meta.connect : meta.disconnect}`,
+        payload: { integration: name, connected: on, by: 'riya@acmerobotics.com' },
+      });
+    });
+  });
+  applyIntegrations();
+}
+
 /* ---------- boot ---------- */
 
 function init() {
@@ -975,6 +1948,15 @@ function init() {
   initEvents();
   initDrawer();
   initSettings();
+  initAsk();
+  initAnnotations();
+  initFunnel();
+  initCohorts();
+  initRules();
+  initStatus();
+  initTeam();
+  initIntegrations();
+  syncLatency();
   renderUpdated();
 }
 

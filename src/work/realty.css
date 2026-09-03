@@ -472,10 +472,10 @@
 }
 
 .refine select,
-.ns select,
-.ns input[type='text'],
-.ns input[type='tel'],
-.ns input[type='email'] {
+.ns > :not(.ln-widget) select,
+.ns > :not(.ln-widget) input[type='text'],
+.ns > :not(.ln-widget) input[type='tel'],
+.ns > :not(.ln-widget) input[type='email'] {
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -486,9 +486,9 @@
   min-width: 0;
 }
 
-.ns input:focus-visible,
-.ns select:focus-visible,
-.ns button:focus-visible {
+.ns > :not(.ln-widget) input:focus-visible,
+.ns > :not(.ln-widget) select:focus-visible,
+.ns > :not(.ln-widget) button:focus-visible {
   outline: 2px solid var(--sky);
   outline-offset: 2px;
 }
@@ -617,7 +617,7 @@
   color: #fff;
 }
 
-.ns button:disabled {
+.ns > :not(.ln-widget) button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }
@@ -881,6 +881,10 @@
 }
 
 /* Detail sheet additions */
+.detail .sheet {
+  overflow: auto;
+}
+
 .detail .tools {
   display: flex;
   flex-wrap: wrap;
@@ -1756,6 +1760,121 @@
   color: #0369a1;
 }
 
+/* Listing flags: set from the agent desk, shown to buyers on cards, pins and sheets */
+.flag {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  z-index: 1;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.flag.is-open-house {
+  background: #16a34a;
+}
+
+.flag.is-offer {
+  background: #b45309;
+}
+
+.flag-line {
+  margin: 0.5rem 0 0;
+  padding: 0.55rem 0.8rem;
+  border-radius: 10px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d !important;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.flag-line.is-offer {
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #b45309 !important;
+}
+
+.pin.is-offer rect {
+  fill: #b45309;
+}
+
+.pin.is-offer:hover rect {
+  fill: var(--sky);
+}
+
+.listing-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.listing {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0.35rem 0.75rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  align-items: center;
+}
+
+.listing-main {
+  display: grid;
+  min-width: 0;
+  font-size: 0.9rem;
+}
+
+.listing-main span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.listing-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.listing-actions button {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.listing-actions button[aria-pressed='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.listing-actions [data-flag-open][aria-pressed='true'] {
+  background: #16a34a;
+  border-color: #16a34a;
+}
+
+.listing-actions [data-flag-offer][aria-pressed='true'] {
+  background: #b45309;
+  border-color: #b45309;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .map {
@@ -1798,8 +1917,21 @@
 }
 
 @media (max-width: 640px) {
+  /* Brand + avatar on row one, the two pills on row two: the un-wrapped row
+     is ~410px of nowrap content, wider than a 390px phone. */
   .ns-top {
+    flex-wrap: wrap;
     gap: 0.75rem;
+  }
+
+  .ns-top .agent {
+    margin-left: auto;
+  }
+
+  .ns-actions {
+    order: 2;
+    flex-basis: 100%;
+    margin-left: 0;
   }
 
   .agent-name {

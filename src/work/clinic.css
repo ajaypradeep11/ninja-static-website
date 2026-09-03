@@ -1337,7 +1337,7 @@
   .doctor,
   .cal-nav,
   .cal-month button,
-  .slot > button,
+  .slot > button:first-child,
   .slot .wl,
   .field input,
   .field textarea,
@@ -2050,7 +2050,7 @@
 .wl-note {
   position: fixed;
   top: calc(var(--ln-bar-h) + 12px);
-  right: 1.25rem;
+  left: 1.25rem; /* top-left: the assistant widget owns the bottom-right corner */
   z-index: 108;
   width: min(380px, calc(100vw - 2.5rem));
   padding: 1.1rem 1.25rem 1rem;
@@ -2558,6 +2558,156 @@ body.cl-staff-lock {
   .wl-note.is-open,
   .queue-pill i,
   .vpill.is-live i {
+    animation: none;
+  }
+}
+
+/* ---------- Video visits: where + device check ---------- */
+.panel .where-title {
+  margin: 1.5rem 0 0.6rem;
+}
+
+.where {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.where-opt {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 0.7rem;
+  align-items: center;
+  padding: 0.75rem 0.9rem;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.where-opt .ico {
+  grid-row: 1 / 3;
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.where-opt strong {
+  font-size: 0.9rem;
+}
+
+.where-opt span:last-child {
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+.where-opt:hover:not(:disabled) {
+  border-color: var(--teal);
+}
+
+.where-opt.is-selected {
+  border-color: var(--teal);
+  background: var(--teal-soft);
+}
+
+.where-opt:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.for-tag.is-video {
+  background: #ede9fe;
+  color: #4c1d95;
+}
+
+.after-card.is-video {
+  border-color: #c4b5fd;
+  background: #f5f3ff;
+}
+
+.devs {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.dev {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fafdfc;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.dev-ico {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.dev-txt {
+  display: grid;
+  gap: 0.05rem;
+  min-width: 0;
+}
+
+.dev-txt strong {
+  font-size: 0.88rem;
+  color: var(--ink);
+}
+
+.dev-txt small {
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+.dev-state {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: #eef3f2;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dev.is-checking .dev-state {
+  animation: cl-blink 1.2s infinite;
+}
+
+.dev.is-ok {
+  border-color: var(--teal);
+  background: var(--teal-soft);
+}
+
+.dev.is-ok .dev-state {
+  background: var(--teal);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .where {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .where-opt,
+  .dev,
+  .dev-state {
+    transition: none;
+  }
+
+  .dev.is-checking .dev-state {
     animation: none;
   }
 }

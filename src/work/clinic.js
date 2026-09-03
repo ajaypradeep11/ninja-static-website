@@ -86,6 +86,8 @@ const state = {
   wlOffered: new Set(),
   wlOffer: null,
   wlTimer: 0,
+  where: 'clinic', // 'clinic' | 'video' for the booking being made
+  dev: { visit: null, timers: [], ready: false, returnFocus: null }, // video device check
 };
 
 /* ---------- date helpers ---------- */
@@ -242,6 +244,7 @@ function applyType(type) {
     first?.click();
   }
   refreshCalendar();
+  syncWhere();
 }
 
 /* ---------- calendar ---------- */
@@ -432,11 +435,11 @@ function confirmBooking() {
     visit = state.visits.find((v) => v.id === state.resched);
     if (visit) {
       moved = `${fmtLong(visit.date)} ${visit.time}`;
-      Object.assign(visit, { doctor, date, time, type, reason: reason || visit.reason });
+      Object.assign(visit, { doctor, date, time, type, reason: reason || visit.reason, where: state.where, joined: false });
     }
   }
   if (!visit) {
-    visit = { id: `v${state.nextId}`, ref: `MC-${state.nextRef}`, doctor, date, time, type, reason, patient: state.patient, confirmed: false };
+    visit = { id: `v${state.nextId}`, ref: `MC-${state.nextRef}`, doctor, date, time, type, reason, patient: state.patient, confirmed: false, where: state.where };
     state.nextId += 1;
     state.nextRef += 1;
     state.visits.push(visit);
@@ -451,8 +454,11 @@ function confirmBooking() {
   const rem = $('[data-reminder]');
   if (rem) rem.checked = state.profile.sms !== false;
   $('[data-reminder-text]').textContent = reminderText();
+  const video = visit.where === 'video';
   const cardLine = $('[data-card-line]');
-  if (cardLine) cardLine.hidden = !card;
+  if (cardLine) cardLine.hidden = !card || video;
+  const videoLine = $('[data-video-line]');
+  if (videoLine) videoLine.hidden = !video;
   const calAdd = $('[data-cal-add]');
   if (calAdd) {
     calAdd.setAttribute('aria-pressed', 'false');
@@ -493,12 +499,26 @@ function renderVisits() {
       const remind = toDate(v.date);
       remind.setDate(remind.getDate() - 1);
       const isNew = v.id === state.lastAdded ? ' is-new' : '';
-      const forTag = v.patient && v.patient !== 'self' ? `<span class="for-tag">For ${escapeHtml(PEOPLE[v.patient].name)}</span>` : '';
+      const video = v.where === 'video';
+      const forTag = `${v.patient && v.patient !== 'self' ? `<span class="for-tag">For ${escapeHtml(PEOPLE[v.patient].name)}</span>` : ''}${
+        video ? '<span class="for-tag is-video">Video</span>' : ''
+      }`;
       const today = v.date === TODAY;
-      const status = today ? checkinPill() : v.confirmed ? '<span class="vpill is-ok">Confirmed ✓</span>' : '<span class="vpill">Not confirmed yet</span>';
+      const status = today
+        ? checkinPill()
+        : v.joined
+          ? '<span class="vpill is-live"><i></i>In the waiting room</span>'
+          : v.confirmed
+            ? '<span class="vpill is-ok">Confirmed ✓</span>'
+            : '<span class="vpill">Not confirmed yet</span>';
+      const videoAct = video
+        ? v.joined
+          ? `<span class="vhint">${DOCTORS[v.doctor].short} starts the call from their side</span>`
+          : `<button class="btn btn-primary btn-sm" type="button" data-video-check="${v.id}">Test camera &amp; mic</button>`
+        : '';
       const acts = today
         ? checkinAct()
-        : `${v.confirmed ? '' : `<button class="btn btn-primary btn-sm" type="button" data-visit-confirm="${v.id}">I'm coming ✓</button>`}<button class="btn btn-ghost btn-sm" type="button" data-visit-resched="${v.id}">Reschedule</button><button class="btn btn-ghost btn-sm is-danger-ghost" type="button" data-visit-cancel="${v.id}">Cancel</button>`;
+        : `${videoAct}${v.confirmed || v.joined ? '' : `<button class="btn btn-primary btn-sm" type="button" data-visit-confirm="${v.id}">I'm coming ✓</button>`}<button class="btn btn-ghost btn-sm" type="button" data-visit-resched="${v.id}">Reschedule</button><button class="btn btn-ghost btn-sm is-danger-ghost" type="button" data-visit-cancel="${v.id}">Cancel</button>`;
       return `<li class="visit${isNew}${today ? ' is-today' : ''}" data-visit-id="${v.id}">
         <div class="when"><b>${MON[d.getMonth()]}</b><span>${d.getDate()}</span><small>${today ? 'Today' : DOW[d.getDay()]}</small></div>
         <div class="what"><strong>${escapeHtml(v.doctor)} ${forTag}</strong><span>${typeLabel(v.type)} · ${v.time} ${status}</span><span class="ref-sm">${v.ref} · ${remindLabel()} reminder ${DOW[remind.getDay()]}</span>${
@@ -1383,9 +1403,162 @@ function setBoardStatus(key, status) {
   renderStaff();
 }
 
+/* ---------- video visits: in-clinic / video choice + device check ---------- */
+
+const VIDEO_TYPES = ['follow', 'new'];
+const videoOk = (type) => VIDEO_TYPES.includes(type);
+const WHERE_LABEL = { clinic: 'In the clinic', video: 'Video call' };
+const DEV_STEPS = [
+  { dev: 'cam', msg: 'Front camera found · picture looks good', delay: 700 },
+  { dev: 'mic', msg: 'Built-in microphone · level is good', delay: 1400 },
+  { dev: 'net', msg: 'Wi-Fi · fast enough for HD', delay: 2100 },
+];
+
+function whereNote() {
+  const type = selectedType();
+  const t = TYPES[type];
+  if (!videoOk(type)) return `${t.label}s are in person - the doctor needs to examine you. Follow-ups and new-patient visits can be done by video.`;
+  if (state.where === 'video') return `Video visit · ${t.label} · ${t.mins} min. You get a join link 15 minutes before; no app to install. No health card needed - it's on file.`;
+  return `${t.label} visits also work by video if that's easier - same doctor, same length, no parking.`;
+}
+
+function syncWhere() {
+  const type = selectedType();
+  const ok = videoOk(type);
+  if (!ok && state.where === 'video') state.where = 'clinic';
+  $$('[data-where]').forEach((b) => {
+    const on = b.dataset.where === state.where;
+    b.classList.toggle('is-selected', on);
+    b.setAttribute('aria-pressed', String(on));
+    if (b.dataset.where === 'video') {
+      b.disabled = !ok;
+      b.title = ok ? '' : `${TYPES[type].label}s are in person only`;
+    }
+  });
+  $$('[data-where-out]').forEach((o) => (o.textContent = WHERE_LABEL[state.where]));
+  const note = $('[data-where-note]');
+  if (note) note.textContent = whereNote();
+}
+
+function setWhere(key) {
+  if (!WHERE_LABEL[key]) return;
+  if (key === 'video' && !videoOk(selectedType())) {
+    toast(`${TYPES[selectedType()].label}s are in person only`);
+    return;
+  }
+  state.where = key;
+  syncWhere();
+}
+
+function resetDevRows() {
+  $$('[data-dev]').forEach((li) => {
+    li.classList.remove('is-ok');
+    li.classList.add('is-checking');
+    $('[data-dev-msg]', li).textContent = 'Checking…';
+    $('[data-dev-state]', li).textContent = '…';
+  });
+}
+
+function openDevCheck(id) {
+  const v = state.visits.find((x) => x.id === id);
+  const host = $('[data-devcheck]');
+  if (!v || !host) return;
+  const d = state.dev;
+  d.visit = id;
+  d.ready = false;
+  d.timers.forEach(clearTimeout);
+  d.timers = [];
+  d.returnFocus = document.activeElement;
+  resetDevRows();
+  const sub = $('[data-devcheck-sub]');
+  if (sub) sub.textContent = `${fmtLong(v.date)} at ${v.time} with ${DOCTORS[v.doctor].short}. Checking your camera, microphone and connection - takes a few seconds.`;
+  const join = $('[data-devcheck-join]');
+  if (join) {
+    join.disabled = true;
+    join.textContent = 'Join call';
+  }
+  host.classList.add('is-open');
+  $('.cl-modal-card', host).focus();
+  DEV_STEPS.forEach((step, i) => {
+    d.timers.push(
+      setTimeout(() => {
+        const li = $(`[data-dev="${step.dev}"]`);
+        if (li) {
+          li.classList.remove('is-checking');
+          li.classList.add('is-ok');
+          $('[data-dev-msg]', li).textContent = step.msg;
+          $('[data-dev-state]', li).textContent = 'Ready ✓';
+        }
+        if (i === DEV_STEPS.length - 1) {
+          d.ready = true;
+          if (sub) sub.textContent = `All set. ${DOCTORS[v.doctor].short} will start the call at ${v.time} - join a few minutes early and wait in the virtual waiting room.`;
+          if (join) join.disabled = false;
+        }
+      }, step.delay)
+    );
+  });
+}
+
+function closeDevCheck() {
+  const host = $('[data-devcheck]');
+  if (!host?.classList.contains('is-open')) return;
+  const d = state.dev;
+  d.timers.forEach(clearTimeout);
+  d.timers = [];
+  host.classList.remove('is-open');
+  d.returnFocus?.focus?.();
+  d.returnFocus = null;
+  d.visit = null;
+}
+
+function joinCall() {
+  const d = state.dev;
+  const v = state.visits.find((x) => x.id === d.visit);
+  if (!v || !d.ready) return;
+  v.joined = true;
+  v.confirmed = true;
+  d.returnFocus = null; // the "Test camera & mic" button is about to be re-rendered away
+  closeDevCheck();
+  renderVisits();
+  $(`[data-visit-id="${v.id}"] [data-visit-resched]`)?.focus();
+  addClinicMessage(
+    `You're in the waiting room for ${fmtLong(v.date)} ${v.time}. ${DOCTORS[v.doctor].short} will start the call - keep this tab open, or we'll text you a link to rejoin.`,
+    'Maple Clinic video · Just now'
+  );
+  toast(`In the waiting room · ${DOCTORS[v.doctor].short} starts the call from their side`);
+  if ($('[data-staff]')?.classList.contains('is-open')) renderStaff();
+}
+
 /* ---------- wiring ---------- */
 
 function initExtras() {
+  REPLIES.unshift([/video|camera|join|link/i, 'Video visits use a link we text you 15 minutes before - no app needed. Test your camera and mic any time from My visits.']);
+
+  document.addEventListener('keydown', (event) => {
+    const host = $('[data-devcheck]');
+    if (!host?.classList.contains('is-open')) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      closeDevCheck();
+    } else if (event.key === 'Tab') {
+      const focusables = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', host).filter((el) => !el.disabled);
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === host.firstElementChild)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+  $('[data-devcheck]')?.addEventListener('click', (event) => {
+    if (event.target === event.currentTarget) closeDevCheck();
+  });
+
   document.addEventListener('click', (event) => {
     const t = event.target.closest('button');
     if (!t) return;
@@ -1395,7 +1568,20 @@ function initExtras() {
     if (t.matches('[data-triage-go]')) return $('.panel-1 [data-go="2"]')?.click();
     if (t.matches('[data-triage-refills]')) return showPortal('refills');
     if (t.matches('[data-emergency-close]')) return clearTriage();
-    if (t.matches('[data-book-another]')) return clearTriage();
+    if (t.matches('[data-book-another]')) {
+      clearTriage();
+      return setWhere('clinic');
+    }
+
+    if (t.matches('[data-where]')) return setWhere(t.dataset.where);
+    if (t.matches('[data-visit-resched]')) {
+      // startReschedule (registered earlier) has already set the type; carry the visit's location over.
+      const v = state.visits.find((x) => x.id === t.dataset.visitResched);
+      return setWhere(v?.where === 'video' && videoOk(selectedType()) ? 'video' : 'clinic');
+    }
+    if (t.matches('[data-video-check]')) return openDevCheck(t.dataset.videoCheck);
+    if (t.matches('[data-devcheck-close]')) return closeDevCheck();
+    if (t.matches('[data-devcheck-join]')) return joinCall();
 
     if (t.matches('[data-checkin]')) return checkIn();
     if (t.matches('[data-arrive-ack]')) {

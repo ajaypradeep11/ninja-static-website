@@ -71,6 +71,24 @@ interactions are class toggles handled in `src/work/mockups.js`; the
   available", reason-for-visit with counter, post-booking calendar /
   reminder toggles, and a patient portal (My visits with reschedule and
   cancel-with-confirm, Messages with auto-reply, Profile with save state).
+  Second pass added: book for a family member, symptom triage with an
+  emergency banner, same-day check-in with a live queue, lab results,
+  prescription refills with a status tracker, "I'm coming" confirmations,
+  waitlist offers, video visits with a device check, and a front-desk
+  staff view.
+- **Ember & Oak (second pass)** — floor-plan table reservations with a
+  hold timer, Ember Club loyalty with redemption, gift cards, tonight's
+  specials with live stock, dish ratings and "most loved" sorting, and a
+  kitchen-display / host-stand staff view.
+- **Pulse (second pass)** — Ask Pulse (keyword-routed insight box), chart
+  annotations, Growth view (funnel + cohort retention heatmap), Alerts
+  view (rules builder), Team view (invites, roles, plan upgrade),
+  Integrations, and a status-page preview.
+- **Northshore Realty** (`src/work/realty.js`) — price/beds/baths filters
+  and sort, save/shortlist drawer with compare, mortgage calculator and
+  similar homes in each sheet, neighbourhood snapshots from the map,
+  book-a-viewing flow, saved-search alerts, home valuation lead capture,
+  and an agent/CRM view.
 
 ### Bot demos
 

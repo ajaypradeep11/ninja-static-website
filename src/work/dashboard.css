@@ -2347,6 +2347,10 @@
   color: #166534;
 }
 
+.status-page .note.is-err {
+  color: #b91c1c;
+}
+
 /* ---------- team & billing ---------- */
 .team-grid {
   display: grid;
@@ -2718,7 +2722,18 @@
   .switch i,
   .scrim,
   .drawer,
-  .toast {
+  .toast,
+  .chart .anno line,
+  .anno-list li,
+  .stage,
+  .stage .fill,
+  .cohort .cell,
+  .incident,
+  .modal-scrim,
+  .modal-card,
+  .sp-banner,
+  .meter .fill,
+  .integration {
     transition: none;
   }
 
@@ -2726,7 +2741,19 @@
   .live.is-on i,
   .kpi .value.is-bumped,
   .events tr.is-new td,
-  .savebar {
+  .savebar,
+  .ask-thinking i,
+  .ask-answer,
+  .anno-form,
+  .rule.is-new,
+  .timeline li.is-new,
+  .team tr.is-new td,
+  .confirm-box,
+  .banner {
     animation: none;
+  }
+
+  .ask-thinking i {
+    opacity: 1;
   }
 }

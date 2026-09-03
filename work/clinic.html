@@ -270,8 +270,15 @@
             <div><span>Date</span><strong data-out="day">Wed, Sep 9</strong></div>
             <div><span>Time</span><strong data-out="slot">9:30</strong></div>
             <div><span>Visit type</span><strong data-visit-out>Annual check-up · 30 min</strong></div>
+            <div><span>Where</span><strong data-where-out>In the clinic</strong></div>
             <div data-resched-row hidden><span>Replaces</span><strong data-resched-from>-</strong></div>
           </div>
+          <h3 class="where-title">How would you like to be seen?</h3>
+          <div class="where" role="group" aria-label="In the clinic or by video">
+            <button type="button" class="where-opt is-selected" data-where="clinic" aria-pressed="true"><span class="ico" aria-hidden="true">🏥</span><strong>In the clinic</strong><span>1420 Quinpool Rd, 2nd floor · free parking</span></button>
+            <button type="button" class="where-opt" data-where="video" aria-pressed="false"><span class="ico" aria-hidden="true">🎥</span><strong>Video call</strong><span>From your phone or laptop · no app to install</span></button>
+          </div>
+          <p class="type-note" data-where-note>Annual check-ups are in person - the doctor needs to examine you.</p>
           <div class="field">
             <label for="cl-reason">Reason for visit <small>(optional - the doctor reads this before you arrive)</small></label>
             <textarea id="cl-reason" rows="3" maxlength="200" placeholder="e.g. Yearly physical - also want to ask about sleep."></textarea>
@@ -314,6 +321,10 @@
               <li class="after-card" data-card-line>
                 <span class="ico" aria-hidden="true">🪪</span>
                 <span><strong>Bring your health card</strong><small>Reception scans it at check-in - arrive 10 minutes early.</small></span>
+              </li>
+              <li class="after-card is-video" data-video-line hidden>
+                <span class="ico" aria-hidden="true">🎥</span>
+                <span><strong>Your join link is ready 15 minutes before</strong><small>It lands in Messages and in your reminder text. Test your camera and mic any time from My visits.</small></span>
               </li>
             </ul>
 
@@ -516,6 +527,23 @@
         <div class="wl-acts">
           <button class="btn btn-primary btn-sm" type="button" data-wlnote-take>Take it</button>
           <button class="btn btn-ghost btn-sm" type="button" data-wlnote-dismiss>No thanks, keep me listed</button>
+        </div>
+      </div>
+
+      <div class="cl-modal" data-devcheck>
+        <div class="cl-modal-card" role="dialog" aria-modal="true" aria-labelledby="cl-dev-title" aria-describedby="cl-dev-sub" tabindex="-1">
+          <button class="cl-modal-x" type="button" data-devcheck-close aria-label="Close device check">×</button>
+          <h3 id="cl-dev-title">Ready for your video visit?</h3>
+          <p id="cl-dev-sub" data-devcheck-sub>Checking your camera, microphone and connection - takes a few seconds.</p>
+          <ul class="devs" aria-label="Device check" aria-live="polite">
+            <li class="dev" data-dev="cam"><span class="dev-ico" aria-hidden="true">📷</span><span class="dev-txt"><strong>Camera</strong><small data-dev-msg>Checking…</small></span><span class="dev-state" data-dev-state>…</span></li>
+            <li class="dev" data-dev="mic"><span class="dev-ico" aria-hidden="true">🎙️</span><span class="dev-txt"><strong>Microphone</strong><small data-dev-msg>Checking…</small></span><span class="dev-state" data-dev-state>…</span></li>
+            <li class="dev" data-dev="net"><span class="dev-ico" aria-hidden="true">📶</span><span class="dev-txt"><strong>Connection</strong><small data-dev-msg>Checking…</small></span><span class="dev-state" data-dev-state>…</span></li>
+          </ul>
+          <div class="actions">
+            <button class="btn btn-ghost" type="button" data-devcheck-close>Close</button>
+            <button class="btn btn-primary" type="button" data-devcheck-join disabled>Join call</button>
+          </div>
         </div>
       </div>
 

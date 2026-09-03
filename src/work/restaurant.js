@@ -1129,8 +1129,15 @@ function confirmBooking() {
     $('[data-eo-resv-phone]')?.focus();
     return;
   }
-  stopHold();
   const t = TABLES.find((x) => x.id === resv.table);
+  if (!t) {
+    // Hold expired or no table picked - send them back to the floor plan.
+    resv.step = 'pick';
+    renderResvStep();
+    toast('Tap a table to hold it first.');
+    return;
+  }
+  stopHold();
   const code = `EO-R-${((hashStr(resv.date + resv.time + resv.table + name) * 7919) % 46656).toString(36).toUpperCase().padStart(3, '0')}`;
   resv.booking = { code, table: t.id, date: resv.date, time: resv.time, party: resv.party, name, occasion: resv.occasion };
   const surname = name.split(/\s+/).slice(-1)[0];

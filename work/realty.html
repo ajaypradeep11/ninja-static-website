@@ -86,7 +86,7 @@
           <div class="cards" data-cards>
             <div class="card-wrap" data-type="condo" data-home="1">
               <button class="card" type="button" data-open="#detail-1">
-                <div class="photo" style="--photo:linear-gradient(160deg,#c7e6f5,#5eb3dd)"><span class="badge">Condo</span></div>
+                <div class="photo" style="--photo:linear-gradient(160deg,#c7e6f5,#5eb3dd)"><span class="badge">Condo</span><span class="flag" data-flag="1" hidden></span></div>
                 <div class="info">
                   <div class="price">$925,000</div>
                   <p class="addr">2288 W 4th Ave · Kitsilano</p>
@@ -97,7 +97,7 @@
             </div>
             <div class="card-wrap" data-type="townhouse" data-home="2">
               <button class="card" type="button" data-open="#detail-2">
-                <div class="photo" style="--photo:linear-gradient(160deg,#f3d9b1,#d9944f)"><span class="badge">Townhouse</span></div>
+                <div class="photo" style="--photo:linear-gradient(160deg,#f3d9b1,#d9944f)"><span class="badge">Townhouse</span><span class="flag" data-flag="2" hidden></span></div>
                 <div class="info">
                   <div class="price">$1,290,000</div>
                   <p class="addr">4120 Hastings St · Burnaby Heights</p>
@@ -108,7 +108,7 @@
             </div>
             <div class="card-wrap" data-type="detached" data-home="3">
               <button class="card" type="button" data-open="#detail-3">
-                <div class="photo" style="--photo:linear-gradient(160deg,#d6ead8,#7fb68a)"><span class="badge">Detached</span></div>
+                <div class="photo" style="--photo:linear-gradient(160deg,#d6ead8,#7fb68a)"><span class="badge">Detached</span><span class="flag" data-flag="3" hidden></span></div>
                 <div class="info">
                   <div class="price">$2,100,000</div>
                   <p class="addr">1560 Grand Blvd · North Vancouver</p>
@@ -119,7 +119,7 @@
             </div>
             <div class="card-wrap" data-type="loft" data-home="4">
               <button class="card" type="button" data-open="#detail-4">
-                <div class="photo" style="--photo:linear-gradient(160deg,#e3d5cf,#a37c6c)"><span class="badge">Loft</span></div>
+                <div class="photo" style="--photo:linear-gradient(160deg,#e3d5cf,#a37c6c)"><span class="badge">Loft</span><span class="flag" data-flag="4" hidden></span></div>
                 <div class="info">
                   <div class="price">$640,000</div>
                   <p class="addr">55 E Cordova St · Gastown</p>
@@ -258,6 +258,10 @@
             <header><h3 id="valuations-h">Valuation requests</h3><span class="muted">seller leads</span></header>
             <ul class="val-list" data-val-list></ul>
           </section>
+          <section class="panel" aria-labelledby="listings-h">
+            <header><h3 id="listings-h">Your listings</h3><span class="muted">flags show on the buyer side instantly</span></header>
+            <ul class="listing-list" data-listing-list></ul>
+          </section>
         </div>
       </section>
 
@@ -267,6 +271,7 @@
           <div class="content">
             <h3>2288 W 4th Ave · Kitsilano</h3>
             <div class="price">$925,000</div>
+            <p class="flag-line" data-flag-line="1" hidden></p>
             <div class="facts">
               <div>Bedrooms<b>2</b></div>
               <div>Bathrooms<b>2</b></div>
@@ -295,6 +300,7 @@
           <div class="content">
             <h3>4120 Hastings St · Burnaby Heights</h3>
             <div class="price">$1,290,000</div>
+            <p class="flag-line" data-flag-line="2" hidden></p>
             <div class="facts">
               <div>Bedrooms<b>3</b></div>
               <div>Bathrooms<b>2.5</b></div>
@@ -323,6 +329,7 @@
           <div class="content">
             <h3>1560 Grand Blvd · North Vancouver</h3>
             <div class="price">$2,100,000</div>
+            <p class="flag-line" data-flag-line="3" hidden></p>
             <div class="facts">
               <div>Bedrooms<b>4</b></div>
               <div>Bathrooms<b>3</b></div>
@@ -351,6 +358,7 @@
           <div class="content">
             <h3>55 E Cordova St · Gastown</h3>
             <div class="price">$640,000</div>
+            <p class="flag-line" data-flag-line="4" hidden></p>
             <div class="facts">
               <div>Bedrooms<b>1</b></div>
               <div>Bathrooms<b>1</b></div>

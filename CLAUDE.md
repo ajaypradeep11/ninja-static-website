@@ -62,7 +62,7 @@ Everything lives in a few files plus assets:
   own their look: `clinic`, `restaurant`, `realty`, `dashboard` each have a
   matching `src/work/<slug>.css` and use `src/work/mockups.js` (generic
   data-attribute behaviours: steps, tabs, select groups, cart, filters,
-  overlays, chart ranges). `dashboard`, `restaurant` and `clinic` also
+  overlays, chart ranges). `dashboard`, `restaurant`, `clinic` and `realty` also
   load a page module `src/work/<slug>.js` for their richer flows (views,
   drawers, checkout, calendar, portal tabs); page modules use their own
   `data-*` names and never re-implement the generic ones. `clinic`, `restaurant` and `realty` also embed
