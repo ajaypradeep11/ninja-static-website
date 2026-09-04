@@ -11,9 +11,18 @@ homepage. Bots run against ChatGPT through a small Firebase Cloud Function
 relay so the API key never ships to the browser; until the key is
 configured they answer from canned scripts.
 
-## Homepage
+## Where it lives
 
-- New `#work` section between `#process` and `#about`. Kicker "Sample
+The full showcase is its own page, **`/work.html`** — the tab bar plus every
+card. Its shell (header, footer) is copied from the homepage, so in-page
+anchors there are absolute (`/#services`). The homepage keeps a short
+**teaser** (`#work`): heading, four highlighted demos as a `.work-strip`, and
+a black CTA bar with "See our work →". Nav and footer "Work" links point at
+`/work.html`.
+
+## Showcase page
+
+- The `#work` teaser sits between `#process` and `#about` on the homepage. Kicker "Sample
   projects", heading `THINGS WE'VE` `BUILT`(highlighted), note "Sample
   projects built to show our range - names and data are fictional."
 - Six brutalist tab buttons switch between card grids (border, hard
@@ -49,6 +58,8 @@ and a footer line. Below the bar each page is its own world.
 | `clinic` | Maple Clinic - patient booking | the same clinic site chrome as `bot-clinic` (nav, hero, info strip; reuses `bot-clinic.css`) with the booking flow as the main section | hero doctor chips pre-select + scroll into the flow; doctor → slot → confirm (3 steps) |
 | `restaurant` | Ember & Oak - menu & ordering | dark, warm, serif headings | category tabs, add to cart, cart drawer |
 | `realty` | Northshore Realty - listings | airy white, photo-led, map placeholder | filter chips, listing → detail panel |
+| `dealer` | Rideau Motorworks - dealership parts & service | graphite-navy, signal orange, condensed industrial | VIN / year-make-model vehicle pin, catalogue with fitment + OEM/aftermarket pricing, part drawer, order with core charges and PO checkout, service booking, repair tracker with quote approval, parts-counter staff view |
+| `trades` | Copper & Coil - plumbing & heating dispatch | bone paper, slate ink, copper + safety amber | problem triage with an emergency path, book-a-job flow with arrival windows, upfront pricing, job tracker with tech ETA, quote approval, invoice + membership upsell, dispatch board staff view |
 | `dashboard` | Pulse - SaaS analytics | dark, dense, mono numbers | sidebar nav, range toggle re-draws inline SVG chart |
 
 No external images: visuals are CSS gradients and inline SVG. Generic

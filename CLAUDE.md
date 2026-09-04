@@ -59,11 +59,11 @@ Everything lives in a few files plus assets:
 
 - `work/*.html` — eight demo pages, each listed in `vite.config.js`. They
   share `src/work/shell.css` (LocalNinja top bar + footer) and otherwise
-  own their look: `clinic`, `restaurant`, `realty`, `dashboard` each have a
+  own their look: `clinic`, `restaurant`, `realty`, `dashboard`, `dealer`, `trades` each have a
   matching `src/work/<slug>.css` and use `src/work/mockups.js` (generic
   data-attribute behaviours: steps, tabs, select groups, cart, filters,
-  overlays, chart ranges). `dashboard`, `restaurant`, `clinic` and `realty` also
-  load a page module `src/work/<slug>.js` for their richer flows (views,
+  overlays, chart ranges). `dashboard`, `restaurant`, `clinic`, `realty`, `dealer` and `trades`
+  also load a page module `src/work/<slug>.js` for their richer flows (views,
   drawers, checkout, calendar, portal tabs); page modules use their own
   `data-*` names and never re-implement the generic ones. `clinic`, `restaurant` and `realty` also embed
   the bot as an on-site widget (`src/work/widget.css` + `bot.js`, root
@@ -79,12 +79,16 @@ Everything lives in a few files plus assets:
   bot id (`clinic`, `restaurant`, `store`, `realty`), input validation,
   per-IP rate limit, `gpt-4o-mini`. Returns 503 `not_configured` without
   the secret; the widget then switches to scripted replies.
+- `work.html` — the showcase page: the tab bar and every project card.
+  Its header/footer are copies of the homepage's, so same-page anchors are
+  written as `/#services`, `/#contact` … If you add a nav item or change
+  the footer, change it in **both** files.
 - `index.html` — homepage markup, no templating. Sections in order: header,
   `#home` hero, marquee band, `#services` (6 numbered accordion rows + an
   "Others" row; rows have `id="svc-*"` so the header dropdown can deep-link),
-  `#process` (six-step "How we work" cards), `#work` (showcase cards →
-  `/work/*.html`), `#about` (+ team), `#contact` (form), footer
-  (`#products` links). CSS is linked directly
+  `#process` (six-step "How we work" cards), `#work` (a teaser strip of four
+  demos + a "See our work →" button pointing at `/work.html`), `#about`
+  (+ team), `#contact` (form), footer (`#products` links). CSS is linked directly
   (`<link href="/src/style.css">`), **not** imported from `main.js` — don't
   move it into JS.
   Any new page must be added to `vite.config.js` `rollupOptions.input` or
@@ -117,9 +121,13 @@ Everything lives in a few files plus assets:
   button) toggles `.is-open` and `aria-expanded`; CSS animates
   `.service-details` height via `grid-template-rows` (instant under
   reduced motion). Clicks inside `.service-details` don't collapse it.
-- **Work tabs**: `.work-tab[data-work-tab]` buttons toggle `.is-active`
+- **Work tabs** (on `work.html`): `.work-tab[data-work-tab]` buttons toggle `.is-active`
   (+ `aria-selected`) on themselves and on the matching `.work-grid` id;
   six tabs (UI/UX, Web development, E-commerce, AI, Chatbots, Voice bots); only UI/UX is visible on load.
+- **Assistant widget collapse**: the `.wmin` button (`data-collapse`)
+  toggles `.is-collapsed`, its `+`/`–` label and `aria-expanded`;
+  `mockups.js` collapses it on load at `(max-width: 640px)` so it never
+  covers a phone screen. Desktop starts expanded.
 - **Bot widget**: `bot.js` posts `{ bot, messages }` to `/api/chat`; any
   non-OK response flips it to scripted mode (canned `SCRIPTS`, "Demo mode"
   pill) for the rest of the session. Voice mode uses `SpeechRecognition`

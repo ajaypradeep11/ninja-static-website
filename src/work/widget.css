@@ -175,4 +175,10 @@
     width: auto;
     height: min(520px, 62vh);
   }
+
+  /* Must out-rank .ln-widget.left above (same specificity, later wins). */
+  .ln-widget.is-collapsed,
+  .ln-widget.left.is-collapsed {
+    height: auto;
+  }
 }

@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Copper &amp; Coil - LocalNinja sample project</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/logo-animated.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/work/shell.css" />
+    <link rel="stylesheet" href="/src/work/bot.css" />
+    <link rel="stylesheet" href="/src/work/widget.css" />
+    <link rel="stylesheet" href="/src/work/trades.css" />
+    <style>.ln-widget{--w-accent:#b4541f;--w-accent-ink:#fff8f2;--w-bg:#fffdf9;--w-ink:#16202b;--w-body:#f7f3ec;--w-bot:#fffdf9;--w-line:#e3d9cb;--w-chip:#fffdf9;--w-input:#fffdf9;--w-muted:#5d6b7a;}</style>
+  </head>
+  <body>
+    <header class="ln-bar">
+      <a class="ln-bar-brand" href="/#work"><img src="/logo-animated.svg" alt="" width="32" height="32" /><span class="ln-bar-name">Local<span class="ninja">Ninja</span></span></a>
+      <p class="ln-bar-title">Sample project · <strong>Copper &amp; Coil</strong> booking &amp; dispatch <span class="ln-tag">Field service</span></p>
+      <a class="ln-bar-back" href="/#work">← Back to site</a>
+    </header>
+
+    <main class="cc">
+      <div class="cc-nav">
+        <span class="cc-logo">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" width="30" height="30" role="img" aria-hidden="true">
+              <rect x="2" y="12" width="28" height="8" rx="2" fill="currentColor" opacity="0.28" />
+              <rect x="6" y="9" width="6" height="14" rx="1.5" fill="currentColor" />
+              <rect x="20" y="9" width="6" height="14" rx="1.5" fill="currentColor" />
+              <circle cx="16" cy="16" r="3.4" fill="none" stroke="currentColor" stroke-width="2.4" />
+            </svg>
+          </span>
+          <span class="wordmark">Copper <em>&amp;</em> Coil</span>
+        </span>
+        <nav aria-label="Copper &amp; Coil">
+          <a href="#cc-triage">What's wrong</a>
+          <a href="#cc-book">Book a job</a>
+          <a href="#cc-prices">Flat-rate prices</a>
+          <a href="#cc-job">My job</a>
+          <a href="#assistant">Ask us</a>
+        </nav>
+        <a class="cc-call" href="#cc-triage"><span aria-hidden="true">☎</span> (613) 555-0114</a>
+      </div>
+
+      <section class="cc-hero">
+        <div class="cc-hero-copy">
+          <p class="eyebrow">Plumbing · Heating · Cooling · Ottawa since 1998</p>
+          <h1>No heat at 11&nbsp;pm? <span>A real person picks up.</span></h1>
+          <p class="lede">Tell us what's wrong, see the price before we start, and pick an arrival window that actually holds. Licensed techs, stocked vans, flat-rate quotes.</p>
+          <div class="cc-hero-cta">
+            <button type="button" class="btn btn-primary btn-lg" data-scroll="#cc-triage">What's wrong? →</button>
+            <button type="button" class="btn btn-ghost btn-lg" data-scroll="#cc-book">Book a time</button>
+          </div>
+          <ul class="cc-trust">
+            <li><b>4.9 ★</b><span>612 Ottawa reviews</span></li>
+            <li><b>24/7</b><span>Real dispatcher, no queue</span></li>
+            <li><b>Licence #PL-40118</b><span>Insured · WSIB covered</span></li>
+          </ul>
+        </div>
+        <div class="cc-art" aria-hidden="true">
+          <div class="acard one"><span class="pill">Booked</span><b>CC-4477 · No heat</b><span>214 Fifth Ave · Today 2–4 pm</span></div>
+          <div class="acard two"><span class="ava">MD</span><b>Marcus Delaine</b><span>Gas &amp; heating · 12 min away</span></div>
+          <div class="acard three"><b>$429 flat rate</b><span>Approved before we touch a tool</span></div>
+        </div>
+      </section>
+
+      <div class="cc-viewbar">
+        <div class="seg" role="group" aria-label="Whose screen">
+          <button type="button" data-cc-view="home" aria-pressed="true">Homeowner</button>
+          <button type="button" data-cc-view="dispatch" aria-pressed="false">Dispatch board</button>
+        </div>
+        <p>Flip to the dispatch board to see the same jobs from the office - assign a tech, move a card, watch the homeowner's tracker change.</p>
+      </div>
+
+      <!-- ============ Triage ============ -->
+      <section class="cc-triage" id="cc-triage" aria-labelledby="cc-triage-title">
+        <div class="sec-head">
+          <h2 id="cc-triage-title">What's wrong?</h2>
+          <p>Tap the closest match. We'll tell you how urgent it is, what the job usually is, and roughly what it costs - before you give us a phone number.</p>
+        </div>
+        <div class="problems" role="group" aria-label="What's wrong">
+          <button type="button" class="problem" data-cc-problem="heat" aria-pressed="false">
+            <span class="ico" aria-hidden="true">🔥</span><strong>No heat</strong><span>Furnace or boiler is out</span>
+          </button>
+          <button type="button" class="problem" data-cc-problem="leak" aria-pressed="false">
+            <span class="ico" aria-hidden="true">💧</span><strong>Water leak</strong><span>Pipe, tap or ceiling drip</span>
+          </button>
+          <button type="button" class="problem" data-cc-problem="drain" aria-pressed="false">
+            <span class="ico" aria-hidden="true">🚿</span><strong>Blocked drain</strong><span>Sink, tub or main stack</span>
+          </button>
+          <button type="button" class="problem" data-cc-problem="water" aria-pressed="false">
+            <span class="ico" aria-hidden="true">🚰</span><strong>No hot water</strong><span>Tank or tankless heater</span>
+          </button>
+          <button type="button" class="problem" data-cc-problem="ac" aria-pressed="false">
+            <span class="ico" aria-hidden="true">❄️</span><strong>AC not cooling</strong><span>Blowing warm or not at all</span>
+          </button>
+          <button type="button" class="problem is-red" data-cc-problem="gas" aria-pressed="false">
+            <span class="ico" aria-hidden="true">⚠️</span><strong>I smell gas</strong><span>Or the CO alarm went off</span>
+          </button>
+          <button type="button" class="problem" data-cc-problem="other" aria-pressed="false">
+            <span class="ico" aria-hidden="true">🔧</span><strong>Something else</strong><span>Tell us in your own words</span>
+          </button>
+        </div>
+
+        <div class="triage-out" data-cc-triage-out hidden>
+          <p class="urgency" data-cc-urgency></p>
+          <div class="triage-grid">
+            <div><span>Likely job</span><strong data-cc-triage-job>-</strong></div>
+            <div><span>Typical range</span><strong data-cc-triage-range>-</strong></div>
+            <div><span>How soon</span><strong data-cc-triage-when>-</strong></div>
+          </div>
+          <p class="triage-tip" data-cc-triage-tip></p>
+          <div class="triage-acts">
+            <button type="button" class="btn btn-primary" data-cc-triage-book>Book this job →</button>
+            <button type="button" class="btn btn-ghost" data-cc-triage-price>See the flat-rate price</button>
+            <button type="button" class="btn btn-ghost" data-cc-triage-clear>Clear</button>
+          </div>
+        </div>
+
+        <div class="emergency" data-cc-emergency role="alert" hidden>
+          <div class="em-top"><span class="em-ico" aria-hidden="true">⚠</span><strong>Stop - don't book this online.</strong></div>
+          <p>If you smell gas or a CO alarm is sounding: <b>get everyone outside</b>, don't touch light switches, and don't start the car in the garage. Then call Enbridge emergency at <b>1-866-763-5427</b> from outside the house.</p>
+          <p>Once the gas utility has made it safe, call our 24/7 line and we'll have a licensed gas tech there the same day.</p>
+          <div class="em-acts">
+            <a class="btn btn-danger" href="#cc-triage"><span aria-hidden="true">☎</span> Call Copper &amp; Coil · (613) 555-0114</a>
+            <button type="button" class="btn btn-ghost" data-cc-triage-clear>I understand</button>
+          </div>
+        </div>
+
+        <!-- Service-area check -->
+        <div class="area-check">
+          <div class="area-copy">
+            <h3>Do we come to you?</h3>
+            <p>We cover Ottawa and the inner suburbs - postal codes K1A through K4C. Kanata, Barrhaven, Orléans and the Glebe are all in.</p>
+          </div>
+          <form class="area-form" data-cc-area-form>
+            <label for="cc-postal">Your postal code</label>
+            <div class="area-row">
+              <input id="cc-postal" name="postal" type="text" inputmode="text" maxlength="7" placeholder="K1S 2M4" autocomplete="postal-code" />
+              <button class="btn btn-primary" type="submit">Check</button>
+            </div>
+            <p class="area-out" data-cc-area-out role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============ Upfront pricing ============ -->
+      <section class="cc-pricing" id="cc-pricing" aria-labelledby="cc-pricing-title">
+        <div class="sec-head">
+          <h2 id="cc-pricing-title">You see the price first</h2>
+          <p>No hourly meter running while you watch. We diagnose, we quote a flat rate, you say yes or no.</p>
+        </div>
+        <div class="price-cards">
+          <article class="pcard">
+            <span class="pnum">$89</span>
+            <h3>Diagnostic visit</h3>
+            <p>A licensed tech comes out, finds the fault and explains it. <b>Waived entirely</b> if you approve the repair the same visit.</p>
+          </article>
+          <article class="pcard">
+            <span class="pnum">$0</span>
+            <h3>Surprises</h3>
+            <p>The flat-rate quote is approved on your phone before a tool comes out of the van. If it turns out to be worse, we re-quote - we never just add it to the bill.</p>
+          </article>
+          <article class="pcard is-live">
+            <h3>Your live estimate</h3>
+            <p class="est-job">For <strong data-cc-est-job>a furnace no-heat call</strong></p>
+            <p class="est-range"><span data-cc-est-low>$249</span> – <span data-cc-est-high>$540</span></p>
+            <div class="est-toggles">
+              <label class="switch-row">
+                <input type="checkbox" class="switch" data-cc-after-switch />
+                <span><strong>After-hours / weekend</strong><small>Evenings after 6, Sundays and holidays: +$70 dispatch</small></span>
+              </label>
+              <label class="switch-row">
+                <input type="checkbox" class="switch" data-cc-club />
+                <span><strong>Comfort Club member</strong><small>$19/month · 15% off every repair · priority booking</small></span>
+              </label>
+            </div>
+            <p class="est-note" data-cc-est-note>Range covers the common causes for this job. Your quote is exact.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ Book a job ============ -->
+      <section class="cc-book" id="cc-book" aria-label="Book a job">
+        <div class="app" data-steps data-step="1">
+          <div class="app-bar">
+            <span class="logo" aria-hidden="true">CC</span>
+            <strong>Book a job</strong>
+            <span class="today">Wed, Sep 2 · 1:45 pm</span>
+            <button type="button" class="staff-btn" data-cc-dispatch-open aria-expanded="false" aria-controls="cc-dispatch"><span aria-hidden="true">▦</span> Dispatch board</button>
+            <span class="user" aria-label="Signed in as Jamie Whitfield">JW</span>
+          </div>
+
+          <div class="reminder" data-cc-reminder>
+            <span class="rem-ico" aria-hidden="true">🍁</span>
+            <div class="rem-txt">
+              <strong>Furnace tune-up is due</strong>
+              <span>Your last one was Oct 14, 2025. Booking before Oct 31 keeps the parts warranty on your Lennox ML193 and usually stops the January no-heat call.</span>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" data-cc-reminder-book>Book the tune-up</button>
+          </div>
+
+          <ol class="stepper">
+            <li class="is-active" data-n="1"><span>Problem</span></li>
+            <li data-n="2"><span>Address</span></li>
+            <li data-n="3"><span>Arrival window</span></li>
+            <li data-n="4"><span>Confirm</span></li>
+          </ol>
+
+          <!-- Step 1 -->
+          <section class="panel panel-1">
+            <h2>What are we coming out for?</h2>
+            <p class="sub">This sets the tech we send and the parts they load on the van.</p>
+            <div class="jobs" role="group" aria-label="Job type">
+              <button type="button" class="job is-selected" data-select-group="job" data-label="Furnace no heat" data-cc-job="heat" aria-pressed="true">
+                <strong>Furnace / boiler no heat</strong><span>Gas tech · ignitor, sensor, board</span>
+              </button>
+              <button type="button" class="job" data-select-group="job" data-label="Water leak" data-cc-job="leak" aria-pressed="false">
+                <strong>Water leak</strong><span>Plumber · copper, PEX, shut-offs</span>
+              </button>
+              <button type="button" class="job" data-select-group="job" data-label="Blocked drain" data-cc-job="drain" aria-pressed="false">
+                <strong>Blocked drain</strong><span>Plumber · auger and camera</span>
+              </button>
+              <button type="button" class="job" data-select-group="job" data-label="Water heater" data-cc-job="water" aria-pressed="false">
+                <strong>Water heater</strong><span>Tank or tankless · element, anode</span>
+              </button>
+              <button type="button" class="job" data-select-group="job" data-label="AC not cooling" data-cc-job="ac" aria-pressed="false">
+                <strong>AC not cooling</strong><span>HVAC · capacitor, charge, coil</span>
+              </button>
+              <button type="button" class="job" data-select-group="job" data-label="Furnace tune-up" data-cc-job="tuneup" aria-pressed="false">
+                <strong>Seasonal tune-up</strong><span>Clean, test, safety check</span>
+              </button>
+            </div>
+
+            <div class="field">
+              <label for="cc-detail">Tell us a bit more <small>(the tech reads this in the van)</small></label>
+              <textarea id="cc-detail" rows="3" maxlength="240" placeholder="e.g. Furnace clicks three times then stops. Started last night. House is at 14°C."></textarea>
+              <span class="count" data-cc-count aria-live="polite">0/240</span>
+            </div>
+
+            <h3>Send us a photo of the unit</h3>
+            <p class="sub">The rating plate tells us the model and the parts to bring. Nothing is uploaded in this demo.</p>
+            <button type="button" class="dropzone" data-cc-photo>
+              <span class="dz-ico" aria-hidden="true">＋</span>
+              <span class="dz-txt"><strong>Add a photo</strong><small>Tap to add · JPG or HEIC · up to 3</small></span>
+            </button>
+            <ul class="shots" data-cc-shots aria-label="Attached photos"></ul>
+
+            <div class="actions">
+              <span class="hint" data-cc-step1-hint>Selected: <strong data-out="job">Furnace no heat</strong></span>
+              <button class="btn btn-primary" type="button" data-go="2">Next: your address →</button>
+            </div>
+          </section>
+
+          <!-- Step 2 -->
+          <section class="panel panel-2">
+            <h2>Where are we going?</h2>
+            <p class="sub">Access notes save everyone a phone call at the curb.</p>
+            <div class="grid2">
+              <div class="field wide">
+                <label for="cc-addr">Street address</label>
+                <input id="cc-addr" type="text" value="214 Fifth Ave" autocomplete="street-address" />
+              </div>
+              <div class="field">
+                <label for="cc-unit">Unit / buzzer <small>(optional)</small></label>
+                <input id="cc-unit" type="text" placeholder="e.g. Unit 3, buzz 0312" />
+              </div>
+              <div class="field">
+                <label for="cc-city">City</label>
+                <input id="cc-city" type="text" value="Ottawa" autocomplete="address-level2" />
+              </div>
+              <div class="field">
+                <label for="cc-pc">Postal code</label>
+                <input id="cc-pc" type="text" value="K1S 2M4" autocomplete="postal-code" />
+              </div>
+              <div class="field">
+                <label for="cc-park">Parking</label>
+                <select id="cc-park">
+                  <option selected>Driveway - room for the van</option>
+                  <option>Street parking, pay-and-display</option>
+                  <option>Rear lane / garage</option>
+                  <option>Underground - van won't fit, tech walks in</option>
+                </select>
+              </div>
+            </div>
+
+            <h3>Anything the tech should know?</h3>
+            <div class="access" role="group" aria-label="Access notes">
+              <button type="button" class="acc" data-cc-access="dog" aria-pressed="false"><span aria-hidden="true">🐕</span> Dog on site</button>
+              <button type="button" class="acc" data-cc-access="gate" aria-pressed="false"><span aria-hidden="true">🔒</span> Gate code needed</button>
+              <button type="button" class="acc" data-cc-access="stairs" aria-pressed="false"><span aria-hidden="true">🪜</span> Basement stairs are tight</button>
+              <button type="button" class="acc" data-cc-access="lockbox" aria-pressed="false"><span aria-hidden="true">🔑</span> Lockbox - I won't be home</button>
+              <button type="button" class="acc" data-cc-access="shoes" aria-pressed="false"><span aria-hidden="true">🥾</span> Please wear boot covers</button>
+            </div>
+            <div class="field" data-cc-gate-field hidden>
+              <label for="cc-gate">Gate or lockbox code</label>
+              <input id="cc-gate" type="text" placeholder="e.g. 4417#" />
+            </div>
+            <p class="type-note" data-cc-access-note>Nothing selected - the tech will ring the front bell.</p>
+
+            <div class="actions">
+              <button class="btn btn-ghost" type="button" data-go="1">← Back</button>
+              <button class="btn btn-primary" type="button" data-go="3">Next: pick a window →</button>
+            </div>
+          </section>
+
+          <!-- Step 3 -->
+          <section class="panel panel-3">
+            <h2>When should we come?</h2>
+            <p class="sub">Two-hour windows, and we text you when the tech is 30 minutes out. The name under each window is who's actually covering it.</p>
+            <div class="windows" role="group" aria-label="Arrival window">
+              <button type="button" class="win is-selected" data-select-group="window" data-label="Today, Wed Sep 2 · 2–4 pm" data-cc-tech="marcus" data-cc-after="0" aria-pressed="true">
+                <span class="w-day">Today · Wed Sep 2</span>
+                <strong>2:00 – 4:00 pm</strong>
+                <span class="w-tech"><span class="ava" data-tech="marcus">MD</span>Marcus Delaine · Gas &amp; heating</span>
+                <span class="w-left">2 slots left</span>
+              </button>
+              <button type="button" class="win" data-select-group="window" data-label="Today, Wed Sep 2 · 6–8 pm" data-cc-tech="ty" data-cc-after="1" aria-pressed="false">
+                <span class="w-day">Today · Wed Sep 2</span>
+                <strong>6:00 – 8:00 pm</strong>
+                <span class="w-tech"><span class="ava" data-tech="ty">TB</span>Ty Bergeron · HVAC &amp; water heaters</span>
+                <span class="w-left is-after">After-hours +$70 · 1 slot left</span>
+              </button>
+              <button type="button" class="win" data-select-group="window" data-label="Tomorrow, Thu Sep 3 · 8–10 am" data-cc-tech="priya" data-cc-after="0" aria-pressed="false">
+                <span class="w-day">Tomorrow · Thu Sep 3</span>
+                <strong>8:00 – 10:00 am</strong>
+                <span class="w-tech"><span class="ava" data-tech="priya">PR</span>Priya Raghunathan · Drains &amp; water</span>
+                <span class="w-left">3 slots left</span>
+              </button>
+              <button type="button" class="win" data-select-group="window" data-label="Tomorrow, Thu Sep 3 · 12–2 pm" data-cc-tech="marcus" data-cc-after="0" aria-pressed="false">
+                <span class="w-day">Tomorrow · Thu Sep 3</span>
+                <strong>12:00 – 2:00 pm</strong>
+                <span class="w-tech"><span class="ava" data-tech="marcus">MD</span>Marcus Delaine · Gas &amp; heating</span>
+                <span class="w-left">4 slots left</span>
+              </button>
+              <button type="button" class="win" data-select-group="window" data-label="Sat, Sep 5 · 8–10 am" data-cc-tech="ty" data-cc-after="1" aria-pressed="false">
+                <span class="w-day">Saturday · Sep 5</span>
+                <strong>8:00 – 10:00 am</strong>
+                <span class="w-tech"><span class="ava" data-tech="ty">TB</span>Ty Bergeron · HVAC &amp; water heaters</span>
+                <span class="w-left is-after">Weekend +$70 · 2 slots left</span>
+              </button>
+            </div>
+            <div class="win-summary">
+              <p><strong data-out="window">Today, Wed Sep 2 · 2–4 pm</strong> with <strong data-cc-window-tech>Marcus Delaine</strong></p>
+              <p class="est-line">Estimate for this visit: <b><span data-cc-est-low>$249</span> – <span data-cc-est-high>$540</span></b> <span data-cc-est-flags></span></p>
+            </div>
+            <div class="actions">
+              <button class="btn btn-ghost" type="button" data-go="2">← Back</button>
+              <button class="btn btn-primary" type="button" data-go="4">Next: confirm →</button>
+            </div>
+          </section>
+
+          <!-- Step 4 -->
+          <section class="panel panel-4">
+            <h2>Last bit - how do we reach you?</h2>
+            <p class="sub">One text when the job is confirmed, one when the tech is 30 minutes out. That's it.</p>
+            <div class="summary">
+              <div><span>Job</span><strong data-out="job">Furnace no heat</strong></div>
+              <div><span>Address</span><strong data-cc-addr-out>214 Fifth Ave, Ottawa K1S 2M4</strong></div>
+              <div><span>Window</span><strong data-out="window">Today, Wed Sep 2 · 2–4 pm</strong></div>
+              <div><span>Technician</span><strong data-cc-window-tech>Marcus Delaine</strong></div>
+              <div><span>Access</span><strong data-cc-access-out>Ring the front bell</strong></div>
+              <div><span>Estimate</span><strong><span data-cc-est-low>$249</span> – <span data-cc-est-high>$540</span></strong></div>
+            </div>
+            <div class="grid2">
+              <div class="field">
+                <label for="cc-name">Name</label>
+                <input id="cc-name" type="text" value="Jamie Whitfield" autocomplete="name" />
+              </div>
+              <div class="field">
+                <label for="cc-phone">Mobile</label>
+                <input id="cc-phone" type="tel" value="(613) 555-0198" autocomplete="tel" />
+              </div>
+              <div class="field wide">
+                <label for="cc-email">Email <small>(receipt and quote go here)</small></label>
+                <input id="cc-email" type="email" value="jamie.whitfield@example.com" autocomplete="email" />
+              </div>
+            </div>
+            <label class="check-row">
+              <input id="cc-sms" type="checkbox" checked />
+              <span><strong>Text me when the tech is 30 minutes out</strong><small>Plus a photo and name so you know who's at the door.</small></span>
+            </label>
+            <div class="actions">
+              <button class="btn btn-ghost" type="button" data-go="3">← Back</button>
+              <button class="btn btn-primary btn-lg" type="button" data-go="5" data-cc-confirm>Confirm the booking</button>
+            </div>
+          </section>
+
+          <!-- Step 5: booked -->
+          <section class="panel panel-5">
+            <div class="success">
+              <div class="check" aria-hidden="true">✓</div>
+              <h2>You're on the board</h2>
+              <p class="sub"><strong data-out="window">Today, Wed Sep 2 · 2–4 pm</strong> · <strong data-out="job">Furnace no heat</strong></p>
+              <span class="ref" data-cc-ref>CC-4477</span>
+              <div class="tech-card">
+                <span class="ava lg" data-cc-tech-ava data-tech="marcus">MD</span>
+                <div class="tech-txt">
+                  <strong data-cc-tech-name>Marcus Delaine</strong>
+                  <span data-cc-tech-role>Gas &amp; heating · 11 years with Copper &amp; Coil</span>
+                  <span class="tech-meta" data-cc-tech-meta>4.9 ★ · 1,842 jobs · Licence TSSA G2-40118</span>
+                </div>
+              </div>
+              <ul class="after">
+                <li><span class="ico" aria-hidden="true">💬</span><span><strong>You'll get a text when he's 30 minutes out</strong><small>To (613) 555-0198, with his photo and the van plate.</small></span></li>
+                <li><span class="ico" aria-hidden="true">💳</span><span><strong>Nothing is charged yet</strong><small>The $89 diagnostic is only billed if you decline the repair.</small></span></li>
+              </ul>
+              <div class="actions center">
+                <button class="btn btn-ghost" type="button" data-go="1">Book another job</button>
+                <button class="btn btn-primary" type="button" data-scroll="#cc-job">Track this job →</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- ============ Job tracker ============ -->
+      <section class="cc-track" id="cc-job" aria-labelledby="cc-job-title">
+        <div class="sec-head">
+          <h2 id="cc-job-title">Your job, live</h2>
+          <p>Same screen the homeowner keeps open. Every status here is pushed from the dispatch board - move a card there and this changes.</p>
+        </div>
+
+        <article class="jobcard" data-cc-jobcard data-stage="0">
+          <header class="job-head">
+            <div>
+              <span class="job-ref" data-cc-job-ref>CC-4477</span>
+              <h3 data-cc-job-title>Furnace no heat · 214 Fifth Ave</h3>
+              <p class="job-win" data-cc-job-win>Today, Wed Sep 2 · 2–4 pm arrival window</p>
+            </div>
+            <span class="job-status" data-cc-job-status>Booked</span>
+          </header>
+
+          <ol class="rail" aria-label="Job progress">
+            <li data-cc-rail="0"><span class="pip" aria-hidden="true"></span><span>Booked</span></li>
+            <li data-cc-rail="1"><span class="pip" aria-hidden="true"></span><span>Assigned</span></li>
+            <li data-cc-rail="2"><span class="pip" aria-hidden="true"></span><span>On the way</span></li>
+            <li data-cc-rail="3"><span class="pip" aria-hidden="true"></span><span>On site</span></li>
+            <li data-cc-rail="4"><span class="pip" aria-hidden="true"></span><span>Complete</span></li>
+          </ol>
+
+          <p class="job-line" data-cc-job-line aria-live="polite">Dispatch has your job. A tech is assigned the moment the morning board is built.</p>
+
+          <div class="tech-card is-flat" data-cc-track-tech hidden>
+            <span class="ava lg" data-cc-tech-ava data-tech="marcus">MD</span>
+            <div class="tech-txt">
+              <strong data-cc-tech-name>Marcus Delaine</strong>
+              <span data-cc-tech-role>Gas &amp; heating · 11 years with Copper &amp; Coil</span>
+              <span class="tech-meta" data-cc-tech-meta>4.9 ★ · 1,842 jobs · Licence TSSA G2-40118</span>
+            </div>
+            <div class="tech-acts">
+              <button type="button" class="btn btn-ghost btn-sm" data-cc-thread-open>Text the tech</button>
+              <button type="button" class="btn btn-ghost btn-sm" data-cc-reschedule>Reschedule</button>
+            </div>
+          </div>
+
+          <div class="enroute" data-cc-enroute hidden>
+            <div class="eta">
+              <span class="eta-num" data-cc-eta aria-live="polite">22</span>
+              <span class="eta-unit">min away</span>
+              <span class="eta-sub" data-cc-eta-sub>Van 4 left the Bells Corners depot · 6.2 km</span>
+            </div>
+            <div class="cc-map">
+              <svg viewBox="0 0 320 170" role="img" aria-label="Simplified map: the van is on its way from the depot to 214 Fifth Avenue">
+                <rect x="0" y="0" width="320" height="170" rx="10" class="m-bg" />
+                <path d="M0 40 H320 M0 92 H320 M0 144 H320" class="m-road" />
+                <path d="M52 0 V170 M156 0 V170 M262 0 V170" class="m-road" />
+                <path d="M52 144 V92 H156 V40 H262" class="m-route" />
+                <rect x="12" y="102" width="26" height="18" rx="3" class="m-block" />
+                <rect x="72" y="52" width="30" height="22" rx="3" class="m-block" />
+                <rect x="180" y="104" width="34" height="22" rx="3" class="m-block" />
+                <rect x="224" y="52" width="22" height="20" rx="3" class="m-block" />
+                <g class="m-home" transform="translate(262 40)">
+                  <circle r="11" class="m-home-ring" />
+                  <path d="M-5 1 L0 -4 L5 1 V6 H-5 Z" class="m-home-icon" />
+                </g>
+                <g class="m-van">
+                  <circle r="8" class="m-van-dot" />
+                  <circle r="13" class="m-van-halo" />
+                </g>
+                <text x="10" y="164" class="m-label">Bells Corners depot</text>
+                <text x="196" y="30" class="m-label">214 Fifth Ave</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Quote -->
+          <div class="quote" data-cc-quote hidden>
+            <div class="q-head">
+              <span class="q-tag">Quote ready</span>
+              <h4>Marcus found the fault</h4>
+              <p>Cracked hot-surface ignitor, and the flame sensor is carboned over. It's a 2013 Lennox ML193 - both parts are on the van. Nothing else on the furnace is failing.</p>
+            </div>
+            <div class="q-options" role="group" aria-label="Repair options">
+              <button type="button" class="q-opt" data-cc-quote-opt="good" data-price="289" aria-pressed="false">
+                <span class="q-label">Get the heat back</span>
+                <strong>$289</strong>
+                <span class="q-desc">Replace the ignitor only. Heat tonight; the sensor stays as-is and may fault again this winter.</span>
+              </button>
+              <button type="button" class="q-opt is-selected" data-cc-quote-opt="better" data-price="429" aria-pressed="true">
+                <span class="q-label">Recommended</span>
+                <strong>$429</strong>
+                <span class="q-desc">Ignitor + flame sensor + burner clean and combustion test. What Marcus would do at his own house.</span>
+              </button>
+              <button type="button" class="q-opt" data-cc-quote-opt="best" data-price="649" aria-pressed="false">
+                <span class="q-label">Done for the season</span>
+                <strong>$649</strong>
+                <span class="q-desc">Everything above plus inducer service, a 2-year parts &amp; labour warranty and this year's tune-up prepaid.</span>
+              </button>
+            </div>
+            <label class="check-row" data-cc-addon-row>
+              <input id="cc-addon" type="checkbox" data-cc-addon />
+              <span><strong>Add a new gas shut-off valve - $95</strong><small>The existing one is seized. Not urgent today, but the next tech will need it to work.</small></span>
+            </label>
+            <div class="q-foot">
+              <p class="q-total">Approve total <strong data-cc-quote-total>$429.00</strong> <small data-cc-quote-note>before HST · diagnostic waived</small></p>
+              <div class="q-acts">
+                <button type="button" class="btn btn-primary btn-lg" data-cc-quote-approve>Approve the work</button>
+                <button type="button" class="btn btn-ghost" data-cc-quote-ask>Ask a question</button>
+                <button type="button" class="btn btn-ghost" data-cc-quote-decline>Not today</button>
+              </div>
+            </div>
+            <p class="q-state" data-cc-quote-state aria-live="polite" hidden></p>
+          </div>
+
+          <!-- Invoice -->
+          <div class="invoice" data-cc-invoice hidden>
+            <h4>Invoice <span data-cc-inv-ref>CC-4477</span></h4>
+            <p class="inv-sub">Work completed 4:12 pm by Marcus Delaine. Furnace tested through two full cycles before he left.</p>
+            <div class="inv-table-wrap">
+              <table class="inv-table">
+                <caption class="sr-only">Invoice line items</caption>
+                <thead><tr><th scope="col">Item</th><th scope="col">Detail</th><th scope="col" class="num">Amount</th></tr></thead>
+                <tbody data-cc-inv-lines></tbody>
+                <tfoot data-cc-inv-foot></tfoot>
+              </table>
+            </div>
+            <label class="check-row club-row">
+              <input id="cc-club-add" type="checkbox" data-cc-club-add />
+              <span><strong>Add Comfort Club - $19/month</strong><small>Two tune-ups a year, 15% off every repair (applied to this invoice), priority booking and no after-hours surcharge. Cancel any time.</small></span>
+            </label>
+            <div class="inv-foot">
+              <p class="inv-total">Total due <strong data-cc-inv-total>$0.00</strong></p>
+              <button type="button" class="btn btn-primary btn-lg" data-cc-pay-open>Pay now</button>
+            </div>
+            <p class="inv-paid" data-cc-inv-paid hidden></p>
+          </div>
+
+          <!-- Review -->
+          <div class="review" data-cc-review hidden>
+            <h4>How did Marcus do?</h4>
+            <p class="rev-sub">Reviews go on the tech's own profile - the crew sees them at Monday's toolbox talk.</p>
+            <div class="stars" role="group" aria-label="Rate this visit">
+              <button type="button" data-cc-star="1" aria-label="1 star" aria-pressed="false">★</button>
+              <button type="button" data-cc-star="2" aria-label="2 stars" aria-pressed="false">★</button>
+              <button type="button" data-cc-star="3" aria-label="3 stars" aria-pressed="false">★</button>
+              <button type="button" data-cc-star="4" aria-label="4 stars" aria-pressed="false">★</button>
+              <button type="button" data-cc-star="5" aria-label="5 stars" aria-pressed="false">★</button>
+            </div>
+            <form class="rev-form" data-cc-review-form>
+              <label class="sr-only" for="cc-rev-text">Your review</label>
+              <textarea id="cc-rev-text" rows="2" maxlength="200" placeholder="Anything you'd want another homeowner to know?"></textarea>
+              <button class="btn btn-primary" type="submit" data-cc-review-send disabled>Post review</button>
+            </form>
+            <p class="rev-thanks" data-cc-review-thanks aria-live="polite" hidden></p>
+          </div>
+
+          <div class="job-demo">
+            <button type="button" class="btn btn-ghost" data-cc-advance>Simulate: assign a tech →</button>
+            <span class="demo-note">Demo control - in the real product this is dispatch and the tech's phone.</span>
+          </div>
+        </article>
+      </section>
+
+      <!-- ============ Flat-rate price book ============ -->
+      <section class="cc-prices" id="cc-prices" aria-labelledby="cc-prices-title">
+        <div class="sec-head">
+          <h2 id="cc-prices-title">The flat-rate book, in public</h2>
+          <p>Every job we do most often, with the real price. Search it or filter by trade - the same book the tech carries.</p>
+        </div>
+        <div class="price-bar">
+          <div class="chips" role="group" aria-label="Filter by trade">
+            <button type="button" data-filter="all" class="is-active" aria-pressed="true">Everything</button>
+            <button type="button" data-filter="heating" aria-pressed="false">Heating</button>
+            <button type="button" data-filter="cooling" aria-pressed="false">Cooling</button>
+            <button type="button" data-filter="drains" aria-pressed="false">Drains</button>
+            <button type="button" data-filter="water" aria-pressed="false">Water</button>
+          </div>
+          <div class="price-search">
+            <label class="sr-only" for="cc-search">Search the price book</label>
+            <input id="cc-search" type="search" placeholder="Search: ignitor, sump, toilet…" autocomplete="off" data-cc-search />
+            <span class="found" data-cc-found aria-live="polite">10 jobs</span>
+          </div>
+        </div>
+        <ul class="pricebook" data-filter-target data-cc-pricebook>
+          <li class="prow" data-type="heating" data-name="Furnace no-heat diagnosis and ignitor replacement gas">
+            <div class="prow-main"><strong>Furnace no-heat repair</strong><span>Diagnosis, ignitor or flame sensor, combustion test</span></div>
+            <span class="prow-price">$249 – $540</span>
+            <button type="button" class="btn btn-ghost btn-sm" data-cc-book-row="heat">Book this</button>
+          </li>
+          <li class="prow" data-type="heating" data-name="Furnace tune-up seasonal maintenance clean safety">
+            <div class="prow-main"><strong>Furnace tune-up</strong><span>21-point clean, test and safety check · 60–75 min</span></div>
+            <span class="prow-price">$169 flat</span>
+            <button type="button" class="btn btn-ghost btn-sm" data-cc-book-row="tuneup">Book this</button>
+          </li>
+          <li class="prow" data-type="heating" data-name="Boiler circulator pump replacement hydronic radiator">
+            <div class="prow-main"><strong>Boiler circulator pump</strong><span>Grundfos or Taco swap, system bled and balanced</span></div>
+            <span class="prow-price">$610 – $890</span>
+            <button type="button" class="btn btn-ghost btn-sm" data-cc-book-row="heat">Book this</button>
+          </li>
+          <li class="prow" data-type="cooling" data-name="AC capacitor contactor replacement not cooling condenser">
+            <div class="prow-main"><strong>AC capacitor / contactor</strong><span>The usual cause of a condenser that hums but won't start</span></div>
+            <span class="prow-price">$229 – $395</span>
+            <button type="button" class="btn btn-ghost btn-sm" data-cc-book-row="ac">Book this</button>
+          </li>
+          <li class="prow" data-type="cooling" data-name="Air conditioner refrigerant leak search recharge R410A">
+            <div class="prow-main"><strong>Refrigerant leak search + recharge</strong><span>Nitrogen pressure test, repair, weighed-in R-410A</span></div>
+            <span class="prow-price">$480 – $1,150</span>
+            <button type="button" class="btn btn-ghost btn-sm" data-cc-book-row="ac">Book this</button>
+          </li>
+          <li class="prow" data-type="drains" data-name="Kitchen sink drain auger snake blocked clog">
+            <div class="prow-main"><strong>Kitchen or bath drain auger</strong><span>Up to 25 ft of line, cleared and flow-tested</span></div>
+            <span class="prow-price">$189 flat</span>
+            <button type="button" class="btn btn-ghost btn-sm" data-cc-book-row="drain">Book this</button>
+          </li>
+          <li class="prow" data-type="drains" data-name="Main stack camera inspection sewer roots blockage">
+            <div class="prow-main"><strong>Main stack camera inspection</strong><span>Recorded run to the city connection, report emailed</span></div>
+            <span class="prow-price">$310 flat</span>
+            <button type="button" class="btn btn-ghost btn-sm" data-cc-book-row="drain">Book this</button>
+          </li>
+          <li class="prow" data-type="drains" data-name="Sump pump replacement basement flooding backup">
+            <div class="prow-main"><strong>Sump pump replacement</strong><span>1/3 hp Zoeller, new check valve, tested with a full pit</span></div>
+            <span class="prow-price">$720 – $980</span>
+            <button type="button" class="btn btn-ghost btn-sm" data-cc-book-row="drain">Book this</button>
+          </li>
+          <li class="prow" data-type="water" data-name="Water heater element thermostat no hot water tank">
+            <div class="prow-main"><strong>Water heater element / thermostat</strong><span>Tank drained, element swapped, anode checked</span></div>
+            <span class="prow-price">$285 – $470</span>
+            <button type="button" class="btn btn-ghost btn-sm" data-cc-book-row="water">Book this</button>
+          </li>
+          <li class="prow" data-type="water" data-name="Toilet rebuild running leak flapper fill valve wax seal">
+            <div class="prow-main"><strong>Toilet rebuild or reset</strong><span>Fill valve, flapper, new wax seal, floor bolts</span></div>
+            <span class="prow-price">$215 flat</span>
+            <button type="button" class="btn btn-ghost btn-sm" data-cc-book-row="leak">Book this</button>
+          </li>
+          <li class="prow" data-type="water" data-name="Burst pipe copper PEX repair leak shut off valve">
+            <div class="prow-main"><strong>Burst pipe repair</strong><span>Copper or PEX section, new shut-off, pressure tested</span></div>
+            <span class="prow-price">$340 – $760</span>
+            <button type="button" class="btn btn-ghost btn-sm" data-cc-book-row="leak">Book this</button>
+          </li>
+          <li class="prow-empty" data-cc-price-empty hidden>Nothing in the book matches that. Try "drain", "furnace" or clear the search - or tell us in your own words on the booking form.</li>
+        </ul>
+      </section>
+
+      <div class="cc-spacer"></div>
+
+      <!-- ============ Text-the-tech drawer ============ -->
+      <aside class="drawer" id="cc-thread" data-cc-thread role="dialog" aria-modal="true" aria-labelledby="cc-thread-title">
+        <div class="drawer-panel">
+          <header class="drawer-head">
+            <span class="ava" data-tech="marcus" aria-hidden="true">MD</span>
+            <div>
+              <h3 id="cc-thread-title">Marcus Delaine</h3>
+              <p>Copper &amp; Coil · replies from the van between jobs</p>
+            </div>
+            <button type="button" class="drawer-x" data-cc-thread-close aria-label="Close messages">×</button>
+          </header>
+          <ol class="thread" data-cc-thread-list aria-label="Messages with your technician">
+            <li class="msg them"><span class="from">Marcus · 1:52 pm</span><p>Hi Jamie - I've got your furnace call. Wrapping up on Merivale, then I'm headed your way. Anything I should know before I pull in?</p></li>
+          </ol>
+          <div class="thread-chips" role="group" aria-label="Quick replies">
+            <button type="button" data-cc-thread-chip="How far away are you?">How far away are you?</button>
+            <button type="button" data-cc-thread-chip="Park in the driveway, the side door is open.">Park in the driveway</button>
+            <button type="button" data-cc-thread-chip="Can you take a look at the humidifier while you're here?">Add to the job</button>
+          </div>
+          <form class="composer2" data-cc-thread-form>
+            <label class="sr-only" for="cc-thread-input">Message</label>
+            <input id="cc-thread-input" type="text" placeholder="Message Marcus…" autocomplete="off" maxlength="220" />
+            <button class="btn btn-primary" type="submit">Send</button>
+          </form>
+        </div>
+      </aside>
+
+      <!-- ============ Reschedule modal ============ -->
+      <div class="cc-modal" data-cc-modal>
+        <div class="cc-modal-card" role="dialog" aria-modal="true" aria-labelledby="cc-modal-title" aria-describedby="cc-modal-body" tabindex="-1">
+          <button type="button" class="cc-modal-x" data-cc-modal-close aria-label="Close dialog">×</button>
+          <h3 id="cc-modal-title">Move your arrival window</h3>
+          <p id="cc-modal-body">Pick another window. Your slot is released the moment you confirm, so someone else on the emergency list can have it.</p>
+          <div class="modal-wins" role="group" aria-label="New arrival window">
+            <button type="button" data-cc-newwin="Today, Wed Sep 2 · 6–8 pm|ty" aria-pressed="false"><strong>Today · 6–8 pm</strong><span>Ty Bergeron · after-hours +$70</span></button>
+            <button type="button" data-cc-newwin="Tomorrow, Thu Sep 3 · 8–10 am|priya" aria-pressed="false"><strong>Tomorrow · 8–10 am</strong><span>Priya Raghunathan</span></button>
+            <button type="button" data-cc-newwin="Tomorrow, Thu Sep 3 · 12–2 pm|marcus" aria-pressed="false"><strong>Tomorrow · 12–2 pm</strong><span>Marcus Delaine</span></button>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-ghost" data-cc-modal-close>Keep my window</button>
+            <button type="button" class="btn btn-primary" data-cc-modal-ok disabled>Move the job</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ Payment modal ============ -->
+      <div class="cc-modal" data-cc-pay>
+        <div class="cc-modal-card" role="dialog" aria-modal="true" aria-labelledby="cc-pay-title" tabindex="-1">
+          <button type="button" class="cc-modal-x" data-cc-pay-close aria-label="Close payment">×</button>
+          <h3 id="cc-pay-title">Pay invoice <span data-cc-pay-ref>CC-4477</span></h3>
+          <p class="pay-amount">Amount due <strong data-cc-pay-amount>$0.00</strong></p>
+          <div class="pay-methods" role="group" aria-label="Payment method">
+            <button type="button" class="pay-m is-selected" data-cc-pay-method="saved" aria-pressed="true"><strong>Saved card</strong><span>Visa ending 4242 · Jamie Whitfield</span></button>
+            <button type="button" class="pay-m" data-cc-pay-method="new" aria-pressed="false"><strong>Another card</strong><span>Enter card details</span></button>
+            <button type="button" class="pay-m" data-cc-pay-method="etransfer" aria-pressed="false"><strong>e-Transfer</strong><span>We email a request to pay</span></button>
+          </div>
+          <div class="pay-card" data-cc-pay-card hidden>
+            <div class="field wide"><label for="cc-cardnum">Card number</label><input id="cc-cardnum" type="text" inputmode="numeric" placeholder="4242 4242 4242 4242" autocomplete="cc-number" /></div>
+            <div class="grid2">
+              <div class="field"><label for="cc-cardexp">Expiry</label><input id="cc-cardexp" type="text" inputmode="numeric" placeholder="MM/YY" autocomplete="cc-exp" /></div>
+              <div class="field"><label for="cc-cardcvc">CVC</label><input id="cc-cardcvc" type="text" inputmode="numeric" placeholder="123" autocomplete="cc-csc" /></div>
+            </div>
+          </div>
+          <p class="pay-secure">Card details never touch our servers - and this demo stops here. Nothing is charged.</p>
+          <div class="actions">
+            <button type="button" class="btn btn-ghost" data-cc-pay-close>Cancel</button>
+            <button type="button" class="btn btn-primary btn-lg" data-cc-pay-go>Pay <span data-cc-pay-amount>$0.00</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cc-toast" role="status" aria-live="polite" data-cc-toast></div>
+
+      <!-- ============ Dispatch board (staff) ============ -->
+      <div class="dispatch" id="cc-dispatch" data-cc-dispatch role="dialog" aria-modal="true" aria-labelledby="cc-dispatch-title" tabindex="-1">
+        <div class="dispatch-inner">
+          <div class="dispatch-head">
+            <div>
+              <p class="eyebrow">Dispatch · Wed, Sep 2 · 1:45 pm</p>
+              <h2 id="cc-dispatch-title">Today's board</h2>
+              <p class="sub">The office side of the same jobs. Assign a tech or move a card and the homeowner's tracker updates on their phone.</p>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" data-cc-dispatch-close>← Back to homeowner view</button>
+          </div>
+
+          <div class="dispatch-kpis">
+            <div class="kpi"><span>Capacity today</span><strong data-cc-capacity>3 slots left</strong></div>
+            <div class="kpi"><span>Jobs on the board</span><strong data-cc-kpi-jobs>7</strong></div>
+            <div class="kpi"><span>Unassigned</span><strong data-cc-kpi-open>2</strong></div>
+            <div class="kpi"><span>Revenue booked</span><strong data-cc-kpi-rev>$3,180</strong></div>
+          </div>
+
+          <div class="emq" data-cc-emq>
+            <h3><span class="emq-dot" aria-hidden="true"></span> Emergency queue <span class="emq-count" data-cc-emq-count>1</span></h3>
+            <ul data-cc-emq-list></ul>
+          </div>
+
+          <div class="dispatch-cols">
+            <section class="board-wrap" aria-labelledby="cc-board-title">
+              <div class="board-bar">
+                <h3 id="cc-board-title">Board</h3>
+                <div class="board-filter" role="group" aria-label="Filter by technician">
+                  <button type="button" data-cc-board-tech="all" aria-pressed="true">All techs</button>
+                  <button type="button" data-cc-board-tech="marcus" aria-pressed="false">Marcus</button>
+                  <button type="button" data-cc-board-tech="priya" aria-pressed="false">Priya</button>
+                  <button type="button" data-cc-board-tech="ty" aria-pressed="false">Ty</button>
+                </div>
+              </div>
+              <div class="board-scroll">
+                <div class="board" data-cc-board></div>
+              </div>
+            </section>
+            <aside class="roster">
+              <h3>Crew today</h3>
+              <ul class="roster-list" data-cc-roster></ul>
+              <div class="roster-note">
+                <strong>After-hours cover</strong>
+                <p>Ty is on the 6 pm–midnight rotation. Overflow rolls to Rideau Mechanical under the mutual-aid agreement.</p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+
+      <aside class="ln-widget" id="assistant" data-bot="trades" data-mode="chat" aria-label="Copper &amp; Coil assistant">
+        <div class="wtop">
+          <span class="avatar" aria-hidden="true">CC</span>
+          <p class="who"><strong>Copper &amp; Coil dispatch</strong><span>Books jobs · answers day or night</span></p>
+          <span class="status-pill">Live</span>
+          <button class="wmin" type="button" data-collapse="#assistant" aria-label="Minimise assistant">–</button>
+        </div>
+        <div class="wchips" aria-label="Try saying">
+          <button type="button" data-say>My furnace stopped and the house is cold</button>
+          <button type="button" data-say>What does a drain clearing cost?</button>
+          <button type="button" data-say>Anything today after 5?</button>
+        </div>
+        <div class="messages" aria-live="polite"></div>
+        <form class="composer">
+          <input type="text" placeholder="Type a message…" aria-label="Message" autocomplete="off" />
+          <button class="send" type="submit" aria-label="Send">➤</button>
+        </form>
+      </aside>
+    </main>
+
+    <footer class="ln-foot">
+      <span>Fictional plumbing and heating company and data. Built by LocalNinja as a sample project.</span>
+      <a href="/#contact">Want one for your business? →</a>
+    </footer>
+
+    <script type="module" src="/src/work/mockups.js"></script>
+    <script type="module" src="/src/work/trades.js"></script>
+    <script type="module" src="/src/work/bot.js"></script>
+  </body>
+</html>

@@ -7,6 +7,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
+        work: resolve(import.meta.dirname, 'work.html'),
         'work/clinic': resolve(import.meta.dirname, 'work/clinic.html'),
         'work/restaurant': resolve(import.meta.dirname, 'work/restaurant.html'),
         'work/realty': resolve(import.meta.dirname, 'work/realty.html'),
@@ -19,6 +20,8 @@ export default defineConfig({
         'work/irina': resolve(import.meta.dirname, 'work/irina.html'),
         'work/story': resolve(import.meta.dirname, 'work/story.html'),
         'work/ninja-commerce': resolve(import.meta.dirname, 'work/ninja-commerce.html'),
+        'work/trades': resolve(import.meta.dirname, 'work/trades.html'),
+        'work/dealer': resolve(import.meta.dirname, 'work/dealer.html'),
       },
     },
   },

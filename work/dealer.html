@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rideau Motorworks - LocalNinja sample project</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/logo-animated.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/work/shell.css" />
+    <link rel="stylesheet" href="/src/work/bot.css" />
+    <link rel="stylesheet" href="/src/work/widget.css" />
+    <link rel="stylesheet" href="/src/work/dealer.css" />
+    <style>.ln-widget{--w-accent:#ff6a1f;--w-accent-ink:#1a0d04;--w-bg:#121a26;--w-ink:#e8eef6;--w-body:#0b111a;--w-bot:#1a2432;--w-line:#26344a;--w-chip:#16202e;--w-input:#0b111a;--w-muted:#8ea0b8;}</style>
+  </head>
+  <body>
+    <header class="ln-bar">
+      <a class="ln-bar-brand" href="/#work"><img src="/logo-animated.svg" alt="" width="32" height="32" /><span class="ln-bar-name">Local<span class="ninja">Ninja</span></span></a>
+      <p class="ln-bar-title">Sample project · <strong>Rideau Motorworks</strong> parts &amp; service portal <span class="ln-tag">Web app</span></p>
+      <a class="ln-bar-back" href="/#work">← Back to site</a>
+    </header>
+
+    <main class="dl">
+      <!-- ============ Dealership chrome ============ -->
+      <div class="dl-top">
+        <span class="dl-brand"><span class="mark" aria-hidden="true">RM</span><span class="wm"><b>Rideau Motorworks</b><small>Ford · Ram · Chevrolet · Ottawa</small></span></span>
+        <p class="dl-hours"><span class="dot" aria-hidden="true"></span>Parts desk open until 6:00 · <a href="tel:+16135550148">(613) 555-0148</a> · 1885 Merivale Rd</p>
+        <button class="dl-staff-btn" type="button" data-dl-staff-open aria-expanded="false" aria-controls="dl-staff"><span aria-hidden="true">▤</span> Parts counter</button>
+        <span class="dl-acct"><span class="ava" aria-hidden="true">DC</span><span class="who"><b>Dan Croteau</b><small>Croteau Contracting · Trade tier 2</small></span></span>
+      </div>
+      <div class="dl-stripe" aria-hidden="true"></div>
+
+      <!-- ============ My garage ============ -->
+      <div class="dl-garage" id="dl-garage">
+        <span class="gar-label">My garage</span>
+        <div class="gar-chips" role="group" aria-label="Saved vehicles" data-dl-garage></div>
+        <p class="gar-now" data-dl-vehicle-line>Pick a vehicle to filter the catalogue.</p>
+        <button class="btn btn-ghost btn-sm gar-change" type="button" data-toggle="#dl-picker" data-scroll="#dl-picker" data-dl-picker-btn aria-controls="dl-picker" aria-expanded="false">Change vehicle</button>
+      </div>
+
+      <div class="dl-shell" data-tabs>
+        <nav class="dl-tabs" role="tablist" aria-label="Portal sections">
+          <button type="button" role="tab" class="is-active" aria-selected="true" data-tab="parts">Parts catalogue</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="service">Book service</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="orders">My orders <span class="tab-badge" data-dl-open-count>2</span></button>
+        </nav>
+
+        <!-- ============ Parts ============ -->
+        <section class="dl-panel is-active" role="tabpanel" data-panel="parts" aria-label="Parts catalogue">
+          <div class="dl-picker" id="dl-picker">
+            <div class="pick-head">
+              <h2>Find the right part</h2>
+              <p>Decode a VIN or step through year, make, model and trim. Everything below filters to the vehicle you pin.</p>
+            </div>
+            <div class="pick-grid">
+              <form class="pick-vin" data-dl-vin-form>
+                <label for="dl-vin">Decode a VIN <small>17 characters, off the door jamb</small></label>
+                <div class="vin-row">
+                  <input id="dl-vin" type="text" maxlength="17" autocomplete="off" spellcheck="false" placeholder="1FTFW1E85MFA10394" />
+                  <button class="btn btn-primary" type="submit">Decode</button>
+                </div>
+                <p class="vin-msg" data-dl-vin-msg>Try <code>1FTFW1E85MFA10394</code> (F-150) or <code>1C6SRFFT4LN214776</code> (Ram 1500).</p>
+              </form>
+              <div class="pick-cascade">
+                <span class="pick-or" aria-hidden="true">or</span>
+                <div class="pick-selects">
+                  <div class="field"><label for="dl-year">Year</label>
+                    <select id="dl-year" data-dl-sel="year"><option value="">Select year</option></select>
+                  </div>
+                  <div class="field"><label for="dl-make">Make</label>
+                    <select id="dl-make" data-dl-sel="make" disabled><option value="">Select make</option></select>
+                  </div>
+                  <div class="field"><label for="dl-model">Model</label>
+                    <select id="dl-model" data-dl-sel="model" disabled><option value="">Select model</option></select>
+                  </div>
+                  <div class="field"><label for="dl-trim">Trim &amp; engine</label>
+                    <select id="dl-trim" data-dl-sel="trim" disabled><option value="">Select trim</option></select>
+                  </div>
+                </div>
+                <button class="btn btn-primary" type="button" data-dl-pin disabled>Pin to my garage</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="dl-toolbar">
+            <div class="dl-search">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M16 16l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+              <label class="sr-only" for="dl-search">Search parts</label>
+              <input id="dl-search" type="search" autocomplete="off" placeholder="Search a part name or number — try FL-500S" />
+            </div>
+            <div class="dl-seg" role="group" aria-label="Parts source">
+              <button type="button" class="is-active" data-dl-mode="oem" aria-pressed="true">OEM / genuine</button>
+              <button type="button" data-dl-mode="am" aria-pressed="false">Aftermarket</button>
+            </div>
+            <label class="dl-check"><input type="checkbox" data-dl-fitonly /><span>Fits my vehicle only</span></label>
+          </div>
+
+          <div class="dl-cats" role="group" aria-label="Category">
+            <button type="button" class="is-active" data-filter="all">All parts <span data-dl-count="all">0</span></button>
+            <button type="button" data-filter="brakes">Brakes <span data-dl-count="brakes">0</span></button>
+            <button type="button" data-filter="filters">Filters <span data-dl-count="filters">0</span></button>
+            <button type="button" data-filter="suspension">Suspension <span data-dl-count="suspension">0</span></button>
+            <button type="button" data-filter="electrical">Electrical <span data-dl-count="electrical">0</span></button>
+            <button type="button" data-filter="body">Body &amp; glass <span data-dl-count="body">0</span></button>
+            <button type="button" data-filter="fluids">Fluids <span data-dl-count="fluids">0</span></button>
+          </div>
+
+          <p class="dl-results" data-dl-results aria-live="polite">Showing 18 parts</p>
+
+          <div class="dl-grid" id="dl-grid" data-filter-target data-dl-grid></div>
+          <p class="dl-empty" data-dl-grid-empty hidden>Nothing matches that. Clear the search, or ask the parts desk in the assistant — they can look it up by the number on the old part.</p>
+
+          <section class="dl-recent" data-dl-recent hidden aria-label="Recently viewed">
+            <h3>Recently viewed</h3>
+            <div class="recent-row" data-dl-recent-row></div>
+          </section>
+
+          <section class="dl-help">
+            <div>
+              <h3>Not sure which part you need?</h3>
+              <p>Give the parts desk your VIN and what the car is doing. Marc has been behind this counter for eleven years - he'll narrow it down in a minute.</p>
+            </div>
+            <button class="btn btn-primary" type="button" data-dl-ask data-scroll="#assistant">Ask the parts desk →</button>
+          </section>
+        </section>
+
+        <!-- ============ Service ============ -->
+        <section class="dl-panel" role="tabpanel" data-panel="service" aria-label="Book service">
+          <div class="svc-cols">
+            <div class="svc-book" id="dl-book" data-steps data-step="1">
+              <ol class="dl-stepper">
+                <li class="is-active" data-n="1"><span>Service</span></li>
+                <li data-n="2"><span>Day &amp; time</span></li>
+                <li data-n="3"><span>Confirm</span></li>
+              </ol>
+
+              <section class="svc-panel svc-panel-1">
+                <h2>What does it need?</h2>
+                <p class="sub">Prices are for <strong data-dl-svc-vehicle>your vehicle</strong>. Anything we find on the hoist gets quoted before we touch it.</p>
+                <div class="svc-list" role="group" aria-label="Service">
+                  <button type="button" class="svc is-selected" aria-pressed="true" data-select-group="svc" data-label="Oil &amp; filter change" data-dl-svc="oil"><strong>Oil &amp; filter change</strong><span>Full synthetic, up to 6 L · multi-point inspection</span><b class="p">$89.95</b><i>45 min</i></button>
+                  <button type="button" class="svc" aria-pressed="false" data-select-group="svc" data-label="Brake service" data-dl-svc="brakes"><strong>Brake service</strong><span>Measure, clean and quote · inspection credited to the repair</span><b class="p">from $59.95</b><i>1 hr</i></button>
+                  <button type="button" class="svc" aria-pressed="false" data-select-group="svc" data-label="Diagnostics" data-dl-svc="diag"><strong>Diagnostics</strong><span>Scan, road test and a written cause · first hour</span><b class="p">$149.00</b><i>1 hr</i></button>
+                  <button type="button" class="svc" aria-pressed="false" data-select-group="svc" data-label="Tire changeover &amp; balance" data-dl-svc="tires"><strong>Tire changeover &amp; balance</strong><span>Four wheels, road-force balanced, TPMS reset</span><b class="p">$99.95</b><i>1 hr 15 min</i></button>
+                  <button type="button" class="svc" aria-pressed="false" data-select-group="svc" data-label="Four-wheel alignment" data-dl-svc="align"><strong>Four-wheel alignment</strong><span>Printed before/after sheet · required after suspension work</span><b class="p">$139.95</b><i>1 hr 30 min</i></button>
+                  <button type="button" class="svc" aria-pressed="false" data-select-group="svc" data-label="Timing chain &amp; cover reseal" data-dl-svc="timing"><strong>Timing chain &amp; cover reseal</strong><span>Book-time job · courtesy car included</span><b class="p">$1,480.00</b><i>2 days</i></button>
+                </div>
+                <p class="svc-note" data-dl-svc-note>Oil &amp; filter change · 45 minutes · you can wait in the lounge.</p>
+                <div class="dl-actions">
+                  <button class="btn btn-primary" type="button" data-go="2">Pick a time →</button>
+                </div>
+              </section>
+
+              <section class="svc-panel svc-panel-2">
+                <h2>When can we have it?</h2>
+                <p class="sub">Shop hours Mon-Fri 7:00-18:00, Saturday 8:00-14:00. Showing <strong data-out="svc">Oil &amp; filter change</strong>.</p>
+                <div class="svc-days" role="group" aria-label="Day">
+                  <button type="button" class="day is-selected" aria-pressed="true" data-select-group="svcday" data-label="Fri, Sep 4" data-dl-day="fri"><b>Fri</b><span>Sep 4</span><i data-dl-day-free>5 open</i></button>
+                  <button type="button" class="day" aria-pressed="false" data-select-group="svcday" data-label="Sat, Sep 5" data-dl-day="sat"><b>Sat</b><span>Sep 5</span><i data-dl-day-free>2 open</i></button>
+                  <button type="button" class="day" aria-pressed="false" data-select-group="svcday" data-label="Mon, Sep 7" data-dl-day="mon"><b>Mon</b><span>Sep 7</span><i data-dl-day-free>6 open</i></button>
+                  <button type="button" class="day" aria-pressed="false" data-select-group="svcday" data-label="Tue, Sep 8" data-dl-day="tue"><b>Tue</b><span>Sep 8</span><i data-dl-day-free>4 open</i></button>
+                  <button type="button" class="day" aria-pressed="false" data-select-group="svcday" data-label="Wed, Sep 9" data-dl-day="wed"><b>Wed</b><span>Sep 9</span><i data-dl-day-free>6 open</i></button>
+                </div>
+                <h3>Drop-off times on <strong data-out="svcday">Fri, Sep 4</strong></h3>
+                <div class="svc-times" role="group" aria-label="Time">
+                  <button type="button" data-select-group="svctime" data-dl-time="7:30" data-label="7:30 AM">7:30 AM</button>
+                  <button type="button" data-select-group="svctime" data-dl-time="9:00" data-label="9:00 AM">9:00 AM</button>
+                  <button type="button" data-select-group="svctime" data-dl-time="10:30" data-label="10:30 AM">10:30 AM</button>
+                  <button type="button" data-select-group="svctime" data-dl-time="13:00" data-label="1:00 PM">1:00 PM</button>
+                  <button type="button" data-select-group="svctime" data-dl-time="14:30" data-label="2:30 PM">2:30 PM</button>
+                  <button type="button" data-select-group="svctime" data-dl-time="16:00" data-label="4:00 PM">4:00 PM</button>
+                </div>
+                <p class="svc-note" data-dl-time-note>Pick a time - greyed-out slots are already spoken for.</p>
+
+                <h3>While it's with us</h3>
+                <div class="svc-mode" role="group" aria-label="Drop off or wait">
+                  <button type="button" class="mode is-selected" aria-pressed="true" data-select-group="svcmode" data-label="Drop off" data-dl-mode-visit="drop"><strong>Drop it off</strong><span>Night-drop envelopes by the bay doors if you're early</span></button>
+                  <button type="button" class="mode" aria-pressed="false" data-select-group="svcmode" data-label="Wait for it" data-dl-mode-visit="wait"><strong>Wait for it</strong><span>Lounge, wifi and decent coffee · jobs under 90 minutes</span></button>
+                </div>
+                <label class="dl-check big"><input type="checkbox" data-dl-courtesy /><span><b>Hold a courtesy car</b><small data-dl-courtesy-note>Free for trade accounts · four left on Fri, Sep 4</small></span></label>
+                <div class="dl-actions">
+                  <button class="btn btn-ghost" type="button" data-go="1">← Back</button>
+                  <button class="btn btn-primary" type="button" data-go="3" data-dl-to-confirm>Review booking →</button>
+                </div>
+              </section>
+
+              <section class="svc-panel svc-panel-3">
+                <h2>Confirm the appointment</h2>
+                <div class="svc-summary">
+                  <div><span>Vehicle</span><strong data-dl-svc-veh>-</strong></div>
+                  <div><span>Service</span><strong data-out="svc">Oil &amp; filter change</strong></div>
+                  <div><span>Day</span><strong data-out="svcday">Fri, Sep 4</strong></div>
+                  <div><span>Time</span><strong data-out="svctime">-</strong></div>
+                  <div><span>While it's here</span><strong data-out="svcmode">Drop off</strong></div>
+                  <div><span>Courtesy car</span><strong data-dl-courtesy-out>No</strong></div>
+                </div>
+                <div class="field"><label for="dl-svc-notes">Anything we should know? <small>(optional)</small></label>
+                  <textarea id="dl-svc-notes" rows="3" maxlength="200" placeholder="e.g. Shudder under braking above 80 km/h. Ladder rack stays on."></textarea>
+                </div>
+                <div class="field"><label for="dl-svc-phone">Mobile for updates</label><input id="dl-svc-phone" type="tel" value="(613) 555-0177" /></div>
+                <div class="dl-actions">
+                  <button class="btn btn-ghost" type="button" data-go="2">← Back</button>
+                  <button class="btn btn-primary" type="button" data-go="4" data-dl-book>Book it</button>
+                </div>
+              </section>
+
+              <section class="svc-panel svc-panel-4">
+                <div class="svc-done">
+                  <span class="tick" aria-hidden="true">✓</span>
+                  <h2>Booked - work order <b data-dl-ro>RO-88221</b></h2>
+                  <p class="sub" data-dl-book-line>-</p>
+                  <ul class="done-list">
+                    <li><b>Advisor</b> Marc Lefebvre · marc.lefebvre@rideaumotorworks.ca</li>
+                    <li><b>Where</b> Service drive, 1885 Merivale Rd - second door, under the orange canopy</li>
+                    <li data-dl-book-extra><b>Courtesy car</b> Held in your name, bring your licence</li>
+                  </ul>
+                  <label class="dl-check big"><input type="checkbox" data-dl-svc-sms checked /><span><b>Text me at each stage</b><small>Checked in, on the hoist, and when it's ready</small></span></label>
+                  <div class="dl-actions">
+                    <button class="btn btn-ghost" type="button" data-go="1" data-dl-book-again>Book another</button>
+                    <button class="btn btn-primary" type="button" data-dl-see-ro data-scroll="#dl-tracker">See the live work order →</button>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <!-- ============ Work order tracker ============ -->
+            <aside class="svc-track" id="dl-tracker" aria-label="Work order status">
+              <div class="track-head">
+                <p class="eyebrow">In the shop now</p>
+                <h2>RO-88207 · 2019 Transit 250</h2>
+                <p class="sub">Front brakes and an oil service. Technician <strong>Kayla Doucette</strong> · advisor <strong>Marc Lefebvre</strong>.</p>
+              </div>
+              <ol class="track-rail" data-dl-track aria-label="Repair progress">
+                <li class="is-done" data-dl-stage="received"><b>Received</b><span>8:05 AM · keys in, VIN scanned</span></li>
+                <li class="is-done" data-dl-stage="hoist"><b>On the hoist</b><span>9:20 AM · bay 1, pads measured at 2 mm</span></li>
+                <li class="is-current" data-dl-stage="parts"><b>Parts on order</b><span data-dl-stage-note>Waiting on your approval before we pull the rotors</span></li>
+                <li data-dl-stage="ready"><b>Ready for pickup</b><span data-dl-ready-note>Estimated 3:30 PM today</span></li>
+              </ol>
+
+              <div class="quote" data-dl-quote data-state="open">
+                <p class="q-flag">Needs your approval</p>
+                <h3>Rear brake pads &amp; rotors</h3>
+                <p class="q-why">Pads are down to 2 mm and both rotors are scored past the minimum thickness of 20.0 mm. Kayla sent three photos from the hoist.</p>
+                <div class="q-photos" aria-label="Photos from the technician" data-dl-photos></div>
+                <table class="q-table">
+                  <caption class="sr-only">Extra work quote</caption>
+                  <tbody>
+                    <tr><th scope="row">Parts · pads &amp; rotors</th><td>$212.40</td></tr>
+                    <tr><th scope="row">Labour · 1.2 hr</th><td>$127.60</td></tr>
+                    <tr class="q-total"><th scope="row">Extra work total</th><td>$340.00</td></tr>
+                  </tbody>
+                </table>
+                <div class="q-acts" data-dl-quote-acts>
+                  <button class="btn btn-primary" type="button" data-dl-approve>Approve $340.00</button>
+                  <button class="btn btn-ghost" type="button" data-dl-decline>Not this time</button>
+                </div>
+                <p class="q-state" data-dl-quote-state hidden></p>
+              </div>
+
+              <div class="track-total">
+                <span>Estimate so far</span>
+                <strong data-dl-ro-total>$272.40</strong>
+              </div>
+              <p class="track-foot">Questions? Reply to any text from us - it lands on Marc's screen at the service desk.</p>
+            </aside>
+          </div>
+        </section>
+
+        <!-- ============ Orders ============ -->
+        <section class="dl-panel" role="tabpanel" data-panel="orders" aria-label="My orders">
+          <div class="ord-cols">
+            <div>
+              <h2>Open with us</h2>
+              <ul class="ord-open" data-dl-open-list aria-label="Open orders"></ul>
+
+              <h2 class="h2-gap">Order history</h2>
+              <ul class="ord-hist" aria-label="Past orders">
+                <li>
+                  <div class="oh-when"><b>Aug</b><span>26</span></div>
+                  <div class="oh-what">
+                    <strong>RM-20402 · $214.66</strong>
+                    <span>Oil filter FL-500S ×6 · 5W-20 5 L ×2 · Cabin filter FP-84 ×1</span>
+                    <span class="oh-tag">Picked up at the counter · PO CC-1188</span>
+                  </div>
+                  <button class="btn btn-ghost btn-sm" type="button" data-dl-reorder="p4:6|p16:2|p6:1">Reorder</button>
+                </li>
+                <li>
+                  <div class="oh-when"><b>Aug</b><span>12</span></div>
+                  <div class="oh-what">
+                    <strong>RM-20388 · $1,042.18</strong>
+                    <span>Front pads ×2 · Front rotors ×4 · DOT 3 fluid ×2</span>
+                    <span class="oh-tag">Couriered to the shop · PO CC-1174</span>
+                  </div>
+                  <button class="btn btn-ghost btn-sm" type="button" data-dl-reorder="p1:2|p2:4|p17:2">Reorder</button>
+                </li>
+                <li>
+                  <div class="oh-when"><b>Jul</b><span>30</span></div>
+                  <div class="oh-what">
+                    <strong>RM-20351 · $89.44</strong>
+                    <span>Wiper blade set ×1 · Coolant concentrate ×1</span>
+                    <span class="oh-tag">Picked up at the counter · PO CC-1152</span>
+                  </div>
+                  <button class="btn btn-ghost btn-sm" type="button" data-dl-reorder="p15:1|p18:1">Reorder</button>
+                </li>
+              </ul>
+            </div>
+
+            <aside class="ord-acct">
+              <h2>Trade account</h2>
+              <p class="acct-num">TR-4417 · Croteau Contracting</p>
+              <ul class="acct-list">
+                <li><span>Pricing tier</span><b class="tier-badge">Tier 2 · −12%</b></li>
+                <li><span>Terms</span><b>Net 30 · $12,000 limit</b></li>
+                <li><span>Balance</span><b>$1,318.42</b></li>
+                <li><span>PO number</span><b>Required on every order</b></li>
+                <li><span>Counter contact</span><b>Marc Lefebvre</b></li>
+              </ul>
+              <p class="acct-note">Fleet vehicles on this account get priority booking and free courtesy cars. Add a vehicle from the garage bar at the top.</p>
+            </aside>
+          </div>
+        </section>
+      </div>
+
+      <!-- ============ Cart button + drawer ============ -->
+      <button class="dl-fab" type="button" data-toggle="#dl-cart" data-dl-fab aria-controls="dl-cart" aria-expanded="false">
+        <span class="fab-ico" aria-hidden="true">▣</span> Your order <span class="count" data-dl-cart-count>0</span>
+      </button>
+
+      <aside class="dl-cart" id="dl-cart" role="dialog" aria-modal="true" aria-labelledby="dl-cart-title" tabindex="-1" data-dl-cstep="cart">
+        <header>
+          <h2 id="dl-cart-title">Your order</h2>
+          <button class="dl-x" type="button" data-close data-dl-cart-close aria-label="Close order">×</button>
+        </header>
+        <ol class="dl-cart-steps" aria-label="Checkout progress">
+          <li data-cstep-name="cart">Order</li>
+          <li data-cstep-name="po">Account &amp; PO</li>
+          <li data-cstep-name="done">Confirmed</li>
+        </ol>
+        <div class="dl-cart-body">
+          <section class="cstep" data-cpanel="cart">
+            <ul class="cart-lines" data-dl-lines aria-label="Order lines"></ul>
+            <p class="cart-empty" data-dl-cart-empty>Nothing on the order yet. Add a part from the catalogue - back-ordered parts can go on too.</p>
+            <div class="cart-fulfil" role="group" aria-label="How you want it">
+              <button type="button" class="ful is-selected" aria-pressed="true" data-dl-fulfil="pickup"><strong>Counter pickup</strong><span>1885 Merivale Rd · free</span></button>
+              <button type="button" class="ful" aria-pressed="false" data-dl-fulfil="courier"><strong>Courier to your shop</strong><span>Next business day in Ottawa · $18.50</span></button>
+            </div>
+            <dl class="cart-totals" data-dl-totals></dl>
+            <div class="cart-foot">
+              <button class="btn btn-primary btn-wide" type="button" data-dl-step="po" data-dl-to-po disabled>Continue to account →</button>
+            </div>
+          </section>
+
+          <section class="cstep" data-cpanel="po">
+            <div class="po-acct">
+              <b>Croteau Contracting</b>
+              <span>Account TR-4417 · <em class="tier-badge">Tier 2 · −12%</em> · Net 30</span>
+            </div>
+            <div class="field"><label for="dl-po">PO number <small>(required on trade accounts)</small></label><input id="dl-po" type="text" autocomplete="off" placeholder="CC-1194" /></div>
+            <div class="field"><label for="dl-po-name">Who's picking it up</label><input id="dl-po-name" type="text" value="Dan Croteau" /></div>
+            <div class="field"><label for="dl-po-phone">Text this number when it's ready</label><input id="dl-po-phone" type="tel" value="(613) 555-0177" /></div>
+            <label class="dl-check big"><input type="checkbox" data-dl-hold checked /><span><b>Hold back-ordered lines and ship complete</b><small>Otherwise we put what's on the shelf on the counter today and text you when the rest lands.</small></span></label>
+            <p class="po-msg" data-dl-po-msg hidden>Add a PO number - your account has PO required turned on.</p>
+            <dl class="cart-totals" data-dl-totals-2></dl>
+            <div class="cart-foot two">
+              <button class="btn btn-ghost" type="button" data-dl-step="cart">← Back</button>
+              <button class="btn btn-primary" type="button" data-dl-place>Place the order</button>
+            </div>
+          </section>
+
+          <section class="cstep" data-cpanel="done">
+            <div class="done-card">
+              <span class="tick" aria-hidden="true">✓</span>
+              <h3>Order <b data-dl-order-no>RM-20418</b> is in</h3>
+              <p class="sub" data-dl-done-line>-</p>
+              <ul class="done-list">
+                <li data-dl-done-window><b>Ready</b> Today between 2:40 and 3:40 PM at the Merivale parts counter</li>
+                <li><b>We'll text</b> (613) 555-0177 the moment it's on the counter - no need to phone ahead</li>
+                <li data-dl-done-bo hidden><b>On order</b> -</li>
+                <li><b>Invoice</b> Goes on TR-4417, Net 30, with your PO on it</li>
+              </ul>
+              <div class="dl-actions">
+                <button class="btn btn-ghost" type="button" data-dl-new-order>Start another order</button>
+                <button class="btn btn-primary" type="button" data-close data-dl-cart-close>Back to the catalogue</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </aside>
+
+      <!-- ============ Part detail drawer ============ -->
+      <aside class="dl-drawer" id="dl-drawer" role="dialog" aria-modal="true" aria-labelledby="dl-drawer-title" tabindex="-1">
+        <header>
+          <div>
+            <p class="eyebrow" data-dl-drawer-cat>Brakes</p>
+            <h2 id="dl-drawer-title" data-dl-drawer-title>Part</h2>
+          </div>
+          <button class="dl-x" type="button" data-close data-dl-drawer-close aria-label="Close part details">×</button>
+        </header>
+        <div class="dl-drawer-body" data-dl-drawer-body></div>
+      </aside>
+
+      <div class="dl-scrim" data-dl-scrim></div>
+
+      <!-- ============ Confirm / fitment modal ============ -->
+      <div class="dl-modal" data-dl-modal>
+        <div class="dl-modal-card" role="dialog" aria-modal="true" aria-labelledby="dl-modal-title" aria-describedby="dl-modal-body" tabindex="-1">
+          <button class="dl-x" type="button" data-dl-modal-close aria-label="Close dialog">×</button>
+          <p class="m-flag" data-dl-modal-flag>Fitment check</p>
+          <h3 id="dl-modal-title">Heads up</h3>
+          <p id="dl-modal-body"></p>
+          <div class="dl-actions">
+            <button class="btn btn-ghost" type="button" data-dl-modal-close>Cancel</button>
+            <button class="btn btn-primary" type="button" data-dl-modal-ok>Add it anyway</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="dl-toast" role="status" aria-live="polite" data-dl-toast></div>
+
+      <!-- ============ Staff view: parts counter ============ -->
+      <div class="dl-staff" id="dl-staff" data-dl-staff role="dialog" aria-modal="true" aria-labelledby="dl-staff-title" tabindex="-1">
+        <div class="staff-inner" data-tabs>
+          <div class="staff-head">
+            <div>
+              <p class="eyebrow">Parts counter · Thu, Sep 3 · 10:42</p>
+              <h2 id="dl-staff-title">Merivale Rd counter</h2>
+              <p class="sub">The same data from behind the counter. Anything you change here shows up on the customer's phone.</p>
+            </div>
+            <button class="btn btn-ghost btn-sm" type="button" data-dl-staff-close>← Back to customer view</button>
+          </div>
+          <div class="staff-kpis" data-dl-kpis aria-label="Counter at a glance"></div>
+          <nav class="staff-tabs" role="tablist" aria-label="Counter sections">
+            <button type="button" role="tab" class="is-active" aria-selected="true" data-tab="queue">Order queue</button>
+            <button type="button" role="tab" aria-selected="false" data-tab="stock">Low stock</button>
+            <button type="button" role="tab" aria-selected="false" data-tab="inbound">Special orders</button>
+            <button type="button" role="tab" aria-selected="false" data-tab="bays">Service bays</button>
+          </nav>
+          <section class="staff-pane is-active" role="tabpanel" data-panel="queue" aria-label="Order queue">
+            <div class="table-wrap">
+              <table class="staff-table">
+                <caption class="sr-only">Orders to pick and pack</caption>
+                <thead><tr><th scope="col">Order</th><th scope="col">Customer</th><th scope="col">Lines</th><th scope="col">Total</th><th scope="col">Status</th><th scope="col">Next</th></tr></thead>
+                <tbody data-dl-queue></tbody>
+              </table>
+            </div>
+          </section>
+          <section class="staff-pane" role="tabpanel" data-panel="stock" aria-label="Low stock">
+            <div class="table-wrap">
+              <table class="staff-table">
+                <caption class="sr-only">Parts at or below the shelf minimum</caption>
+                <thead><tr><th scope="col">Part</th><th scope="col">Number</th><th scope="col">On hand</th><th scope="col">Min</th><th scope="col">Action</th></tr></thead>
+                <tbody data-dl-stock></tbody>
+              </table>
+            </div>
+          </section>
+          <section class="staff-pane" role="tabpanel" data-panel="inbound" aria-label="Special orders">
+            <ul class="side-list" data-dl-inbound></ul>
+          </section>
+          <section class="staff-pane" role="tabpanel" data-panel="bays" aria-label="Service bays">
+            <div class="bays" data-dl-bays></div>
+          </section>
+        </div>
+      </div>
+
+      <aside class="ln-widget" id="assistant" data-bot="dealer" data-mode="chat" aria-label="Rideau Motorworks parts desk assistant">
+        <div class="wtop">
+          <span class="avatar" aria-hidden="true">RM</span>
+          <p class="who"><strong>Parts desk assistant</strong><span>Looks up fitment · checks stock</span></p>
+          <span class="status-pill">Live</span>
+          <button class="wmin" type="button" data-collapse="#assistant" aria-label="Minimise assistant">–</button>
+        </div>
+        <div class="wchips" aria-label="Try saying">
+          <button type="button" data-say>Front pads for a 2021 F-150?</button>
+          <button type="button" data-say>Is FL-500S on the shelf?</button>
+          <button type="button" data-say>When does my back-order land?</button>
+        </div>
+        <div class="messages" aria-live="polite"></div>
+        <form class="composer">
+          <input type="text" placeholder="Type a message…" aria-label="Message" autocomplete="off" />
+          <button class="send" type="submit" aria-label="Send">➤</button>
+        </form>
+      </aside>
+    </main>
+
+    <footer class="ln-foot">
+      <span>Fictional dealership and data. Built by LocalNinja as a sample project.</span>
+      <a href="/#contact">Want one for your business? →</a>
+    </footer>
+
+    <script type="module" src="/src/work/mockups.js"></script>
+    <script type="module" src="/src/work/dealer.js"></script>
+    <script type="module" src="/src/work/bot.js"></script>
+  </body>
+</html>

@@ -5,7 +5,8 @@
 //                             data-label into [data-out="x"]
 //   data-tab="x"           -> tabs; shows [data-panel="x"] in [data-tabs]
 //   data-toggle="#id"      -> toggles .is-open on the target
-//   data-collapse="#id"    -> toggles .is-collapsed (assistant widget)
+//   data-collapse="#id"    -> toggles .is-collapsed (assistant widget;
+//                             starts collapsed on <=640px screens)
 //   data-open="#id" / data-close -> overlay open/close
 //   data-add="Name|12.50"  -> cart: appends to [data-cart-list], updates
 //                             [data-cart-count] / [data-cart-total]
@@ -69,12 +70,24 @@ function init() {
   on('[data-toggle]', (el) => {
     document.querySelector(el.dataset.toggle)?.classList.toggle('is-open');
   });
+  const setCollapsed = (target, btn, collapsed) => {
+    target.classList.toggle('is-collapsed', collapsed);
+    btn.textContent = collapsed ? '+' : '–';
+    btn.setAttribute('aria-label', collapsed ? 'Expand assistant' : 'Minimise assistant');
+    btn.setAttribute('aria-expanded', String(!collapsed));
+  };
+
   on('[data-collapse]', (el) => {
     const target = document.querySelector(el.dataset.collapse);
     if (!target) return;
-    const collapsed = target.classList.toggle('is-collapsed');
-    el.textContent = collapsed ? '+' : '–';
-    el.setAttribute('aria-label', collapsed ? 'Expand assistant' : 'Minimise assistant');
+    setCollapsed(target, el, !target.classList.contains('is-collapsed'));
+  });
+
+  // On phones the assistant starts minimised so it doesn't cover the page;
+  // the header bar stays tappable. Desktop keeps it open.
+  document.querySelectorAll('[data-collapse]').forEach((btn) => {
+    const target = document.querySelector(btn.dataset.collapse);
+    if (target && matchMedia('(max-width: 640px)').matches) setCollapsed(target, btn, true);
   });
   on('[data-open]', (el) => {
     document.querySelector(el.dataset.open)?.classList.add('is-open');

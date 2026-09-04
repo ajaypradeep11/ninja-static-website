@@ -38,6 +38,20 @@ const SCRIPTS = {
     "Great choice. Are you pre-approved for a mortgage yet, and when are you hoping to move?",
     "I can set up a viewing with Maya Chen this week. What's the best name and number to reach you?",
   ],
+  dealer: [
+    "Rideau Motorworks parts desk. Tell me the part you're after, or give me a VIN and I'll pull the right one.",
+    'Got it. Is that for the F-150, the Transit or the Ram? I can check what fits before we order.',
+    "Both are in: the Motorcraft set is $189.95 on the shelf here at Merivale, the Raybestos is $118.50. Which way do you want to go?",
+    "Done - that's on your order with the core charge. Want me to add it to the Thursday service visit or hold it at the counter?",
+    "It'll be on the counter under Croteau Contracting, and we'll text (613) 555-0177 when it's picked. Anything else for the truck?",
+  ],
+  trades: [
+    "Copper & Coil, 24/7. What's going on - no heat, a leak, or something else?",
+    'Okay. Is water still running, or is it contained? If it is running, shut the valve behind the fixture and we will get someone out today.',
+    'I can do today 2-4 pm with Marc, or tomorrow 8-10 am with Priya. Which suits you better?',
+    "What's the address and is there anything the tech should know - a gate code, a dog, parking?",
+    "You're booked. Diagnostic is $89 and it comes off the repair; you'll get a text when the tech is 30 minutes out.",
+  ],
 };
 const CLOSER = "Thanks! This is a scripted demo - once connected to ChatGPT I'll answer anything about the business. Is there something else I can help with?";
 
