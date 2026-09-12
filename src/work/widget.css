@@ -155,6 +155,34 @@
 }
 
 /* Minimised: only the header bar stays */
+.ln-widget .voice-call {
+  width: 100%;
+  min-height: 46px;
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 700;
+}
+
+.ln-widget .voice-call:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.ln-widget .voice-call.is-listening {
+  background: #b91c1c;
+  color: #fff;
+}
+
+.ln-widget .voice-call:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: -5px;
+}
+
+.ln-widget.is-voice .voice-hint {
+  padding: 0.8rem 1rem;
+  line-height: 1.5;
+}
+
 .ln-widget.is-collapsed {
   height: auto;
 }

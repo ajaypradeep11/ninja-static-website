@@ -130,9 +130,12 @@ Everything lives in a few files plus assets:
   covers a phone screen. Desktop starts expanded.
 - **Bot widget**: `bot.js` posts `{ bot, messages }` to `/api/chat`; any
   non-OK response flips it to scripted mode (canned `SCRIPTS`, "Demo mode"
-  pill) for the rest of the session. Voice mode uses `SpeechRecognition`
-  + `speechSynthesis`; if recognition is missing it adds
-  `.voice-unsupported` and keeps the text input.
+  pill) for the rest of the text-chat session. Voice mode delegates to
+  `src/work/voice.js` and the Vapi Web SDK, using public build-time keys and
+  fixed assistant IDs. It never falls back to scripted replies. Clinic/dealer
+  voice links use `?mode=voice#assistant`; normal links preserve chat mode.
+  Setup lives in `docs/voice-assistants.md`; the independent tenant booking API
+  is in the sibling `../generic-backend` directory.
 - **Contact form**: `#contact-form` submit is intercepted; after
   `reportValidity()` JS sets `window.location.href` to a `mailto:` with the
   subject/body prefilled. No network request, no backend.

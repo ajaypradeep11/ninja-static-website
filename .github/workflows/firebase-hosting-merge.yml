@@ -17,6 +17,13 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          VITE_VAPI_PUBLIC_KEY: ${{ vars.VITE_VAPI_PUBLIC_KEY }}
+          VITE_VAPI_CLINIC_PUBLIC_KEY: ${{ vars.VITE_VAPI_CLINIC_PUBLIC_KEY }}
+          VITE_VAPI_CLINIC_ASSISTANT_ID: ${{ vars.VITE_VAPI_CLINIC_ASSISTANT_ID }}
+          VITE_VAPI_DEALER_ASSISTANT_ID: ${{ vars.VITE_VAPI_DEALER_ASSISTANT_ID }}
+          VITE_VAPI_RESTAURANT_ASSISTANT_ID: ${{ vars.VITE_VAPI_RESTAURANT_ASSISTANT_ID }}
+          VITE_VAPI_REALTY_ASSISTANT_ID: ${{ vars.VITE_VAPI_REALTY_ASSISTANT_ID }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}

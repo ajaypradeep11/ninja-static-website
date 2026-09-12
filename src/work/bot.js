@@ -1,7 +1,9 @@
-// Chat / voice widget for the bot demo pages.
-// Talks to /api/chat (Firebase relay). If the relay isn't reachable or
+// Chat widget plus the real voice-provider entry point for demo pages.
+// Text chat talks to /api/chat (Firebase relay). If the relay isn't reachable or
 // isn't configured yet, falls back to a scripted conversation so the
 // demo still works. JS toggles classes; CSS owns animation.
+
+import { initVoice } from './voice.js';
 
 const ENDPOINT = '/api/chat';
 const HISTORY = 12;
@@ -59,14 +61,16 @@ function initBot() {
   const root = document.querySelector('[data-bot]');
   if (!root) return;
 
+  if (root.dataset.mode === 'voice' || new URLSearchParams(location.search).get('mode') === 'voice') {
+    initVoice(root);
+    return;
+  }
+
   const bot = root.dataset.bot;
-  const voice = root.dataset.mode === 'voice';
   const list = root.querySelector('.messages');
   const form = root.querySelector('.composer');
   const input = form.querySelector('input');
   const send = form.querySelector('.send');
-  const mic = form.querySelector('.mic');
-  const hint = root.querySelector('.voice-hint');
   const status = root.querySelector('.status-pill');
 
   const history = [];
@@ -98,14 +102,6 @@ function initBot() {
     status.textContent = 'Demo mode';
     status.classList.add('is-demo');
     add('system', 'Scripted demo - live ChatGPT replies switch on once the relay is configured.');
-  };
-
-  const speak = (text) => {
-    if (!voice || !('speechSynthesis' in window)) return;
-    speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.rate = 1.02;
-    speechSynthesis.speak(u);
   };
 
   const scriptedReply = () => {
@@ -149,7 +145,6 @@ function initBot() {
     typing.remove();
     add('bot', reply);
     history.push({ role: 'assistant', content: reply });
-    speak(reply);
 
     busy = false;
     send.disabled = false;
@@ -166,58 +161,6 @@ function initBot() {
   document.querySelectorAll('[data-say]').forEach((chip) => {
     chip.addEventListener('click', () => ask(chip.dataset.say || chip.textContent));
   });
-
-  // Voice: browser speech recognition in, spoken replies out.
-  if (voice) {
-    const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!Recognition || !mic) {
-      root.classList.add('voice-unsupported');
-      if (hint) hint.textContent = 'Voice input needs Chrome, Edge or Safari - type instead.';
-    } else {
-      const rec = new Recognition();
-      rec.lang = 'en-CA';
-      rec.interimResults = true;
-      let listening = false;
-
-      const setListening = (on) => {
-        listening = on;
-        mic.classList.toggle('is-listening', on);
-        mic.setAttribute('aria-pressed', String(on));
-        if (hint) hint.textContent = on ? 'Listening… tap again to stop.' : 'Tap the mic and speak.';
-      };
-
-      rec.addEventListener('result', (event) => {
-        const transcript = [...event.results].map((r) => r[0].transcript).join(' ');
-        input.value = transcript;
-        if (event.results[event.results.length - 1].isFinal) {
-          input.value = '';
-          setListening(false);
-          rec.stop();
-          ask(transcript);
-        }
-      });
-      rec.addEventListener('end', () => setListening(false));
-      rec.addEventListener('error', () => {
-        setListening(false);
-        if (hint) hint.textContent = 'Microphone not available - type instead.';
-      });
-
-      mic.addEventListener('click', () => {
-        if (listening) {
-          rec.stop();
-          return;
-        }
-        speechSynthesis?.cancel();
-        try {
-          rec.start();
-          setListening(true);
-        } catch {
-          setListening(false);
-        }
-      });
-      if (hint) hint.textContent = 'Tap the mic and speak.';
-    }
-  }
 
   // Opening line comes from the script so the phone never starts empty.
   const opener = (SCRIPTS[bot] || [])[0];

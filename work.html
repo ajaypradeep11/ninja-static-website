@@ -79,7 +79,14 @@
             </p>
           </div>
 
-          <div class="work-tabs reveal" role="tablist" aria-label="Project type">
+          <div class="work-layout">
+          <aside class="work-filters" aria-label="Project filters">
+            <p class="work-filter-heading">Project type</p>
+            <button class="work-filter-toggle" type="button" aria-expanded="false" aria-controls="work-filters">
+              <span>Filters <span class="work-filter-current">UI / UX</span></span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+          <div class="work-tabs" id="work-filters" role="tablist" aria-label="Project type" aria-orientation="vertical">
             <button class="work-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="work-ui" data-work-tab="work-ui">UI / UX</button>
             <button class="work-tab" type="button" role="tab" aria-selected="false" aria-controls="work-web" data-work-tab="work-web">Web development</button>
             <button class="work-tab" type="button" role="tab" aria-selected="false" aria-controls="work-ecom" data-work-tab="work-ecom">E-commerce</button>
@@ -87,6 +94,7 @@
             <button class="work-tab" type="button" role="tab" aria-selected="false" aria-controls="work-chat" data-work-tab="work-chat">Chatbots</button>
             <button class="work-tab" type="button" role="tab" aria-selected="false" aria-controls="work-voice" data-work-tab="work-voice">Voice bots</button>
           </div>
+          </aside>
 
           <div class="work-grid is-active" id="work-ui" role="tabpanel">
             <a class="work-card reveal" href="/work/clinic.html">
@@ -377,6 +385,28 @@
           </div>
 
           <div class="work-grid" id="work-voice" role="tabpanel">
+            <section class="voice-showcase" aria-labelledby="voice-showcase-title">
+              <div class="voice-showcase-copy">
+                <h2 id="voice-showcase-title">A receptionist you can talk to.</h2>
+                <p>Try our clinic booking assistant, powered by Vapi and connected to our booking platform on Google Cloud Run and Firebase.</p>
+                <p>Ask about an available appointment. This is a real voice connection, not a scripted chat. Only confirm a booking if you intend to create it.</p>
+                <div class="voice-showcase-stack" aria-label="Built with"><span>Vapi</span><span>Google Cloud Run</span><span>Firebase</span></div>
+              </div>
+              <div class="voice-showcase-call" data-showcase-voice data-bot="clinic" aria-label="Clinic voice assistant">
+                <p class="who"><strong>Clinic booking assistant</strong><span>Voice assistant</span></p>
+                <span class="status-pill" role="status">Loading</span>
+                <div class="messages" aria-live="polite"></div>
+                <form class="composer"></form>
+                <noscript>Enable JavaScript to start a voice call.</noscript>
+              </div>
+            </section>
+            <a class="work-card reveal" href="/work/dealer.html?mode=voice#assistant">
+              <span class="work-swatch" aria-hidden="true"><i style="background:#1d4ed8"></i><i style="background:#eff6ff"></i><i style="background:#111111"></i></span>
+              <span class="work-tags"><span class="work-tag">Voice bot</span><span class="work-tag">Automotive</span><span class="work-tag">Service</span></span>
+              <h3 class="work-name">Rideau Motorworks service desk</h3>
+              <p class="work-pitch">Book a service visit by voice, with the right vehicle details, technician, and available bay.</p>
+              <span class="work-open">Try voice assistant <span aria-hidden="true">→</span></span>
+            </a>
             <a class="work-card reveal" href="/work/restaurant.html#assistant">
               <span class="work-swatch" aria-hidden="true"><i style="background:#c2410c"></i><i style="background:#fbf3ee"></i><i style="background:#111111"></i></span>
               <span class="work-tags"><span class="work-tag">Voice bot</span><span class="work-tag">AI</span><span class="work-tag">Ordering</span></span>

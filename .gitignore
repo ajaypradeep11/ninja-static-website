@@ -6,3 +6,8 @@ dist
 functions/node_modules
 firebase-debug.log
 .playwright-mcp/
+.env
+.env.*
+!.env.example
+output/
+.playwright-cli/
