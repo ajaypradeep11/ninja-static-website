@@ -933,6 +933,7 @@ h2.display {
 .work-tabs:has(.work-tab:nth-child(4).is-active) { --pill-index: 3; }
 .work-tabs:has(.work-tab:nth-child(5).is-active) { --pill-index: 4; }
 .work-tabs:has(.work-tab:nth-child(6).is-active) { --pill-index: 5; }
+.work-tabs:has(.work-tab:nth-child(7).is-active) { --pill-index: 6; }
 
 @media (prefers-reduced-motion: no-preference) {
   .work-tabs::before {
@@ -992,6 +993,9 @@ h2.display {
 }
 
 .voice-showcase-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: #eaf4ff;
   border-right: var(--border) solid var(--ink);
 }
@@ -1028,6 +1032,110 @@ h2.display {
   margin-bottom: 1rem;
 }
 
+/* A grain-lit blue sphere. Live audio, not a loop, moves its color field. */
+.voice-showcase-call {
+  text-align: center;
+}
+
+.voice-orb-control {
+  position: relative;
+  width: min(270px, 100%);
+  margin: 1rem auto 2.75rem;
+}
+
+.voice-orb {
+  --mic-level: 0;
+  --voice-level: 0;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.voice-orb-sphere {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  isolation: isolate;
+  background: var(--accent);
+  transform: scale(calc(1 + var(--mic-level) * 0.025 + var(--voice-level) * 0.04));
+}
+
+.voice-orb-surface {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: rotate(calc(var(--voice-level) * 24deg - var(--mic-level) * 16deg)) scale(1.04);
+}
+
+.voice-orb-clouds {
+  transform-origin: 50% 50%;
+  transform: translateY(calc(var(--voice-level) * -12px)) scale(calc(1 + var(--voice-level) * 0.16));
+}
+
+.voice-orb-arc {
+  position: absolute;
+  inset: -7px;
+  border: 2px solid transparent;
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.voice-orb[data-state="connecting"] .voice-orb-arc {
+  opacity: 1;
+}
+
+.voice-orb-caption {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.voice-orb[data-state="unavailable"] .voice-orb-sphere {
+  opacity: 0.45;
+  filter: grayscale(1);
+}
+
+.voice-showcase-call .messages {
+  max-width: 32ch;
+  margin: 0 auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .voice-orb-sphere,
+  .voice-orb-surface,
+  .voice-orb-clouds {
+    transition: transform 180ms ease-out;
+  }
+
+  .voice-orb[data-state="idle"] .voice-orb-surface {
+    animation: voice-orb-drift 12s ease-in-out infinite alternate;
+  }
+
+  .voice-orb[data-state="connecting"] .voice-orb-arc {
+    animation: voice-orb-connect 1.2s linear infinite;
+  }
+
+  @keyframes voice-orb-drift {
+    from { transform: rotate(-6deg) scale(1.04); }
+    to { transform: rotate(9deg) scale(1.08); }
+  }
+
+  @keyframes voice-orb-connect {
+    to { transform: rotate(360deg); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .voice-orb-sphere,
+  .voice-orb-surface,
+  .voice-orb-clouds { transform: none; }
+}
+
 .voice-showcase-call .who span,
 .voice-showcase-call .msg.system,
 .voice-showcase-call .voice-hint {
@@ -1049,17 +1157,38 @@ h2.display {
   margin: 1rem 0;
 }
 
+.voice-showcase-call .composer {
+  position: absolute;
+  bottom: -26px;
+  left: calc(50% - 33px);
+  z-index: 1;
+}
+
 .voice-showcase-call .voice-call {
-  width: 100%;
-  min-height: 48px;
-  padding: 0.75rem 1rem;
-  border: 2px solid var(--ink);
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  padding: 0;
+  border: 8px solid var(--paper);
   border-radius: 999px;
-  background: var(--accent);
-  color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
   font: inherit;
-  font-weight: 700;
+  font-size: 0;
   cursor: pointer;
+}
+
+.voice-showcase-call .voice-call::before {
+  content: '';
+  width: 21px;
+  height: 21px;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M6.6 2h-3A1.6 1.6 0 0 0 2 3.6C2 13.8 10.2 22 20.4 22a1.6 1.6 0 0 0 1.6-1.6v-3a1.6 1.6 0 0 0-1.4-1.6l-3.1-.4a1.6 1.6 0 0 0-1.4.5l-1.9 1.9a15.4 15.4 0 0 1-8-8l1.9-1.9a1.6 1.6 0 0 0 .5-1.4L8.2 3.4A1.6 1.6 0 0 0 6.6 2Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.voice-showcase-call .voice-call.is-listening::before {
+  transform: rotate(135deg);
 }
 
 .voice-showcase-call .voice-call.is-listening {
@@ -1148,6 +1277,11 @@ h2.display {
   font-weight: 700;
   letter-spacing: var(--label-tracking);
   text-transform: uppercase;
+}
+
+.work-tag--sample {
+  background: #f0f2f5;
+  border-style: dashed;
 }
 
 .work-name {

@@ -194,6 +194,8 @@ function initWorkTabs() {
     if (mobile.matches && focusWasInTabs) toggle?.focus();
     if (!mobile.matches && focusWasOnToggle) tabs.find((tab) => tab.classList.contains('is-active'))?.focus();
   });
+  const linkedTab = tabs.find((tab) => `#${tab.dataset.workTab}` === location.hash);
+  if (linkedTab) selectTab(linkedTab);
 }
 
 function initVoiceShowcase() {

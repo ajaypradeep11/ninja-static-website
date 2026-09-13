@@ -1,4 +1,6 @@
 // Provider boundary: UI depends on this adapter, not booking credentials or tenant IDs.
+import { createVoiceOrb } from './voice-orb.js';
+
 export function voiceConfig(bot) {
   const ids = {
     clinic: import.meta.env.VITE_VAPI_CLINIC_ASSISTANT_ID,
@@ -18,6 +20,7 @@ export function initVoice(root, { config = voiceConfig(root.dataset.bot), create
   const list = root.querySelector('.messages');
   const form = root.querySelector('.composer');
   const status = root.querySelector('.status-pill');
+  const orb = createVoiceOrb(root);
   root.classList.add('is-voice');
   root.querySelector('.wchips')?.remove();
   const subtitle = root.querySelector('.who span');
@@ -47,6 +50,7 @@ export function initVoice(root, { config = voiceConfig(root.dataset.bot), create
   let generation = 0;
   const render = (next, message) => {
     phase = next;
+    orb?.phase(next);
     button.disabled = ['connecting', 'stopping', 'unavailable'].includes(next);
     button.textContent = next === 'active' ? 'End call' : next === 'connecting' ? 'Connecting…' : next === 'stopping' ? 'Ending call…' : 'Start voice call';
     button.setAttribute('aria-pressed', String(next === 'active'));
@@ -100,6 +104,18 @@ export function initVoice(root, { config = voiceConfig(root.dataset.bot), create
       });
       current.on('call-end', () => { if (attempt === generation) stop(); });
       current.on('error', fail);
+      current.on('local-volume-level', (level) => {
+        if (attempt === generation) orb?.level('mic', level);
+      });
+      current.on('volume-level', (level) => {
+        if (attempt === generation) orb?.level('voice', level);
+      });
+      current.on('speech-start', () => {
+        if (attempt === generation) orb?.speaking(true);
+      });
+      current.on('speech-end', () => {
+        if (attempt === generation) orb?.speaking(false);
+      });
       current.on('message', (message) => {
         if (attempt !== generation || root.dataset.bot === 'clinic') return;
         if (message.type === 'transcript' && message.transcriptType === 'final' && message.transcript) {

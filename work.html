@@ -83,20 +83,21 @@
           <aside class="work-filters" aria-label="Project filters">
             <p class="work-filter-heading">Project type</p>
             <button class="work-filter-toggle" type="button" aria-expanded="false" aria-controls="work-filters">
-              <span>Filters <span class="work-filter-current">UI / UX</span></span>
+              <span>Filters <span class="work-filter-current">Voice bots</span></span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
             </button>
           <div class="work-tabs" id="work-filters" role="tablist" aria-label="Project type" aria-orientation="vertical">
-            <button class="work-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="work-ui" data-work-tab="work-ui">UI / UX</button>
+            <button class="work-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="work-voice" data-work-tab="work-voice">Voice bots</button>
+            <button class="work-tab" type="button" role="tab" aria-selected="false" aria-controls="work-ui" data-work-tab="work-ui">UI / UX</button>
             <button class="work-tab" type="button" role="tab" aria-selected="false" aria-controls="work-web" data-work-tab="work-web">Web development</button>
             <button class="work-tab" type="button" role="tab" aria-selected="false" aria-controls="work-ecom" data-work-tab="work-ecom">E-commerce</button>
             <button class="work-tab" type="button" role="tab" aria-selected="false" aria-controls="work-ai" data-work-tab="work-ai">AI</button>
             <button class="work-tab" type="button" role="tab" aria-selected="false" aria-controls="work-chat" data-work-tab="work-chat">Chatbots</button>
-            <button class="work-tab" type="button" role="tab" aria-selected="false" aria-controls="work-voice" data-work-tab="work-voice">Voice bots</button>
+            <button class="work-tab" type="button" role="tab" aria-selected="false" aria-controls="work-samples" data-work-tab="work-samples">Sample projects</button>
           </div>
           </aside>
 
-          <div class="work-grid is-active" id="work-ui" role="tabpanel">
+          <div class="work-grid" id="work-ui" role="tabpanel">
             <a class="work-card reveal" href="/work/clinic.html">
               <span class="work-swatch" aria-hidden="true"><i style="background:#0f9d8a"></i><i style="background:#e3f4f0"></i><i style="background:#0f2a26"></i></span>
               <span class="work-tags"><span class="work-tag">Web app</span><span class="work-tag">Chatbot</span><span class="work-tag">UI/UX</span></span>
@@ -384,7 +385,7 @@
             </a>
           </div>
 
-          <div class="work-grid" id="work-voice" role="tabpanel">
+          <div class="work-grid is-active" id="work-voice" role="tabpanel">
             <section class="voice-showcase" aria-labelledby="voice-showcase-title">
               <div class="voice-showcase-copy">
                 <h2 id="voice-showcase-title">A receptionist you can talk to.</h2>
@@ -395,28 +396,66 @@
               <div class="voice-showcase-call" data-showcase-voice data-bot="clinic" aria-label="Clinic voice assistant">
                 <p class="who"><strong>Clinic booking assistant</strong><span>Voice assistant</span></p>
                 <span class="status-pill" role="status">Loading</span>
+                <div class="voice-orb-control">
+                  <div class="voice-orb" data-voice-orb data-state="idle" aria-hidden="true">
+                    <div class="voice-orb-arc"></div>
+                    <div class="voice-orb-sphere">
+                      <svg class="voice-orb-surface" viewBox="0 0 300 300" fill="none">
+                        <defs>
+                          <linearGradient id="voice-orb-base" x2="0.7" y2="1">
+                            <stop stop-color="#c8eeff" /><stop offset="0.5" stop-color="#4da3ff" /><stop offset="1" stop-color="#0864dd" />
+                          </linearGradient>
+                          <filter id="voice-orb-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="25" /></filter>
+                          <filter id="voice-orb-grain" x="0" y="0" width="100%" height="100%">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" />
+                            <feColorMatrix type="saturate" values="0" />
+                            <feComponentTransfer>
+                              <feFuncR type="linear" slope="2.6" intercept="-0.8" />
+                              <feFuncG type="linear" slope="2.6" intercept="-0.8" />
+                              <feFuncB type="linear" slope="2.6" intercept="-0.8" />
+                            </feComponentTransfer>
+                          </filter>
+                        </defs>
+                        <path fill="url(#voice-orb-base)" d="M0 0h300v300H0z" />
+                        <g class="voice-orb-clouds" filter="url(#voice-orb-blur)">
+                          <ellipse cx="65" cy="155" rx="96" ry="109" fill="#1258ac" />
+                          <ellipse cx="120" cy="31" rx="112" ry="73" fill="#a5ddff" />
+                          <ellipse cx="228" cy="99" rx="74" ry="87" fill="#e2faff" />
+                          <ellipse cx="262" cy="298" rx="75" ry="72" fill="#002e76" />
+                          <ellipse cx="97" cy="282" rx="73" ry="24" fill="#68c6ff" />
+                        </g>
+                        <path fill="#888" filter="url(#voice-orb-grain)" opacity="0.6" style="mix-blend-mode:soft-light" d="M0 0h300v300H0z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <form class="composer"></form>
+                </div>
+                <p class="voice-orb-caption" data-orb-caption aria-live="polite">Ready when you are</p>
+                <p class="voice-hint" aria-live="polite"></p>
                 <div class="messages" aria-live="polite"></div>
-                <form class="composer"></form>
                 <noscript>Enable JavaScript to start a voice call.</noscript>
               </div>
             </section>
+          </div>
+
+          <div class="work-grid" id="work-samples" role="tabpanel">
             <a class="work-card reveal" href="/work/dealer.html?mode=voice#assistant">
               <span class="work-swatch" aria-hidden="true"><i style="background:#1d4ed8"></i><i style="background:#eff6ff"></i><i style="background:#111111"></i></span>
-              <span class="work-tags"><span class="work-tag">Voice bot</span><span class="work-tag">Automotive</span><span class="work-tag">Service</span></span>
+              <span class="work-tags"><span class="work-tag work-tag--sample">Sample project</span><span class="work-tag">Voice bot</span><span class="work-tag">Automotive</span><span class="work-tag">Service</span></span>
               <h3 class="work-name">Rideau Motorworks service desk</h3>
               <p class="work-pitch">Book a service visit by voice, with the right vehicle details, technician, and available bay.</p>
               <span class="work-open">Try voice assistant <span aria-hidden="true">→</span></span>
             </a>
             <a class="work-card reveal" href="/work/restaurant.html#assistant">
               <span class="work-swatch" aria-hidden="true"><i style="background:#c2410c"></i><i style="background:#fbf3ee"></i><i style="background:#111111"></i></span>
-              <span class="work-tags"><span class="work-tag">Voice bot</span><span class="work-tag">AI</span><span class="work-tag">Ordering</span></span>
+              <span class="work-tags"><span class="work-tag work-tag--sample">Sample project</span><span class="work-tag">Voice bot</span><span class="work-tag">AI</span><span class="work-tag">Ordering</span></span>
               <h3 class="work-name">Ember &amp; Oak host</h3>
               <p class="work-pitch">Takes reservations by voice: listens, checks the book, offers alternatives, confirms aloud.</p>
               <span class="work-open">Open demo <span aria-hidden="true">→</span></span>
             </a>
             <a class="work-card reveal" href="/work/realty.html#assistant">
               <span class="work-swatch" aria-hidden="true"><i style="background:#4f46e5"></i><i style="background:#f0f0fb"></i><i style="background:#111111"></i></span>
-              <span class="work-tags"><span class="work-tag">Voice bot</span><span class="work-tag">AI</span><span class="work-tag">Website</span></span>
+              <span class="work-tags"><span class="work-tag work-tag--sample">Sample project</span><span class="work-tag">Voice bot</span><span class="work-tag">AI</span><span class="work-tag">Website</span></span>
               <h3 class="work-name">Northshore Realty lead bot</h3>
               <p class="work-pitch">Qualifies buyers by voice - budget, area, timeline - and books a viewing.</p>
               <span class="work-open">Open demo <span aria-hidden="true">→</span></span>

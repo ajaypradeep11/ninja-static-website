@@ -123,7 +123,10 @@ Everything lives in a few files plus assets:
   reduced motion). Clicks inside `.service-details` don't collapse it.
 - **Work tabs** (on `work.html`): `.work-tab[data-work-tab]` buttons toggle `.is-active`
   (+ `aria-selected`) on themselves and on the matching `.work-grid` id;
-  six tabs (UI/UX, Web development, E-commerce, AI, Chatbots, Voice bots); only UI/UX is visible on load.
+  seven tabs (Voice bots, UI/UX, Web development, E-commerce, AI, Chatbots,
+  Sample projects); Voice bots is first and visible on load unless a category
+  hash is supplied. Rideau, Ember & Oak, and Northshore voice demos live under
+  Sample projects and carry sample badges. The CSS sliding pill supports all seven positions.
 - **Assistant widget collapse**: the `.wmin` button (`data-collapse`)
   toggles `.is-collapsed`, its `+`/`–` label and `aria-expanded`;
   `mockups.js` collapses it on load at `(max-width: 640px)` so it never
