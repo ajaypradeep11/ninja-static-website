@@ -125,8 +125,11 @@ Everything lives in a few files plus assets:
   (+ `aria-selected`) on themselves and on the matching `.work-grid` id;
   seven tabs (Voice bots, UI/UX, Web development, E-commerce, AI, Chatbots,
   Sample projects); Voice bots is first and visible on load unless a category
-  hash is supplied. Rideau, Ember & Oak, and Northshore voice demos live under
-  Sample projects and carry sample badges. The CSS sliding pill supports all seven positions.
+  hash is supplied. Maple Clinic, Ember & Oak, Northshore Realty, Pulse,
+  Rideau Motorworks, and Copper & Coil are sample projects, grouped first in
+  UI/UX and also listed under Sample projects. Use their canonical business
+  names across categories; tags reflect the active project type, with a sample
+  badge for demos. The CSS sliding pill supports all seven positions.
 - **Assistant widget collapse**: the `.wmin` button (`data-collapse`)
   toggles `.is-collapsed`, its `+`/`–` label and `aria-expanded`;
   `mockups.js` collapses it on load at `(max-width: 640px)` so it never
