@@ -1165,6 +1165,7 @@ h2.display {
 }
 
 .voice-showcase-call .voice-call {
+  position: relative;
   display: grid;
   place-items: center;
   width: 66px;
@@ -1181,6 +1182,9 @@ h2.display {
 
 .voice-showcase-call .voice-call::before {
   content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
   width: 21px;
   height: 21px;
   background: currentColor;
