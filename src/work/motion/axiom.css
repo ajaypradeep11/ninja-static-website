@@ -1,0 +1,633 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap");
+
+body:has(.axiom-page) {
+  background: #141412;
+}
+.axiom-page {
+  --axiom-orange: #ff6544;
+  --axiom-paper: #eeece4;
+  --axiom-line: #3d3b35;
+  color: var(--axiom-paper);
+  background: #141412;
+  font-family: "Manrope", sans-serif;
+  padding: 0 3.7% 110px;
+  overflow: clip;
+}
+.axiom-page a {
+  color: inherit;
+  text-decoration: none;
+}
+.axiom-page button,
+.axiom-page input {
+  font: inherit;
+}
+.axiom-page a:focus-visible,
+.axiom-page button:focus-visible,
+.axiom-page input:focus-visible {
+  outline: 2px solid var(--axiom-orange);
+  outline-offset: 5px;
+}
+.axiom-header {
+  display: flex;
+  align-items: center;
+  min-height: 104px;
+  border-bottom: 1px solid var(--axiom-line);
+  gap: 48px;
+}
+.axiom-brand {
+  font-weight: 700;
+  font-size: 31px;
+  letter-spacing: -2px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.axiom-mark {
+  font-size: 40px;
+  color: var(--axiom-orange);
+  line-height: 1;
+}
+.axiom-brand-index {
+  align-self: flex-start;
+  font-size: 12px;
+  margin-top: 6px;
+  letter-spacing: 0;
+}
+.axiom-header-discipline {
+  font-size: 11px;
+  line-height: 1.7;
+  color: #b5b2a8;
+}
+.axiom-header nav {
+  display: flex;
+  margin-left: auto;
+  gap: 38px;
+  font-size: 12px;
+}
+.axiom-header nav a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  gap: 7px;
+}
+.axiom-header nav a:hover {
+  color: var(--axiom-orange);
+}
+.axiom-header nav a span {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  align-self: flex-start;
+  padding-top: 10px;
+  color: var(--axiom-orange);
+}
+.axiom-hero {
+  position: relative;
+  min-height: 835px;
+  border-bottom: 1px solid var(--axiom-line);
+  isolation: isolate;
+  scroll-margin-top: 20px;
+}
+.axiom-coordinate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 28px;
+  font:
+    10px "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.06em;
+  color: #b5b2a8;
+}
+.axiom-live {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--axiom-orange);
+}
+.axiom-live i {
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.axiom-hero h1 {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  margin: 41px 0 0;
+  width: 55%;
+  font:
+    700 clamp(80px, 8.3vw, 136px)/0.87 "Barlow Condensed",
+    Impact,
+    sans-serif;
+  letter-spacing: -0.018em;
+}
+.axiom-hero h1 > span:not(.axiom-period) {
+  color: #77766d;
+}
+.axiom-period {
+  color: var(--axiom-orange);
+}
+.axiom-artwork {
+  position: absolute;
+  width: 74%;
+  height: 690px;
+  right: -7%;
+  top: 7px;
+  z-index: 1;
+}
+.axiom-artwork .axiom-sculpture {
+  height: 100%;
+  width: 100%;
+}
+.axiom-cross {
+  position: absolute;
+  color: #a39b8d;
+  font:
+    20px "IBM Plex Mono",
+    monospace;
+}
+.axiom-cross-one {
+  top: 92px;
+  left: 15%;
+}
+.axiom-cross-two {
+  bottom: 125px;
+  right: 16%;
+}
+.axiom-axis {
+  position: absolute;
+  left: 19%;
+  bottom: 85px;
+  color: #9c968a;
+  font:
+    10px/1.7 "IBM Plex Mono",
+    monospace;
+}
+.axiom-art-label {
+  position: absolute;
+  bottom: 65px;
+  right: 16%;
+  color: #d6cec0;
+  font:
+    9px/1.8 "IBM Plex Mono",
+    monospace;
+  text-align: right;
+  text-transform: uppercase;
+}
+.axiom-selector {
+  position: relative;
+  z-index: 3;
+  width: 270px;
+  margin-top: 38px;
+}
+.axiom-selector > p {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 12px;
+  font:
+    9px "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.1em;
+  color: #a39e93;
+}
+.axiom-selector button {
+  padding: 5px 10px 5px 0;
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--axiom-line);
+  background: transparent;
+  color: #b3aea3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  min-height: 57px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.axiom-selector button:last-child {
+  border-bottom: 1px solid var(--axiom-line);
+}
+.axiom-selector button[aria-pressed="true"] {
+  color: var(--axiom-orange);
+}
+.axiom-study-number {
+  font:
+    9px "IBM Plex Mono",
+    monospace;
+  width: 18px;
+}
+.axiom-selector svg {
+  width: 54px;
+  height: 42px;
+  stroke: currentColor;
+  stroke-width: 0.65;
+}
+.axiom-study-arrow {
+  margin-left: auto;
+  font-size: 18px;
+}
+.axiom-console {
+  position: absolute;
+  bottom: 31px;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+  z-index: 4;
+  padding-top: 23px;
+  border-top: 1px solid var(--axiom-line);
+}
+.axiom-meta {
+  font:
+    10px "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.03em;
+  color: #a39e93;
+}
+.axiom-current p {
+  font-size: 21px;
+  line-height: 1.3;
+  margin: 9px 0 0;
+  letter-spacing: -0.04em;
+}
+.axiom-tension label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font:
+    10px "IBM Plex Mono",
+    monospace;
+}
+.axiom-tension output {
+  font-size: 22px;
+  color: var(--axiom-orange);
+}
+.axiom-tension output span {
+  color: #b3aea3;
+  font-size: 10px;
+  margin-left: 5px;
+}
+.axiom-tension input {
+  display: block;
+  height: 26px;
+  padding: 0;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background: transparent;
+  margin: 4px 0;
+}
+.axiom-tension input::-webkit-slider-runnable-track {
+  height: 2px;
+  background: #646054;
+}
+.axiom-tension input::-moz-range-track {
+  height: 2px;
+  background: #646054;
+}
+.axiom-tension input::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 8px;
+  height: 18px;
+  margin-top: -8px;
+  border: 0;
+  border-radius: 0;
+  background: var(--axiom-orange);
+}
+.axiom-tension input::-moz-range-thumb {
+  width: 8px;
+  height: 18px;
+  border: 0;
+  border-radius: 0;
+  background: var(--axiom-orange);
+}
+.axiom-tension > div {
+  display: flex;
+  justify-content: space-between;
+  font:
+    8px "IBM Plex Mono",
+    monospace;
+  color: #a39e93;
+}
+.axiom-console-note {
+  justify-self: end;
+  color: #b3aea3;
+  font-size: 10px;
+  line-height: 1.8;
+  margin: 0;
+}
+.axiom-manifesto {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 15%;
+  padding: 102px 0 90px;
+  scroll-margin-top: 35px;
+}
+.axiom-notes-heading {
+  position: relative;
+}
+.axiom-notes-heading h2 {
+  font-size: clamp(32px, 3.4vw, 52px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.06em;
+  margin: 32px 0 25px;
+}
+.axiom-notes-heading h2 em {
+  font-style: normal;
+  color: var(--axiom-orange);
+}
+.axiom-notes-heading > p:last-of-type {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #b5b2a8;
+  max-width: 350px;
+}
+.axiom-notes-symbol {
+  display: block;
+  margin-top: 24px;
+  font-size: 50px;
+  color: var(--axiom-orange);
+}
+.axiom-notes-list article {
+  border-top: 1px solid var(--axiom-line);
+}
+.axiom-notes-list article:last-child {
+  border-bottom: 1px solid var(--axiom-line);
+}
+.axiom-notes-list h3 {
+  margin: 0;
+}
+.axiom-notes-list button {
+  width: 100%;
+  padding: 25px 0;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  text-align: left;
+  font-size: 23px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  border: 0;
+  color: var(--axiom-paper);
+  background: transparent;
+  cursor: pointer;
+}
+.axiom-notes-list button span:first-child {
+  font:
+    10px "IBM Plex Mono",
+    monospace;
+  color: #a39e93;
+}
+.axiom-notes-list button span:last-child {
+  margin-left: auto;
+  color: var(--axiom-orange);
+}
+.axiom-notes-list article > div {
+  padding: 0 20px 24px 40px;
+}
+.axiom-notes-list p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #b5b2a8;
+  margin: 0 0 14px;
+}
+.axiom-notes-list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 44px;
+  color: var(--axiom-orange);
+  font-size: 11px;
+}
+.axiom-footer {
+  border-top: 1px solid var(--axiom-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font:
+    9px "IBM Plex Mono",
+    monospace;
+  color: #a39e93;
+  min-height: 70px;
+}
+.axiom-footer a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+@media (min-width: 1600px) {
+  .axiom-page {
+    padding-left: max(4%, calc((100vw - 1480px) / 2));
+    padding-right: max(4%, calc((100vw - 1480px) / 2));
+  }
+}
+@media (max-width: 1000px) {
+  .axiom-page {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+  .axiom-header {
+    gap: 24px;
+    min-height: 90px;
+  }
+  .axiom-header nav {
+    gap: 22px;
+  }
+  .axiom-hero {
+    min-height: 800px;
+  }
+  .axiom-hero h1 {
+    font-size: 99px;
+    width: 58%;
+    margin-top: 48px;
+  }
+  .axiom-artwork {
+    top: 24px;
+    right: -19%;
+    width: 95%;
+    height: 630px;
+  }
+  .axiom-selector {
+    margin-top: 45px;
+    width: 240px;
+  }
+  .axiom-console {
+    gap: 25px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .axiom-console-note {
+    display: none;
+  }
+  .axiom-manifesto {
+    gap: 9%;
+    padding: 75px 0;
+  }
+  .axiom-art-label {
+    right: 23%;
+    bottom: 68px;
+  }
+}
+@media (max-width: 600px) {
+  .axiom-page {
+    padding: 0 21px 120px;
+  }
+  .axiom-header {
+    min-height: 83px;
+    gap: 15px;
+  }
+  .axiom-brand {
+    font-size: 25px;
+    gap: 5px;
+  }
+  .axiom-mark {
+    font-size: 31px;
+  }
+  .axiom-header-discipline {
+    display: none;
+  }
+  .axiom-header nav {
+    gap: 0;
+    font-size: 10px;
+  }
+  .axiom-header nav a:first-child {
+    display: none;
+  }
+  .axiom-coordinate {
+    font-size: 8px;
+    padding-top: 23px;
+  }
+  .axiom-live {
+    font-size: 7px;
+    gap: 5px;
+  }
+  .axiom-hero {
+    min-height: 0;
+    padding-bottom: 28px;
+  }
+  .axiom-hero h1 {
+    width: 100%;
+    font-size: clamp(75px, 20.5vw, 120px);
+    margin-top: 38px;
+  }
+  .axiom-artwork {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: calc(100% + 64px);
+    height: 390px;
+    margin: -10px -32px -25px;
+  }
+  .axiom-artwork .axiom-sculpture {
+    height: 100%;
+  }
+  .axiom-cross-one {
+    top: 55px;
+    left: 13%;
+  }
+  .axiom-cross-two {
+    bottom: 69px;
+    right: 13%;
+  }
+  .axiom-axis {
+    left: 12%;
+    bottom: 48px;
+  }
+  .axiom-art-label {
+    right: 12%;
+    bottom: 25px;
+    font-size: 7px;
+  }
+  .axiom-selector {
+    width: 100%;
+    margin: 25px 0 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .axiom-selector > p {
+    grid-column: 1 / -1;
+    margin-bottom: 15px;
+  }
+  .axiom-selector button {
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 12px 6px;
+    min-height: 88px;
+    border-bottom: 1px solid var(--axiom-line);
+    border-right: 1px solid var(--axiom-line);
+    font-size: 12px;
+  }
+  .axiom-selector button:last-child {
+    border-right: 0;
+  }
+  .axiom-selector .axiom-study-number {
+    font-size: 8px;
+    width: 14px;
+  }
+  .axiom-selector svg {
+    width: 45px;
+    height: 34px;
+  }
+  .axiom-selector button > span:nth-last-child(2) {
+    width: calc(100% - 20px);
+  }
+  .axiom-study-arrow {
+    font-size: 15px;
+  }
+  .axiom-console {
+    position: relative;
+    margin-top: 28px;
+    bottom: auto;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    border-top: 0;
+    padding-top: 0;
+  }
+  .axiom-current p {
+    margin-top: 7px;
+    font-size: 24px;
+  }
+  .axiom-tension {
+    padding-top: 17px;
+    border-top: 1px solid var(--axiom-line);
+  }
+  .axiom-tension input {
+    height: 44px;
+    margin: 0;
+  }
+  .axiom-tension > div {
+    margin-top: -2px;
+  }
+  .axiom-console-note {
+    display: block;
+    justify-self: start;
+  }
+  .axiom-manifesto {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 56px 0 45px;
+  }
+  .axiom-notes-heading h2 {
+    font-size: 38px;
+    margin-top: 24px;
+  }
+  .axiom-notes-symbol {
+    display: none;
+  }
+  .axiom-footer {
+    flex-wrap: wrap;
+    gap: 0 20px;
+    padding-top: 20px;
+    font-size: 8px;
+  }
+  .axiom-footer > span:nth-child(2) {
+    display: none;
+  }
+}

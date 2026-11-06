@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#f3f0e7" />
+    <title>K-Design — LocalNinja Design Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/work/designs/base.css" />
+    <link rel="stylesheet" href="/src/work/designs/k-design.css" />
+  </head>
+  <body data-design="k-design">
+    <a class="form-skip" href="#main">Skip to content</a>
+    <svg
+      class="form-definitions"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="form-red" x1="0" x2="1">
+          <stop stop-color="#aa211a" />
+          <stop offset=".26" stop-color="#e74732" />
+          <stop offset=".56" stop-color="#f86143" />
+          <stop offset=".82" stop-color="#db3d2b" />
+          <stop offset="1" stop-color="#a61d16" />
+        </linearGradient>
+        <linearGradient id="form-dome" x1="0" y1="0" x2=".75" y2="1">
+          <stop stop-color="#ff7755" />
+          <stop offset=".47" stop-color="#e84530" />
+          <stop offset="1" stop-color="#be2c20" />
+        </linearGradient>
+        <linearGradient id="form-cream" x1="0" x2="1">
+          <stop stop-color="#b7aa93" />
+          <stop offset=".4" stop-color="#e4d8c2" />
+          <stop offset=".73" stop-color="#f4e9d5" />
+          <stop offset="1" stop-color="#c0af94" />
+        </linearGradient>
+        <linearGradient id="form-wood" x1="0" x2="1">
+          <stop stop-color="#5a3a24" />
+          <stop offset=".3" stop-color="#9f7451" />
+          <stop offset=".6" stop-color="#ba946c" />
+          <stop offset="1" stop-color="#775232" />
+        </linearGradient>
+        <radialGradient id="form-shadow">
+          <stop stop-color="#3d2f20" stop-opacity=".25" />
+          <stop offset="1" stop-color="#3d2f20" stop-opacity="0" />
+        </radialGradient>
+        <symbol id="form-lamp" viewBox="0 0 480 520">
+          <ellipse
+            cx="253"
+            cy="470"
+            rx="173"
+            ry="29"
+            fill="url(#form-shadow)"
+          />
+          <path
+            d="M251 434q55 35 111 19t49 13"
+            fill="none"
+            stroke="#61584b"
+            stroke-width="3"
+          />
+          <ellipse cx="240" cy="446" rx="93" ry="22" fill="#a7271c" />
+          <path
+            d="M147 434v12c0 12 42 21 93 21s93-9 93-21v-12Z"
+            fill="url(#form-red)"
+          />
+          <ellipse cx="240" cy="433" rx="93" ry="21" fill="#ee5037" />
+          <path d="M215 238h50v190c0 10-50 10-50 0Z" fill="url(#form-red)" />
+          <path
+            d="M74 245C79 145 144 74 240 74s161 71 166 171Z"
+            fill="url(#form-dome)"
+          />
+          <ellipse cx="240" cy="245" rx="166" ry="29" fill="#a52218" />
+          <ellipse cx="240" cy="245" rx="148" ry="19" fill="#e78152" />
+          <ellipse cx="240" cy="247" rx="62" ry="11" fill="#ffe3a4" />
+          <path
+            d="M87 209c18-64 62-113 123-121"
+            fill="none"
+            stroke="#ff9572"
+            stroke-opacity=".25"
+            stroke-width="2"
+          />
+        </symbol>
+        <symbol id="form-bowl" viewBox="0 0 480 520">
+          <ellipse
+            cx="243"
+            cy="403"
+            rx="172"
+            ry="27"
+            fill="url(#form-shadow)"
+          />
+          <path
+            d="M79 269c9 83 57 131 161 131s152-48 161-131Z"
+            fill="url(#form-cream)"
+          />
+          <ellipse cx="240" cy="269" rx="161" ry="58" fill="#f2e7d3" />
+          <ellipse cx="240" cy="270" rx="145" ry="46" fill="#b9aa91" />
+          <ellipse cx="240" cy="278" rx="132" ry="37" fill="#d0c1a6" />
+          <path
+            d="M94 283c20 21 78 36 146 36s127-15 147-36"
+            fill="none"
+            stroke="#f7eddc"
+            stroke-width="5"
+          />
+          <path
+            d="M204 275c17-15 40-17 56-7s4 25-12 30-36-5-44-23"
+            fill="#969b60"
+          />
+          <path
+            d="M238 269c-1-17 5-25 13-30"
+            fill="none"
+            stroke="#6a7050"
+            stroke-width="3"
+          />
+        </symbol>
+        <symbol id="form-stool" viewBox="0 0 480 520">
+          <ellipse
+            cx="242"
+            cy="456"
+            rx="164"
+            ry="30"
+            fill="url(#form-shadow)"
+          />
+          <path
+            d="m154 238-20 205c0 12 33 14 37 2l32-192Zm124 15 32 192c4 12 37 10 37-2l-20-205Z"
+            fill="url(#form-wood)"
+          />
+          <path d="m224 233-8 198c0 10 31 12 34 0l14-193Z" fill="#65432c" />
+          <path
+            d="M119 221v28c0 33 54 59 121 59s121-26 121-59v-28Z"
+            fill="url(#form-wood)"
+          />
+          <ellipse cx="240" cy="221" rx="121" ry="58" fill="#b58c61" />
+          <ellipse
+            cx="240"
+            cy="221"
+            rx="105"
+            ry="46"
+            fill="none"
+            stroke="#996d47"
+            stroke-opacity=".4"
+          />
+          <ellipse
+            cx="240"
+            cy="221"
+            rx="80"
+            ry="34"
+            fill="none"
+            stroke="#d2ac7c"
+            stroke-opacity=".5"
+          />
+          <path
+            d="M148 205c28 10 108 20 180 8M157 236c48-11 110-9 170 3"
+            stroke="#986f4a"
+            stroke-opacity=".3"
+            fill="none"
+          />
+        </symbol>
+      </defs>
+    </svg>
+    <div class="form-site">
+      <header class="form-header">
+        <a class="form-wordmark" href="#main" aria-label="FORM Seoul home"
+          >FORM<span>®</span></a
+        >
+        <p class="form-header-note">
+          An everyday design practice.<br />Seoul, South Korea
+          <span lang="ko">서울</span>
+        </p>
+        <nav aria-label="Main navigation">
+          <a href="#collection">Objects <span>03</span></a
+          ><a href="#studio">Our practice ↗</a>
+        </nav>
+      </header>
+      <main id="main">
+        <section class="form-hero" aria-labelledby="form-title">
+          <div class="form-hero-copy">
+            <div class="form-eyebrow">
+              <span class="form-dot"></span> A study in everyday living
+              <span>№ 01—26</span>
+            </div>
+            <h1 id="form-title">
+              Objects for<br />an <em>unhurried</em><br />day<span
+                class="form-period"
+                >.</span
+              >
+            </h1>
+            <div class="form-intro">
+              <span class="form-korean" lang="ko">일상</span>
+              <p>
+                A quieter kind of presence.<br />Considered objects for the
+                small<br />moments that make a life.
+              </p>
+            </div>
+            <a class="form-collection-link" href="#collection"
+              ><span>Explore the collection</span
+              ><span aria-hidden="true">↘</span></a
+            >
+          </div>
+          <figure class="form-hero-art">
+            <div class="form-art-top">
+              <span>FORM / OBJECT STUDIES</span><span>001</span>
+            </div>
+            <span class="form-art-korean" lang="ko" aria-hidden="true">빛</span>
+            <svg
+              role="img"
+              aria-label="Sculptural tomato red mushroom lamp with a domed shade and a slender stem"
+              viewBox="0 0 480 520"
+            >
+              <use href="#form-lamp" />
+            </svg>
+            <figcaption>
+              <div>
+                <span class="form-object-label">A softer light.</span
+                ><span>Dome lamp / Tomato</span>
+              </div>
+              <span class="form-art-arrow" aria-hidden="true">↗</span>
+            </figcaption>
+            <div class="form-art-vertical">DESIGNED TO STAY.</div>
+          </figure>
+        </section>
+        <div class="form-belief">
+          <span>( Our point of view )</span>
+          <p>
+            Less noise. More meaning.<br /><em
+              >A little room for the everyday.</em
+            >
+          </p>
+          <span class="form-belief-mark" aria-hidden="true">✳</span>
+        </div>
+        <section
+          class="form-collection"
+          id="collection"
+          aria-labelledby="form-collection-title"
+        >
+          <div class="form-section-head">
+            <div>
+              <p class="form-eyebrow">USEFUL, BEAUTIFUL, EVERYDAY.</p>
+              <h2 id="form-collection-title">
+                The object edit<span> (03)</span>
+              </h2>
+            </div>
+            <p>
+              Good company for your space.<br />Made slowly. Kept for longer.
+            </p>
+          </div>
+          <div class="form-filter-row">
+            <div class="form-filters" role="group" aria-label="Filter objects">
+              <button type="button" data-form-filter="all" aria-pressed="true">
+                All objects <sup>03</sup></button
+              ><button
+                type="button"
+                data-form-filter="lighting"
+                aria-pressed="false"
+              >
+                Lighting <sup>01</sup></button
+              ><button
+                type="button"
+                data-form-filter="living"
+                aria-pressed="false"
+              >
+                Living <sup>02</sup>
+              </button>
+            </div>
+            <p class="form-count" aria-live="polite">Showing 3 objects</p>
+          </div>
+          <div class="form-products">
+            <article class="form-product" data-form-category="lighting">
+              <button
+                class="form-product-art form-product-red"
+                type="button"
+                data-form-object="lamp"
+                aria-label="View Dome lamp details"
+              >
+                <span class="form-product-number">01 / LIGHTING</span
+                ><svg viewBox="0 0 480 520" aria-hidden="true">
+                  <use href="#form-lamp" /></svg
+                ><span class="form-product-plus" aria-hidden="true">+</span>
+              </button>
+              <div class="form-product-meta">
+                <h3>Dome lamp</h3>
+                <span>Tomato / Powder-coated steel</span><span>2026</span>
+              </div>
+            </article>
+            <article class="form-product" data-form-category="living">
+              <button
+                class="form-product-art form-product-bowl"
+                type="button"
+                data-form-object="bowl"
+                aria-label="View Daily bowl details"
+              >
+                <span class="form-product-number">02 / LIVING</span
+                ><svg viewBox="0 0 480 520" aria-hidden="true">
+                  <use href="#form-bowl" /></svg
+                ><span class="form-product-plus" aria-hidden="true">+</span>
+              </button>
+              <div class="form-product-meta">
+                <h3>Daily bowl</h3>
+                <span>Oat / Glazed stoneware</span><span>2026</span>
+              </div>
+            </article>
+            <article class="form-product" data-form-category="living">
+              <button
+                class="form-product-art form-product-stool"
+                type="button"
+                data-form-object="stool"
+                aria-label="View Pause stool details"
+              >
+                <span class="form-product-number">03 / LIVING</span
+                ><svg viewBox="0 0 480 520" aria-hidden="true">
+                  <use href="#form-stool" /></svg
+                ><span class="form-product-plus" aria-hidden="true">+</span>
+              </button>
+              <div class="form-product-meta">
+                <h3>Pause stool</h3>
+                <span>Natural / Solid oak</span><span>2026</span>
+              </div>
+            </article>
+          </div>
+        </section>
+        <section
+          class="form-studio"
+          id="studio"
+          aria-labelledby="form-studio-title"
+        >
+          <div class="form-studio-label">
+            <span>( A note from Seoul )</span><span lang="ko">일상의 형태</span>
+          </div>
+          <div class="form-studio-copy">
+            <h2 id="form-studio-title">
+              Made with intention.<br />Lived with <em>ease.</em>
+            </h2>
+            <p>
+              We are FORM, an independent design practice in Seoul. We find our
+              starting point in ordinary things: the curve of a bowl, the warmth
+              of a light, the place you pause.
+            </p>
+            <p>
+              Our objects are an invitation to notice a little more, and need a
+              little less.
+            </p>
+            <a href="#collection"
+              >Meet the objects <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="form-studio-seal" aria-hidden="true">
+            <span>FORM</span><span>서울</span
+            ><small>EVERY DAY, WELL MADE.</small>
+          </div>
+        </section>
+      </main>
+      <footer class="form-footer">
+        <a class="form-wordmark" href="#main">FORM<span>®</span></a>
+        <p>Small things. A fuller life.</p>
+        <span>SEOUL · EST. 2026</span>
+      </footer>
+    </div>
+    <dialog class="form-dialog" aria-labelledby="form-dialog-title">
+      <button
+        class="form-dialog-close"
+        type="button"
+        aria-label="Close object details"
+      >
+        Close ×
+      </button>
+      <div class="form-dialog-art">
+        <svg viewBox="0 0 480 520" aria-hidden="true">
+          <use href="#form-lamp" />
+        </svg>
+      </div>
+      <div class="form-dialog-copy">
+        <p class="form-eyebrow" id="form-dialog-category">
+          OBJECT 01 / LIGHTING
+        </p>
+        <h2 id="form-dialog-title">Dome lamp</h2>
+        <p id="form-dialog-description"></p>
+        <dl>
+          <div>
+            <dt>Material</dt>
+            <dd id="form-dialog-material"></dd>
+          </div>
+          <div>
+            <dt>Dimensions</dt>
+            <dd id="form-dialog-dimensions"></dd>
+          </div>
+          <div>
+            <dt>Color</dt>
+            <dd id="form-dialog-color"></dd>
+          </div>
+        </dl>
+        <p class="form-dialog-note">
+          An original concept from the FORM object studies.
+        </p>
+      </div>
+    </dialog>
+    <script type="module" src="/src/work/designs/k-design.js"></script>
+    <script type="module" src="/src/work/designs/base.js"></script>
+  </body>
+</html>

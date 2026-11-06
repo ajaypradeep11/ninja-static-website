@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 A static marketing site for LocalNinja. The homepage is a single-page,
-neo-brutalist services site (white ground, black 3px borders + hard offset
+neo-brutalist services site (light/dark ground, 3px borders + hard offset
 shadows, `#4da3ff` accent on the "Ninja" word and highlighted heading words)
 listing the company's 6 core services (plus an "Others" group), about/team, and a mailto-backed contact
 form, plus a **Work** showcase of eight sample projects under `/work/`
@@ -58,7 +58,7 @@ and the `OPENAI_API_KEY` secret set via `firebase functions:secrets:set`).
 Everything lives in a few files plus assets:
 
 - `work/*.html` — eight demo pages, each listed in `vite.config.js`. They
-  share `src/work/shell.css` (LocalNinja top bar + footer) and otherwise
+  share `src/work/shell.css` (Studio shell styles and footer) and otherwise
   own their look: `clinic`, `restaurant`, `realty`, `dashboard`, `dealer`, `trades` each have a
   matching `src/work/<slug>.css` and use `src/work/mockups.js` (generic
   data-attribute behaviours: steps, tabs, select groups, cart, filters,
@@ -80,30 +80,52 @@ Everything lives in a few files plus assets:
   per-IP rate limit, `gpt-4o-mini`. Returns 503 `not_configured` without
   the secret; the widget then switches to scripted replies.
 - `work.html` — the showcase page: the tab bar and every project card.
+  Its container stretches to 2240px; project cards use real screenshot thumbnails
+  from `public/work/service-previews/`. The Voice bots panel shows the actual
+  assistant without a preview screenshot. The Motion collection begins with filters
+  and projects; its former Motion Lab heading and introductory copy are removed.
   Its header/footer are copies of the homepage's, so same-page anchors are
   written as `/#services`, `/#contact` … If you add a nav item or change
   the footer, change it in **both** files.
 - `index.html` — homepage markup, no templating. Sections in order: header,
-  `#home` hero, marquee band, `#services` (6 numbered accordion rows + an
-  "Others" row; rows have `id="svc-*"` so the header dropdown can deep-link),
-  `#process` (six-step "How we work" cards), `#work` (a teaser strip of four
-  demos + a "See our work →" button pointing at `/work.html`), `#about`
+  `#home` hero, marquee band, `#services` (8 service tabs with project galleries;
+  tabs have `id="svc-*"` so the header dropdown can deep-link),
+  `#process` (six-step "How we work" cards), `#about`
   (+ team), `#contact` (form), footer (`#products` links). CSS is linked directly
   (`<link href="/src/style.css">`), **not** imported from `main.js` — don't
   move it into JS.
   Any new page must be added to `vite.config.js` `rollupOptions.input` or
   the build won't emit it.
-- `src/main.js` — all interactivity, loaded as an ES module
-  (`<script type="module">`). Three independent `init*()` functions called
-  from one `init()`: scroll-reveal (IntersectionObserver), mobile nav toggle,
-  services accordion, work tabs, contact form (builds a `mailto:` URL). Comment at the top states the
-  contract: **JS only toggles classes / builds URLs; CSS owns all
-  transitions/animations.**
+- `src/main.js` — shared interactivity, loaded as an ES module
+  (`<script type="module">`). Independent `init*()` functions handle
+  scroll-reveal (IntersectionObserver), mobile nav, work tabs, the voice showcase
+  and contact form (builds a `mailto:` URL). Comment at the top states the
+  contract: **CSS owns all transitions/animations. JS initializes content, toggles
+  interaction state, and builds URLs.**
 - `src/style.css` — all styling and every animation/transition.
+- `src/theme.css` and `public/theme.js` — shared Studio themes. A synchronous
+  head script applies the stored `localninja-theme` preference before CSS paints;
+  otherwise it follows the system. Header buttons switch modes across homepage,
+  Work, project galleries, and shared sample-project bars/footers. Standalone design
+  studies and embedded sample-product interfaces retain their authored palettes.
+  Dark mode uses black for Hero, Services, About, Footer, Work, and the contact form;
+  Contact uses deep navy blue `#0b2447` in both themes, with light copy and a
+  themed form. Custom solutions uses `#292929` in dark mode and `#eeeeee` in
+  light mode. The homepage Work teaser has been removed; link to `/work.html`.
 - `public/` — static assets served from site root (`logo-animated.svg`,
   `logo.png`).
 
 ### JS/CSS behavior contracts (don't break these)
+
+- **Hero service wheel**: `initServiceWheel()` enhances seven service links into
+  a tilted CSS 3D cylinder. Cards remain tangent to the wheel, with mirrored
+  reverse faces to keep service names readable. A visual copy of each service
+  fills out the desktop ring; copies are hidden from assistive technology and
+  omitted from the mobile/static grid. Original links follow the existing
+  `#svc-*` routing. CSS owns the rotation and focus positioning; card hover,
+  keyboard focus, offscreen visibility and hidden tabs stop motion.
+  The hero tagline and manual Pause/Play button are removed.
+  Reduced motion presents all seven services in a static grid without controls.
 
 - **Reveal**: elements with `.reveal` gain `.is-visible` once via an
   `IntersectionObserver` (threshold 0.15); falls back to revealing everything
@@ -115,12 +137,48 @@ Everything lives in a few files plus assets:
 - **Services dropdown**: `.has-menu > .nav-menu-toggle` toggles `.is-open`
   on `.has-menu` (click only — no hover-open); nested `.nav-others-toggle`
   toggles `.is-open` on `.nav-others`. Outside click / Escape / following a
-  menu link closes it. Menu links are `#svc-*` hashes; `initServices()`
-  opens the matching row on `hashchange`/load.
-- **Services accordion**: `.service-row` click (or its `.service-toggle`
-  button) toggles `.is-open` and `aria-expanded`; CSS animates
-  `.service-details` height via `grid-template-rows` (instant under
-  reduced motion). Clicks inside `.service-details` don't collapse it.
+  menu link closes it. Menu links are `#svc-*` hashes; `src/services.js`
+  selects the matching service tab on `hashchange`/load.
+- **Services galleries**: `src/services.js` is loaded only on the homepage. It
+  reads `work.html?raw` through an inert template so titles and demo URLs stay
+  aligned with Work. UI/UX shows 24 visible design studies (MINA and ECHO ZERO are hidden); the remaining seven
+  tabs show relevant products. `.service-tab` controls a `.service-panel` with
+  `aria-selected`, roving tabindex and Left/Right/Home/End navigation. Inactive
+  panels are hidden; their gallery images render on first selection. Existing
+  service copy remains in native “What’s included” details. Preview WebPs live
+  in `public/work/service-previews/`; update a preview when its project changes.
+  The homepage content is 1520px wide; Services uses a near-full-width project
+  gallery with 1–5 columns by viewport size. Cards follow a stable left-to-right
+  grid order; generic #services links preserve the current service selection. CSS owns hover/reduced motion.
+  Every service tab reuses available recordings from `src/service-preview-catalog.js`.
+  It maps each recorded project to one poster/video URL pair and cache version;
+  update that catalog when adding a recording. Repeated projects across categories
+  must use identical media URLs. Cards remain deduplicated within each tab.
+  `src/service-previews.js`
+  defers animation loading until visible, pauses offscreen/hidden tabs, and provides a
+  gallery Play/Pause button. Reduced motion/data saver default to stills. Clips
+  and regeneration instructions live in `scripts/service-previews/` and
+  `public/work/service-previews/motion/`; projects without a recording use their still image.
+  Conversy, ajaypradeep.com, NinjaLearn and NinjaCommerce use 30 fps MP4s captured
+  from live browser frames with `capture-scroll.mjs <slug>`. Ajay's tour shows
+  About → Design → the Crimson Lancer project. NinjaLearn starts in System Design,
+  opens Chat System and demonstrates simulated messages and reconnection. Neither
+  tour records the site's homepage. Preserve timestamps and still holds, and update
+  their poster images together with the videos. The 24 UI tours use
+  `motion-tours.mjs`, `more-motion-tours.mjs`, `design-tours-a.mjs` and
+  `design-tours-b.mjs` to demonstrate each design's controls and detail views.
+  New visible design cards require matching MP4 and WebP assets before release.
+  Each gallery owns its playback controls; animated cards use a 1.6 aspect ratio.
+  Others has eight tours: Conversy App, NinjaHR and the six sample projects.
+  `others-gallery-tours.mjs`, `others-tours-a.mjs` and `others-tours-b.mjs`
+  drive their existing screenshot lightboxes and native product controls.
+  Conversy App/NinjaHR share these upgraded clips with Web Development.
+  The eight Others destination pages omit `.ln-bar`; their
+  `body[data-project-standalone]` uses `--ln-bar-h: 0px` for sticky controls,
+  drawer offsets and full-height layouts. Keep each product's own navigation
+  and footer links. Hide floating assistant widgets only during capture;
+  preserve the actual page widgets. Do not submit bookings, orders or chats
+  while generating previews.
 - **Work tabs** (on `work.html`): `.work-tab[data-work-tab]` buttons toggle `.is-active`
   (+ `aria-selected`) on themselves and on the matching `.work-grid` id;
   seven tabs (Voice bots, UI/UX, Web development, E-commerce, AI, Chatbots,

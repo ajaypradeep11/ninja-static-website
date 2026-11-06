@@ -16,6 +16,25 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 const money = (n) => `$${n.toFixed(2)}`;
 const escapeHtml = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+// Reuse the menu's photographs in the order drawer without a second asset map.
+const dishImages = new Map(
+  $$('.dish, .special').map((article) => [
+    $('h3', article)?.textContent.trim(),
+    $('.art img', article),
+  ]),
+);
+
+function cartImage(name) {
+  const source = dishImages.get(name);
+  if (!source) return '';
+  const image = source.cloneNode();
+  image.className = 'line-photo';
+  image.alt = '';
+  image.sizes = '48px';
+  image.loading = 'lazy';
+  return image.outerHTML;
+}
+
 const fmtTime = (d) => {
   let h = d.getHours();
   const m = d.getMinutes();
@@ -134,7 +153,7 @@ function renderCartList() {
     .map((l) => {
       const mods = l.mods.length ? `<small class="mods">${escapeHtml(l.mods.map((m) => m.label).join(' · '))}</small>` : '';
       return `<li data-key="${escapeHtml(l.key)}">
-        <div class="line-main"><span class="name">${escapeHtml(l.name)}</span>${mods}</div>
+        <div class="line-main">${cartImage(l.name)}<div class="line-copy"><span class="name">${escapeHtml(l.name)}</span>${mods}</div></div>
         <div class="qty" role="group" aria-label="Quantity for ${escapeHtml(l.name)}">
           <button type="button" data-eo-qty="-1" aria-label="One fewer ${escapeHtml(l.name)}">−</button>
           <span data-eo-qty-out>${l.qty}</span>
@@ -414,11 +433,9 @@ function openDish(article) {
   if (!host || !article) return;
   const name = $('h3', article)?.textContent.trim() || '';
   const base = Number(($('[data-add]', article)?.dataset.add || '|0').split('|')[1]) || 0;
-  const art = $('.art', article)?.style.getPropertyValue('--art') || '';
   modal.dish = {
     name,
     base,
-    art,
     desc: $('p:not(.tags)', article)?.textContent.trim() || '',
     story: article.dataset.story || '',
     allergens: article.dataset.allergens || 'Ask your server',
@@ -436,7 +453,12 @@ function openDish(article) {
   modal.qty = 1;
   modal.returnFocus = document.activeElement;
 
-  $('[data-eo-modal-art]').style.setProperty('--art', art);
+  const image = $('.art img', article)?.cloneNode();
+  if (image) {
+    image.loading = 'eager';
+    image.sizes = '(max-width: 640px) calc(100vw - 24px), 560px';
+  }
+  $('[data-eo-modal-art]').replaceChildren(...(image ? [image] : []));
   $('[data-eo-modal-title]').textContent = name;
   $('[data-eo-modal-price]').textContent = `$${base}`;
   $('[data-eo-modal-desc]').textContent = modal.dish.desc;

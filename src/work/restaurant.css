@@ -416,22 +416,25 @@
   padding: 0;
   border: 0;
   border-radius: 0;
-  background: var(--art, linear-gradient(135deg, #3a2a20, #6b3a1c));
+  background: var(--bg-2);
   position: relative;
   cursor: pointer;
 }
 
-.dish .art::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.12), transparent 45%);
-  transition: opacity 0.2s;
+.dish .art img,
+.special .art img,
+.modal-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
 }
 
 .dish .art::before {
   content: 'Details';
   position: absolute;
+  z-index: 1;
   right: 0.75rem;
   bottom: 0.65rem;
   padding: 0.25rem 0.6rem;
@@ -451,10 +454,6 @@
 .dish .art:focus-visible::before {
   opacity: 1;
   transform: none;
-}
-
-.dish .art:hover::after {
-  opacity: 1.6;
 }
 
 .dish .body {
@@ -924,9 +923,24 @@
 .cart .line-main {
   grid-column: 1;
   display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.cart .line-copy {
+  display: flex;
   flex-direction: column;
   gap: 0.1rem;
   min-width: 0;
+}
+
+.cart .line-photo {
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .cart .line-main .mods {
@@ -1434,7 +1448,7 @@
 
 .modal-art {
   height: 200px;
-  background: var(--art, linear-gradient(135deg, #3a2a20, #6b3a1c));
+  background: var(--bg-2);
   position: relative;
 }
 
@@ -1442,9 +1456,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.14), transparent 45%),
-    linear-gradient(to top, var(--bg-2), transparent 40%);
+  background: linear-gradient(to top, var(--bg-2), transparent 25%);
 }
 
 .modal-body {
@@ -1812,17 +1824,9 @@ body.eo-modal-open {
   width: 84px;
   height: 84px;
   border-radius: 6px;
-  background: var(--art, linear-gradient(135deg, #3a2a20, #6b3a1c));
+  background: var(--bg-2);
   position: relative;
   transition: filter 0.2s;
-}
-
-.special .art::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 6px;
-  background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.14), transparent 45%);
 }
 
 .special h3 {

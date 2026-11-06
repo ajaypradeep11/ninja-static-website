@@ -1,0 +1,698 @@
+body[data-design="vector-surrealism"] {
+  --vs-paper: #f7f3e8;
+  --vs-ink: #252b25;
+  --vs-blue: #244ed6;
+  --vs-coral: #dd795b;
+  --vs-lilac: #c6b3e3;
+  --vs-green: #627d52;
+  --vs-sky: #f0d5bf;
+  background: var(--vs-paper);
+  color: var(--vs-ink);
+  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 85px;
+  -webkit-font-smoothing: antialiased;
+}
+body[data-design="vector-surrealism"] button {
+  color: inherit;
+}
+.vs-header {
+  max-width: 1540px;
+  margin: auto;
+  min-height: 115px;
+  padding: 24px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  border-bottom: 1px solid #252b253b;
+}
+.vs-wordmark {
+  font-size: 42px;
+  letter-spacing: -3px;
+  font-weight: 800;
+  text-decoration: none;
+  line-height: 1;
+}
+.vs-wordmark span {
+  font-size: 12px;
+  letter-spacing: 0;
+  vertical-align: top;
+  display: inline-block;
+  margin: 5px 0 0 4px;
+}
+.vs-header-note {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 1.3px;
+  margin-left: auto;
+  margin-right: 8vw;
+}
+.vs-header nav {
+  display: flex;
+  gap: 34px;
+  font-size: 12px;
+}
+.vs-header nav a {
+  text-decoration: none;
+  padding: 10px 0;
+}
+.vs-header nav a span {
+  margin-left: 12px;
+}
+.vs-header nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+.vs-hero {
+  max-width: 1540px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 0.87fr 1.13fr;
+  min-height: 720px;
+  padding: 48px 4% 30px 5%;
+  gap: 10px;
+}
+.vs-intro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 40px;
+  z-index: 1;
+}
+.vs-eyebrow {
+  font-size: 10px;
+  letter-spacing: 1.7px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0 0 25px;
+}
+.vs-spark {
+  font-size: 24px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.vs-intro h1 {
+  font-size: clamp(65px, 7.7vw, 120px);
+  line-height: 0.98;
+  letter-spacing: -7px;
+  font-weight: 500;
+  margin: 18px 0 29px;
+}
+.vs-intro h1 em,
+.vs-section-heading h2 em,
+.vs-studio h2 em {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}
+.vs-intro h1 em {
+  letter-spacing: -8px;
+}
+.vs-description {
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 340px;
+  margin: 0 0 24px;
+}
+.vs-work-link {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--vs-ink);
+  padding: 9px 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.vs-work-link span {
+  font-size: 29px;
+  font-weight: 400;
+  line-height: 1;
+}
+.vs-work-link:hover {
+  color: var(--vs-blue);
+}
+.vs-hero-footnote {
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  margin-top: auto;
+  padding-top: 48px;
+}
+.vs-world {
+  align-self: center;
+  min-width: 0;
+}
+.vs-scene-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  padding: 0 10%;
+}
+.vs-landscape {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: -12px 0 -15px;
+  overflow: visible;
+}
+.vs-scene-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid #252b2538;
+  margin: 0 8%;
+  padding-top: 16px;
+}
+.vs-scene-controls > span {
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  max-width: 90px;
+  line-height: 1.5;
+}
+.vs-scene-controls > div {
+  display: flex;
+  gap: 12px;
+}
+.vs-scene-controls button {
+  border: 0;
+  background: transparent;
+  padding: 8px 0;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.vs-scene-controls button i {
+  width: 11px;
+  height: 11px;
+  background: #244ed6;
+  border-radius: 50%;
+  display: block;
+}
+.vs-scene-controls button:last-child i {
+  background: #a282d1;
+}
+.vs-scene-controls button[aria-pressed="true"] {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.vs-world[data-palette="afterhours"] {
+  --vs-paper: #f0deff;
+  --vs-sky: #b7a6cd;
+  --vs-blue: #4e3786;
+  --vs-coral: #f3a177;
+  --vs-green: #d7f2a8;
+  --vs-lilac: #8175b3;
+  --vs-ink: #28203d;
+}
+.vs-ribbon {
+  background: var(--vs-ink);
+  color: var(--vs-paper);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 40px;
+  padding: 20px 35px;
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  white-space: nowrap;
+}
+.vs-ribbon span:nth-child(even) {
+  font-size: 30px;
+  line-height: 1;
+}
+.vs-selected {
+  padding: 88px 5% 76px;
+  max-width: 1540px;
+  margin: auto;
+}
+.vs-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 34px;
+  gap: 24px;
+}
+.vs-section-heading .vs-eyebrow {
+  margin-bottom: 16px;
+}
+.vs-section-heading h2 {
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: -2px;
+  line-height: 1.1;
+  margin: 0;
+}
+.vs-section-heading > span {
+  font-size: 9px;
+  letter-spacing: 1.3px;
+  line-height: 1.7;
+  text-align: right;
+}
+.vs-projects {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.vs-project {
+  padding: 0;
+  text-align: left;
+  border: 0;
+  background: none;
+  display: block;
+  min-width: 0;
+}
+.vs-project-art {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.vs-project-art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.vs-project-open {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #252b25;
+  border-radius: 50%;
+  font-size: 22px;
+  background: var(--vs-paper);
+}
+.vs-project:hover .vs-project-open {
+  background: var(--vs-ink);
+  color: var(--vs-paper);
+}
+.vs-project-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 17px;
+}
+.vs-project-info > span:first-child {
+  font-size: 17px;
+  letter-spacing: -0.5px;
+}
+.vs-project-info > span:last-child {
+  font-size: 7px;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  text-align: right;
+  max-width: 125px;
+}
+.vs-studio {
+  border-top: 1px solid #252b253b;
+  border-bottom: 1px solid #252b253b;
+  padding: 65px 5%;
+  display: grid;
+  grid-template-columns: 0.35fr 1fr auto;
+  gap: 30px;
+  max-width: 1540px;
+  margin: auto;
+  align-items: center;
+}
+.vs-studio-star {
+  font-size: 120px;
+  line-height: 1;
+  color: var(--vs-coral);
+}
+.vs-studio .vs-eyebrow {
+  margin-bottom: 20px;
+}
+.vs-studio h2 {
+  font-size: clamp(28px, 3.2vw, 48px);
+  line-height: 1.2;
+  letter-spacing: -1.6px;
+  font-weight: 500;
+  margin: 0 0 20px;
+}
+.vs-studio p:last-child {
+  max-width: 470px;
+  line-height: 1.8;
+  font-size: 13px;
+  margin: 0;
+}
+.vs-studio > a {
+  width: 58px;
+  height: 58px;
+  border: 1px solid var(--vs-ink);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  font-size: 26px;
+}
+.vs-studio > a:hover {
+  background: var(--vs-ink);
+  color: var(--vs-paper);
+}
+.vs-footer {
+  max-width: 1540px;
+  margin: auto;
+  padding: 35px 5%;
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  align-items: center;
+}
+.vs-footer .vs-wordmark {
+  font-size: 29px;
+  letter-spacing: -2px;
+}
+.vs-footer > span {
+  font-size: 8px;
+  letter-spacing: 1.1px;
+}
+.vs-dialog {
+  position: fixed;
+  max-width: 580px;
+  width: calc(100% - 32px);
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  border: 0;
+  background: var(--vs-paper);
+  color: var(--vs-ink);
+  padding: 26px;
+}
+.vs-dialog::backdrop {
+  background: #252b259e;
+  backdrop-filter: blur(5px);
+}
+.vs-dialog-close {
+  position: absolute;
+  top: 36px;
+  right: 36px;
+  z-index: 1;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--vs-ink);
+  border-radius: 50%;
+  background: var(--vs-paper);
+  font-size: 27px;
+}
+.vs-dialog-art svg {
+  display: block;
+  max-height: 330px;
+  width: 100%;
+  object-fit: cover;
+}
+.vs-dialog .vs-eyebrow {
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+.vs-dialog h2 {
+  font-size: 38px;
+  letter-spacing: -1px;
+  font-weight: 500;
+  margin: 0 0 15px;
+}
+.vs-dialog p:not(.vs-eyebrow) {
+  font-size: 14px;
+  line-height: 1.7;
+}
+.vs-dialog-note {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 1px;
+  margin-top: 25px;
+}
+.vs-header a:focus-visible,
+.vs-project:focus-visible,
+.vs-work-link:focus-visible,
+.vs-scene-controls button:focus-visible {
+  outline-color: var(--vs-blue);
+}
+@media (min-width: 1600px) {
+  .vs-hero {
+    min-height: 780px;
+  }
+  .vs-landscape {
+    max-height: 660px;
+  }
+  .vs-intro {
+    padding-top: 65px;
+  }
+}
+@media (max-width: 1000px) {
+  .vs-header-note {
+    margin-right: 3vw;
+  }
+  .vs-header nav {
+    gap: 20px;
+  }
+  .vs-hero {
+    min-height: 630px;
+    padding-top: 30px;
+  }
+  .vs-intro {
+    padding-top: 30px;
+  }
+  .vs-intro h1 {
+    letter-spacing: -5px;
+  }
+  .vs-intro h1 em {
+    letter-spacing: -5px;
+  }
+  .vs-scene-controls {
+    margin: 0 5%;
+  }
+  .vs-scene-controls > span {
+    display: none;
+  }
+  .vs-scene-controls > div {
+    width: 100%;
+    justify-content: center;
+  }
+  .vs-projects {
+    gap: 15px;
+  }
+  .vs-project-info {
+    flex-direction: column;
+  }
+  .vs-project-info > span:last-child {
+    text-align: left;
+    max-width: none;
+  }
+  .vs-studio {
+    grid-template-columns: 100px 1fr auto;
+  }
+  .vs-studio-star {
+    font-size: 90px;
+  }
+}
+@media (max-width: 720px) {
+  .vs-header {
+    min-height: 88px;
+    padding: 20px 6%;
+    gap: 15px;
+  }
+  .vs-header .vs-wordmark {
+    font-size: 33px;
+    letter-spacing: -2px;
+  }
+  .vs-header-note {
+    display: none;
+  }
+  .vs-header nav {
+    gap: 18px;
+    font-size: 10px;
+  }
+  .vs-header nav a span {
+    display: none;
+  }
+  .vs-hero {
+    display: flex;
+    flex-direction: column;
+    padding: 35px 6% 26px;
+    gap: 20px;
+  }
+  .vs-intro {
+    padding-top: 0;
+  }
+  .vs-intro .vs-eyebrow {
+    font-size: 8px;
+    margin-bottom: 5px;
+  }
+  .vs-intro h1 {
+    font-size: clamp(72px, 14vw, 100px);
+    letter-spacing: -5px;
+    line-height: 0.98;
+    margin: 14px 0 22px;
+  }
+  .vs-intro h1 em {
+    letter-spacing: -5px;
+  }
+  .vs-description {
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+  .vs-work-link {
+    font-size: 12px;
+    gap: 38px;
+  }
+  .vs-hero-footnote {
+    display: none;
+  }
+  .vs-world {
+    width: 100%;
+  }
+  .vs-scene-topline {
+    font-size: 6px;
+    letter-spacing: 0.8px;
+    padding: 0 5%;
+  }
+  .vs-landscape {
+    margin: -5px 0 -6px;
+  }
+  .vs-scene-controls {
+    padding-top: 6px;
+  }
+  .vs-scene-controls > span {
+    display: block;
+    font-size: 6px;
+    max-width: 85px;
+  }
+  .vs-scene-controls > div {
+    width: auto;
+    gap: 16px;
+  }
+  .vs-scene-controls button {
+    font-size: 9px;
+    min-height: 40px;
+  }
+  .vs-ribbon {
+    padding: 15px 20px;
+    gap: 25px;
+    font-size: 8px;
+    letter-spacing: 1.7px;
+    justify-content: center;
+  }
+  .vs-ribbon span:nth-child(n + 3) {
+    display: none;
+  }
+  .vs-ribbon span:nth-child(2) {
+    font-size: 25px;
+  }
+  .vs-selected {
+    padding: 48px 6%;
+  }
+  .vs-section-heading {
+    margin-bottom: 25px;
+  }
+  .vs-section-heading h2 {
+    font-size: 36px;
+    letter-spacing: -1.5px;
+  }
+  .vs-section-heading .vs-eyebrow {
+    font-size: 8px;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .vs-section-heading > span {
+    display: none;
+  }
+  .vs-projects {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .vs-project-info {
+    flex-direction: row;
+    align-items: center;
+  }
+  .vs-project-info > span:last-child {
+    max-width: 130px;
+    text-align: right;
+  }
+  .vs-studio {
+    margin: 0 6%;
+    padding: 40px 0;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+  }
+  .vs-studio-star {
+    font-size: 64px;
+    grid-column: 1/-1;
+  }
+  .vs-studio h2 {
+    font-size: 28px;
+    letter-spacing: -1px;
+  }
+  .vs-studio p:last-child {
+    font-size: 12px;
+  }
+  .vs-studio .vs-eyebrow {
+    font-size: 8px;
+  }
+  .vs-studio > a {
+    width: 42px;
+    height: 42px;
+    font-size: 21px;
+    align-self: end;
+  }
+  .vs-footer {
+    padding: 30px 6% 20px;
+    flex-wrap: wrap;
+    gap: 22px;
+  }
+  .vs-footer > span {
+    font-size: 7px;
+  }
+  .vs-footer > span:last-child {
+    width: 100%;
+    font-size: 7px;
+  }
+  .vs-dialog {
+    padding: 18px;
+  }
+  .vs-dialog-close {
+    top: 27px;
+    right: 27px;
+  }
+  .vs-dialog h2 {
+    font-size: 32px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .vs-floating-eye {
+    animation: vs-float 7s ease-in-out infinite;
+  }
+  .vs-orbit {
+    animation: vs-float 8s ease-in-out infinite reverse;
+  }
+  .vs-project-art svg {
+    transition: transform 0.4s ease;
+  }
+  .vs-project:hover .vs-project-art svg {
+    transform: scale(1.035);
+  }
+  .vs-project-open,
+  .vs-studio > a {
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+  @keyframes vs-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}

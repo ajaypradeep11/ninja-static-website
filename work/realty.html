@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="theme-color" content="#ffffff" />
+    <script src="/theme.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Northshore Realty - LocalNinja sample project</title>
     <meta name="robots" content="noindex" />
@@ -15,13 +17,7 @@
     <link rel="stylesheet" href="/src/work/realty.css" />
     <style>.ln-widget{--w-accent:#4f46e5;--w-accent-ink:#fff;--w-body:#f5f5fb;--w-line:#e2e4ee;} .ns-body{padding-bottom:9rem;}</style>
   </head>
-  <body>
-    <header class="ln-bar">
-      <a class="ln-bar-brand" href="/#work"><img src="/logo-animated.svg" alt="" width="32" height="32" /><span class="ln-bar-name">Local<span class="ninja">Ninja</span></span></a>
-      <p class="ln-bar-title">Sample project · <strong>Northshore Realty</strong> listings <span class="ln-tag">Website</span></p>
-      <a class="ln-bar-back" href="/#work">← Back to site</a>
-    </header>
-
+  <body data-project-standalone>
     <main class="ns">
       <div class="ns-top">
         <span class="brand">Northshore<span>.</span></span>
@@ -82,53 +78,8 @@
 
       <div class="ns-body">
         <section class="results" data-filter-target>
-          <h2><span data-count>4 homes</span> <span>· sorted by <span data-sort-label>newest</span></span></h2>
-          <div class="cards" data-cards>
-            <div class="card-wrap" data-type="condo" data-home="1">
-              <button class="card" type="button" data-open="#detail-1">
-                <div class="photo" style="--photo:linear-gradient(160deg,#c7e6f5,#5eb3dd)"><span class="badge">Condo</span><span class="flag" data-flag="1" hidden></span></div>
-                <div class="info">
-                  <div class="price">$925,000</div>
-                  <p class="addr">2288 W 4th Ave · Kitsilano</p>
-                  <div class="specs"><span><b>2</b> bd</span><span><b>2</b> ba</span><span><b>890</b> sq ft</span></div>
-                </div>
-              </button>
-              <button class="heart" type="button" data-save="1" aria-pressed="false" aria-label="Save 2288 W 4th Ave"><span aria-hidden="true">♡</span></button>
-            </div>
-            <div class="card-wrap" data-type="townhouse" data-home="2">
-              <button class="card" type="button" data-open="#detail-2">
-                <div class="photo" style="--photo:linear-gradient(160deg,#f3d9b1,#d9944f)"><span class="badge">Townhouse</span><span class="flag" data-flag="2" hidden></span></div>
-                <div class="info">
-                  <div class="price">$1,290,000</div>
-                  <p class="addr">4120 Hastings St · Burnaby Heights</p>
-                  <div class="specs"><span><b>3</b> bd</span><span><b>2.5</b> ba</span><span><b>1,480</b> sq ft</span></div>
-                </div>
-              </button>
-              <button class="heart" type="button" data-save="2" aria-pressed="false" aria-label="Save 4120 Hastings St"><span aria-hidden="true">♡</span></button>
-            </div>
-            <div class="card-wrap" data-type="detached" data-home="3">
-              <button class="card" type="button" data-open="#detail-3">
-                <div class="photo" style="--photo:linear-gradient(160deg,#d6ead8,#7fb68a)"><span class="badge">Detached</span><span class="flag" data-flag="3" hidden></span></div>
-                <div class="info">
-                  <div class="price">$2,100,000</div>
-                  <p class="addr">1560 Grand Blvd · North Vancouver</p>
-                  <div class="specs"><span><b>4</b> bd</span><span><b>3</b> ba</span><span><b>2,350</b> sq ft</span></div>
-                </div>
-              </button>
-              <button class="heart" type="button" data-save="3" aria-pressed="false" aria-label="Save 1560 Grand Blvd"><span aria-hidden="true">♡</span></button>
-            </div>
-            <div class="card-wrap" data-type="loft" data-home="4">
-              <button class="card" type="button" data-open="#detail-4">
-                <div class="photo" style="--photo:linear-gradient(160deg,#e3d5cf,#a37c6c)"><span class="badge">Loft</span><span class="flag" data-flag="4" hidden></span></div>
-                <div class="info">
-                  <div class="price">$640,000</div>
-                  <p class="addr">55 E Cordova St · Gastown</p>
-                  <div class="specs"><span><b>1</b> bd</span><span><b>1</b> ba</span><span><b>720</b> sq ft</span></div>
-                </div>
-              </button>
-              <button class="heart" type="button" data-save="4" aria-pressed="false" aria-label="Save 55 E Cordova St"><span aria-hidden="true">♡</span></button>
-            </div>
-          </div>
+          <h2><span data-count>20 homes</span> <span>· sorted by <span data-sort-label>newest</span></span></h2>
+          <div class="cards" data-cards></div>
 
           <div class="empty" data-empty>
             <h3>No homes match yet</h3>
@@ -177,19 +128,14 @@
         </section>
 
         <aside class="map" aria-label="Map of listings">
-          <svg viewBox="0 0 480 360" role="img" aria-label="Map placeholder with four pins">
+          <div class="map-canvas" tabindex="0" role="region" aria-label="Property markers by neighbourhood; scroll sideways for more">
+          <svg viewBox="0 0 480 360" role="group" aria-label="Neighbourhood overview with 20 home markers">
             <path d="M0 300 C120 260 180 330 300 290 S440 240 480 270 V360 H0 Z" fill="#cfe5f2" />
             <path d="M0 40 C90 70 140 20 230 60 S380 30 480 70" fill="none" stroke="#dde3ea" stroke-width="10" />
             <path d="M60 0 V360 M240 0 V360 M400 0 V360 M0 150 H480 M0 230 H480" stroke="#e6ebf0" stroke-width="6" />
-            <g class="area" data-hood-open="kits" tabindex="0" role="button" aria-label="Kitsilano neighbourhood snapshot" transform="translate(150 222)"><rect x="-38" y="-10" width="76" height="20" rx="10" /><text x="0" y="4" text-anchor="middle">Kitsilano</text></g>
-            <g class="area" data-hood-open="heights" tabindex="0" role="button" aria-label="Burnaby Heights neighbourhood snapshot" transform="translate(360 152)"><rect x="-56" y="-10" width="112" height="20" rx="10" /><text x="0" y="4" text-anchor="middle">Burnaby Heights</text></g>
-            <g class="area" data-hood-open="northvan" tabindex="0" role="button" aria-label="North Vancouver neighbourhood snapshot" transform="translate(300 92)"><rect x="-58" y="-10" width="116" height="20" rx="10" /><text x="0" y="4" text-anchor="middle">North Vancouver</text></g>
-            <g class="area" data-hood-open="gastown" tabindex="0" role="button" aria-label="Gastown neighbourhood snapshot" transform="translate(200 292)"><rect x="-34" y="-10" width="68" height="20" rx="10" /><text x="0" y="4" text-anchor="middle">Gastown</text></g>
-            <g class="pin" data-open="#detail-1" data-home="1" transform="translate(150 190)"><rect x="-34" y="-14" width="68" height="28" rx="14" /><text x="0" y="5" text-anchor="middle">$925k</text></g>
-            <g class="pin" data-open="#detail-2" data-home="2" transform="translate(360 120)"><rect x="-34" y="-14" width="68" height="28" rx="14" /><text x="0" y="5" text-anchor="middle">$1,290k</text></g>
-            <g class="pin" data-open="#detail-3" data-home="3" transform="translate(300 60)"><rect x="-34" y="-14" width="68" height="28" rx="14" /><text x="0" y="5" text-anchor="middle">$2,100k</text></g>
-            <g class="pin" data-open="#detail-4" data-home="4" transform="translate(200 260)"><rect x="-34" y="-14" width="68" height="28" rx="14" /><text x="0" y="5" text-anchor="middle">$640k</text></g>
+            <g data-home-pins></g>
           </svg>
+          </div>
           <p class="map-hint" aria-hidden="true">Tap a neighbourhood for schools, transit and prices</p>
 
           <div class="hood" data-hood-panel aria-live="polite">
@@ -265,122 +211,7 @@
         </div>
       </section>
 
-      <div class="detail" id="detail-1">
-        <div class="sheet" role="dialog" aria-label="2288 W 4th Ave · Kitsilano">
-          <div class="photo" style="--photo:linear-gradient(160deg,#c7e6f5,#5eb3dd)"><span class="badge">Condo</span></div>
-          <div class="content">
-            <h3>2288 W 4th Ave · Kitsilano</h3>
-            <div class="price">$925,000</div>
-            <p class="flag-line" data-flag-line="1" hidden></p>
-            <div class="facts">
-              <div>Bedrooms<b>2</b></div>
-              <div>Bathrooms<b>2</b></div>
-              <div>Size<b>890 sq ft</b></div>
-              <div>Listed<b>6 days ago</b></div>
-              <div>Built<b>2009</b></div>
-              <div>Walk Score<b>94</b></div>
-            </div>
-            <p>Corner unit with a wraparound balcony, two blocks from the beach. In-suite laundry, one parking stall, pet-friendly building.</p>
-            <div class="tools">
-              <button type="button" class="tool" data-save="1" aria-pressed="false"><span aria-hidden="true" data-save-icon>♡</span> <span data-save-text>Save</span></button>
-              <button type="button" class="tool" data-mortgage-toggle="1" aria-expanded="false" aria-controls="mortgage-1">Estimate payments</button>
-              <button type="button" class="tool" data-hood-open="kits">Kitsilano snapshot</button>
-            </div>
-            <div class="sheet-extras" data-extras="1"></div>
-            <div class="row">
-              <button type="button" data-close>Close</button>
-              <button class="primary" type="button" data-book="1">Book a viewing with Maya</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="detail" id="detail-2">
-        <div class="sheet" role="dialog" aria-label="4120 Hastings St · Burnaby Heights">
-          <div class="photo" style="--photo:linear-gradient(160deg,#f3d9b1,#d9944f)"><span class="badge">Townhouse</span></div>
-          <div class="content">
-            <h3>4120 Hastings St · Burnaby Heights</h3>
-            <div class="price">$1,290,000</div>
-            <p class="flag-line" data-flag-line="2" hidden></p>
-            <div class="facts">
-              <div>Bedrooms<b>3</b></div>
-              <div>Bathrooms<b>2.5</b></div>
-              <div>Size<b>1,480 sq ft</b></div>
-              <div>Listed<b>6 days ago</b></div>
-              <div>Built<b>2016</b></div>
-              <div>Walk Score<b>81</b></div>
-            </div>
-            <p>Three-level townhome with a fenced yard and roof deck. Newer kitchen, gas range, walking distance to Confederation Park.</p>
-            <div class="tools">
-              <button type="button" class="tool" data-save="2" aria-pressed="false"><span aria-hidden="true" data-save-icon>♡</span> <span data-save-text>Save</span></button>
-              <button type="button" class="tool" data-mortgage-toggle="2" aria-expanded="false" aria-controls="mortgage-2">Estimate payments</button>
-              <button type="button" class="tool" data-hood-open="heights">Burnaby Heights snapshot</button>
-            </div>
-            <div class="sheet-extras" data-extras="2"></div>
-            <div class="row">
-              <button type="button" data-close>Close</button>
-              <button class="primary" type="button" data-book="2">Book a viewing with Maya</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="detail" id="detail-3">
-        <div class="sheet" role="dialog" aria-label="1560 Grand Blvd · North Vancouver">
-          <div class="photo" style="--photo:linear-gradient(160deg,#d6ead8,#7fb68a)"><span class="badge">Detached</span></div>
-          <div class="content">
-            <h3>1560 Grand Blvd · North Vancouver</h3>
-            <div class="price">$2,100,000</div>
-            <p class="flag-line" data-flag-line="3" hidden></p>
-            <div class="facts">
-              <div>Bedrooms<b>4</b></div>
-              <div>Bathrooms<b>3</b></div>
-              <div>Size<b>2,350 sq ft</b></div>
-              <div>Listed<b>6 days ago</b></div>
-              <div>Built<b>1958</b></div>
-              <div>Walk Score<b>68</b></div>
-            </div>
-            <p>Mid-century home on a 50×120 lot with mountain views. Legal two-bed suite below, detached garage, mature garden.</p>
-            <div class="tools">
-              <button type="button" class="tool" data-save="3" aria-pressed="false"><span aria-hidden="true" data-save-icon>♡</span> <span data-save-text>Save</span></button>
-              <button type="button" class="tool" data-mortgage-toggle="3" aria-expanded="false" aria-controls="mortgage-3">Estimate payments</button>
-              <button type="button" class="tool" data-hood-open="northvan">North Vancouver snapshot</button>
-            </div>
-            <div class="sheet-extras" data-extras="3"></div>
-            <div class="row">
-              <button type="button" data-close>Close</button>
-              <button class="primary" type="button" data-book="3">Book a viewing with Maya</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="detail" id="detail-4">
-        <div class="sheet" role="dialog" aria-label="55 E Cordova St · Gastown">
-          <div class="photo" style="--photo:linear-gradient(160deg,#e3d5cf,#a37c6c)"><span class="badge">Loft</span></div>
-          <div class="content">
-            <h3>55 E Cordova St · Gastown</h3>
-            <div class="price">$640,000</div>
-            <p class="flag-line" data-flag-line="4" hidden></p>
-            <div class="facts">
-              <div>Bedrooms<b>1</b></div>
-              <div>Bathrooms<b>1</b></div>
-              <div>Size<b>720 sq ft</b></div>
-              <div>Listed<b>6 days ago</b></div>
-              <div>Built<b>1911</b></div>
-              <div>Walk Score<b>98</b></div>
-            </div>
-            <p>Heritage brick loft with 12-ft ceilings and original timber beams. Steel-framed windows, polished concrete, rooftop patio.</p>
-            <div class="tools">
-              <button type="button" class="tool" data-save="4" aria-pressed="false"><span aria-hidden="true" data-save-icon>♡</span> <span data-save-text>Save</span></button>
-              <button type="button" class="tool" data-mortgage-toggle="4" aria-expanded="false" aria-controls="mortgage-4">Estimate payments</button>
-              <button type="button" class="tool" data-hood-open="gastown">Gastown snapshot</button>
-            </div>
-            <div class="sheet-extras" data-extras="4"></div>
-            <div class="row">
-              <button type="button" data-close>Close</button>
-              <button class="primary" type="button" data-book="4">Book a viewing with Maya</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div data-home-details></div>
 
       <!-- Saved homes drawer (slides in from the left, clear of the assistant) -->
       <div class="ns-overlay drawer-overlay" id="saved">

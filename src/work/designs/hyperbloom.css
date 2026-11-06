@@ -1,0 +1,782 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap");
+:root {
+  --ink: #2927a9;
+  --butter: #fff5b7;
+  --petal-light: #ffd1ee;
+  --petal-mid: #ff69b6;
+  --petal-dark: #e21d78;
+}
+@media (max-width: 1000px) {
+  .bloom-hero {
+    overflow: clip;
+  }
+  .season-swatch {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+body {
+  background: var(--butter);
+  color: var(--ink);
+  font-family: "DM Sans", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  text-decoration: none;
+}
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+.bloom-header {
+  max-width: 1600px;
+  margin: auto;
+  min-height: 105px;
+  padding: 23px 5%;
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  border-bottom: 1px solid #2927a92e;
+}
+.wordmark {
+  font-weight: 800;
+  font-size: 35px;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+.wordmark span {
+  display: inline-block;
+  font-size: 40px;
+  vertical-align: -4px;
+  margin-left: 3px;
+}
+.header-note {
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.6px;
+}
+.bloom-header nav {
+  display: flex;
+  gap: 40px;
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 600;
+}
+.bloom-header nav a {
+  padding: 12px 0;
+}
+.bloom-header nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.bloom-header nav a span {
+  margin-left: 8px;
+}
+.bloom-hero {
+  max-width: 1600px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  min-height: 720px;
+  padding: 43px 5% 35px;
+  position: relative;
+}
+.hero-copy {
+  position: relative;
+  z-index: 2;
+}
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.hero-copy > .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tiny-flower {
+  font-size: 25px;
+  line-height: 1;
+}
+h1,
+h2 {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -5px;
+}
+h1 {
+  font-size: clamp(88px, 9.55vw, 148px);
+  line-height: 0.9;
+  margin: 36px 0 27px;
+}
+h1 em {
+  font-weight: 400;
+  letter-spacing: -7px;
+}
+h1 em::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fa7138;
+  margin-left: 15px;
+  vertical-align: middle;
+}
+.hero-bottom {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+}
+.hero-bottom p {
+  font-size: 13px;
+  line-height: 1.65;
+}
+.round-link {
+  width: 58px;
+  height: 58px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.round-link:hover {
+  background: var(--ink);
+  color: var(--butter);
+}
+.botanical {
+  position: relative;
+  min-width: 0;
+  align-self: center;
+  height: 660px;
+}
+.art-orbit {
+  position: absolute;
+  inset: 80px 0 85px;
+  border: 1px solid #2927a919;
+  border-radius: 50%;
+  transform: rotate(-28deg);
+}
+.bloom-sculpture {
+  position: absolute;
+  width: 112%;
+  max-width: none;
+  left: -3%;
+  top: -28px;
+  height: 660px;
+  overflow: visible;
+}
+.art-label {
+  position: absolute;
+  left: 2%;
+  top: 62px;
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transform: rotate(-12deg);
+}
+.art-star {
+  position: absolute;
+  right: 2%;
+  top: 25px;
+  color: #f57932;
+  font-size: 62px;
+  transform: rotate(10deg);
+}
+.season-picker {
+  position: absolute;
+  left: 20%;
+  right: 0;
+  bottom: -1px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.season-label {
+  font-size: 8px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.season-picker > div {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+.season-swatch {
+  width: 25px;
+  height: 25px;
+  border: 3px solid var(--butter);
+  border-radius: 50%;
+  padding: 0;
+  box-shadow: 0 0 0 1px transparent;
+}
+.season-swatch[aria-pressed="true"] {
+  box-shadow: 0 0 0 1px var(--ink);
+}
+.season-swatch.spring {
+  background: #ed68a4;
+}
+.season-swatch.summer {
+  background: #fa9834;
+}
+.season-swatch.twilight {
+  background: #9f83d9;
+}
+#season-caption {
+  font-size: 9px;
+  min-width: 100px;
+}
+.flower-ribbon {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 35px;
+  overflow: hidden;
+  white-space: nowrap;
+  background: #c9e751;
+  padding: 22px 0;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.6px;
+  border-top: 1px solid #2927a91f;
+  border-bottom: 1px solid #2927a91f;
+}
+.flower-ribbon > span:nth-child(even) {
+  font-size: 25px;
+  line-height: 1;
+}
+.collection {
+  padding: 94px 5% 100px;
+  max-width: 1600px;
+  margin: auto;
+}
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 38px;
+}
+.section-heading h2 {
+  font-size: 64px;
+  letter-spacing: -2px;
+  margin-top: 13px;
+  line-height: 1.1;
+}
+.section-heading > p {
+  font-size: 12px;
+  line-height: 1.7;
+  padding-bottom: 5px;
+}
+.arrangement-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.arrangement-art {
+  position: relative;
+  aspect-ratio: 1/1.12;
+  border-radius: 100px 100px 0 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.pink-card {
+  background: #f6b6ca;
+}
+.lime-card {
+  background: #d9e98b;
+}
+.peach-card {
+  background: #ffc299;
+}
+.arrangement-art svg {
+  width: 100%;
+  height: 100%;
+  padding-top: 18px;
+  transition: transform 0.35s;
+}
+.arrangement:hover svg {
+  transform: rotate(-3deg) scale(1.04);
+}
+.art-index {
+  position: absolute;
+  left: 28px;
+  top: 42px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  z-index: 1;
+}
+.card-tag {
+  position: absolute;
+  bottom: 19px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 8px;
+  letter-spacing: 1.4px;
+  font-weight: 700;
+}
+.card-caption {
+  padding-top: 18px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.card-caption h3 {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+}
+.card-caption > span {
+  font-size: 10px;
+}
+.studio {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #f6adc5;
+}
+.studio-art {
+  position: relative;
+  min-height: 550px;
+  overflow: hidden;
+  background: #c7dc75;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.studio-art > span {
+  font-size: clamp(85px, 11vw, 165px);
+  font-weight: 800;
+  letter-spacing: -10px;
+  line-height: 0.82;
+  transform: rotate(-8deg);
+  color: #334b23;
+}
+.studio-art svg {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  right: -10px;
+  bottom: 50px;
+  transform: rotate(15deg);
+}
+.studio-copy {
+  padding: 70px 12%;
+  align-self: center;
+}
+.studio-copy h2 {
+  font-size: 58px;
+  letter-spacing: -2px;
+  line-height: 1.05;
+  margin: 22px 0;
+}
+.studio-copy > p:not(.eyebrow) {
+  font-size: 13px;
+  line-height: 1.8;
+  max-width: 350px;
+  margin-bottom: 26px;
+}
+.studio-copy details {
+  border-top: 1px solid #2927a950;
+  padding: 17px 0;
+  font-size: 12px;
+}
+.studio-copy details:last-child {
+  border-bottom: 1px solid #2927a950;
+}
+.studio-copy summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  min-height: 20px;
+}
+.studio-copy summary::-webkit-details-marker {
+  display: none;
+}
+.studio-copy summary span {
+  font-size: 21px;
+}
+.studio-copy details[open] summary span {
+  transform: rotate(45deg);
+}
+.studio-copy details p {
+  padding-top: 12px;
+  line-height: 1.7;
+}
+.bloom-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 50px 5% 120px;
+}
+.bloom-footer .wordmark {
+  font-size: 26px;
+}
+.bloom-footer .wordmark span {
+  font-size: 30px;
+}
+.bloom-footer p,
+.bloom-footer > a:last-child {
+  font-size: 10px;
+}
+.bloom-footer > a:last-child {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pink-flower {
+    transform-origin: 297px 164px;
+    animation: flower-sway 9s ease-in-out infinite;
+  }
+  .blue-flower {
+    transform-origin: 464px 290px;
+    animation: flower-sway 7s ease-in-out infinite reverse;
+  }
+  .orange-flower {
+    transform-origin: 140px 378px;
+    animation: flower-sway 8s ease-in-out infinite;
+  }
+  @keyframes flower-sway {
+    0%,
+    100% {
+      transform: rotate(-2deg);
+    }
+    50% {
+      transform: rotate(2deg);
+    }
+  }
+}
+@media (min-width: 1600px) {
+  .bloom-hero {
+    min-height: 800px;
+    padding-top: 65px;
+  }
+  .botanical {
+    height: 690px;
+  }
+  .bloom-sculpture {
+    height: 700px;
+  }
+}
+@media (max-width: 1000px) {
+  .bloom-header {
+    gap: 25px;
+  }
+  .bloom-hero {
+    min-height: 650px;
+    padding-top: 32px;
+  }
+  .botanical {
+    height: 570px;
+  }
+  .bloom-sculpture {
+    height: 580px;
+    top: -10px;
+    width: 120%;
+    left: -7%;
+  }
+  .hero-copy h1 {
+    font-size: clamp(88px, 10vw, 115px);
+    margin-top: 42px;
+  }
+  .hero-bottom {
+    gap: 25px;
+  }
+  .art-label {
+    left: 0;
+    top: 40px;
+  }
+  .art-star {
+    right: 0;
+    font-size: 45px;
+  }
+  .season-picker {
+    left: 8%;
+    gap: 10px;
+    bottom: 0;
+  }
+  .season-label {
+    flex-basis: 100%;
+  }
+  .arrangement-grid {
+    gap: 16px;
+  }
+  .card-caption {
+    display: block;
+  }
+  .card-caption > span {
+    display: block;
+    margin-top: 5px;
+  }
+  .studio-copy {
+    padding: 45px 10%;
+  }
+  .studio-copy h2 {
+    font-size: 46px;
+  }
+  .studio-art {
+    min-height: 530px;
+  }
+  .studio-art svg {
+    width: 240px;
+    right: -30px;
+  }
+  .bloom-footer {
+    flex-wrap: wrap;
+  }
+  .bloom-footer p {
+    margin-left: auto;
+  }
+}
+@media (max-width: 700px) {
+  .bloom-header {
+    min-height: 80px;
+    padding: 18px 6%;
+    gap: 15px;
+  }
+  .wordmark {
+    font-size: 28px;
+    letter-spacing: -1.6px;
+  }
+  .wordmark span {
+    font-size: 32px;
+    vertical-align: -3px;
+  }
+  .header-note {
+    display: none;
+  }
+  .bloom-header nav {
+    gap: 18px;
+    font-size: 10px;
+  }
+  .bloom-header nav a span {
+    margin-left: 2px;
+  }
+  .bloom-hero {
+    display: block;
+    padding: 28px 6% 30px;
+  }
+  .eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.7px;
+  }
+  .hero-copy > .eyebrow {
+    gap: 7px;
+  }
+  .tiny-flower {
+    font-size: 20px;
+  }
+  .hero-copy h1 {
+    font-size: clamp(89px, 18vw, 126px);
+    line-height: 0.92;
+    margin: 25px 0 20px;
+    letter-spacing: -4px;
+  }
+  .hero-copy h1 em {
+    letter-spacing: -5px;
+  }
+  .hero-copy h1 em::after {
+    width: 7px;
+    height: 7px;
+    margin-left: 8px;
+    margin-right: 7px;
+  }
+  .hero-bottom {
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 400px;
+  }
+  .hero-bottom p {
+    font-size: 12px;
+  }
+  .round-link {
+    width: 49px;
+    height: 49px;
+    font-size: 27px;
+  }
+  .botanical {
+    height: 550px;
+    max-width: 520px;
+    margin: 3px auto 0;
+  }
+  .bloom-sculpture {
+    width: 109%;
+    height: 535px;
+    left: -4.5%;
+    top: 7px;
+  }
+  .art-orbit {
+    inset: 90px 0 50px;
+  }
+  .art-label {
+    top: 65px;
+    left: 0;
+    font-size: 8px;
+  }
+  .art-star {
+    top: 15px;
+    right: 0;
+    font-size: 45px;
+  }
+  .season-picker {
+    left: 0;
+    bottom: -3px;
+    right: 0;
+    justify-content: center;
+    gap: 12px;
+  }
+  .season-label {
+    flex-basis: auto;
+  }
+  .flower-ribbon {
+    font-size: 10px;
+    gap: 25px;
+    padding: 16px 0;
+  }
+  .collection {
+    padding: 58px 6% 65px;
+  }
+  .section-heading {
+    align-items: flex-start;
+    display: block;
+    margin-bottom: 25px;
+  }
+  .section-heading h2 {
+    font-size: 48px;
+    margin-top: 9px;
+  }
+  .section-heading > p {
+    margin-top: 15px;
+    font-size: 11px;
+  }
+  .section-heading > p br {
+    display: none;
+  }
+  .arrangement-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .arrangement-art {
+    aspect-ratio: 1.1/1;
+    max-height: 420px;
+    border-radius: 100px 100px 0 0;
+  }
+  .arrangement-art svg {
+    width: 90%;
+    padding-top: 0;
+  }
+  .art-index {
+    top: 36px;
+  }
+  .card-caption {
+    display: flex;
+    padding-top: 14px;
+  }
+  .card-caption h3 {
+    font-size: 25px;
+  }
+  .card-caption > span {
+    font-size: 10px;
+    margin: 0;
+  }
+  .studio {
+    grid-template-columns: 1fr;
+  }
+  .studio-art {
+    min-height: 390px;
+  }
+  .studio-art > span {
+    font-size: 122px;
+    letter-spacing: -8px;
+  }
+  .studio-art svg {
+    width: 235px;
+    height: 235px;
+    right: 5%;
+    bottom: 15px;
+  }
+  .studio-copy {
+    padding: 45px 7% 52px;
+  }
+  .studio-copy h2 {
+    font-size: 51px;
+  }
+  .studio-copy > p:not(.eyebrow) {
+    max-width: none;
+  }
+  .bloom-footer {
+    display: block;
+    padding: 35px 6% 120px;
+  }
+  .bloom-footer p {
+    margin: 18px 0;
+  }
+  .bloom-footer > a:last-child {
+    display: inline-block;
+    padding: 8px 0;
+  }
+}
+@media (max-width: 390px) {
+  .bloom-header nav {
+    gap: 12px;
+    font-size: 9px;
+  }
+  .wordmark {
+    font-size: 26px;
+  }
+  .wordmark span {
+    font-size: 28px;
+  }
+  .hero-copy h1 {
+    font-size: 83px;
+  }
+  .botanical {
+    height: 485px;
+  }
+  .bloom-sculpture {
+    height: 485px;
+    top: 0;
+  }
+  .art-label {
+    top: 48px;
+  }
+  .season-picker {
+    gap: 8px;
+  }
+  .season-label {
+    font-size: 7px;
+  }
+  .season-picker > div {
+    gap: 7px;
+  }
+  .season-swatch {
+    width: 23px;
+    height: 23px;
+  }
+  #season-caption {
+    font-size: 8px;
+    min-width: 88px;
+  }
+}

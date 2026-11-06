@@ -1,0 +1,236 @@
+{
+  "version": 1,
+  "project": {
+    "name": "localninja-site",
+    "productType": "Marketing portfolio and UI design lab",
+    "stack": [
+      "vite",
+      "react (motion pages only)",
+      "motion",
+      "three.js"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "src/theme.css",
+      "src/style.css"
+    ],
+    "components": [],
+    "assets": [],
+    "instructions": [
+      "CLAUDE.md"
+    ]
+  },
+  "design": {
+    "colorMode": "light and dark",
+    "colors": {
+      "ink": "#000000",
+      "paper": "#ffffff",
+      "accent": "#4da3ff"
+    },
+    "typography": {
+      "display": "Syne",
+      "body": "Manrope"
+    },
+    "spacing": {},
+    "radius": {},
+    "shadows": {},
+    "motion": {},
+    "density": "unknown"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [],
+    "patterns": [
+      "Existing Work tabs",
+      "Standalone Vite HTML specimens"
+    ]
+  },
+  "constraints": {
+    "must": [
+      "Preserve vanilla portfolio and first collection; use isolated React + Motion + Three.js entries for Motion Lab as requested",
+      "Scope experimental palettes to individual design pages",
+      "Provide responsive, keyboard-accessible interfaces and reduced motion"
+    ],
+    "avoid": [
+      "Do not copy MotionSites prompts, website code or artwork, per the user."
+    ]
+  },
+  "decisions": [
+    {
+      "date": "2026-11-03",
+      "decision": "User selected ten independent visual languages: Acidwave, Y2K Futurism, K-Design, Dreamscape, Halftone, Hyperbloom, Neo-brutalism, Neo-Swiss, Synthwave, Vector-surrealism. Integrate a preview-led Design Lab in Work UI/UX."
+    },
+    {
+      "date": "2026-11-03",
+      "decision": "User requested at least ten additional MotionSites-inspired designs, especially Sparkform. Add independent Motion Lab Vol.02 pages with React Motion and real Three.js scenes; retain all ten Vol.01 pages."
+    },
+    {
+      "date": "2026-11-03",
+      "decision": "User supplied an expressive character portfolio recording. Add MINA as study 11 with charcoal ground, oversized silver type, original aligned character artwork, pointer gaze and spring tilt, hair/expression interactions, and responsive Motion controls."
+    },
+    {
+      "date": "2026-11-03",
+      "decision": "Add continuous cheek deformation and spring-back to MINA. Three further user recordings become SOFT SPOT (character carousel), RAIL (3D garment rack), and ECHO ZERO (3D character orbit), all in the shared UI gallery."
+    },
+    {
+      "date": "2026-11-03",
+      "decision": "User refined MINA: cheek dragging should produce an angry facial expression and only a slight local stretch, matching the supplied recording; restore the chosen mood after release."
+    },
+    {
+      "date": "2026-11-03",
+      "decision": "Keep MINA\u2019s head steady when the mouse moves. Remove pointer-driven head tilt and rotation while preserving eye tracking and cheek interaction."
+    },
+    {
+      "date": "2026-11-03",
+      "decision": "MINA\u2019s eyes should follow the cursor on both axes independently of the head, with eye tracking suspended during the angry cheek-pull reaction."
+    },
+    {
+      "date": "2026-11-03",
+      "decision": "User rejected ECHO ZERO\u2019s procedural figure as too crude. Replace it with a high-quality authored human character, prepared in Blender with convincing pose, detailed materials and genuine full rotation."
+    },
+    {
+      "date": "2026-11-03",
+      "decision": "Add TALIA from the user-provided anime character image as a separate MINA-style interactive portrait with orange accents, fixed head, eye tracking and subtle angry cheek response. Motion Lab now has 15 studies, 25 designs overall."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "Replace homepage Services accordion with eight accessible service tabs. UI/UX opens a wide, dark masonry gallery of all 25 Work design studies; other services show matching real project screenshots. Keep Work as the project source and widen the homepage to 1520px, with a nearly edge-to-edge Services gallery."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "User reported Services appearing to reorder. Use a stable left-to-right grid instead of auto-balanced CSS columns; preserve the selected service on generic #services navigation and avoid rerendering the active tab."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "Improve RAIL garments: replace flat rippled extrusions with four original hollow GLB silhouettes, connected sleeves, rounded hoods, cuffs, seams and jacket hardware. Show the real garment in product panels with Front / Back controls and refresh gallery previews."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "User rejected the first RAIL model refinement as artificial. Revisit the video and replace the inflated shells with Blender cloth-simulated sewn panels, shaped sleeve support and folded hoods, baked occlusion, dye-cloud prints, and softer showroom lighting."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "User requested closer RAIL garments and a clear hover reveal. Tighten the row, bring the selected garment forward facing the camera, and slide neighbours aside. Add hover dwell/transition stability and fit longer garments above labels on mobile."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "Seat RAIL garments properly on their hangers: fit thinner support arms inside the authored shoulder seams, shorten the hook, and raise the cloth so the stem emerges through the neckline. Keep garment and hanger in one transform group during hover."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "User requested immediate RAIL response during fast mouse movement. Remove hover dwell and transition locks; retarget the selected garment immediately and accelerate garment/label animation while preserving the existing camera easing and reduced-motion behavior."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "User selected a dark RAIL showroom: near-black at the top fading to charcoal grey below, light interface text, dark product panels, and soft key/rim/selection lighting on slightly more saturated garments. Hover uses damped spring translation/rotation and bounded fabric bending with fixed shoulders; retarget immediately and reset all physics for pause/reduced motion."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "User refined the RAIL garment palette to clear red instead of orange, deep blue instead of sky blue, parrot green instead of muted green, and black hoodies. Keep the dark showroom, studio lighting and hover physics."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "Add AKAI as Motion Lab study 16: an original illustrated botanical-soda scroll story with cream paper, black ink, vermilion skies, and three selectable flavors. User explicitly requires original work with no copied MotionSites prompts, website code or artwork. Generated artwork is local; responsive layouts, reduced motion and keyboard controls are supported."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "User supplied a garment reference for RAIL sleeves and rejected an overly tubular side profile. Rebuild all four original Blender meshes with downward sleeve drape, softly pinched oval openings, slimmer cuffs and subtle seams. Give the torso modest depth and orient resting pieces about 71 degrees from their camera-facing direction so garments at the rail ends retain a visible silhouette. Preserve the selected dark palette and spring hover response."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "Replace the AKAI soda study in place with the user-authored LocalNinja katana story: hilltop city watcher, eye zoom, red world, rival glance, and two fighters crossing swords. The three elements are Wind in green, Water in blue, and Fire in red. Use nine original generated artworks, a responsive scroll timeline, accessible product tabs, and enquiry links for unset pricing. Preserve the no-MotionSites-copying constraint and provide sequential panels for reduced motion."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "User requested hiding the entire Hi I\u2019m MINA design. Keep its gallery markup inert in a template, remove MINA from the visible Motion Lab catalog and homepage featured order, and update counts to 15 visible Motion studies / 25 designs overall. Preserve the standalone implementation for possible restoration."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "Add silent looping screen previews only to the eight homepage Web Development cards, as selected by the user. Reuse the existing gallery and real portfolio screenshots/public-site captures. Defer loading until visible, pause offscreen and hidden tabs, include a Play/Pause control, and default to still images for reduced motion or data saver. Other homepage service tabs retain static previews."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "User prefers a complete page scroll over the screenshot loop. Trial this only on Conversy AI's marketing card: record the live public homepage from hero through footer with its actual animations, hold briefly at the ends and crossfade back to the opening. Preserve the other seven previews while this direction is evaluated."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "User requested GIF or animated WebP for the Conversy trial. Use a 640 by 400 animated WebP of the full scroll, keeping on-demand loading and replacing it with the existing still for Pause, reduced motion, data saver, offscreen cards and hidden tabs. Other seven Web Development previews remain videos."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "User found the 15 fps animated WebP laggy and accepted a higher-frame-rate MP4 trial. Recapture Conversy's whole page at approximately 60 fps and encode an evenly paced 30 fps MP4 with a footer hold and eased loop transition. Keep lazy loading, real pause/resume and reduced-motion defaults."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "Add persistent light/dark themes across Studio pages and shared project shells. Follow system by default; preserve authored design-study and sample-product palettes. Dark Hero, Services, About, Footer, Work and contact form are pitch black. Contact and Custom solutions are grey #292929; Custom solutions is #eeeeee in light mode. Remove the homepage Things we have built teaser."
+    },
+    {
+      "date": "2026-11-04",
+      "decision": "Widen Work to 2240px with small outer gutters, remove the Motion Lab title and intro, use black showcase backgrounds in dark mode, and show real screenshot thumbnails on all project cards. Voice Bots shows the actual assistant with no additional preview image, per the latest user correction."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "Hide ECHO ZERO from Work, homepage Services, and the shared Motion picker/Next navigation. Keep the standalone implementation. There are now 14 visible Motion studies and 24 designs overall."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "Replace SOFT SPOT animals with original generated Ottawa, Toronto and Windsor miniature city artwork. Preserve the carousel and three palettes, update all copy and accessible names, and open city details on tap. Brand the page LocalNinja and catalog it as LocalNinja Cities, retaining its existing URL. Refresh both gallery previews."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "Extend the accepted smooth 30 fps live-scroll previews to ajaypradeep.com, NinjaLearn and NinjaCommerce. Keep the first two in Web Development; enable the existing NinjaCommerce card in E-commerce with its own Play/Pause control. NinjaLearn starts on its one-screen home, then scrolls the System Design grid. Keep other service galleries static, preserve project links and load media only when visible."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "Add TALIA Offline as a third selectable state with one original closed-eye render edited from the neutral portrait. Blend only the face in the shader, stop gaze/idle float and cheek pulling while offline, preserve explicit wake controls, update the OFFLINE? project image, and retain static fallback/reduced motion support."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "Replace Ajay and NinjaLearn homepage footage with project detail tours at the user's request. Ajay shows About, clicks Design, opens Crimson Lancer and scrolls its renders and wireframes. NinjaLearn starts in System Design, clicks Chat System and demonstrates local simulated messages, disconnection and reconnection. Refresh both still posters and cache versions; preserve the existing playback controls and all other clips."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "Extend the homepage's 30 fps interaction previews to TALIA, RAIL, OUTFORM, BLOOMFIELD and RIBBON in UI / UX. Record actual expression, garment, palette, bloom and carousel controls plus project details; keep the full 1.6 frame visible. Add the existing gallery Play/Pause pattern to UI / UX with independent state, lazy loading, offscreen pausing and still fallbacks. Preserve all other cards and clips."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "At the user's request, use parallel agents to prepare interaction tours for every remaining visible UI / UX study, then record sequentially to keep GPU capture smooth. All 24 UI designs receive 960 by 600, 30 fps silent loops and matching opening posters. Reuse the existing independent gallery controls, visibility-based loading, offscreen/tab pausing and still fallbacks. Preserve hidden MINA/ECHO ZERO and all previously generated clips."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "Extend the smooth 30 fps screen tours to all eight Others projects. Remove the shared LocalNinja top header from those real destination pages, retaining native product navigation and footer links; set standalone shell offsets to zero. Showcase native product flows and real Conversy/NinjaHR screenshots, with an independent Others Play/Pause control and visibility-based loading. Preserve external assistant widgets on the pages but omit their overlays in recordings; leave booking/order/chat submissions untouched."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "User selected a Framer-reference curved 3D wheel for the homepage hero, showing UI/UX Design, Voice Bots, AI Bots, Web Apps, Consulting, Custom Software and Maintenance. Cards follow the tilted cylinder rather than facing the camera. Use original SVG service illustrations and the existing blue palette, stationary central copy, CSS rotation, pause/hover/offscreen controls, keyboard focus that brings a service forward, and a static grid for reduced motion. Repeat seven services around the desktop ring for continuous spacing; show seven on mobile. Implement in the existing vanilla site; the Framer project is an inspected reference, not the edited implementation."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "User clarified that Get in touch refers to the contact section, not the hero button, then requested a much darker blue. Use deep navy #0b2447 in both themes with light copy for contrast. Preserve the themed form and the hero Get in touch button\u2019s original secondary style."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "Slightly reduce the mobile hero: smaller headline, tighter spacing, and a smaller curved service wheel; preserve desktop geometry. Remove AI Specialist Ninja, Frontend Ninja, Backend Ninja, and Cloud Ninja from the team in all views, leaving Ajay and Aleena in a two-column grid."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "Match the Motion collection filters (All 14, Expressive, Spatial, Immersive) to the Project type controls: Syne display font, 700 weight, 1rem size and uppercase labels. Keep their existing filtering behavior and responsive wrapping."
+    },
+    {
+      "date": "2026-11-05",
+      "decision": "Reuse every existing animated project preview across all homepage service tabs through one shared media catalog. Conversy marketing/app and other repeated projects use the same recording and poster URLs in AI & Voice Bots, Software, Consulting and Support as in their existing galleries. Keep per-gallery pause controls, lazy playback, reduced-motion/data-saver defaults, and deduplication within each category."
+    }
+  ],
+  "evidence": [
+    {
+      "fact": "project.instructions",
+      "source": "CLAUDE.md"
+    },
+    {
+      "fact": "project.stack:vite",
+      "source": "package.json"
+    }
+  ],
+  "generatedAt": "2026-11-03T23:48:53.785Z"
+}

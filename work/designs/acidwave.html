@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#d7ff3f" />
+    <title>Acidwave — LocalNinja Design Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/work/designs/base.css" />
+    <link rel="stylesheet" href="/src/work/designs/acidwave.css" />
+  </head>
+  <body data-design="acidwave" id="top">
+    <a class="acid-skip" href="#main">Skip to content</a>
+    <header class="acid-nav">
+      <a class="acid-logo" href="#top" aria-label="Acid Radio home"
+        ><span aria-hidden="true">✳</span> ACID RADIO<sup>®</sup></a
+      >
+      <nav aria-label="Main navigation">
+        <a href="#frequencies">The signal</a><a href="#sessions">Sessions</a
+        ><a class="nav-tune" href="#frequencies"
+          >Get tuned in <span aria-hidden="true">↗</span></a
+        >
+      </nav>
+    </header>
+    <main id="main">
+      <section class="acid-hero" aria-labelledby="hero-title">
+        <div class="hero-meta">
+          <span
+            ><i aria-hidden="true"></i> INDEPENDENT MINDS. UNFILTERED
+            SOUND.</span
+          ><span>TRANSMITTING FROM EVERYWHERE ↙</span>
+        </div>
+        <div class="hero-stage">
+          <div class="hero-copy">
+            <span class="tiny hero-index"
+              >OFF THE GRID / ON YOUR WAVELENGTH</span
+            >
+            <h1 id="hero-title">TURN ON.<br /><span>TUNE OUT.</span></h1>
+            <p>A little left of the dial.<br />A long way from ordinary.</p>
+            <a href="#frequencies" class="hero-cta"
+              >FIND YOUR FREQUENCY <span aria-hidden="true">↘</span></a
+            >
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <svg class="acid-orbit" viewBox="0 0 640 640" fill="none">
+              <defs>
+                <clipPath id="orb-clip">
+                  <circle cx="320" cy="320" r="290" />
+                </clipPath>
+              </defs>
+              <g clip-path="url(#orb-clip)">
+                <circle cx="320" cy="320" r="290" fill="#151611" />
+                <g stroke="#d7ff3f" stroke-width="8">
+                  <ellipse cx="260" cy="300" rx="330" ry="300" />
+                  <ellipse cx="260" cy="300" rx="307" ry="279" />
+                  <ellipse cx="260" cy="300" rx="284" ry="258" />
+                  <ellipse cx="260" cy="300" rx="261" ry="237" />
+                  <ellipse cx="260" cy="300" rx="238" ry="216" />
+                  <ellipse cx="260" cy="300" rx="215" ry="195" />
+                  <ellipse cx="260" cy="300" rx="192" ry="174" />
+                  <ellipse cx="260" cy="300" rx="169" ry="153" />
+                  <ellipse cx="260" cy="300" rx="146" ry="132" />
+                  <ellipse cx="260" cy="300" rx="123" ry="111" />
+                  <ellipse cx="260" cy="300" rx="100" ry="90" />
+                  <ellipse cx="260" cy="300" rx="77" ry="69" />
+                  <ellipse cx="260" cy="300" rx="54" ry="48" />
+                </g>
+                <ellipse cx="260" cy="300" rx="30" ry="27" fill="#ff6dbe" />
+              </g>
+              <path
+                d="M10 430C150 520 560 110 630 210"
+                stroke="#ff6dbe"
+                stroke-width="33"
+              />
+              <path
+                d="M11 429C150 520 560 110 630 210"
+                stroke="#151611"
+                stroke-width="2"
+                stroke-dasharray="2 8"
+              />
+            </svg>
+            <span class="orb-coordinate tiny"
+              >43° 39′ 12.00″ N<br />79° 22′ 48.00″ W</span
+            ><span class="orb-tag">GOOD<br />WEIRD<br />ONLY.</span
+            ><span class="orb-caption tiny">NO ALGORITHM. ALL INSTINCT.</span
+            ><span class="orbit-spark">✳</span>
+          </div>
+        </div>
+        <div class="hero-bottom">
+          <span class="tiny">EST. IN THE UNDERGROUND / 2026</span
+          ><span class="tiny"
+            >SCROLL TO LOSE THE PLOT <span aria-hidden="true">↓</span></span
+          >
+        </div>
+      </section>
+      <div
+        class="acid-ticker"
+        aria-label="Less noise. More signal. Stay strange."
+      >
+        <div aria-hidden="true">
+          <span>LESS NOISE</span><b>✳</b><span>MORE SIGNAL</span><b>✳</b
+          ><span>STAY STRANGE</span><b>✳</b><span>LESS NOISE</span><b>✳</b
+          ><span>MORE SIGNAL</span><b>✳</b><span>STAY STRANGE</span><b>✳</b>
+        </div>
+      </div>
+      <section
+        class="frequency-section"
+        id="frequencies"
+        aria-labelledby="frequency-title"
+      >
+        <div class="section-top tiny">
+          <span>01 / THE FREQUENCIES</span><span>GOOD TASTE HAS NO GENRE.</span>
+        </div>
+        <div class="frequency-heading">
+          <h2 id="frequency-title">FOLLOW<br /><span>THE FEELING.</span></h2>
+          <div>
+            <p>
+              Deep cuts, happy accidents, and sounds from the outer edges. Pick
+              a signal. See where it takes you.
+            </p>
+            <div
+              class="frequency-filters"
+              role="group"
+              aria-label="Filter frequencies"
+            >
+              <button type="button" data-acid-filter="all" aria-pressed="true">
+                All signals</button
+              ><button
+                type="button"
+                data-acid-filter="night"
+                aria-pressed="false"
+              >
+                After dark</button
+              ><button
+                type="button"
+                data-acid-filter="left"
+                aria-pressed="false"
+              >
+                Left field
+              </button>
+            </div>
+          </div>
+        </div>
+        <p class="acid-sr" data-filter-status aria-live="polite">
+          Showing all 3 frequencies.
+        </p>
+        <div class="frequency-grid">
+          <article class="frequency-card" data-frequency="night">
+            <a href="#session-static" aria-label="Explore Static Bloom session"
+              ><div class="frequency-art art-static">
+                <span class="tiny">CHANNEL 001</span>
+                <div class="static-rings" aria-hidden="true"></div>
+                <strong>STATIC<br />BLOOM</strong
+                ><span class="card-arrow" aria-hidden="true">↗</span>
+              </div>
+              <div class="frequency-info">
+                <h3>Static Bloom</h3>
+                <span>LEFTFIELD HOUSE / 124 BPM</span>
+              </div></a
+            >
+          </article>
+          <article class="frequency-card" data-frequency="left">
+            <a href="#session-soft" aria-label="Explore Soft Circuit session"
+              ><div class="frequency-art art-soft">
+                <span class="tiny">CHANNEL 002</span>
+                <div class="soft-sun" aria-hidden="true">✳</div>
+                <strong>SOFT<br />CIRCUIT</strong
+                ><span class="card-arrow" aria-hidden="true">↗</span>
+              </div>
+              <div class="frequency-info">
+                <h3>Soft Circuit</h3>
+                <span>AMBIENT ODDITIES / FREEFORM</span>
+              </div></a
+            >
+          </article>
+          <article class="frequency-card" data-frequency="night">
+            <a href="#session-after" aria-label="Explore After Hours session"
+              ><div class="frequency-art art-after">
+                <span class="tiny">CHANNEL 003</span>
+                <div class="after-grid" aria-hidden="true"></div>
+                <strong>AFTER<br />HOURS</strong
+                ><span class="card-arrow" aria-hidden="true">↗</span>
+              </div>
+              <div class="frequency-info">
+                <h3>After Hours</h3>
+                <span>ACID & ELECTRO / 138 BPM</span>
+              </div></a
+            >
+          </article>
+        </div>
+      </section>
+      <section
+        class="session-section"
+        id="sessions"
+        aria-labelledby="sessions-title"
+      >
+        <div class="section-top tiny">
+          <span>02 / IN THE ROOM</span><span>SMALL ROOMS. BIG ENERGY.</span>
+        </div>
+        <div class="session-title">
+          <h2 id="sessions-title">OFFLINE.<br />FULL VOLUME.</h2>
+          <p>
+            Three imaginary sessions.<br />One very real love for the
+            underground.<br /><span>Explore the concept programme below.</span>
+          </p>
+        </div>
+        <div class="sessions-list">
+          <details id="session-static">
+            <summary>
+              <span class="session-date">FRI<br /><b>21.08</b></span
+              ><span class="session-name"
+                >STATIC BLOOM<small
+                  >WITH MIRA SOL & THE ACID COLLECTIVE</small
+                ></span
+              ><span class="session-room">THE GREEN ROOM<br />22:00 — LATE</span
+              ><span class="session-open" aria-hidden="true">+</span>
+            </summary>
+            <div class="session-detail">
+              <p>
+                A slow-burning journey from dusty house records to the outer
+                limits of the dance floor. Mira Sol opens the room, followed by
+                a back-to-back session from the collective.
+              </p>
+              <span class="tiny"
+                >CONCEPT SESSION · TORONTO · 18 TRACK SELECTION</span
+              >
+            </div>
+          </details>
+          <details id="session-soft">
+            <summary>
+              <span class="session-date">SAT<br /><b>22.08</b></span
+              ><span class="session-name"
+                >SOFT CIRCUIT<small>AN AFTERNOON WITH SOFT SYSTEMS</small></span
+              ><span class="session-room"
+                >THE LISTENING SPACE<br />14:00 — 18:00</span
+              ><span class="session-open" aria-hidden="true">+</span>
+            </summary>
+            <div class="session-detail">
+              <p>
+                Bring an open mind and find a soft landing. A sunlit listening
+                session of ambient textures, field recordings, and beautifully
+                strange electronic music.
+              </p>
+              <span class="tiny"
+                >CONCEPT SESSION · TORONTO · SEATED LISTENING</span
+              >
+            </div>
+          </details>
+          <details id="session-after">
+            <summary>
+              <span class="session-date">SAT<br /><b>22.08</b></span
+              ><span class="session-name"
+                >AFTER HOURS<small
+                  >BASEMENT TRANSMISSIONS WITH DJ NULL</small
+                ></span
+              ><span class="session-room"
+                >THE BASEMENT<br />23:00 — SUNRISE</span
+              ><span class="session-open" aria-hidden="true">+</span>
+            </summary>
+            <div class="session-detail">
+              <p>
+                Rubbery basslines, restless drum machines, and a room that moves
+                as one. DJ Null joins the dots between early electro and
+                contemporary acid.
+              </p>
+              <span class="tiny"
+                >CONCEPT SESSION · TORONTO · ALL-NIGHT SELECTOR</span
+              >
+            </div>
+          </details>
+        </div>
+      </section>
+      <footer class="acid-footer">
+        <div>
+          <span class="tiny">STAY CURIOUS. STAY CONNECTED.</span
+          ><a href="#frequencies"
+            >KEEP IT<br /><span>WEIRD.</span
+            ><span class="footer-arrow" aria-hidden="true">↗</span></a
+          >
+        </div>
+        <div class="footer-meta tiny">
+          <span>ACID RADIO® / AN INDEPENDENT STATE OF MIND</span
+          ><span>FICTIONAL RADIO CONCEPT · LOCALNINJA DESIGN LAB</span
+          ><a href="#top">BACK TO TOP ↑</a>
+        </div>
+      </footer>
+    </main>
+    <script type="module" src="/src/work/designs/acidwave.js"></script>
+    <script type="module" src="/src/work/designs/base.js"></script>
+  </body>
+</html>

@@ -1,0 +1,597 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+body:has(.synapse-root) {
+  background: #f1eff5;
+}
+.synapse-root {
+  --synapse-ink: #28223c;
+  color: var(--synapse-ink);
+  background: #f1eff5;
+  font-family: "Manrope", sans-serif;
+}
+.synapse-root a {
+  text-decoration: none;
+}
+.synapse-root button,
+.synapse-root textarea {
+  font: inherit;
+}
+.synapse-nav {
+  height: 108px;
+  padding: 0 4.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #28223c18;
+}
+.synapse-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: -1.4px;
+}
+.synapse-symbol {
+  font-family: sans-serif;
+  font-size: 41px;
+  line-height: 1;
+  font-weight: 400;
+}
+.synapse-nav-note {
+  font-size: 11px;
+  letter-spacing: 0.025em;
+}
+.synapse-nav-cta {
+  min-height: 44px;
+  padding: 11px 0 11px 18px;
+  display: flex;
+  align-items: center;
+  gap: 45px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.synapse-nav-cta > span {
+  font-size: 21px;
+}
+.synapse-hero {
+  position: relative;
+  padding: 82px 4.5% 35px;
+  min-height: 770px;
+  overflow: clip;
+}
+.synapse-intro {
+  position: relative;
+  z-index: 2;
+  width: 46%;
+  pointer-events: none;
+}
+.synapse-intro a {
+  pointer-events: auto;
+}
+.synapse-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.synapse-eyebrow > span {
+  width: 5px;
+  height: 5px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #6b58a0;
+}
+.synapse-intro h1 {
+  font-size: clamp(76px, 7.35vw, 124px);
+  line-height: 0.96;
+  letter-spacing: -0.075em;
+  font-weight: 500;
+  margin: 39px 0 35px;
+}
+.synapse-root em {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+}
+.synapse-intro h1 em {
+  font-size: 1.13em;
+  letter-spacing: -0.045em;
+  line-height: 0.8;
+  padding-right: 0.05em;
+}
+.synapse-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 44px;
+  min-height: 46px;
+  font-size: 12px;
+  font-weight: 600;
+  border-bottom: 1px solid #28223c55;
+}
+.synapse-start > span {
+  font-size: 24px;
+  font-weight: 400;
+}
+.synapse-art {
+  position: absolute;
+  top: 15px;
+  left: 35%;
+  width: 64%;
+  height: 615px;
+}
+.synapse-art::before {
+  content: "";
+  position: absolute;
+  inset: 60px 7% 80px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    #c9bfe33d 0%,
+    #dad3ed17 50%,
+    transparent 70%
+  );
+}
+.synapse-art .synapse-brain {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+}
+.synapse-art-label {
+  position: absolute;
+  top: 66px;
+  right: 6.3%;
+  z-index: 1;
+  font-size: 8px;
+  letter-spacing: 0.17em;
+}
+.synapse-art-index {
+  position: absolute;
+  left: 10%;
+  bottom: 33px;
+  font-size: 10px;
+  line-height: 2;
+  letter-spacing: 0.04em;
+}
+.synapse-art-index > span {
+  font-size: 8px;
+  color: #62596f;
+  letter-spacing: 0;
+}
+.synapse-art-copy {
+  position: absolute;
+  right: 6.3%;
+  bottom: 24px;
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 0;
+}
+.synapse-mindset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 84px auto 0;
+  position: relative;
+  z-index: 2;
+}
+.synapse-mindset > p {
+  font-size: 10px;
+  color: #62596f;
+  margin: 0 0 14px;
+}
+.synapse-modes {
+  display: flex;
+  align-items: center;
+  border: 1px solid #28223c20;
+  padding: 5px;
+  border-radius: 100px;
+  gap: 4px;
+  background: #f6f4f9a8;
+}
+.synapse-modes button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 45px;
+  min-width: 135px;
+  border: none;
+  border-radius: 40px;
+  background: transparent;
+  color: #534b63;
+  font-size: 11px;
+  padding: 0 15px;
+}
+.synapse-modes button[aria-pressed="true"] {
+  background: #fff;
+  color: #28223c;
+  box-shadow: 0 2px 8px #28223c0d;
+}
+.synapse-modes button small {
+  font-size: 8px;
+  opacity: 0.7;
+  margin-left: 5px;
+}
+.synapse-mode-dot {
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+  border: 1px solid #746796;
+  border-radius: 50%;
+}
+.synapse-mode-dot[data-mode="explore"] {
+  border-radius: 2px;
+  transform: rotate(45deg);
+  border-color: #44748e;
+}
+.synapse-mode-dot[data-mode="dream"] {
+  border-radius: 50% 50% 0 50%;
+  transform: rotate(-45deg);
+  border-color: #96559c;
+}
+.synapse-mode-note {
+  font:
+    italic 18px "Instrument Serif",
+    Georgia,
+    serif;
+  color: #6b607d;
+  min-height: 22px;
+  margin-top: 13px;
+}
+.synapse-playground {
+  margin: 0 4.5%;
+  border-top: 1px solid #28223c25;
+  padding: 84px 0 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8%;
+  scroll-margin-top: 35px;
+}
+.synapse-play-intro h2 {
+  font-size: clamp(38px, 4.2vw, 67px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+  margin: 25px 0;
+}
+.synapse-play-intro h2 em {
+  font-size: 1.1em;
+  letter-spacing: -0.03em;
+}
+.synapse-play-intro > p:last-child {
+  color: #62596f;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.synapse-workspace {
+  padding-top: 4px;
+}
+.synapse-exercise-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: #62596f;
+  margin-bottom: 28px;
+}
+.synapse-exercise-label > span:last-child {
+  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.synapse-exercise-label i {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+.synapse-workspace label {
+  display: block;
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  margin-bottom: 14px;
+}
+.synapse-workspace textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 86px;
+  max-height: 180px;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  border-bottom: 1px solid #28223c40;
+  font-size: 15px;
+  padding: 9px 0 15px;
+  line-height: 1.6;
+  color: #28223c;
+}
+.synapse-workspace textarea::placeholder {
+  color: #746b81;
+}
+.synapse-form-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 18px;
+}
+.synapse-form-bottom > span {
+  max-width: 145px;
+  font-size: 9px;
+  line-height: 1.6;
+  color: #62596f;
+}
+.synapse-form-bottom button {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  border: 0;
+  background: #2b263b;
+  color: #fff;
+  border-radius: 40px;
+  padding: 12px 18px;
+  min-height: 46px;
+  white-space: nowrap;
+  font-size: 10px;
+}
+.synapse-form-bottom button > span {
+  font-size: 18px;
+}
+.synapse-honest-note {
+  font-size: 9px;
+  line-height: 1.8;
+  color: #6b6278;
+  margin: 25px 0 0;
+}
+.synapse-result {
+  border-left: 1px solid #8d7fa6;
+  padding: 0 0 0 23px;
+  margin-top: 35px;
+}
+.synapse-result > span {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #62596f;
+}
+.synapse-result h3 {
+  font:
+    32px/1.1 "Instrument Serif",
+    Georgia,
+    serif;
+  letter-spacing: -0.015em;
+  margin: 12px 0;
+}
+.synapse-result p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #62596f;
+  margin: 0;
+}
+.synapse-result .synapse-your-thought {
+  margin-top: 12px;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+.synapse-footer {
+  padding: 35px 4.5% 110px;
+  border-top: 1px solid #28223c20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+.synapse-footer .synapse-brand {
+  font-size: 22px;
+}
+.synapse-footer .synapse-symbol {
+  font-size: 32px;
+}
+.synapse-footer > p {
+  font:
+    italic 24px "Instrument Serif",
+    Georgia,
+    serif;
+  margin: 0;
+}
+.synapse-footer > span:last-child {
+  font-size: 9px;
+  color: #62596f;
+}
+
+@media (min-width: 1700px) {
+  .synapse-hero {
+    min-height: 850px;
+  }
+  .synapse-art {
+    height: 720px;
+  }
+}
+@media (max-width: 1050px) {
+  .synapse-hero {
+    padding-top: 65px;
+    min-height: 740px;
+  }
+  .synapse-intro {
+    width: 50%;
+  }
+  .synapse-intro h1 {
+    font-size: 9vw;
+  }
+  .synapse-art {
+    left: 35%;
+    width: 67%;
+    height: 555px;
+    top: 35px;
+  }
+  .synapse-art-label {
+    right: 9%;
+    top: 26px;
+  }
+  .synapse-art-copy {
+    right: 9%;
+    bottom: 0;
+    font-size: 10px;
+  }
+  .synapse-art-index {
+    display: none;
+  }
+  .synapse-mindset {
+    margin-top: 100px;
+  }
+  .synapse-playground {
+    gap: 6%;
+  }
+  .synapse-form-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .synapse-form-bottom > span {
+    max-width: none;
+  }
+}
+@media (max-width: 650px) {
+  .synapse-nav {
+    height: 83px;
+    padding: 0 6%;
+  }
+  .synapse-brand {
+    font-size: 24px;
+  }
+  .synapse-symbol {
+    font-size: 35px;
+  }
+  .synapse-nav-note {
+    display: none;
+  }
+  .synapse-nav-cta {
+    gap: 15px;
+    font-size: 10px;
+  }
+  .synapse-hero {
+    padding: 43px 6% 35px;
+    min-height: 0;
+  }
+  .synapse-intro {
+    width: 100%;
+  }
+  .synapse-eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.07em;
+  }
+  .synapse-intro h1 {
+    font-size: clamp(66px, 16.8vw, 106px);
+    line-height: 0.98;
+    margin-top: 23px;
+    margin-bottom: 25px;
+  }
+  .synapse-intro h1 em {
+    font-size: 1.08em;
+  }
+  .synapse-start {
+    font-size: 11px;
+    gap: 30px;
+  }
+  .synapse-art {
+    position: relative;
+    top: auto;
+    left: -7%;
+    width: 114%;
+    height: 405px;
+    margin-top: -12px;
+  }
+  .synapse-art-label {
+    top: 37px;
+    right: 7%;
+    font-size: 7px;
+  }
+  .synapse-art-copy {
+    bottom: 0;
+    right: 7%;
+    font-size: 9px;
+    line-height: 1.6;
+  }
+  .synapse-art-index {
+    display: block;
+    bottom: 1px;
+    left: 7%;
+    font-size: 9px;
+  }
+  .synapse-art-index > span {
+    font-size: 7px;
+  }
+  .synapse-mindset {
+    margin-top: 40px;
+  }
+  .synapse-mindset > p {
+    font-size: 9px;
+  }
+  .synapse-modes {
+    width: 100%;
+    padding: 4px;
+    gap: 1px;
+  }
+  .synapse-modes button {
+    min-width: 0;
+    flex: 1;
+    gap: 7px;
+    padding: 0 9px;
+    font-size: 10px;
+  }
+  .synapse-modes button small {
+    display: none;
+  }
+  .synapse-mode-note {
+    font-size: 17px;
+  }
+  .synapse-playground {
+    margin: 0 6%;
+    padding: 55px 0 60px;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .synapse-play-intro h2 {
+    font-size: 44px;
+    margin: 20px 0;
+  }
+  .synapse-play-intro > p:last-child {
+    font-size: 11px;
+  }
+  .synapse-exercise-label {
+    margin-bottom: 22px;
+  }
+  .synapse-form-bottom {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+  .synapse-form-bottom > span {
+    font-size: 8px;
+    max-width: 115px;
+  }
+  .synapse-form-bottom button {
+    font-size: 9px;
+    padding: 11px 13px;
+    gap: 15px;
+  }
+  .synapse-footer {
+    margin: 0;
+    padding: 30px 6% 115px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .synapse-footer > p {
+    font-size: 21px;
+  }
+  .synapse-footer > span:last-child {
+    width: 100%;
+    font-size: 8px;
+  }
+}

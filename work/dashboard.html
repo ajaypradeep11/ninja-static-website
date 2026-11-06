@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="theme-color" content="#ffffff" />
+    <script src="/theme.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pulse analytics - LocalNinja sample project</title>
     <meta name="robots" content="noindex" />
@@ -12,13 +14,7 @@
     <link rel="stylesheet" href="/src/work/shell.css" />
     <link rel="stylesheet" href="/src/work/dashboard.css" />
   </head>
-  <body>
-    <header class="ln-bar">
-      <a class="ln-bar-brand" href="/#work"><img src="/logo-animated.svg" alt="" width="32" height="32" /><span class="ln-bar-name">Local<span class="ninja">Ninja</span></span></a>
-      <p class="ln-bar-title">Sample project · <strong>Pulse</strong> SaaS analytics <span class="ln-tag">Dashboard</span></p>
-      <a class="ln-bar-back" href="/#work">← Back to site</a>
-    </header>
-
+  <body data-project-standalone>
     <main class="pulse" id="pulse" data-current="overview">
       <nav class="side" aria-label="Dashboard">
         <div class="logo"><i></i> Pulse</div>

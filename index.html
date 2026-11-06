@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="theme-color" content="#ffffff" />
+    <script src="/theme.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LocalNinja - We build ninja solutions</title>
     <meta
@@ -17,7 +19,7 @@
     />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
-  <body>
+  <body class="home-page">
     <header class="site-header" id="top">
       <div class="nav-inner container">
         <a class="brand" href="#home" aria-label="LocalNinja home">
@@ -31,6 +33,7 @@
             </button>
             <div class="nav-menu" id="services-menu">
               <a class="nav-menu-all" href="#services">All services</a>
+              <a href="#svc-ui">UI/UX Design</a>
               <a href="#svc-ai">AI Chatbot &amp; Voice Bot</a>
               <a href="#svc-web">Web Development</a>
               <a href="#svc-ecom">E-commerce Development</a>
@@ -44,7 +47,6 @@
                 <div class="nav-others-list" id="services-menu-others">
                 <a href="#svc-others">Automation &amp; AI Integration</a>
                 <a href="#svc-others">Cloud &amp; DevOps</a>
-                <a href="#svc-others">UI/UX Design</a>
                 <a href="#svc-others">HR &amp; People Operations</a>
                 <a href="#svc-others">Staff Augmentation</a>
                 </div>
@@ -57,6 +59,7 @@
           <a href="#contact">Contact</a>
           <a href="#products">Products</a>
         </nav>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme" hidden></button>
         <a class="btn btn-primary nav-cta" href="#contact">Let's talk</a>
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -66,39 +69,125 @@
 
     <main>
       <!-- ============ HERO ============ -->
-      <section class="hero" id="home">
+      <section class="hero service-hero" id="home" aria-labelledby="hero-title">
         <div class="hero-inner container">
           <div class="hero-copy">
-            <p class="tag">Software · Solutions · People</p>
-            <h1 class="display hero-title">
-              We build<br />
-              <span class="hl">Ninja</span><br />
-              solutions
+            <p class="hero-eyebrow"><span aria-hidden="true"></span> Your idea. Our expertise.</p>
+            <h1 class="display hero-title" id="hero-title">
+              We build<br /><span class="hl">Ninja</span> solutions.
             </h1>
             <p class="hero-sub">
-              LocalNinja is a small studio that builds AI chatbots, voice bots,
-              websites, online stores and custom software for businesses - then keeps
-              them running.
+              From the first sketch to the software you run on.<br class="hero-desktop-break" />
+              Design, development and support. All in one studio.
             </p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#services">See services <span class="arrow" aria-hidden="true">→</span></a>
               <a class="btn" href="#contact">Get in touch</a>
             </div>
           </div>
-          <div class="hero-art" aria-hidden="true">
-            <div class="stack stack-back"></div>
-            <div class="stack stack-mid"></div>
-            <div class="stack stack-front">
-              <ol class="stack-flow">
-                <li>Talk</li>
-                <li>Quote</li>
-                <li>Prototype</li>
-                <li>Build</li>
-                <li>Test</li>
-                <li><span class="hl">Deliver</span></li>
-              </ol>
+          <nav class="service-wheel" aria-label="Explore our services" data-service-wheel>
+            <p class="wheel-center-note" aria-hidden="true">Built around<br /><span>your business.</span></p>
+            <div class="service-wheel-space">
+              <ul class="service-wheel-ring" id="service-wheel-items">
+                <li class="service-wheel-spoke" style="--angle: 0deg">
+                  <a class="wheel-card wheel-card-blue" href="#svc-ui">
+                    <span class="wheel-card-face">
+                      <span class="wheel-card-meta" aria-hidden="true"><span>01 / DESIGN</span><span>↗</span></span>
+                      <svg class="wheel-card-art" viewBox="0 0 180 104" fill="none" aria-hidden="true">
+                        <rect x="26" y="14" width="109" height="75" rx="3" fill="var(--card-paper)" stroke="currentColor" stroke-width="2"/>
+                        <path d="M26 30H135M44 30V89" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="34" cy="22" r="2" fill="currentColor"/><circle cx="41" cy="22" r="2" fill="currentColor"/>
+                        <rect x="55" y="42" width="66" height="20" fill="var(--card-highlight)"/>
+                        <path d="M55 72H81M55 79H101" stroke="currentColor" stroke-width="2"/>
+                        <path d="M119 60L153 80L138 83L131 97Z" fill="currentColor" stroke="var(--card-paper)" stroke-width="2"/>
+                      </svg>
+                      <span class="wheel-card-name">UI/UX Design</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="service-wheel-spoke" style="--angle: 51.428571deg">
+                  <a class="wheel-card wheel-card-paper" href="#svc-ai">
+                    <span class="wheel-card-face">
+                      <span class="wheel-card-meta" aria-hidden="true"><span>02 / VOICE</span><span>↗</span></span>
+                      <svg class="wheel-card-art" viewBox="0 0 180 104" fill="none" aria-hidden="true">
+                        <circle cx="90" cy="52" r="44" fill="var(--card-highlight)"/>
+                        <g stroke="currentColor" stroke-width="5" stroke-linecap="round"><path d="M32 47V57M45 38V66M58 28V76M71 41V63M84 18V86M97 32V72M110 22V82M123 40V64M136 32V72M149 47V57"/></g>
+                      </svg>
+                      <span class="wheel-card-name">Voice Bots</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="service-wheel-spoke" style="--angle: 102.857143deg">
+                  <a class="wheel-card wheel-card-dark" href="#svc-ai">
+                    <span class="wheel-card-face">
+                      <span class="wheel-card-meta" aria-hidden="true"><span>03 / INTELLIGENCE</span><span>↗</span></span>
+                      <svg class="wheel-card-art" viewBox="0 0 180 104" fill="none" aria-hidden="true">
+                        <g stroke="var(--card-highlight)" stroke-width="2"><path d="M90 52L32 22M90 52L148 22M90 52L32 82M90 52L148 82"/><circle cx="32" cy="22" r="7"/><circle cx="148" cy="22" r="7"/><circle cx="32" cy="82" r="7"/><circle cx="148" cy="82" r="7"/></g>
+                        <path d="M90 12L101 39L128 52L101 64L90 92L79 64L52 52L79 39Z" fill="var(--card-highlight)"/>
+                        <circle cx="90" cy="52" r="9" fill="var(--card-paper)"/>
+                      </svg>
+                      <span class="wheel-card-name">AI Bots</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="service-wheel-spoke" style="--angle: 154.285714deg">
+                  <a class="wheel-card wheel-card-paper" href="#svc-web">
+                    <span class="wheel-card-face">
+                      <span class="wheel-card-meta" aria-hidden="true"><span>04 / DEVELOPMENT</span><span>↗</span></span>
+                      <svg class="wheel-card-art" viewBox="0 0 180 104" fill="none" aria-hidden="true">
+                        <rect x="24" y="13" width="132" height="81" rx="3" fill="var(--card-paper)" stroke="currentColor" stroke-width="2"/>
+                        <path d="M24 30H156" stroke="currentColor" stroke-width="2"/><circle cx="34" cy="22" r="2" fill="currentColor"/><circle cx="42" cy="22" r="2" fill="currentColor"/>
+                        <rect x="35" y="40" width="36" height="43" fill="var(--card-highlight)"/>
+                        <path d="M91 50L81 61L91 72M126 50L136 61L126 72M113 46L103 77" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+                      </svg>
+                      <span class="wheel-card-name">Web Apps</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="service-wheel-spoke" style="--angle: 205.714286deg">
+                  <a class="wheel-card wheel-card-blue" href="#svc-consulting">
+                    <span class="wheel-card-face">
+                      <span class="wheel-card-meta" aria-hidden="true"><span>05 / STRATEGY</span><span>↗</span></span>
+                      <svg class="wheel-card-art" viewBox="0 0 180 104" fill="none" aria-hidden="true">
+                        <path d="M43 80V53H90V27H137" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+                        <circle cx="43" cy="80" r="13" fill="var(--card-paper)" stroke="currentColor" stroke-width="2"/>
+                        <rect x="78" y="40" width="25" height="25" fill="var(--card-highlight)" stroke="currentColor" stroke-width="2"/>
+                        <path d="M124 14L138 27L124 40" stroke="currentColor" stroke-width="3"/>
+                        <path d="M121 75L127 81L143 65" stroke="currentColor" stroke-width="3"/>
+                      </svg>
+                      <span class="wheel-card-name">Consulting</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="service-wheel-spoke" style="--angle: 257.142857deg">
+                  <a class="wheel-card wheel-card-dark" href="#svc-software">
+                    <span class="wheel-card-face">
+                      <span class="wheel-card-meta" aria-hidden="true"><span>06 / ENGINEERING</span><span>↗</span></span>
+                      <svg class="wheel-card-art" viewBox="0 0 180 104" fill="none" aria-hidden="true">
+                        <path d="M90 12L133 35L90 58L47 35Z" fill="var(--card-highlight)" stroke="currentColor" stroke-width="2"/>
+                        <path d="M47 35V69L90 93V58Z" fill="var(--card-paper)" stroke="currentColor" stroke-width="2"/>
+                        <path d="M133 35V69L90 93V58Z" fill="var(--card-highlight)" fill-opacity=".3" stroke="currentColor" stroke-width="2"/>
+                        <path d="M69 24L112 47M69 47L112 24M69 47V81M112 47V81M47 52L90 76L133 52" stroke="currentColor" stroke-width="1.5"/>
+                      </svg>
+                      <span class="wheel-card-name">Custom Software</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="service-wheel-spoke" style="--angle: 308.571429deg">
+                  <a class="wheel-card wheel-card-paper" href="#svc-support">
+                    <span class="wheel-card-face">
+                      <span class="wheel-card-meta" aria-hidden="true"><span>07 / SUPPORT</span><span>↗</span></span>
+                      <svg class="wheel-card-art" viewBox="0 0 180 104" fill="none" aria-hidden="true">
+                        <path d="M90 10L128 24V51C128 74 107 88 90 96C73 88 52 74 52 51V24Z" fill="var(--card-highlight)" stroke="currentColor" stroke-width="2"/>
+                        <path d="M28 54H66L77 38L90 70L102 48L111 54H152" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      <span class="wheel-card-name">Maintenance</span>
+                    </span>
+                  </a>
+                </li>
+              </ul>
             </div>
-          </div>
+          </nav>
         </div>
       </section>
 
@@ -125,187 +214,202 @@
       </div>
 
       <!-- ============ SERVICES ============ -->
-      <section class="services section on-ink" id="services">
-        <div class="container">
-          <div class="section-head reveal">
-            <p class="kicker">What we do</p>
-            <h2 class="display">Our <span class="hl">Services</span></h2>
+      <section class="services section on-ink" id="services" aria-labelledby="services-title">
+        <div class="container services-container">
+          <div class="section-head services-head">
+            <div>
+              <p class="kicker">What we do / What you can explore</p>
+              <h2 class="display" id="services-title">Our <span class="hl">Services</span></h2>
+            </div>
+            <p>Pick a service. Explore the projects.<br /> Find the direction for your next idea.</p>
           </div>
-          <ol class="service-list">
-            <li class="service-row reveal" id="svc-ai">
-              <span class="service-num">01</span>
-              <h3 class="service-name">AI Chatbot &amp; Voice Bot</h3>
-              <p class="service-desc">Chatbots and voice agents that answer calls and messages, book and support customers 24/7.</p>
-              <button
-                class="service-toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="svc-ai-details"
-                aria-label="Show details for AI Chatbot &amp; Voice Bot"
-              >
-                <span class="service-arrow" aria-hidden="true">→</span>
-              </button>
-              <div class="service-details" id="svc-ai-details">
-                <div class="service-details-inner">
-                  <p>Phone, chat and back-office agents that work around the clock and hand off to a human when it matters.</p>
+          <div class="service-tabs" role="tablist" aria-label="Our services" hidden>
+            <button class="service-tab" id="svc-ui" type="button" role="tab" aria-selected="false" aria-controls="svc-ui-panel" tabindex="-1">UI / UX Design</button>
+            <button class="service-tab" id="svc-ai" type="button" role="tab" aria-selected="false" aria-controls="svc-ai-panel" tabindex="-1">AI &amp; Voice Bots</button>
+            <button class="service-tab" id="svc-web" type="button" role="tab" aria-selected="false" aria-controls="svc-web-panel" tabindex="-1">Web Development</button>
+            <button class="service-tab" id="svc-ecom" type="button" role="tab" aria-selected="false" aria-controls="svc-ecom-panel" tabindex="-1">E-commerce</button>
+            <button class="service-tab" id="svc-software" type="button" role="tab" aria-selected="false" aria-controls="svc-software-panel" tabindex="-1">Custom Software</button>
+            <button class="service-tab" id="svc-consulting" type="button" role="tab" aria-selected="false" aria-controls="svc-consulting-panel" tabindex="-1">IT Consulting</button>
+            <button class="service-tab" id="svc-support" type="button" role="tab" aria-selected="false" aria-controls="svc-support-panel" tabindex="-1">Maintenance &amp; Support</button>
+            <button class="service-tab" id="svc-others" type="button" role="tab" aria-selected="false" aria-controls="svc-others-panel" tabindex="-1">Others</button>
+          </div>
+          <section class="service-panel" id="svc-ui-panel" role="tabpanel" aria-labelledby="svc-ui" tabindex="0">
+            <div class="service-panel-head">
+              <div>
+                <h3>UI / UX Design</h3>
+                <p>Interactive characters, sculptural worlds and bold visual identities. Explore all 24 design experiments.</p>
+              </div>
+              <div class="service-panel-actions">
+                <button class="service-preview-toggle" type="button" data-preview-toggle aria-controls="svc-ui-projects" hidden>Pause previews</button>
+                <a class="service-work-link" href="/work.html#work-ui">Explore in Work <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <details class="service-includes">
+              <summary>What’s included</summary>
+              <div><p>Distinctive interfaces, from the first visual direction to the final interaction.</p>
+                  <ul><li>Product design, prototypes and design systems</li><li>Interactive websites, motion and 3D experiences</li><li>Responsive layouts and accessible interactions</li><li>Ten visual styles and fifteen motion studies to explore</li></ul></div>
+            </details>
+            <div class="service-projects" id="svc-ui-projects" aria-label="Projects for UI / UX Design"></div>
+          </section>
+          <section class="service-panel" id="svc-ai-panel" role="tabpanel" aria-labelledby="svc-ai" tabindex="0">
+            <div class="service-panel-head">
+              <div>
+                <h3>AI Chatbot &amp; Voice Bot</h3>
+                <p>Chatbots and voice agents that answer calls and messages, book and support customers 24/7.</p>
+              </div>
+              <div class="service-panel-actions">
+                <button class="service-preview-toggle" type="button" data-preview-toggle aria-controls="svc-ai-projects" hidden>Pause previews</button>
+                <a class="service-work-link" href="/work.html#work-ai">Explore in Work <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <details class="service-includes">
+              <summary>What’s included</summary>
+              <div><p>Phone, chat and back-office agents that work around the clock and hand off to a human when it matters.</p>
                   <ul>
                   <li>Inbound voice agents that answer calls, qualify leads and book appointments</li>
                   <li>Website, WhatsApp and SMS chatbots trained on your own docs and FAQs</li>
                   <li>AI agents for email triage, data entry and follow-ups</li>
                   <li>Connected to your CRM, calendar and phone system, with analytics and guardrails</li>
-                  </ul>
-                </div>
+                  </ul></div>
+            </details>
+            <div class="service-projects" id="svc-ai-projects" aria-label="Projects for AI Chatbot &amp; Voice Bot"></div>
+          </section>
+          <section class="service-panel" id="svc-web-panel" role="tabpanel" aria-labelledby="svc-web" tabindex="0">
+            <div class="service-panel-head">
+              <div>
+                <h3>Web Development</h3>
+                <p>Marketing sites, web apps and landing pages built fast and built to last.</p>
               </div>
-            </li>
-            <li class="service-row reveal" id="svc-web">
-              <span class="service-num">02</span>
-              <h3 class="service-name">Web Development</h3>
-              <p class="service-desc">Marketing sites, web apps and landing pages built fast and built to last.</p>
-              <button
-                class="service-toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="svc-web-details"
-                aria-label="Show details for Web Development"
-              >
-                <span class="service-arrow" aria-hidden="true">→</span>
-              </button>
-              <div class="service-details" id="svc-web-details">
-                <div class="service-details-inner">
-                  <p>Sites that load fast, rank well and are easy for your team to update.</p>
+              <div class="service-panel-actions">
+                <button class="service-preview-toggle" type="button" data-preview-toggle aria-controls="svc-web-projects" hidden>Pause previews</button>
+                <a class="service-work-link" href="/work.html#work-web">Explore in Work <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <details class="service-includes">
+              <summary>What’s included</summary>
+              <div><p>Sites that load fast, rank well and are easy for your team to update.</p>
                   <ul>
                   <li>Marketing sites, landing pages and web apps</li>
                   <li>Performance, accessibility and SEO built in from day one</li>
                   <li>CMS setup so you can edit content without a developer</li>
-                  </ul>
-                </div>
+                  </ul></div>
+            </details>
+            <div class="service-projects" id="svc-web-projects" aria-label="Projects for Web Development"></div>
+          </section>
+          <section class="service-panel" id="svc-ecom-panel" role="tabpanel" aria-labelledby="svc-ecom" tabindex="0">
+            <div class="service-panel-head">
+              <div>
+                <h3>E-commerce Development</h3>
+                <p>Shopify themes and custom storefronts - checkout, payments and inventory that turn browsers into buyers.</p>
               </div>
-            </li>
-            <li class="service-row reveal" id="svc-ecom">
-              <span class="service-num">03</span>
-              <h3 class="service-name">E-commerce Development</h3>
-              <p class="service-desc">Shopify themes and custom storefronts - checkout, payments and inventory that turn browsers into buyers.</p>
-              <button
-                class="service-toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="svc-ecom-details"
-                aria-label="Show details for E-commerce Development"
-              >
-                <span class="service-arrow" aria-hidden="true">→</span>
-              </button>
-              <div class="service-details" id="svc-ecom-details">
-                <div class="service-details-inner">
-                  <p>Storefronts built to sell, with the operations behind them handled - on Shopify or fully custom.</p>
+              <div class="service-panel-actions">
+                <button class="service-preview-toggle" type="button" data-preview-toggle aria-controls="svc-ecom-projects" hidden>Pause previews</button>
+                <a class="service-work-link" href="/work.html#work-ecom">Explore in Work <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <details class="service-includes">
+              <summary>What’s included</summary>
+              <div><p>Storefronts built to sell, with the operations behind them handled - on Shopify or fully custom.</p>
                   <ul>
                   <li>Custom Shopify themes, or your current theme customised - sections, layouts, speed</li>
                   <li>Shopify, WooCommerce or custom storefronts</li>
                   <li>Checkout, payments, shipping and tax configured correctly</li>
                   <li>Inventory, order and customer data synced to your other tools</li>
-                  </ul>
-                </div>
+                  </ul></div>
+            </details>
+            <div class="service-projects" id="svc-ecom-projects" aria-label="Projects for E-commerce Development"></div>
+          </section>
+          <section class="service-panel" id="svc-software-panel" role="tabpanel" aria-labelledby="svc-software" tabindex="0">
+            <div class="service-panel-head">
+              <div>
+                <h3>Custom Software</h3>
+                <p>Internal tools, dashboards and integrations shaped around how you actually work.</p>
               </div>
-            </li>
-            <li class="service-row reveal" id="svc-software">
-              <span class="service-num">04</span>
-              <h3 class="service-name">Custom Software</h3>
-              <p class="service-desc">Internal tools, dashboards and integrations shaped around how you actually work.</p>
-              <button
-                class="service-toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="svc-software-details"
-                aria-label="Show details for Custom Software"
-              >
-                <span class="service-arrow" aria-hidden="true">→</span>
-              </button>
-              <div class="service-details" id="svc-software-details">
-                <div class="service-details-inner">
-                  <p>Software shaped around your workflow instead of the other way round. Don't see your problem listed anywhere? This is where it goes - we scope it, quote it, prototype it and deliver it end to end.</p>
+              <div class="service-panel-actions">
+                <button class="service-preview-toggle" type="button" data-preview-toggle aria-controls="svc-software-projects" hidden>Pause previews</button>
+                <a class="service-work-link" href="/work.html#work-web">Explore in Work <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <details class="service-includes">
+              <summary>What’s included</summary>
+              <div><p>Software shaped around your workflow instead of the other way round. Don't see your problem listed anywhere? This is where it goes - we scope it, quote it, prototype it and deliver it end to end.</p>
                   <ul>
                   <li>Internal tools, admin panels and dashboards</li>
                   <li>APIs and integrations between the systems you already use</li>
                   <li>Migrations off spreadsheets and legacy software</li>
                   <li><a href="#process">See how we work →</a></li>
-                  </ul>
-                </div>
+                  </ul></div>
+            </details>
+            <div class="service-projects" id="svc-software-projects" aria-label="Projects for Custom Software"></div>
+          </section>
+          <section class="service-panel" id="svc-consulting-panel" role="tabpanel" aria-labelledby="svc-consulting" tabindex="0">
+            <div class="service-panel-head">
+              <div>
+                <h3>IT Consulting</h3>
+                <p>Tech strategy, architecture and vendor decisions - without the jargon.</p>
               </div>
-            </li>
-            <li class="service-row reveal" id="svc-consulting">
-              <span class="service-num">05</span>
-              <h3 class="service-name">IT Consulting</h3>
-              <p class="service-desc">Tech strategy, architecture and vendor decisions - without the jargon.</p>
-              <button
-                class="service-toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="svc-consulting-details"
-                aria-label="Show details for IT Consulting"
-              >
-                <span class="service-arrow" aria-hidden="true">→</span>
-              </button>
-              <div class="service-details" id="svc-consulting-details">
-                <div class="service-details-inner">
-                  <p>Straight answers on what to build, buy and skip.</p>
+              <div class="service-panel-actions">
+                <button class="service-preview-toggle" type="button" data-preview-toggle aria-controls="svc-consulting-projects" hidden>Pause previews</button>
+                <a class="service-work-link" href="/work.html#work-web">Explore in Work <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <details class="service-includes">
+              <summary>What’s included</summary>
+              <div><p>Straight answers on what to build, buy and skip.</p>
                   <ul>
                   <li>Technology strategy and roadmaps</li>
                   <li>Architecture reviews and vendor / platform selection</li>
                   <li>Security, compliance and cost audits</li>
-                  </ul>
-                </div>
+                  </ul></div>
+            </details>
+            <div class="service-projects" id="svc-consulting-projects" aria-label="Projects for IT Consulting"></div>
+          </section>
+          <section class="service-panel" id="svc-support-panel" role="tabpanel" aria-labelledby="svc-support" tabindex="0">
+            <div class="service-panel-head">
+              <div>
+                <h3>Maintenance &amp; Support</h3>
+                <p>Ongoing fixes, updates and SLAs so nothing goes quiet after launch.</p>
               </div>
-            </li>
-            <li class="service-row reveal" id="svc-support">
-              <span class="service-num">06</span>
-              <h3 class="service-name">Maintenance &amp; Support</h3>
-              <p class="service-desc">Ongoing fixes, updates and SLAs so nothing goes quiet after launch.</p>
-              <button
-                class="service-toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="svc-support-details"
-                aria-label="Show details for Maintenance &amp; Support"
-              >
-                <span class="service-arrow" aria-hidden="true">→</span>
-              </button>
-              <div class="service-details" id="svc-support-details">
-                <div class="service-details-inner">
-                  <p>Nothing goes quiet after launch.</p>
+              <div class="service-panel-actions">
+                <button class="service-preview-toggle" type="button" data-preview-toggle aria-controls="svc-support-projects" hidden>Pause previews</button>
+                <a class="service-work-link" href="/work.html#work-web">Explore in Work <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <details class="service-includes">
+              <summary>What’s included</summary>
+              <div><p>Nothing goes quiet after launch.</p>
                   <ul>
                   <li>Bug fixes, security patches and dependency updates</li>
                   <li>Uptime monitoring with response-time SLAs</li>
                   <li>Small improvements shipped on a monthly retainer</li>
-                  </ul>
-                </div>
+                  </ul></div>
+            </details>
+            <div class="service-projects" id="svc-support-projects" aria-label="Projects for Maintenance &amp; Support"></div>
+          </section>
+          <section class="service-panel" id="svc-others-panel" role="tabpanel" aria-labelledby="svc-others" tabindex="0">
+            <div class="service-panel-head">
+              <div>
+                <h3>Others</h3>
+                <p>Automation, cloud infrastructure and people operations that help your business grow.</p>
               </div>
-            </li>
-            <li class="service-row service-row-others reveal" id="svc-others">
-              <span class="service-num">+</span>
-              <h3 class="service-name">Others</h3>
-              <p class="service-desc">Five more things we do alongside the core services.</p>
-              <button
-                class="service-toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="svc-others-details"
-                aria-label="Show other services"
-              >
-                <span class="service-arrow" aria-hidden="true">→</span>
-              </button>
-              <div class="service-details" id="svc-others-details">
-                <div class="service-details-inner">
-                  <p>Usually bundled into a bigger project, but available on their own too.</p>
+              <div class="service-panel-actions">
+                <button class="service-preview-toggle" type="button" data-preview-toggle aria-controls="svc-others-projects" hidden>Pause previews</button>
+                <a class="service-work-link" href="/work.html#work-samples">Explore in Work <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <details class="service-includes">
+              <summary>What’s included</summary>
+              <div><p>Usually bundled into a bigger project, but available on their own too.</p>
                   <ul class="others-list">
                     <li><strong>Automation &amp; AI Integration</strong> Workflow automation and LLM features wired into the tools you already use.</li>
                     <li><strong>Cloud &amp; DevOps</strong> Hosting, CI/CD, migrations and monitoring that keep you shipping.</li>
-                    <li><strong>UI/UX Design</strong> Product design, prototypes and design systems people enjoy using.</li>
                     <li><strong>HR &amp; People Operations</strong> Hiring, onboarding, policies and payroll setup for growing teams.</li>
                     <li><strong>Staff Augmentation</strong> Dedicated developers who slot into your team when you need more hands.</li>
-                  </ul>
-                </div>
-              </div>
-            </li>
-          </ol>
+                  </ul></div>
+            </details>
+            <div class="service-projects" id="svc-others-projects" aria-label="Projects for Others"></div>
+          </section>
+          <noscript><p class="service-fallback">Browse all our demos and design experiments on <a href="/work.html">the Work page →</a>.</p></noscript>
         </div>
       </section>
 
@@ -367,34 +471,6 @@
         </div>
       </section>
 
-      <!-- ============ WORK (teaser -> /work.html) ============ -->
-      <section class="work section" id="work">
-        <div class="container">
-          <div class="section-head work-head reveal">
-            <div>
-              <p class="kicker">Our work</p>
-              <h2 class="display">Things we've <span class="hl">built</span></h2>
-            </div>
-            <p class="work-intro">
-              From AI workspaces and voice assistants to our own anime store.
-              Explore the products we've built and see them in action.
-            </p>
-          </div>
-
-          <ul class="work-strip reveal">
-            <li><a href="/work/conversy-app.html"><span class="ws-sw" aria-hidden="true"><i style="background:#0a1020"></i><i style="background:#3b3bd6"></i></span>ConversyAI Webapp<small>AI agents + business workspace</small></a></li>
-            <li><a href="/work/irina.html"><span class="ws-sw" aria-hidden="true"><i style="background:#1f2937"></i><i style="background:#d97706"></i></span>IRINA<small>AI apparel engineering workspace</small></a></li>
-            <li><a href="/work.html#work-voice"><span class="ws-sw" aria-hidden="true"><i style="background:#4da3ff"></i><i style="background:#dceeff"></i></span>Voice Bot<small>Live clinic booking assistant</small></a></li>
-            <li><a href="/work/ninja-commerce.html"><span class="ws-sw" aria-hidden="true"><i style="background:#000000"></i><i style="background:#4da3ff"></i></span>Anime Ecommerce<small>Anime merch + online storefront</small></a></li>
-          </ul>
-
-          <div class="work-cta reveal">
-            <p>Explore the screens, visit the store, or try a voice conversation.</p>
-            <a class="btn btn-primary" href="/work.html">See our work <span class="arrow" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </section>
-
       <!-- ============ ABOUT + TEAM ============ -->
       <section class="about section" id="about">
         <div class="about-inner container">
@@ -419,7 +495,7 @@
                 <span class="stat-label">Products</span>
               </div>
               <div class="stat">
-                <span class="stat-num">6</span>
+                <span class="stat-num">7</span>
                 <span class="stat-label">Services</span>
               </div>
               <div class="stat">
@@ -446,34 +522,6 @@
                 <p class="team-name">Aleena</p>
                 <p class="team-role">Owner</p>
                 <a class="team-link" href="https://www.linkedin.com/in/aleenaannieabraham/" target="_blank" rel="noopener">LinkedIn ↗</a>
-              </div>
-              <div class="team-card">
-                <div class="avatar" aria-hidden="true">
-                  <img src="/logo-animated.svg" alt="" width="88" height="88" loading="lazy" />
-                </div>
-                <p class="team-name">AI Specialist Ninja</p>
-                <p class="team-role">Chatbots, voice bots &amp; LLMs</p>
-              </div>
-              <div class="team-card">
-                <div class="avatar" aria-hidden="true">
-                  <img src="/logo-animated.svg" alt="" width="88" height="88" loading="lazy" />
-                </div>
-                <p class="team-name">Frontend Ninja</p>
-                <p class="team-role">Web &amp; UI engineering</p>
-              </div>
-              <div class="team-card">
-                <div class="avatar" aria-hidden="true">
-                  <img src="/logo-animated.svg" alt="" width="88" height="88" loading="lazy" />
-                </div>
-                <p class="team-name">Backend Ninja</p>
-                <p class="team-role">APIs, data &amp; integrations</p>
-              </div>
-              <div class="team-card">
-                <div class="avatar" aria-hidden="true">
-                  <img src="/logo-animated.svg" alt="" width="88" height="88" loading="lazy" />
-                </div>
-                <p class="team-name">Cloud Ninja</p>
-                <p class="team-role">Cloud, DevOps &amp; hosting</p>
               </div>
             </div>
           </div>
@@ -556,5 +604,6 @@
     </footer>
 
     <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/services.js"></script>
   </body>
 </html>

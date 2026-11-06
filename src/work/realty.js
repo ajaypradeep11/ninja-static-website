@@ -1,3 +1,5 @@
+import { homeListings } from './realty-homes.js';
+
 // Northshore Realty - page-specific behaviour. Loaded after mockups.js,
 // which still owns the generic hooks (data-filter, data-open, data-close,
 // data-collapse, data-say). This module layers the buyer tools on top -
@@ -11,13 +13,9 @@
 // CSS owns every transition and animation. No wall clock: the demo date is
 // fixed (Wed 2 Sep 2026).
 
-const HOMES = {
-  1: { id: 1, addr: '2288 W 4th Ave', hood: 'kits', type: 'condo', label: 'Condo', price: 925000, beds: 2, baths: 2, sqft: 890, built: 2009, walk: 94, strata: 412, photo: 'linear-gradient(160deg,#c7e6f5,#5eb3dd)', views: 312, saves: 18, viewings: 3 },
-  2: { id: 2, addr: '4120 Hastings St', hood: 'heights', type: 'townhouse', label: 'Townhouse', price: 1290000, beds: 3, baths: 2.5, sqft: 1480, built: 2016, walk: 81, strata: 298, photo: 'linear-gradient(160deg,#f3d9b1,#d9944f)', views: 204, saves: 11, viewings: 2 },
-  3: { id: 3, addr: '1560 Grand Blvd', hood: 'northvan', type: 'detached', label: 'Detached', price: 2100000, beds: 4, baths: 3, sqft: 2350, built: 1958, walk: 68, strata: 0, photo: 'linear-gradient(160deg,#d6ead8,#7fb68a)', views: 176, saves: 9, viewings: 1 },
-  4: { id: 4, addr: '55 E Cordova St', hood: 'gastown', type: 'loft', label: 'Loft', price: 640000, beds: 1, baths: 1, sqft: 720, built: 1911, walk: 98, strata: 355, photo: 'linear-gradient(160deg,#e3d5cf,#a37c6c)', views: 389, saves: 24, viewings: 4 },
-};
-const IDS = [1, 2, 3, 4];
+const HOMES = Object.fromEntries(homeListings.map(home => [home.id, home]));
+const IDS = homeListings.map(home => home.id);
+const homeThumb = (h) => `<img class="thumb" src="/work/realty/${h.photo}-480.webp" width="480" height="320" alt="" loading="lazy" decoding="async" />`;
 
 // Trends are median sale price by month (thousands), oldest first. The
 // 12-month change shown is computed from these so the two never disagree.
@@ -44,7 +42,7 @@ const SORTS = {
   size: { label: 'size', by: (a, b) => b.sqft - a.sqft },
 };
 
-// Valuation model - tuned so the four listings on the page land inside
+// Valuation model - tuned so the original four example listings land inside
 // their own estimate range (condo 2/2 -> $930k, townhouse 3/2.5 -> $1.295M,
 // detached 4/3 -> $2.13M, loft 1/1 -> $645k).
 const VALUE_BASE = { condo: 520000, townhouse: 700000, detached: 1350000, loft: 440000 };
@@ -191,7 +189,12 @@ const applyFilters = () => {
     wrap.classList.toggle('is-hidden', !ok);
     cards.appendChild(wrap); // reorder in place
     if (ok) shown += 1;
-    $(`.pin[data-home="${h.id}"]`)?.classList.toggle('is-dim', !ok);
+    const pin = $(`.pin[data-home="${h.id}"]`);
+    if (pin) {
+      pin.classList.toggle('is-dim', !ok);
+      pin.setAttribute('tabindex', ok ? '0' : '-1');
+      pin.setAttribute('aria-disabled', String(!ok));
+    }
   });
   const count = $('[data-count]');
   if (count) count.textContent = shown === 1 ? '1 home' : `${shown} homes`;
@@ -232,6 +235,77 @@ const resetFilters = () => {
   $$('.filters [data-filter]').forEach((b) => b.classList.toggle('is-active', b.dataset.filter === 'all'));
   applyFilters();
 };
+
+/* ---------- listing catalogue ---------- */
+
+const homePhoto = (home, detail = false) => {
+  const src = `/work/realty/${home.photo}`;
+  const sizes = detail ? '(max-width: 720px) calc(100vw - 32px), 680px'
+    : '(max-width: 520px) calc(100vw - 32px), (max-width: 900px) 45vw, (max-width: 1000px) 50vw, 25vw';
+  return `<img src="${src}-480.webp" srcset="${src}-480.webp 480w, ${src}.webp 960w" sizes="${sizes}" width="960" height="640" alt="${escapeHtml(home.alt)}" loading="${!detail && home.id <= 2 ? 'eager' : 'lazy'}" decoding="async" />`;
+};
+
+function renderCatalogue() {
+  $('[data-cards]').innerHTML = homeListings.map(home => `
+    <div class="card-wrap" data-type="${home.type}" data-home="${home.id}">
+      <button class="card" type="button" data-home-open="${home.id}" aria-haspopup="dialog" aria-controls="detail-${home.id}">
+        <div class="photo">${homePhoto(home)}<span class="badge">${home.label}</span><span class="flag" data-flag="${home.id}" hidden></span></div>
+        <div class="info">
+          <div class="price">${money(home.price)}</div>
+          <p class="addr">${escapeHtml(fullAddr(home))}</p>
+          <div class="specs"><span><b>${home.beds}</b> bd</span><span><b>${home.baths}</b> ba</span><span><b>${home.sqft.toLocaleString('en-CA')}</b> sq ft</span></div>
+        </div>
+      </button>
+      <button class="heart" type="button" data-save="${home.id}" aria-pressed="false" aria-label="Save ${escapeHtml(home.addr)}"><span aria-hidden="true">♡</span></button>
+    </div>`).join('');
+
+  $('[data-home-details]').innerHTML = homeListings.map(home => `
+    <div class="detail" id="detail-${home.id}">
+      <div class="sheet" role="dialog" aria-label="${escapeHtml(fullAddr(home))}">
+        <div class="photo">${homePhoto(home, true)}<span class="badge">${home.label}</span></div>
+        <div class="content">
+          <h3>${escapeHtml(fullAddr(home))}</h3>
+          <div class="price">${money(home.price)}</div>
+          <p class="flag-line" data-flag-line="${home.id}" hidden></p>
+          <div class="facts">
+            <div>Bedrooms<b>${home.beds}</b></div><div>Bathrooms<b>${home.baths}</b></div>
+            <div>Size<b>${home.sqft.toLocaleString('en-CA')} sq ft</b></div>
+            <div>Listed<b>${home.listedDays} days ago</b></div>
+            <div>Built<b>${home.built}</b></div><div>Walk Score<b>${home.walk}</b></div>
+          </div>
+          <p>${escapeHtml(home.desc)}</p>
+          <div class="tools">
+            <button type="button" class="tool" data-save="${home.id}" aria-pressed="false"><span aria-hidden="true" data-save-icon>♡</span> <span data-save-text>Save</span></button>
+            <button type="button" class="tool" data-mortgage-toggle="${home.id}" aria-expanded="false" aria-controls="mortgage-${home.id}">Estimate payments</button>
+            <button type="button" class="tool" data-hood-open="${home.hood}">${HOODS[home.hood].name} snapshot</button>
+          </div>
+          <div class="sheet-extras" data-extras="${home.id}"></div>
+          <div class="row">
+            <button type="button" data-home-close>Close</button>
+            <button class="primary" type="button" data-book="${home.id}">Book a viewing with Maya</button>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+
+  const mapOrder = ['kits', 'northvan', 'gastown', 'heights'];
+  $('[data-home-pins]').innerHTML = mapOrder.map((hood, column) => {
+    const x = 60 + column * 120;
+    const homes = homeListings.filter(home => home.hood === hood);
+    return `<g class="area" data-hood-open="${hood}" tabindex="0" role="button" aria-label="${HOODS[hood].name} neighbourhood snapshot" transform="translate(${x} 66)"><rect x="-57" y="-10" width="114" height="20" rx="10" /><text x="0" y="4" text-anchor="middle">${HOODS[hood].name}</text></g>` +
+      homes.map((home, row) => `<g class="pin" data-home-open="${home.id}" data-home="${home.id}" tabindex="0" role="button" aria-label="View ${escapeHtml(home.addr)}, ${money(home.price)}" transform="translate(${x} ${112 + row * 53})"><rect x="-44" y="-20" width="88" height="40" rx="20" /><text x="0" y="5" text-anchor="middle">${short(home.price)}</text></g>`).join('');
+  }).join('');
+}
+
+function openHome(id) {
+  if (!HOMES[id]) return;
+  $$('.detail.is-open').forEach(detail => detail.classList.remove('is-open'));
+  const detail = $(`#detail-${id}`);
+  detail.classList.add('is-open');
+  $('.sheet', detail).scrollTop = 0;
+  $('img', detail).loading = 'eager';
+}
+
 
 /* ---------- save / compare ---------- */
 
@@ -280,7 +354,7 @@ const renderSaved = () => {
       const h = HOMES[id];
       const picked = state.picks.has(id);
       return `<li class="saved-row${picked ? ' is-picked' : ''}">
-        <span class="thumb" style="--photo:${h.photo}"></span>
+        ${homeThumb(h)}
         <div class="saved-main"><b>${money(h.price)}</b><span>${escapeHtml(fullAddr(h))}</span><small>${h.beds} bd · ${h.baths} ba · ${h.sqft.toLocaleString('en-CA')} sq ft</small></div>
         <div class="saved-actions">
           <label class="pick"><input type="checkbox" data-compare-pick="${id}"${picked ? ' checked' : ''}${!picked && full ? ' disabled' : ''} /> Compare</label>
@@ -330,7 +404,7 @@ const compareRows = (ids) => {
     ['Transfer tax (BC)', hs.map((h) => money(transferTax(h.price))), pick(hs.map((h) => transferTax(h.price)), 'min')],
   ];
   const head = `<thead><tr><th scope="col"><span class="sr">Feature</span></th>${hs
-    .map((h) => `<th scope="col"><span class="thumb" style="--photo:${h.photo}"></span><b>${escapeHtml(h.addr)}</b><span>${escapeHtml(HOODS[h.hood].name)}</span></th>`)
+    .map((h) => `<th scope="col">${homeThumb(h)}<b>${escapeHtml(h.addr)}</b><span>${escapeHtml(HOODS[h.hood].name)}</span></th>`)
     .join('')}</tr></thead>`;
   const body = `<tbody>${rows
     .map(([label, vals, best]) => `<tr><th scope="row">${label}</th>${vals.map((v, i) => `<td${best[i] ? ' class="is-best"' : ''}>${v}</td>`).join('')}</tr>`)
@@ -372,7 +446,7 @@ const buildExtras = (id) => {
     <p class="eyebrow">Similar homes</p>
     <div class="sim-row">${others
       .map(
-        (o) => `<button type="button" data-switch="#detail-${o.id}"><span class="thumb" style="--photo:${o.photo}"></span><b>${money(o.price)}</b><span>${o.beds} bd · ${o.sqft.toLocaleString('en-CA')} sq ft · ${escapeHtml(HOODS[o.hood].name)}</span></button>`
+        (o) => `<button type="button" data-switch="#detail-${o.id}">${homeThumb(o)}<b>${money(o.price)}</b><span>${o.beds} bd · ${o.sqft.toLocaleString('en-CA')} sq ft · ${escapeHtml(HOODS[o.hood].name)}</span></button>`
       )
       .join('')}</div>
   </div>`;
@@ -621,8 +695,8 @@ const renderListings = () => {
   list.innerHTML = IDS.map((id) => HOMES[id])
     .map(
       (h) => `<li class="listing">
-        <span class="thumb" style="--photo:${h.photo}"></span>
-        <div class="listing-main"><b>${escapeHtml(h.addr)}</b><span>${money(h.price)} · ${escapeHtml(HOODS[h.hood].name)} · listed 6 days ago</span></div>
+        ${homeThumb(h)}
+        <div class="listing-main"><b>${escapeHtml(h.addr)}</b><span>${money(h.price)} · ${escapeHtml(HOODS[h.hood].name)} · listed ${h.listedDays} days ago</span></div>
         <div class="listing-actions">
           <button type="button" data-flag-open="${h.id}" aria-pressed="${String(state.openHouse.has(h.id))}">${state.openHouse.has(h.id) ? `Open house ${OPEN_HOUSE}` : 'Add open house'}</button>
           <button type="button" data-flag-offer="${h.id}" aria-pressed="${String(state.underOffer.has(h.id))}">${state.underOffer.has(h.id) ? 'Under offer' : 'Mark under offer'}</button>
@@ -690,7 +764,7 @@ const renderDesk = () => {
       .sort((a, b) => b.saves - a.saves)
       .map(
         (h) => `<li>
-          <span class="thumb" style="--photo:${h.photo}"></span>
+          ${homeThumb(h)}
           <div class="hot-main"><b>${escapeHtml(h.addr)}</b><span>${money(h.price)} · ${escapeHtml(HOODS[h.hood].name)}</span></div>
           <div class="hot-nums"><b>${h.saves}</b><span>${h.views}</span><span>${h.viewings}</span></div>
         </li>`
@@ -727,6 +801,7 @@ const toggleDesk = () => {
 /* ---------- wiring ---------- */
 
 function init() {
+  renderCatalogue();
   // Per-sheet extras (mortgage calculator, similar homes)
   IDS.forEach((id) => {
     const host = $(`[data-extras="${id}"]`);
@@ -744,6 +819,15 @@ function init() {
     if (!(t instanceof Element)) return;
     const hit = (sel) => t.closest(sel);
     let el;
+
+    if ((el = hit('[data-home-open]'))) {
+      openHome(Number(el.dataset.homeOpen));
+      return;
+    }
+    if ((el = hit('[data-home-close]'))) {
+      el.closest('.detail')?.classList.remove('is-open');
+      return;
+    }
 
     // Type chips (mockups.js already toggled is-hidden by type; re-apply the
     // combined filters so price / beds / baths and the count stay in sync).
@@ -769,7 +853,7 @@ function init() {
     if ((el = hit('[data-view]'))) {
       // Rendered after mockups.js wired data-open, so open the sheet here.
       closeOverlay('#saved');
-      $(`#detail-${el.dataset.view}`)?.classList.add('is-open');
+      openHome(Number(el.dataset.view));
       return;
     }
     if (hit('[data-compare-open]')) {
@@ -796,9 +880,7 @@ function init() {
       return;
     }
     if ((el = hit('[data-switch]'))) {
-      $('.detail.is-open')?.classList.remove('is-open');
-      $(el.dataset.switch)?.classList.add('is-open');
-      $(`${el.dataset.switch} .sheet`)?.scrollTo?.(0, 0);
+      openHome(Number(el.dataset.switch.replace('#detail-', '')));
       return;
     }
 
@@ -1006,6 +1088,11 @@ function init() {
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       if (closeTopmost()) event.preventDefault();
+      return;
+    }
+    if ((event.key === 'Enter' || event.key === ' ') && event.target instanceof Element && event.target.matches('.pin[data-home-open]')) {
+      event.preventDefault();
+      if (!event.target.classList.contains('is-dim')) openHome(Number(event.target.dataset.homeOpen));
       return;
     }
     if ((event.key === 'Enter' || event.key === ' ') && event.target instanceof Element && event.target.matches('.area[data-hood-open]')) {

@@ -1,0 +1,620 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fredoka:wght@600;700&display=swap");
+body:has(.totem-page) {
+  background: #dfd6ef;
+}
+.totem-page {
+  --totem-ink: #38244b;
+  --totem-paper: #dfd6ef;
+  --totem-acid: #d0ff71;
+  color: var(--totem-ink);
+  background: var(--totem-paper);
+  padding-bottom: 94px;
+  overflow: clip;
+}
+.totem-page a {
+  text-decoration: none;
+}
+.totem-page button {
+  color: inherit;
+}
+.totem-page a,
+.totem-page button {
+  touch-action: manipulation;
+}
+.totem-header {
+  height: 100px;
+  padding: 0 4.2%;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  border-bottom: 1px solid #38244b2b;
+}
+.totem-brand {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  gap: 8px;
+  min-height: 44px;
+}
+.totem-brand-mark {
+  font-size: 40px;
+  line-height: 1;
+}
+.totem-registered {
+  font-size: 12px;
+  align-self: flex-start;
+  margin-top: 7px;
+  margin-left: -5px;
+}
+.totem-header-note {
+  font-size: 11px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+.totem-header nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 700;
+}
+.totem-header nav a {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 44px;
+}
+.totem-header .totem-nav-pill {
+  border: 1px solid var(--totem-ink);
+  border-radius: 40px;
+  padding: 0 22px;
+}
+.totem-nav-pill:hover {
+  background: var(--totem-ink);
+  color: var(--totem-paper);
+}
+.totem-hero {
+  position: relative;
+  height: 790px;
+  max-width: 1800px;
+  margin: auto;
+  isolation: isolate;
+}
+.totem-hero-topline {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 4.2% 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.totem-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 12px;
+  margin: 0;
+  text-align: center;
+  font-family: "Fredoka", sans-serif;
+  font-size: clamp(170px, 25.8vw, 415px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.055em;
+  pointer-events: none;
+}
+.totem-title > span {
+  display: inline-flex;
+}
+.totem-title > span > span {
+  display: inline-block;
+}
+.totem-art {
+  position: absolute;
+  z-index: 1;
+  top: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(800px, 73vw);
+  height: 650px;
+}
+.totem-side-left {
+  position: absolute;
+  z-index: 2;
+  left: 5.2%;
+  top: 365px;
+}
+.totem-mini-label {
+  display: block;
+  font-size: 10px;
+  line-height: 1.45;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.totem-side-left p {
+  font-size: clamp(25px, 2.45vw, 36px);
+  line-height: 1.08;
+  letter-spacing: -1.2px;
+  font-weight: 600;
+  margin: 20px 0 24px;
+}
+.totem-side-left em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+.totem-coordinate {
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+}
+.totem-side-right {
+  position: absolute;
+  z-index: 2;
+  right: 5.2%;
+  top: 365px;
+  text-align: center;
+}
+.totem-orbit-stamp {
+  width: 128px;
+  height: 128px;
+  border: 1px solid var(--totem-ink);
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  transform: rotate(12deg);
+}
+.totem-orbit-stamp > span:first-child {
+  font-size: 33px;
+  line-height: 0.9;
+}
+.totem-orbit-stamp > span:last-child {
+  font-size: 8px;
+  line-height: 1.15;
+  letter-spacing: 0.6px;
+  font-weight: 700;
+}
+.totem-wave {
+  background: var(--totem-acid);
+  border: 1px solid var(--totem-ink);
+  border-radius: 40px;
+  min-height: 48px;
+  padding: 0 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.totem-wave > span {
+  font-size: 21px;
+}
+.totem-side-right > p {
+  font-size: 10px;
+  margin-top: 10px;
+}
+.totem-picker {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  text-align: center;
+  scroll-margin-top: 28px;
+}
+.totem-picker > .totem-mini-label {
+  margin-bottom: 16px;
+}
+.totem-colorways {
+  display: flex;
+  gap: 3px;
+  background: #efe8f866;
+  border: 1px solid #38244b35;
+  border-radius: 50px;
+  padding: 5px;
+}
+.totem-colorway {
+  border: 0;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 13px;
+  gap: 8px;
+  background: transparent;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.totem-color-dot {
+  width: 19px;
+  height: 19px;
+  border: 1px solid #38244b55;
+  border-radius: 50%;
+}
+.totem-color-selected {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #f9f5ff;
+  box-shadow: 0 2px 4px #38244b12;
+  z-index: -1;
+}
+.totem-edition-number {
+  position: absolute;
+  bottom: 41px;
+  left: 5.2%;
+}
+.totem-edition-number > span {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.totem-edition-number strong {
+  font-size: 30px;
+  letter-spacing: -1px;
+  font-weight: 500;
+}
+.totem-edition-number strong span {
+  font-size: 12px;
+  margin-left: 7px;
+  letter-spacing: 0;
+}
+.totem-story {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 80px;
+  padding: 90px 8%;
+  background: var(--totem-acid);
+  border-top: 1px solid var(--totem-ink);
+  border-bottom: 1px solid var(--totem-ink);
+  scroll-margin-top: 30px;
+}
+.totem-story h2 {
+  font-family: "Fredoka", sans-serif;
+  font-size: clamp(52px, 6.5vw, 100px);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+  margin: 24px 0;
+  font-weight: 600;
+}
+.totem-story h2 span {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.totem-story-intro > p {
+  max-width: 320px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.totem-passport {
+  width: 100%;
+  max-width: 430px;
+  margin-left: auto;
+  padding: 26px;
+  border: 1px solid var(--totem-ink);
+  border-radius: 8px;
+  background: #e1d7f2;
+  transform: rotate(3deg);
+  box-shadow: 5px 6px 0 #38244b;
+}
+.totem-passport-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dashed #38244b70;
+  padding-bottom: 17px;
+  margin-bottom: 25px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.totem-passport-top span:last-child {
+  font-size: 30px;
+  line-height: 1;
+}
+.totem-passport-code {
+  font-size: 11px;
+}
+.totem-passport h3 {
+  font-size: clamp(28px, 3vw, 43px);
+  letter-spacing: -2px;
+  margin: 7px 0 12px;
+  line-height: 1;
+}
+.totem-passport p {
+  font-size: 12px;
+  line-height: 1.7;
+  min-height: 42px;
+}
+.totem-passport dl {
+  margin: 30px 0 20px;
+}
+.totem-passport dl > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 10px 0;
+  border-top: 1px solid #38244b30;
+}
+.totem-passport dt {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+.totem-passport dd {
+  font-size: 11px;
+  margin: 0;
+}
+.totem-passport-foot {
+  font-size: 7px;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+}
+.totem-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 30px 5%;
+}
+.totem-footer > span {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.totem-footer > a:last-child {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.totem-art .motion-scene-fallback span {
+  width: 180px;
+  height: 135px;
+  border-radius: 45px;
+  background: #eee6fc;
+  border: 14px solid #eee6fc;
+  box-shadow: 0 10px 0 4px #a995df;
+  transform: none;
+  opacity: 1;
+  position: relative;
+}
+.totem-art .motion-scene-fallback span::before {
+  content: "• •";
+  position: absolute;
+  inset: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  background: #20132e;
+  color: #d0ff71;
+  font: bold 54px/1 sans-serif;
+  letter-spacing: 8px;
+}
+@media (min-width: 1600px) {
+  .totem-art {
+    top: 85px;
+  }
+  .totem-hero {
+    height: 840px;
+  }
+}
+@media (max-width: 1000px) {
+  .totem-header {
+    gap: 28px;
+  }
+  .totem-header nav {
+    gap: 20px;
+  }
+  .totem-hero {
+    height: 750px;
+  }
+  .totem-title {
+    top: 40px;
+  }
+  .totem-art {
+    top: 63px;
+    width: 79vw;
+    height: 600px;
+  }
+  .totem-side-left,
+  .totem-side-right {
+    top: 375px;
+  }
+  .totem-side-left {
+    left: 4%;
+  }
+  .totem-side-left p {
+    font-size: 27px;
+  }
+  .totem-side-right {
+    right: 3%;
+  }
+  .totem-orbit-stamp {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 16px;
+  }
+  .totem-wave {
+    padding: 0 14px;
+    font-size: 10px;
+  }
+  .totem-story {
+    gap: 45px;
+    padding: 70px 6%;
+  }
+  .totem-passport {
+    padding: 22px;
+  }
+  .totem-passport dl > div {
+    gap: 10px;
+  }
+}
+@media (max-width: 650px) {
+  .totem-header {
+    height: 77px;
+    padding: 0 20px;
+    gap: 10px;
+  }
+  .totem-header-note,
+  .totem-header nav a:first-child {
+    display: none;
+  }
+  .totem-header .totem-nav-pill {
+    padding: 0 14px;
+    font-size: 10px;
+    gap: 18px;
+  }
+  .totem-brand {
+    font-size: 21px;
+  }
+  .totem-brand-mark {
+    font-size: 31px;
+  }
+  .totem-hero {
+    height: 865px;
+  }
+  .totem-hero-topline {
+    padding: 22px 20px 0;
+    font-size: 7px;
+    letter-spacing: 0.5px;
+  }
+  .totem-title {
+    top: 51px;
+    font-size: 26.3vw;
+  }
+  .totem-art {
+    top: 86px;
+    width: 100%;
+    height: 460px;
+  }
+  .totem-side-left {
+    top: 540px;
+    left: 23px;
+  }
+  .totem-side-left .totem-mini-label {
+    font-size: 8px;
+  }
+  .totem-side-left p {
+    font-size: 31px;
+    margin: 13px 0 16px;
+  }
+  .totem-coordinate {
+    font-size: 7px;
+  }
+  .totem-side-right {
+    top: 544px;
+    right: 23px;
+    max-width: 160px;
+  }
+  .totem-orbit-stamp {
+    width: 88px;
+    height: 88px;
+    margin-bottom: 15px;
+  }
+  .totem-orbit-stamp > span:first-child {
+    font-size: 25px;
+  }
+  .totem-orbit-stamp > span:last-child {
+    font-size: 6px;
+  }
+  .totem-wave {
+    max-width: 154px;
+    padding: 0 12px;
+    min-height: 44px;
+    gap: 5px;
+    font-size: 10px;
+  }
+  .totem-side-right > p {
+    font-size: 8px;
+  }
+  .totem-edition-number {
+    left: 23px;
+    top: 453px;
+    bottom: auto;
+    z-index: 2;
+  }
+  .totem-edition-number > span {
+    font-size: 7px;
+  }
+  .totem-edition-number strong {
+    font-size: 23px;
+  }
+  .totem-edition-number strong span {
+    font-size: 9px;
+  }
+  .totem-picker {
+    bottom: 29px;
+    width: calc(100% - 36px);
+  }
+  .totem-picker > .totem-mini-label {
+    font-size: 8px;
+    margin-bottom: 12px;
+  }
+  .totem-colorways {
+    justify-content: space-between;
+  }
+  .totem-colorway {
+    flex: 1;
+    padding: 0 8px;
+    gap: 5px;
+    font-size: 9px;
+  }
+  .totem-color-dot {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+  }
+  .totem-story {
+    grid-template-columns: 1fr;
+    padding: 55px 25px 65px;
+    gap: 37px;
+  }
+  .totem-story h2 {
+    font-size: 63px;
+  }
+  .totem-story-intro > p {
+    font-size: 13px;
+  }
+  .totem-passport {
+    width: calc(100% - 10px);
+    margin: auto;
+    padding: 23px;
+    transform: rotate(2deg);
+  }
+  .totem-passport h3 {
+    font-size: 37px;
+  }
+  .totem-footer {
+    flex-wrap: wrap;
+    padding: 25px;
+    gap: 10px;
+  }
+  .totem-footer > span {
+    width: calc(100% - 120px);
+    text-align: right;
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+  .totem-footer > a:last-child {
+    width: 100%;
+    font-size: 11px;
+  }
+}

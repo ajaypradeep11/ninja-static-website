@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#eee8d9" />
+    <meta
+      name="description"
+      content="OFF/PRINT: an independent journal for culture, curious minds, and ideas worth getting your hands dirty for."
+    />
+    <title>Halftone — LocalNinja Design Lab</title>
+    <link rel="stylesheet" href="/src/work/designs/base.css" />
+    <link rel="stylesheet" href="/src/work/designs/halftone.css" />
+  </head>
+  <body data-design="halftone" id="top">
+    <div class="paper">
+      <header class="print-header">
+        <a href="#top" class="small-wordmark" aria-label="OFF/PRINT home"
+          >O/P<span>®</span></a
+        >
+        <p>INDEPENDENT MINDS.<br />INK-STAINED HANDS.</p>
+        <nav aria-label="Magazine navigation">
+          <a href="#stories">The stories <span>↗</span></a
+          ><a href="#colophon">The journal <span>↗</span></a>
+        </nav>
+      </header>
+      <main>
+        <div class="masthead" aria-label="OFF/PRINT">
+          OFF<span>/</span>PRINT<span class="masthead-mark">®</span>
+        </div>
+        <div class="edition-line">
+          <span>A JOURNAL OF PEOPLE, PROCESS & POSSIBILITY</span
+          ><span>EST. 2024 · PRINTED WITH FEELING</span>
+        </div>
+        <section class="cover" aria-labelledby="cover-title">
+          <div class="cover-copy">
+            <div class="issue-tag">
+              <span class="live-dot"></span
+              ><span data-issue-label>ISSUE 003 — THE HUMAN TOUCH</span>
+            </div>
+            <h1 id="cover-title">Good stories.<br /><em>Rough edges.</em></h1>
+            <p class="cover-intro" data-cover-intro>
+              In a world that moves too fast, we make room for the things that
+              take a little longer.
+            </p>
+            <p class="cover-detail">
+              An independent journal about making things, making a mess, and
+              making it mean something.
+            </p>
+            <a class="ink-button" href="#stories"
+              >Get your hands on the stories
+              <span aria-hidden="true">↗</span></a
+            >
+            <div class="cover-bottom">
+              <span class="tiny-spark" aria-hidden="true">✳</span>
+              <p>NO ALGORITHMS.<br />JUST GOOD INSTINCTS.</p>
+              <span class="cover-page">001—064</span>
+            </div>
+          </div>
+          <figure class="cover-art">
+            <div class="art-frame">
+              <span class="art-corner">FIG. 003 / GROW YOUR OWN WAY</span>
+              <svg
+                class="flower-print"
+                viewBox="0 0 620 600"
+                role="img"
+                aria-labelledby="flower-title"
+              >
+                <title id="flower-title">
+                  A halftone ink illustration of a hand holding a wild flower in
+                  front of a red sun
+                </title>
+                <defs>
+                  <pattern
+                    id="fine-dots"
+                    width="6"
+                    height="6"
+                    patternUnits="userSpaceOnUse"
+                    patternTransform="rotate(15)"
+                  >
+                    <circle cx="3" cy="3" r="1.4" fill="#171713" />
+                  </pattern>
+                  <pattern
+                    id="mid-dots"
+                    width="6"
+                    height="6"
+                    patternUnits="userSpaceOnUse"
+                    patternTransform="rotate(15)"
+                  >
+                    <circle cx="3" cy="3" r="2.35" fill="#171713" />
+                  </pattern>
+                  <pattern
+                    id="heavy-dots"
+                    width="6"
+                    height="6"
+                    patternUnits="userSpaceOnUse"
+                    patternTransform="rotate(15)"
+                  >
+                    <circle cx="3" cy="3" r="2.85" fill="#171713" />
+                  </pattern>
+                  <pattern
+                    id="red-dots"
+                    width="5"
+                    height="5"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <circle cx="2.5" cy="2.5" r="1.5" fill="#e44729" />
+                  </pattern>
+                  <linearGradient id="dot-shade" x1="0" x2="1">
+                    <stop stop-color="white" />
+                    <stop offset=".75" stop-color="#777" />
+                    <stop offset="1" stop-color="black" />
+                  </linearGradient>
+                  <mask id="petal-shade">
+                    <rect width="620" height="600" fill="url(#dot-shade)" />
+                  </mask>
+                  <clipPath id="hand-clip">
+                    <path
+                      d="M247 608 265 498C250 476 226 446 222 426C218 407 219 394 233 392C246 390 253 411 267 425L294 451 312 384C315 373 326 368 334 374L356 404 381 393C398 386 411 401 402 416L386 447 411 443C428 439 439 455 429 467L401 494C395 523 376 553 353 566L349 608Z"
+                    />
+                  </clipPath>
+                </defs>
+                <circle cx="338" cy="245" r="202" fill="#e44729" />
+                <circle
+                  cx="338"
+                  cy="245"
+                  r="176"
+                  fill="none"
+                  stroke="#eee8d9"
+                  stroke-width="1"
+                />
+                <path
+                  d="M306 479C319 381 326 307 314 233"
+                  stroke="#171713"
+                  stroke-width="9"
+                  fill="none"
+                />
+                <path
+                  d="M323 366C257 370 220 329 217 291C264 286 309 316 323 366Z"
+                  fill="#eee8d9"
+                />
+                <path
+                  d="M323 366C257 370 220 329 217 291C264 286 309 316 323 366Z"
+                  fill="url(#heavy-dots)"
+                />
+                <path
+                  d="M325 327C327 278 367 266 411 271C395 316 363 338 325 327Z"
+                  fill="#eee8d9"
+                />
+                <path
+                  d="M325 327C327 278 367 266 411 271C395 316 363 338 325 327Z"
+                  fill="url(#mid-dots)"
+                />
+                <g transform="translate(311 205)">
+                  <g fill="#eee8d9" stroke="#171713" stroke-width="1.2">
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(-5)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(40)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(85)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(130)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(175)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(220)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(265)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(310)" />
+                  </g>
+                  <g fill="url(#fine-dots)">
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(-5)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(40)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(85)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(130)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(175)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(220)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(265)" />
+                    <ellipse cy="-73" rx="35" ry="85" transform="rotate(310)" />
+                  </g>
+                  <g fill="url(#heavy-dots)">
+                    <ellipse cy="-42" rx="20" ry="54" transform="rotate(-5)" />
+                    <ellipse cy="-42" rx="20" ry="54" transform="rotate(40)" />
+                    <ellipse cy="-42" rx="20" ry="54" transform="rotate(85)" />
+                    <ellipse cy="-42" rx="20" ry="54" transform="rotate(130)" />
+                    <ellipse cy="-42" rx="20" ry="54" transform="rotate(175)" />
+                    <ellipse cy="-42" rx="20" ry="54" transform="rotate(220)" />
+                    <ellipse cy="-42" rx="20" ry="54" transform="rotate(265)" />
+                    <ellipse cy="-42" rx="20" ry="54" transform="rotate(310)" />
+                  </g>
+                  <circle r="54" fill="#171713" />
+                  <circle r="47" fill="#eee8d9" />
+                  <circle r="47" fill="url(#heavy-dots)" />
+                </g>
+                <g clip-path="url(#hand-clip)">
+                  <rect
+                    x="205"
+                    y="365"
+                    width="240"
+                    height="250"
+                    fill="#eee8d9"
+                  />
+                  <rect
+                    x="205"
+                    y="365"
+                    width="240"
+                    height="250"
+                    fill="url(#mid-dots)"
+                  />
+                  <path
+                    d="M233 390 285 471 272 608H232ZM316 371 341 423 360 463 345 608H387L454 450 410 386 358 397Z"
+                    fill="url(#heavy-dots)"
+                  />
+                  <path
+                    d="M298 471C334 473 362 460 385 447M299 499C334 508 364 505 399 493M317 452C338 435 345 417 356 404"
+                    stroke="#171713"
+                    fill="none"
+                    stroke-width="3"
+                  />
+                </g>
+                <path
+                  d="M247 608 265 498C250 476 226 446 222 426C218 407 219 394 233 392C246 390 253 411 267 425L294 451 312 384C315 373 326 368 334 374L356 404 381 393C398 386 411 401 402 416L386 447 411 443C428 439 439 455 429 467L401 494C395 523 376 553 353 566L349 608"
+                  fill="none"
+                  stroke="#171713"
+                  stroke-width="2"
+                />
+                <path
+                  d="M50 92h22M61 81v22M541 469h22M552 458v22"
+                  stroke="#171713"
+                  stroke-width="1"
+                />
+                <text
+                  x="47"
+                  y="544"
+                  font-family="monospace"
+                  font-size="11"
+                  fill="#171713"
+                  transform="rotate(-90 47 544)"
+                >
+                  IMPERFECT BY NATURE. HUMAN BY DESIGN.
+                </text>
+              </svg>
+              <div class="print-stamp">
+                100%<br /><span>HUMAN<br />MADE</span>
+              </div>
+              <div class="art-note">
+                A little dirt.<br /><i>A little possibility.</i>
+              </div>
+            </div>
+            <figcaption>
+              <span>THE HUMAN TOUCH — COVER STUDY, NO. 003</span
+              ><span>INK ON PAPER. IDEAS IN MOTION. ↗</span>
+            </figcaption>
+          </figure>
+        </section>
+        <div class="editor-note">
+          <span class="note-label">A NOTE FROM THE EDITORS</span>
+          <p>
+            Some things are better <em>left unpolished.</em> This is a home for
+            those things.
+          </p>
+          <span class="editor-signature">O/P, with love.</span>
+        </div>
+        <section class="stories" id="stories" aria-labelledby="stories-title">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">FRESH OFF THE PRESS</span>
+              <h2 id="stories-title">The reading room<span>↘</span></h2>
+            </div>
+            <label class="issue-select"
+              >ON THE SHELF<select id="issue-select">
+                <option value="003">Issue 003 · Human touch</option>
+                <option value="002">Issue 002 · After hours</option>
+                <option value="001">Issue 001 · Starting out</option>
+              </select></label
+            >
+          </div>
+          <div class="story-tools">
+            <div
+              class="filters"
+              role="group"
+              aria-label="Filter stories by category"
+            >
+              <button
+                type="button"
+                class="active"
+                data-category="all"
+                aria-pressed="true"
+              >
+                All stories <span>06</span></button
+              ><button
+                type="button"
+                data-category="people"
+                aria-pressed="false"
+              >
+                People</button
+              ><button
+                type="button"
+                data-category="process"
+                aria-pressed="false"
+              >
+                Process</button
+              ><button
+                type="button"
+                data-category="perspectives"
+                aria-pressed="false"
+              >
+                Perspectives
+              </button>
+            </div>
+            <span class="story-count" aria-live="polite">06 STORIES</span>
+          </div>
+          <div class="story-grid" id="story-grid"></div>
+        </section>
+        <section
+          class="colophon"
+          id="colophon"
+          aria-labelledby="colophon-title"
+        >
+          <div class="colophon-mark" aria-hidden="true">O/P<span>↗</span></div>
+          <div>
+            <span class="eyebrow">A SMALL JOURNAL. A BIG POINT OF VIEW.</span>
+            <h2 id="colophon-title">Stay curious.<br />Leave a mark.</h2>
+            <p>
+              OFF/PRINT is an independent, fictional culture journal. This
+              digital edition celebrates the people who choose to make something
+              with their own two hands.
+            </p>
+          </div>
+          <div class="colophon-meta">
+            <span>MADE FOR SLOW READING</span
+            ><span>NO. 003 / DIGITAL EDITION</span
+            ><a href="#top">Back to the top ↑</a>
+          </div>
+        </section>
+      </main>
+      <footer class="print-footer">
+        <span>© OFF/PRINT JOURNAL · A LOCALNINJA DESIGN STUDY</span
+        ><span>ALL FEELING. NO FILLER.</span>
+      </footer>
+    </div>
+    <dialog class="story-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-top">
+        <span>OFF/PRINT · THE READING ROOM</span
+        ><button type="button" class="dialog-close" aria-label="Close article">
+          CLOSE ×
+        </button>
+      </div>
+      <article>
+        <span class="dialog-meta eyebrow"></span>
+        <h2 id="dialog-title"></h2>
+        <p class="dialog-deck"></p>
+        <div class="dialog-body"></div>
+        <span class="end-mark" aria-label="End of story">■</span>
+      </article>
+      <div class="dialog-bottom">
+        <span>THANK YOU FOR READING SLOWLY.</span
+        ><button type="button" class="dialog-close">
+          Back to the stories ↗
+        </button>
+      </div>
+    </dialog>
+    <script type="module" src="/src/work/designs/halftone.js"></script>
+    <script type="module" src="/src/work/designs/base.js"></script>
+  </body>
+</html>

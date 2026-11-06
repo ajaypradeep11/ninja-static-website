@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="theme-color" content="#ffffff" />
+    <script src="/theme.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Copper &amp; Coil - LocalNinja sample project</title>
     <meta name="robots" content="noindex" />
@@ -15,13 +17,7 @@
     <link rel="stylesheet" href="/src/work/trades.css" />
     <style>.ln-widget{--w-accent:#b4541f;--w-accent-ink:#fff8f2;--w-bg:#fffdf9;--w-ink:#16202b;--w-body:#f7f3ec;--w-bot:#fffdf9;--w-line:#e3d9cb;--w-chip:#fffdf9;--w-input:#fffdf9;--w-muted:#5d6b7a;}</style>
   </head>
-  <body>
-    <header class="ln-bar">
-      <a class="ln-bar-brand" href="/#work"><img src="/logo-animated.svg" alt="" width="32" height="32" /><span class="ln-bar-name">Local<span class="ninja">Ninja</span></span></a>
-      <p class="ln-bar-title">Sample project · <strong>Copper &amp; Coil</strong> booking &amp; dispatch <span class="ln-tag">Field service</span></p>
-      <a class="ln-bar-back" href="/#work">← Back to site</a>
-    </header>
-
+  <body data-project-standalone>
     <main class="cc">
       <div class="cc-nav">
         <span class="cc-logo">
@@ -61,6 +57,7 @@
           </ul>
         </div>
         <div class="cc-art" aria-hidden="true">
+          <img class="cc-service-photo" src="/work/trades/furnace-technician.webp" srcset="/work/trades/furnace-technician-640.webp 640w, /work/trades/furnace-technician.webp 1200w" sizes="(max-width: 920px) calc(100vw - 2rem), 42vw" width="1200" height="800" alt="" fetchpriority="high" decoding="async" />
           <div class="acard one"><span class="pill">Booked</span><b>CC-4477 · No heat</b><span>214 Fifth Ave · Today 2–4 pm</span></div>
           <div class="acard two"><span class="ava">MD</span><b>Marcus Delaine</b><span>Gas &amp; heating · 12 min away</span></div>
           <div class="acard three"><b>$429 flat rate</b><span>Approved before we touch a tool</span></div>

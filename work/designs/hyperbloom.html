@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#fff5b7" />
+    <title>Hyperbloom — LocalNinja Design Lab</title>
+    <link rel="stylesheet" href="/src/work/designs/base.css" />
+    <link rel="stylesheet" href="/src/work/designs/hyperbloom.css" />
+  </head>
+  <body data-design="hyperbloom">
+    <header class="bloom-header">
+      <a class="wordmark" href="#home" aria-label="Superbloom home"
+        >superbloom<span aria-hidden="true">✳</span></a
+      >
+      <span class="header-note">FLORAL OBJECTS.<br />UNCOMMON FEELINGS.</span>
+      <nav aria-label="Main navigation">
+        <a href="#flowers">The flowers</a
+        ><a href="#studio">Our world <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <main id="home">
+      <section class="bloom-hero" aria-labelledby="bloom-title">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="tiny-flower" aria-hidden="true">✳</span> GOOD THINGS
+            GROW A LITTLE DIFFERENT.
+          </p>
+          <h1 id="bloom-title">A little<br /><em>wildly</em><br />alive.</h1>
+          <div class="hero-bottom">
+            <p>
+              For the big feelings.<br />The just becauses. The beautifully<br />over-the-top
+              everyday.
+            </p>
+            <a
+              class="round-link"
+              href="#flowers"
+              aria-label="Explore our floral collection"
+              ><span aria-hidden="true">↘</span></a
+            >
+          </div>
+        </div>
+        <div class="botanical" data-season="spring">
+          <div class="art-orbit" aria-hidden="true"></div>
+          <svg
+            class="bloom-sculpture"
+            viewBox="0 0 620 670"
+            role="img"
+            aria-labelledby="sculpture-title sculpture-desc"
+          >
+            <title id="sculpture-title">An impossible garden in bloom</title>
+            <desc id="sculpture-desc">
+              Sculptural pink, blue and orange flowers with folded petals, lime
+              green leaves and a striped cobalt vase.
+            </desc>
+            <defs>
+              <radialGradient id="pink-petal" cx="30%" cy="22%" r="83%">
+                <stop stop-color="var(--petal-light, #ffd1ee)" />
+                <stop offset=".44" stop-color="var(--petal-mid, #ff69b6)" />
+                <stop offset="1" stop-color="var(--petal-dark, #e21d78)" />
+              </radialGradient>
+              <radialGradient id="blue-petal" cx="28%" cy="20%" r="85%">
+                <stop stop-color="#aaafff" />
+                <stop offset=".45" stop-color="#5654ff" />
+                <stop offset="1" stop-color="#2721bc" />
+              </radialGradient>
+              <radialGradient id="orange-petal" cx="25%" cy="25%" r="80%">
+                <stop stop-color="#fff28d" />
+                <stop offset=".5" stop-color="#ffa137" />
+                <stop offset="1" stop-color="#ef560c" />
+              </radialGradient>
+              <radialGradient id="flower-heart" cx="35%" cy="30%">
+                <stop stop-color="#ecfa5b" />
+                <stop offset=".65" stop-color="#c0d91f" />
+                <stop offset="1" stop-color="#79840b" />
+              </radialGradient>
+              <linearGradient id="leaf-green" x2="1" y2="1">
+                <stop stop-color="#e7f477" />
+                <stop offset=".45" stop-color="#b6d629" />
+                <stop offset="1" stop-color="#5d8c17" />
+              </linearGradient>
+              <linearGradient id="vase-blue">
+                <stop stop-color="#3532b8" />
+                <stop offset=".4" stop-color="#605dff" />
+                <stop offset=".7" stop-color="#2d2bd4" />
+                <stop offset="1" stop-color="#1a158f" />
+              </linearGradient>
+              <pattern
+                id="vase-stripes"
+                width="22"
+                height="22"
+                patternUnits="userSpaceOnUse"
+              >
+                <rect width="11" height="22" fill="#e0dbff" />
+              </pattern>
+              <symbol id="bloom-pink" viewBox="-125 -125 250 250">
+                <g fill="url(#pink-petal)">
+                  <ellipse cy="-58" rx="31" ry="64" />
+                  <ellipse cy="-58" rx="31" ry="64" transform="rotate(30)" />
+                  <ellipse cy="-58" rx="31" ry="64" transform="rotate(60)" />
+                  <ellipse cy="-58" rx="31" ry="64" transform="rotate(90)" />
+                  <ellipse cy="-58" rx="31" ry="64" transform="rotate(120)" />
+                  <ellipse cy="-58" rx="31" ry="64" transform="rotate(150)" />
+                  <ellipse cy="-58" rx="31" ry="64" transform="rotate(180)" />
+                  <ellipse cy="-58" rx="31" ry="64" transform="rotate(210)" />
+                  <ellipse cy="-58" rx="31" ry="64" transform="rotate(240)" />
+                  <ellipse cy="-58" rx="31" ry="64" transform="rotate(270)" />
+                  <ellipse cy="-58" rx="31" ry="64" transform="rotate(300)" />
+                  <ellipse cy="-58" rx="31" ry="64" transform="rotate(330)" />
+                </g>
+                <circle r="34" fill="url(#flower-heart)" />
+                <g fill="#677400" opacity=".5">
+                  <circle cx="-10" cy="-14" r="3" />
+                  <circle cx="9" cy="-15" r="3" />
+                  <circle cx="18" cy="2" r="3" />
+                  <circle cx="-14" cy="6" r="3" />
+                  <circle cy="2" r="3" />
+                  <circle cx="4" cy="18" r="3" />
+                </g>
+              </symbol>
+              <symbol id="bloom-blue" viewBox="-125 -125 250 250">
+                <g fill="url(#blue-petal)">
+                  <ellipse cy="-58" rx="40" ry="65" />
+                  <ellipse cy="-58" rx="40" ry="65" transform="rotate(45)" />
+                  <ellipse cy="-58" rx="40" ry="65" transform="rotate(90)" />
+                  <ellipse cy="-58" rx="40" ry="65" transform="rotate(135)" />
+                  <ellipse cy="-58" rx="40" ry="65" transform="rotate(180)" />
+                  <ellipse cy="-58" rx="40" ry="65" transform="rotate(225)" />
+                  <ellipse cy="-58" rx="40" ry="65" transform="rotate(270)" />
+                  <ellipse cy="-58" rx="40" ry="65" transform="rotate(315)" />
+                </g>
+                <circle r="35" fill="url(#orange-petal)" />
+                <circle
+                  r="24"
+                  fill="none"
+                  stroke="#c94e08"
+                  stroke-width="2"
+                  stroke-dasharray="2 5"
+                />
+              </symbol>
+              <symbol id="bloom-orange" viewBox="-125 -125 250 250">
+                <g fill="url(#orange-petal)">
+                  <ellipse cy="-54" rx="43" ry="67" />
+                  <ellipse cy="-54" rx="43" ry="67" transform="rotate(60)" />
+                  <ellipse cy="-54" rx="43" ry="67" transform="rotate(120)" />
+                  <ellipse cy="-54" rx="43" ry="67" transform="rotate(180)" />
+                  <ellipse cy="-54" rx="43" ry="67" transform="rotate(240)" />
+                  <ellipse cy="-54" rx="43" ry="67" transform="rotate(300)" />
+                </g>
+                <circle r="33" fill="#702dce" />
+                <circle
+                  r="23"
+                  fill="none"
+                  stroke="#c693ff"
+                  stroke-width="3"
+                  stroke-dasharray="2 5"
+                />
+              </symbol>
+            </defs>
+            <ellipse
+              cx="325"
+              cy="628"
+              rx="156"
+              ry="16"
+              fill="#b7a965"
+              opacity=".19"
+            />
+            <g
+              class="flower-stems"
+              fill="none"
+              stroke="#669424"
+              stroke-width="13"
+              stroke-linecap="round"
+            >
+              <path d="M318 548C290 420 293 285 287 159" />
+              <path d="M328 549C375 432 402 319 458 282" />
+              <path d="M311 551C270 478 218 387 133 378" />
+            </g>
+            <g fill="url(#leaf-green)">
+              <path
+                d="M303 407C213 417 174 352 193 287C259 294 302 323 303 407Z"
+              />
+              <path
+                d="M332 484C345 395 412 380 475 391C454 461 411 484 332 484Z"
+              />
+              <path
+                d="M292 326C296 263 337 229 387 226C391 285 353 321 292 326Z"
+              />
+            </g>
+            <g fill="none" stroke="#628328" stroke-width="2" opacity=".55">
+              <path d="M300 401L209 309M338 478L455 405M296 319L376 241" />
+            </g>
+            <g class="pink-flower">
+              <use href="#bloom-pink" x="135" y="2" width="325" height="325" />
+            </g>
+            <g class="blue-flower">
+              <use
+                href="#bloom-blue"
+                x="343"
+                y="170"
+                width="241"
+                height="241"
+              />
+            </g>
+            <g class="orange-flower">
+              <use
+                href="#bloom-orange"
+                x="25"
+                y="263"
+                width="230"
+                height="230"
+              />
+            </g>
+            <path
+              d="M260 510Q318 491 377 510L364 611Q316 641 273 611Z"
+              fill="url(#vase-blue)"
+            />
+            <path
+              d="M260 510Q318 491 377 510L364 611Q316 641 273 611Z"
+              fill="url(#vase-stripes)"
+              opacity=".75"
+            />
+            <ellipse cx="318" cy="509" rx="59" ry="13" fill="#2623ad" />
+            <ellipse cx="318" cy="508" rx="45" ry="6" fill="#151262" />
+            <path
+              d="M310 505L307 482M323 506L332 479"
+              stroke="#7c9b24"
+              stroke-width="10"
+            />
+          </svg>
+          <span class="art-label">NOT YOUR<br />GARDEN VARIETY.</span>
+          <span class="art-star" aria-hidden="true">✷</span>
+          <div class="season-picker">
+            <span class="season-label">PICK YOUR MOOD</span>
+            <div role="group" aria-label="Flower palette">
+              <button
+                class="season-swatch spring"
+                data-palette="spring"
+                aria-pressed="true"
+                aria-label="Spring crush palette"
+              ></button
+              ><button
+                class="season-swatch summer"
+                data-palette="summer"
+                aria-pressed="false"
+                aria-label="Summer fever palette"
+              ></button
+              ><button
+                class="season-swatch twilight"
+                data-palette="twilight"
+                aria-pressed="false"
+                aria-label="Twilight bloom palette"
+              ></button>
+            </div>
+            <span id="season-caption" aria-live="polite"
+              >01 / Spring crush</span
+            >
+          </div>
+        </div>
+      </section>
+      <div class="flower-ribbon" aria-hidden="true">
+        <span>GROW YOUR OWN WAY</span><span>✳</span><span>MORE IS MORE</span
+        ><span>✳</span><span>GROW YOUR OWN WAY</span><span>✳</span
+        ><span>MORE IS MORE</span>
+      </div>
+      <section
+        class="collection"
+        id="flowers"
+        aria-labelledby="collection-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THE EVER-CHANGING COLLECTION</p>
+            <h2 id="collection-title">Full of <em>feeling.</em></h2>
+          </div>
+          <p>A few of our wildest ideas.<br />All grown from a good place.</p>
+        </div>
+        <div class="arrangement-grid">
+          <article class="arrangement">
+            <div class="arrangement-art pink-card">
+              <span class="art-index">NO. 01</span
+              ><svg
+                viewBox="0 0 340 340"
+                role="img"
+                aria-label="Pink layered bloom in a green sculptural vase"
+              >
+                <path d="M173 239L173 123" stroke="#5e8428" stroke-width="9" />
+                <path
+                  d="M171 210C126 216 104 188 110 162C150 160 172 181 171 210Z"
+                  fill="#aed143"
+                />
+                <path
+                  d="M132 236Q172 220 212 236L225 303Q170 321 118 303Z"
+                  fill="#789938"
+                />
+                <path
+                  d="M141 238L135 302M158 235L155 307M180 234L183 308M201 239L210 304"
+                  stroke="#d5eb82"
+                  stroke-width="9"
+                />
+                <use
+                  href="#bloom-pink"
+                  x="67"
+                  y="23"
+                  width="210"
+                  height="210"
+                /></svg
+              ><span class="card-tag">THE DAY-MAKER</span>
+            </div>
+            <div class="card-caption">
+              <h3>Blush rush</h3>
+              <span>Sweet, with a wild side.</span>
+            </div>
+          </article>
+          <article class="arrangement">
+            <div class="arrangement-art lime-card">
+              <span class="art-index">NO. 02</span
+              ><svg
+                viewBox="0 0 340 340"
+                role="img"
+                aria-label="Cobalt flower with orange center and sculptural pink vessel"
+              >
+                <path
+                  d="M170 257Q188 165 162 120"
+                  stroke="#5e8428"
+                  stroke-width="9"
+                />
+                <path
+                  d="M181 206C205 172 234 175 253 194C234 217 205 224 181 206Z"
+                  fill="#769c24"
+                />
+                <path
+                  d="M128 229Q171 211 213 229L213 309H128Z"
+                  fill="#ef7caf"
+                />
+                <path
+                  d="M133 236H208M133 253H208M133 270H208M133 287H208M133 303H208"
+                  stroke="#ffc2d8"
+                  stroke-width="8"
+                />
+                <use
+                  href="#bloom-blue"
+                  x="52"
+                  y="13"
+                  width="230"
+                  height="230"
+                /></svg
+              ><span class="card-tag">THE MAIN CHARACTER</span>
+            </div>
+            <div class="card-caption">
+              <h3>Blue beyond</h3>
+              <span>For beautifully big feelings.</span>
+            </div>
+          </article>
+          <article class="arrangement">
+            <div class="arrangement-art peach-card">
+              <span class="art-index">NO. 03</span
+              ><svg
+                viewBox="0 0 340 340"
+                role="img"
+                aria-label="Orange sculptural flower in a lavender vase"
+              >
+                <path
+                  d="M173 255Q159 182 170 128"
+                  stroke="#5e8428"
+                  stroke-width="9"
+                />
+                <path
+                  d="M166 205C120 202 115 179 126 151C151 163 170 178 166 205Z"
+                  fill="#93b93e"
+                />
+                <path
+                  d="M138 233L204 233L221 302Q172 325 121 302Z"
+                  fill="#8a76c8"
+                />
+                <path
+                  d="M143 239L132 301M160 238L156 309M179 238L181 309M197 239L209 301"
+                  stroke="#d1c4ef"
+                  stroke-width="8"
+                />
+                <use
+                  href="#bloom-orange"
+                  x="59"
+                  y="13"
+                  width="222"
+                  height="222"
+                /></svg
+              ><span class="card-tag">THE LITTLE SUNSHINE</span>
+            </div>
+            <div class="card-caption">
+              <h3>Orange crush</h3>
+              <span>A very good kind of extra.</span>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="studio" id="studio" aria-labelledby="studio-title">
+        <div class="studio-art" aria-hidden="true">
+          <span>LET<br />IT<br />GROW.</span
+          ><svg viewBox="0 0 300 300">
+            <use href="#bloom-pink" width="300" height="300" />
+          </svg>
+        </div>
+        <div class="studio-copy">
+          <p class="eyebrow">ROOTED IN A LITTLE REBELLION</p>
+          <h2 id="studio-title">
+            Nature never<br />did <em>ordinary.</em><br />Neither do we.
+          </h2>
+          <p>
+            We're an imaginary floral playground for real-world joy. A place for
+            unexpected colors, slightly unruly shapes, and the belief that a
+            flower can change your whole day.
+          </p>
+          <details>
+            <summary>
+              Inside the bloom room <span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Our workshop concept starts with one rule: follow your curiosity.
+              Gather seasonal stems, play with unlikely color pairs, and build a
+              composition that feels like you. This is a design study; workshop
+              booking is not available.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Our approach to flowers <span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Less perfect symmetry. More personality. We begin with a striking
+              stem, add generous negative space, and let every twist, bend, and
+              brilliant imperfection belong.
+            </p>
+          </details>
+        </div>
+      </section>
+    </main>
+    <footer class="bloom-footer">
+      <a class="wordmark" href="#home"
+        >superbloom<span aria-hidden="true">✳</span></a
+      >
+      <p>A fictional floral studio. An experiment in feeling good.</p>
+      <a href="#home">Back to the sunshine ↑</a>
+    </footer>
+    <script type="module" src="/src/work/designs/base.js"></script>
+    <script type="module" src="/src/work/designs/hyperbloom.js"></script>
+  </body>
+</html>

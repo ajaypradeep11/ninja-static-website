@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="0 0 1254 1254">
+  <rect width="1254" height="1254" fill="black"/>
+  <!-- Fixed openings inside the original inked eyelids; the left bang stays in front. -->
+  <g fill="white">
+    <path d="M453 664 C471 651 490 645 512 648 L523 658 L524 650 C544 656 565 669 574 685 L573 692 C548 695 518 695 496 696 C479 694 464 682 453 664Z"/>
+    <path d="M706 690 C718 667 737 651 757 647 C780 644 804 651 822 664 C808 683 795 694 778 695 L710 694Z"/>
+  </g>
+</svg>

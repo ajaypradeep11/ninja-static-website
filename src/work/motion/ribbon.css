@@ -1,0 +1,640 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+body:has(.ribbon-page) {
+  background: #101110;
+  color: #eeeeda;
+}
+.ribbon-page {
+  --rb-paper: #eeefdf;
+  --rb-muted: #a8aa9e;
+  --rb-line: #383a34;
+  background: #101110;
+  color: var(--rb-paper);
+  font-family: "DM Sans", sans-serif;
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+.ribbon-page * {
+  box-sizing: border-box;
+}
+.ribbon-page a {
+  color: inherit;
+  text-decoration: none;
+}
+.ribbon-page button {
+  font: inherit;
+  cursor: pointer;
+}
+.ribbon-page a:focus-visible,
+.ribbon-page button:focus-visible {
+  outline: 2px solid #e9f47b;
+  outline-offset: 6px;
+}
+.ribbon-header {
+  height: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 5%;
+  border-bottom: 1px solid var(--rb-line);
+}
+.ribbon-wordmark {
+  font-family: "Manrope", sans-serif;
+  font-size: 34px;
+  letter-spacing: -2px;
+  font-weight: 800;
+  line-height: 1;
+  display: inline-flex;
+  align-items: flex-start;
+}
+.ribbon-wordmark span {
+  font-size: 12px;
+  letter-spacing: 0;
+  margin: 3px 0 0 4px;
+}
+.ribbon-header-note {
+  font-size: 11px;
+  line-height: 1.5;
+  margin-left: auto;
+  margin-right: 15%;
+  color: var(--rb-muted);
+}
+.ribbon-studio-link {
+  font-size: 13px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+}
+.ribbon-studio-link span {
+  font-size: 22px;
+}
+.ribbon-hero {
+  overflow: hidden;
+  padding-top: 49px;
+}
+.ribbon-heading {
+  text-align: center;
+  padding: 0 20px;
+}
+.ribbon-heading > p:first-child {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  font-weight: 600;
+  margin: 0 0 23px;
+}
+.ribbon-heading h1 {
+  font:
+    500 clamp(54px, 7.9vw, 118px)/1.1 "Manrope",
+    sans-serif;
+  letter-spacing: -7px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0 0 11px;
+}
+.ribbon-heading h1 > span {
+  display: inline-block;
+  position: relative;
+}
+.ribbon-heading h1 em {
+  font-style: normal;
+  color: #e9f47b;
+}
+.ribbon-title-star {
+  display: inline-block;
+  font:
+    400 0.46em/1 "DM Sans",
+    sans-serif;
+  vertical-align: top;
+  margin: 3px 0 0 12px;
+  letter-spacing: 0;
+  color: #e9f47b;
+}
+.ribbon-heading-sub {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--rb-muted);
+  margin: 9px 0 0;
+}
+.ribbon-stage {
+  height: 405px;
+  position: relative;
+  margin-top: 5px;
+}
+.ribbon-stage .ribbon-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.ribbon-stage-tag {
+  position: absolute;
+  top: 20px;
+  left: 5%;
+  font-size: 8px;
+  letter-spacing: 1.4px;
+  color: var(--rb-muted);
+  z-index: 2;
+}
+.ribbon-stage-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    #101110 0,
+    transparent 7%,
+    transparent 93%,
+    #101110 100%
+  );
+}
+.ribbon-project-bar {
+  margin: 0 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  gap: 30px;
+  padding: 9px 0 23px;
+}
+.ribbon-eyebrow {
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  color: var(--rb-muted);
+  font-weight: 500;
+}
+.ribbon-project-info h2 {
+  font-size: 23px;
+  letter-spacing: -0.7px;
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 11px 0 5px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.ribbon-project-info h2 span {
+  font-size: 9px;
+  color: var(--rb-muted);
+  letter-spacing: 0.5px;
+}
+.ribbon-project-info p {
+  font-size: 11px;
+  color: var(--rb-muted);
+  margin: 0;
+}
+.ribbon-project-open {
+  justify-self: center;
+  border: 1px solid #606255;
+  border-radius: 100px;
+  min-height: 48px;
+  background: transparent;
+  color: var(--rb-paper);
+  padding: 0 23px;
+  font-size: 11px !important;
+  display: flex;
+  gap: 29px;
+  align-items: center;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.ribbon-project-open:hover {
+  background: var(--rb-paper);
+  color: #101110;
+}
+.ribbon-project-open span {
+  font-size: 21px;
+}
+.ribbon-controls {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 23px;
+}
+.ribbon-controls button {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #606255;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--rb-paper);
+  font-size: 22px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.ribbon-controls button:hover {
+  background: #e9f47b;
+  color: #101110;
+  border-color: #e9f47b;
+}
+.ribbon-controls > span {
+  font-size: 11px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.ribbon-controls i {
+  font-style: normal;
+  color: #6d7064;
+  margin: 0 9px;
+}
+.ribbon-progress {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin: 0 5%;
+  padding-bottom: 45px;
+}
+.ribbon-progress button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  background: none;
+  border: 0;
+  color: var(--rb-muted);
+  padding: 8px 0;
+  min-height: 44px;
+  text-align: left;
+}
+.ribbon-progress button > span:first-child {
+  height: 2px;
+  width: 100%;
+  background: #414339;
+  transition: background 0.25s;
+}
+.ribbon-progress button[aria-pressed="true"] > span:first-child {
+  background: var(--project-color);
+  height: 3px;
+}
+.ribbon-project-dot-label {
+  font-size: 8px;
+  letter-spacing: 0.7px;
+}
+.ribbon-progress button[aria-pressed="true"] {
+  color: var(--rb-paper);
+}
+.ribbon-detail {
+  margin: 0 5% 55px;
+  padding: 34px 0 0;
+  border-top: 1px solid var(--rb-line);
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 20px 40px;
+}
+.ribbon-detail > span {
+  font-size: 10px;
+  letter-spacing: 1.7px;
+  padding-top: 9px;
+}
+.ribbon-detail h3 {
+  font-size: clamp(25px, 3vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  font-weight: 500;
+  margin: 0;
+}
+.ribbon-detail p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #c2c5b5;
+  margin: 0;
+}
+.ribbon-detail > div {
+  grid-column: 2/4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.ribbon-detail > div span {
+  border: 1px solid var(--rb-line);
+  padding: 7px 11px;
+  font-size: 9px;
+  border-radius: 30px;
+  color: var(--rb-muted);
+}
+.ribbon-about {
+  background: #e9e8dc;
+  color: #181a15;
+  margin: 14px 0 0;
+  padding: 95px 7% 100px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 10%;
+  scroll-margin-top: 30px;
+}
+.ribbon-about .ribbon-eyebrow {
+  color: #56594d;
+}
+.ribbon-about h2 {
+  font:
+    500 clamp(40px, 5.3vw, 77px)/1.06 "Manrope",
+    sans-serif;
+  letter-spacing: -4px;
+  margin: 37px 0 0;
+}
+.ribbon-about h2 em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+.ribbon-about-copy > p {
+  font-size: 18px;
+  line-height: 1.55;
+  letter-spacing: -0.4px;
+  margin: 0 0 35px;
+  max-width: 420px;
+}
+.ribbon-services {
+  border-top: 1px solid #b9bbad;
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+}
+.ribbon-services span {
+  padding: 13px 0;
+  border-bottom: 1px solid #b9bbad;
+}
+.ribbon-about-copy > a {
+  margin-top: 30px;
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  font-size: 12px;
+  gap: 40px;
+}
+.ribbon-about-copy > a span {
+  font-size: 22px;
+}
+.ribbon-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 5%;
+  padding: 46px 0 5px;
+}
+.ribbon-footer .ribbon-wordmark {
+  font-size: 26px;
+}
+.ribbon-footer p {
+  font-size: 11px;
+}
+.ribbon-footer > span {
+  font-size: 9px;
+  color: var(--rb-muted);
+}
+@media (min-width: 1650px) {
+  .ribbon-stage {
+    height: 480px;
+  }
+  .ribbon-hero {
+    padding-top: 65px;
+  }
+}
+@media (max-width: 900px) {
+  .ribbon-header {
+    height: 98px;
+  }
+  .ribbon-header-note {
+    margin-right: 10%;
+  }
+  .ribbon-heading h1 {
+    letter-spacing: -4px;
+  }
+  .ribbon-heading > p:first-child {
+    margin-bottom: 19px;
+  }
+  .ribbon-hero {
+    padding-top: 38px;
+  }
+  .ribbon-stage {
+    height: 365px;
+    margin-top: 15px;
+  }
+  .ribbon-stage-tag {
+    top: 5px;
+  }
+  .ribbon-project-bar {
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+  }
+  .ribbon-project-open {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    min-height: 44px;
+  }
+  .ribbon-controls {
+    grid-column: 2;
+    grid-row: 1/3;
+    gap: 15px;
+  }
+  .ribbon-progress {
+    padding-top: 5px;
+    padding-bottom: 30px;
+  }
+  .ribbon-project-dot-label {
+    font-size: 7px;
+    letter-spacing: 0;
+  }
+  .ribbon-detail {
+    grid-template-columns: 1fr 1.7fr;
+    gap: 18px;
+  }
+  .ribbon-detail > span {
+    grid-column: 1/3;
+  }
+  .ribbon-detail > div {
+    grid-column: 1/3;
+  }
+  .ribbon-about {
+    gap: 7%;
+    padding: 65px 5%;
+  }
+  .ribbon-about h2 {
+    letter-spacing: -2.5px;
+  }
+  .ribbon-about-copy > p {
+    font-size: 15px;
+  }
+  .ribbon-footer {
+    gap: 25px;
+  }
+  .ribbon-footer p {
+    font-size: 10px;
+  }
+}
+@media (max-width: 520px) {
+  .ribbon-header {
+    height: 83px;
+    margin: 0 6%;
+  }
+  .ribbon-wordmark {
+    font-size: 29px;
+  }
+  .ribbon-header-note {
+    display: none;
+  }
+  .ribbon-studio-link {
+    font-size: 11px;
+    gap: 21px;
+  }
+  .ribbon-hero {
+    padding-top: 35px;
+  }
+  .ribbon-heading {
+    padding: 0 13px;
+  }
+  .ribbon-heading > p:first-child {
+    font-size: 8px;
+    letter-spacing: 2px;
+    margin-bottom: 19px;
+  }
+  .ribbon-heading h1 {
+    font-size: 47px;
+    letter-spacing: -3.3px;
+    line-height: 1.1;
+    padding-bottom: 8px;
+  }
+  .ribbon-title-star {
+    font-size: 0.45em;
+    margin: 2px 0 0 5px;
+  }
+  .ribbon-heading-sub {
+    font-size: 11px;
+    max-width: 250px;
+    margin: 12px auto 0;
+    line-height: 1.5;
+  }
+  .ribbon-stage {
+    height: 343px;
+    margin-top: 11px;
+  }
+  .ribbon-stage-tag {
+    left: 6%;
+    top: 18px;
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+  .ribbon-stage-shade {
+    background: linear-gradient(
+      90deg,
+      #101110 0,
+      transparent 3%,
+      transparent 97%,
+      #101110 100%
+    );
+  }
+  .ribbon-project-bar {
+    margin: 0 6%;
+    gap: 17px;
+    padding: 5px 0 21px;
+  }
+  .ribbon-project-info h2 {
+    font-size: 21px;
+    margin-top: 9px;
+    gap: 10px;
+  }
+  .ribbon-project-info p {
+    font-size: 10px;
+  }
+  .ribbon-eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.3px;
+  }
+  .ribbon-project-open {
+    padding: 0 15px;
+    gap: 15px;
+    font-size: 10px !important;
+  }
+  .ribbon-controls {
+    gap: 10px;
+  }
+  .ribbon-controls button {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+  .ribbon-controls > span {
+    font-size: 10px;
+  }
+  .ribbon-controls i {
+    margin: 0 4px;
+  }
+  .ribbon-progress {
+    margin: 0 6%;
+    gap: 5px;
+    padding-bottom: 25px;
+  }
+  .ribbon-project-dot-label {
+    display: none;
+  }
+  .ribbon-progress button {
+    min-height: 44px;
+    padding: 9px 0;
+  }
+  .ribbon-detail {
+    margin: 0 6% 37px;
+    grid-template-columns: 1fr;
+    gap: 17px;
+    padding-top: 23px;
+  }
+  .ribbon-detail > span,
+  .ribbon-detail > div {
+    grid-column: 1;
+  }
+  .ribbon-detail h3 {
+    font-size: 31px;
+    letter-spacing: -1px;
+    max-width: 300px;
+  }
+  .ribbon-detail p {
+    font-size: 12px;
+  }
+  .ribbon-detail > div {
+    gap: 7px;
+  }
+  .ribbon-detail > div span {
+    font-size: 8px;
+    padding: 7px 9px;
+  }
+  .ribbon-about {
+    padding: 53px 7% 55px;
+    grid-template-columns: 1fr;
+    gap: 33px;
+    margin-top: 0;
+  }
+  .ribbon-about h2 {
+    font-size: 48px;
+    letter-spacing: -2.5px;
+    margin-top: 25px;
+  }
+  .ribbon-about-copy > p {
+    font-size: 15px;
+    max-width: 330px;
+    margin-bottom: 25px;
+  }
+  .ribbon-services {
+    font-size: 10px;
+  }
+  .ribbon-footer {
+    padding-top: 30px;
+    flex-wrap: wrap;
+    gap: 19px;
+    margin: 0 7%;
+  }
+  .ribbon-footer p {
+    margin-left: auto;
+  }
+  .ribbon-footer > span {
+    width: 100%;
+    font-size: 8px;
+  }
+  .ribbon-footer .ribbon-wordmark {
+    font-size: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-page * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}

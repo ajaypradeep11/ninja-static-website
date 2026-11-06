@@ -1,0 +1,544 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&display=swap");
+
+body:has(.softspot-page) {
+  background: #3e6370;
+}
+.softspot-page {
+  position: relative;
+  height: 100svh;
+  min-height: 740px;
+  isolation: isolate;
+  overflow: hidden;
+  background: #3e6370;
+  color: #f7f4e7;
+  font-family: "DM Sans", sans-serif;
+}
+.softspot-page button,
+.softspot-page a {
+  color: inherit;
+}
+.softspot-page button {
+  border: 0;
+  background: none;
+}
+.softspot-page a {
+  text-decoration: none;
+}
+.softspot-page h1,
+.softspot-page h2,
+.softspot-page p {
+  margin: 0;
+}
+.softspot-page button:focus-visible,
+.softspot-page a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+.softspot-header {
+  position: relative;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  padding: 32px 4.5%;
+  z-index: 5;
+}
+.softspot-wordmark {
+  position: relative;
+  font:
+    700 16px/0.87 "Archivo Black",
+    sans-serif;
+  letter-spacing: -0.065em;
+  min-width: 51px;
+}
+.softspot-wordmark > span {
+  position: absolute;
+  font:
+    10px/1 "DM Sans",
+    sans-serif;
+  top: -2px;
+  right: -12px;
+}
+.softspot-header button {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 44px;
+  padding: 0;
+  font-size: 9px;
+  letter-spacing: 0.055em;
+  font-weight: 600;
+}
+.softspot-nav-line {
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: currentColor;
+}
+.softspot-about-link {
+  margin-left: auto;
+}
+.softspot-about-link > span {
+  font-size: 18px;
+}
+.softspot-header-note {
+  font-size: 8px;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  margin-left: 8%;
+}
+.softspot-world {
+  position: absolute;
+  inset: 0;
+}
+.softspot-side-note,
+.softspot-right-note {
+  position: absolute;
+  z-index: 3;
+  top: 174px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.softspot-side-note {
+  left: 4.5%;
+}
+.softspot-side-note svg {
+  display: block;
+  width: 40px;
+  height: 30px;
+  margin-top: 20px;
+}
+.softspot-right-note {
+  right: 4.5%;
+}
+.softspot-horizon {
+  position: absolute;
+  inset: 55% -15% -30%;
+  transform: rotate(-4deg);
+  background: linear-gradient(
+    175deg,
+    transparent 8%,
+    #ffffff35 9%,
+    #ffffff03 18%,
+    #00000003 40%,
+    transparent 65%
+  );
+  opacity: 0.15;
+  pointer-events: none;
+}
+.softspot-city-position {
+  --city-size: min(53vw, 71svh, 760px);
+  position: absolute;
+  width: var(--city-size);
+  aspect-ratio: 1;
+  left: 54%;
+  top: 47%;
+  margin-left: calc(var(--city-size) / -2);
+  margin-top: calc(var(--city-size) / -2);
+  z-index: 2;
+}
+.softspot-city-parallax,
+.softspot-city-float,
+.softspot-city-touch {
+  width: 100%;
+  height: 100%;
+}
+.softspot-city-touch {
+  display: block;
+  padding: 0;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+}
+.softspot-city-touch:active {
+  cursor: grabbing;
+}
+.softspot-city-touch:focus-visible {
+  outline-offset: 4px !important;
+  border-radius: 45%;
+}
+.softspot-city-touch img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.softspot-ground-shadow {
+  position: absolute;
+  left: 54%;
+  top: 78%;
+  width: min(32vw, 420px);
+  height: 27px;
+  margin-left: max(-16vw, -210px);
+  background: #122c36;
+  filter: blur(16px);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.softspot-title-block {
+  position: absolute;
+  z-index: 3;
+  left: 4.5%;
+  bottom: 140px;
+}
+.softspot-project-meta {
+  display: flex;
+  gap: 49px;
+  margin-bottom: 12px;
+  font-size: 7px;
+  letter-spacing: 0.09em;
+  font-weight: 500;
+}
+.softspot-page h1 {
+  font-family: "Archivo Black", sans-serif;
+  font-size: clamp(54px, 6.3vw, 108px);
+  line-height: 0.95;
+  letter-spacing: -0.065em;
+  font-weight: 400;
+  min-height: 1em;
+  text-transform: uppercase;
+}
+.softspot-title-lines {
+  display: block;
+}
+.softspot-title-lines > span {
+  display: block;
+}
+.softspot-story-link {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  min-height: 44px;
+  padding: 0 !important;
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  margin-top: 14px;
+}
+.softspot-story-link > span {
+  font-size: 17px;
+}
+.softspot-stage-caption {
+  position: absolute;
+  z-index: 3;
+  bottom: 102px;
+  left: 54%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 7px;
+  letter-spacing: 0.13em;
+}
+.softspot-stage-caption > span {
+  font-size: 18px;
+}
+.softspot-navigation {
+  position: absolute;
+  right: 4.5%;
+  bottom: 109px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.softspot-slide-dots {
+  display: flex;
+}
+.softspot-slide-dots button {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+.softspot-slide-dots span {
+  width: 5px;
+  height: 5px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+.softspot-slide-dots button[aria-pressed="true"] span {
+  background: currentColor;
+  box-shadow: 0 0 0 4px #ffffff18;
+}
+.softspot-arrows {
+  display: flex;
+  gap: 10px;
+}
+.softspot-arrows button {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.softspot-arrows button:hover {
+  background: #ffffff18;
+}
+.softspot-arrows svg {
+  width: 22px;
+  height: 22px;
+}
+.softspot-seal {
+  position: absolute;
+  z-index: 3;
+  right: 4.5%;
+  bottom: 225px;
+  width: 86px;
+  height: 86px;
+  padding: 0;
+  transform: rotate(15deg);
+}
+.softspot-seal svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.softspot-seal text {
+  font-size: 7.5px;
+  fill: currentColor;
+  letter-spacing: 1.3px;
+  font-weight: 600;
+}
+.softspot-dialog {
+  width: min(610px, calc(100vw - 32px));
+  max-height: calc(100svh - 80px);
+  padding: 0;
+  background: #f5f0e7;
+  color: #303329;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 0 30px 120px #1116;
+}
+.softspot-dialog::backdrop {
+  background: #10252a85;
+  backdrop-filter: blur(9px);
+}
+.softspot-dialog-inner {
+  position: relative;
+  padding: 58px 48px 43px;
+}
+.softspot-dialog-close {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  width: 44px;
+  height: 44px;
+  font-size: 28px;
+}
+.softspot-dialog-eyebrow {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  margin-bottom: 25px;
+}
+.softspot-dialog h2 {
+  font:
+    400 clamp(30px, 4vw, 46px)/1 "Archivo Black",
+    sans-serif;
+  letter-spacing: -0.055em;
+  margin-bottom: 24px;
+}
+.softspot-dialog p {
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 17px;
+}
+.softspot-dialog dl {
+  margin: 25px 0;
+}
+.softspot-dialog dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  border-top: 1px solid #30332933;
+  padding: 16px 0;
+  font-size: 11px;
+}
+.softspot-dialog dd {
+  text-align: right;
+  margin: 0;
+}
+.softspot-dialog-cta {
+  width: 100%;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #303329 !important;
+  min-height: 60px;
+  padding: 16px 0 !important;
+  margin-top: 25px;
+  font-size: 10px;
+  font-weight: 600;
+  text-align: left;
+}
+.softspot-dialog-cta svg {
+  width: 23px;
+  height: 23px;
+  flex-shrink: 0;
+}
+.softspot-dialog .softspot-dialog-small {
+  font-size: 10px;
+  margin-bottom: 0;
+}
+@media (max-width: 1100px) {
+  .softspot-header {
+    gap: 38px;
+  }
+  .softspot-header-note {
+    margin-left: 0;
+  }
+  .softspot-city-position {
+    --city-size: min(67vw, 70svh);
+    top: 46%;
+    left: 55%;
+  }
+  .softspot-navigation {
+    gap: 10px;
+  }
+  .softspot-stage-caption {
+    bottom: 183px;
+    left: 62%;
+  }
+  .softspot-seal {
+    bottom: 280px;
+    width: 68px;
+    height: 68px;
+  }
+  .softspot-project-meta {
+    gap: 25px;
+  }
+}
+@media (max-width: 600px) {
+  .softspot-page {
+    min-height: 760px;
+    height: 100svh;
+  }
+  .softspot-header {
+    padding: 23px 6%;
+    gap: 25px;
+  }
+  .softspot-wordmark {
+    font-size: 14px;
+    min-width: 44px;
+  }
+  .softspot-header button {
+    font-size: 7px;
+    letter-spacing: 0.02em;
+    gap: 8px;
+  }
+  .softspot-nav-line,
+  .softspot-header-note {
+    display: none;
+  }
+  .softspot-contact-link {
+    margin-left: auto;
+  }
+  .softspot-about-link {
+    font-size: 0 !important;
+    margin-left: 0;
+  }
+  .softspot-about-link > span {
+    font-size: 22px;
+  }
+  .softspot-side-note {
+    top: 113px;
+    left: 6%;
+    font-size: 8px;
+  }
+  .softspot-side-note svg {
+    width: 28px;
+    height: 20px;
+    margin-top: 10px;
+  }
+  .softspot-right-note {
+    top: 113px;
+    right: 6%;
+    font-size: 8px;
+  }
+  .softspot-city-position {
+    --city-size: min(96vw, 440px);
+    left: 50%;
+    top: 41%;
+  }
+  .softspot-ground-shadow {
+    top: 61%;
+    left: 50%;
+    width: 55vw;
+    margin-left: -27.5vw;
+    height: 14px;
+    filter: blur(10px);
+  }
+  .softspot-title-block {
+    bottom: 178px;
+    left: 6%;
+  }
+  .softspot-project-meta {
+    font-size: 6px;
+    gap: 24px;
+    margin-bottom: 8px;
+  }
+  .softspot-page h1 {
+    font-size: clamp(43px, 12vw, 69px);
+  }
+  .softspot-story-link {
+    font-size: 6px;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .softspot-stage-caption {
+    bottom: auto;
+    top: 62%;
+    left: 50%;
+    font-size: 6px;
+    letter-spacing: 0.07em;
+    gap: 6px;
+  }
+  .softspot-seal {
+    display: none;
+  }
+  .softspot-navigation {
+    left: 6%;
+    right: 6%;
+    bottom: 102px;
+    justify-content: space-between;
+  }
+  .softspot-arrows {
+    gap: 7px;
+  }
+  .softspot-arrows button {
+    width: 44px;
+    height: 44px;
+  }
+  .softspot-arrows svg {
+    width: 18px;
+    height: 18px;
+  }
+  .softspot-slide-dots {
+    position: static;
+  }
+  .softspot-dialog-inner {
+    padding: 60px 27px 30px;
+  }
+  .softspot-dialog p {
+    font-size: 12px;
+  }
+  .softspot-dialog dl > div {
+    font-size: 10px;
+  }
+  .softspot-dialog-cta {
+    font-size: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .softspot-arrows button {
+    transition: none;
+  }
+}

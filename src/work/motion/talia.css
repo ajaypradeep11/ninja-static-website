@@ -1,0 +1,912 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap");
+
+body:has(.talia-page) {
+  background: #141110;
+}
+.talia-page {
+  --talia-ink: #141110;
+  --talia-paper: #f2e5dc;
+  --talia-muted: #b8aaa1;
+  --talia-line: #ffffff28;
+  background: var(--talia-ink);
+  color: var(--talia-paper);
+  font-family: "Manrope", sans-serif;
+}
+.talia-page ::selection {
+  background: #ff713f;
+  color: #141110;
+}
+.talia-page a {
+  text-decoration: none;
+}
+.talia-page button {
+  color: inherit;
+}
+.talia-page svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.talia-page p,
+.talia-page h1,
+.talia-page h2,
+.talia-page h3 {
+  margin: 0;
+}
+.talia-page button:focus-visible,
+.talia-page a:focus-visible,
+.talia-page select:focus-visible {
+  outline: 2px solid #ff9b75;
+  outline-offset: 6px;
+}
+.talia-hero {
+  min-height: 800px;
+  height: 100svh;
+  max-height: 1180px;
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+.talia-header {
+  padding: 24px 4%;
+  position: relative;
+  z-index: 5;
+}
+.talia-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.talia-header a {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.talia-header a:hover {
+  color: #ff9b75;
+}
+.talia-title {
+  position: absolute;
+  top: 96px;
+  left: 2.6%;
+  right: 2.6%;
+  font-family: "Inter Tight", "Arial Black", sans-serif;
+  font-size: 16.5vw;
+  font-weight: 900;
+  letter-spacing: -0.065em;
+  line-height: 0.91;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 0.06em;
+}
+.talia-title span {
+  display: block;
+  background: linear-gradient(180deg, #fff2e8, #bca394);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.talia-character-stage {
+  position: absolute;
+  z-index: 2;
+  top: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(47vw, 67svh, 740px);
+  aspect-ratio: 1;
+}
+.talia-character-reveal,
+.talia-character-frame,
+.talia-character {
+  width: 100%;
+  height: 100%;
+}
+.talia-character {
+  position: relative;
+}
+.talia-character-images,
+.talia-face-warp {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.talia-face-warp {
+  opacity: 0;
+  filter: drop-shadow(0 20px 35px #0002);
+}
+.talia-face-warp canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.talia-character[data-warp="ready"] .talia-face-warp {
+  opacity: 1;
+}
+.talia-character[data-warp="ready"] .talia-character-images {
+  opacity: 0;
+}
+.talia-character img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(0 20px 35px #0002);
+}
+.talia-character-fallback {
+  height: 100%;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  font:
+    800 300px/1 "Inter Tight",
+    sans-serif;
+  color: #b7a1d8;
+}
+.talia-character-fallback span {
+  font:
+    14px "Manrope",
+    sans-serif;
+}
+.talia-zone {
+  position: absolute;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  z-index: 2;
+  padding: 0;
+  cursor: pointer;
+}
+.talia-zone-hair {
+  left: 16%;
+  top: 3%;
+  width: 70%;
+  height: 32%;
+}
+.talia-zone-cheek {
+  top: 60%;
+  width: 13%;
+  height: 14%;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.talia-zone-cheek-left {
+  left: 30%;
+}
+.talia-zone-cheek-right {
+  left: 57%;
+}
+.talia-character[data-dragging="true"] .talia-zone-cheek {
+  cursor: grabbing;
+}
+.talia-zone-cheek:disabled {
+  cursor: default;
+}
+.talia-zone-nose {
+  left: 44%;
+  top: 56%;
+  width: 12%;
+  height: 15%;
+}
+.talia-zone:focus-visible {
+  outline-offset: 0 !important;
+  background: #ff713f18;
+}
+.talia-side-note {
+  position: absolute;
+  left: 4.3%;
+  top: 49%;
+  font-size: 10px;
+  line-height: 1.7;
+  letter-spacing: 0.09em;
+  color: var(--talia-muted);
+}
+.talia-live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff713f;
+  margin-right: 9px;
+  box-shadow: 0 0 12px #ff713f40;
+}
+.talia-side-note .talia-live-dot {
+  display: block;
+  margin-bottom: 14px;
+}
+.talia-moods {
+  position: absolute;
+  right: 4.2%;
+  top: 46%;
+  width: 152px;
+  z-index: 4;
+}
+.talia-eyebrow {
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  color: var(--talia-muted);
+  display: block;
+  margin-bottom: 13px;
+}
+.talia-moods button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  padding: 4px 0;
+  color: #b8aaa1;
+  font-size: 11px;
+  text-align: left;
+}
+.talia-moods button[aria-pressed="true"],
+.talia-moods button:hover {
+  color: #fff;
+}
+.talia-mood-dot {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #ffa57f;
+  color: #141110;
+  display: grid;
+  place-content: center;
+  font-size: 16px;
+  font-family: sans-serif;
+  border: 1px solid #ffffff48;
+}
+.talia-mood-dot-neutral {
+  background: radial-gradient(circle at 30% 30%, #b9f5fa, #2c8794);
+}
+.talia-mood-dot-angry {
+  background: radial-gradient(circle at 30% 30%, #ffb386, #dd562c);
+}
+.talia-mood-dot-offline {
+  background: #c7b9c5;
+}
+.talia-side-note[data-offline="true"] .talia-live-dot {
+  background: #a89da3;
+  box-shadow: none;
+}
+.talia-mood-mark {
+  margin-left: auto;
+  font-size: 16px;
+}
+.talia-hero-bottom {
+  position: absolute;
+  z-index: 4;
+  left: 4.2%;
+  right: 4.2%;
+  bottom: 112px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+}
+.talia-intro {
+  font-size: clamp(11px, 1.05vw, 15px);
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: 0.035em;
+}
+.talia-play-hint {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-left: 38px;
+  color: #d1ccd5;
+  font-size: 9px;
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+}
+.talia-play-hint > span {
+  font-size: 26px;
+  color: #ff956c;
+}
+.talia-hint-sub {
+  color: #a8a2ad;
+  letter-spacing: 0;
+  font-size: 10px;
+}
+.talia-touch-hint {
+  display: none;
+}
+.talia-contact-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 38px;
+  min-width: 185px;
+  min-height: 52px;
+  border: 1px solid #ff9f79;
+  border-radius: 100px;
+  background: #ff713f;
+  box-shadow:
+    inset 0 0 8px #ffc3a538,
+    0 0 20px #ff713f12;
+  color: #21130d;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0 22px;
+}
+.talia-contact-pill svg {
+  width: 17px;
+  height: 17px;
+}
+.talia-scroll {
+  position: absolute;
+  bottom: 28px;
+  left: 4.2%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 44px;
+  font-size: 20px;
+}
+.talia-scroll span {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: var(--talia-muted);
+}
+.talia-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.talia-section {
+  margin: 0 4.2%;
+  padding: 42px 0 100px;
+  scroll-margin-top: 25px;
+  border-top: 1px solid var(--talia-line);
+}
+.talia-section-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--talia-muted);
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  margin-bottom: 80px;
+  line-height: 1.6;
+}
+.talia-page h2 {
+  font-family: "Inter Tight", sans-serif;
+  font-weight: 600;
+  font-size: clamp(34px, 5.3vw, 82px);
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+}
+.talia-about h2 span,
+.talia-services h2 span {
+  color: #918b97;
+}
+.talia-about-bottom {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr auto;
+  gap: 8%;
+  align-items: end;
+  margin-top: 50px;
+}
+.talia-about-bottom p {
+  color: #b7b1bc;
+  font-size: 13px;
+  line-height: 1.85;
+  max-width: 410px;
+}
+.talia-text-link {
+  display: inline-flex;
+  min-height: 44px;
+  gap: 20px;
+  align-items: center;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.talia-text-link:hover {
+  color: #ffad87;
+}
+.talia-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.talia-section-heading > span {
+  color: var(--talia-muted);
+  font-size: 11px;
+}
+.talia-project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+.talia-project-wrap {
+  min-width: 0;
+}
+.talia-project-open {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+.talia-project-art {
+  background: var(--talia-project-color);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 0.86;
+  display: flex;
+  align-items: center;
+}
+.talia-project-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(145deg, #fff2, transparent 60%, #14111015);
+}
+.talia-project-art img {
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+}
+.talia-project-word {
+  position: absolute;
+  font-family: "Inter Tight", sans-serif;
+  font-size: clamp(40px, 5.1vw, 90px);
+  color: #141110;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  top: 24px;
+  left: 5%;
+  width: 90%;
+  text-align: center;
+  line-height: 0.9;
+}
+.talia-project-plus {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #141110;
+  display: grid;
+  place-content: center;
+  color: #fff;
+  font-size: 26px;
+  z-index: 2;
+}
+.talia-project-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 8px;
+  letter-spacing: 0.04em;
+  color: var(--talia-muted);
+  margin: 22px 0 10px;
+}
+.talia-project h3 {
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+}
+.talia-project p {
+  color: #bcaea5;
+  font-size: 12px;
+  line-height: 1.8;
+  margin-top: 18px;
+}
+.talia-services-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+}
+.talia-services h2 {
+  font-size: clamp(36px, 4.5vw, 68px);
+}
+.talia-services-layout > div > p {
+  font-size: 13px;
+  color: var(--talia-muted);
+  line-height: 1.8;
+  max-width: 315px;
+  margin-top: 25px;
+}
+.talia-service-list a {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--talia-line);
+}
+.talia-service-list a:first-child {
+  padding-top: 0;
+}
+.talia-service-list a > span {
+  color: var(--talia-muted);
+  font-size: 10px;
+}
+.talia-service-list h3 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+.talia-service-list p {
+  font-size: 11px;
+  line-height: 1.65;
+  color: var(--talia-muted);
+  margin-top: 7px;
+}
+.talia-service-list svg {
+  margin-left: auto;
+  transition: transform 0.2s ease;
+}
+.talia-service-list a:hover svg {
+  transform: rotate(45deg);
+}
+.talia-contact {
+  padding-bottom: 95px;
+}
+.talia-contact h2 {
+  position: relative;
+  font-size: clamp(86px, 15.3vw, 250px);
+  line-height: 0.88;
+  letter-spacing: -0.07em;
+  font-weight: 800;
+}
+.talia-contact h2 em {
+  font-style: normal;
+  color: #ff8c5e;
+}
+.talia-contact-star {
+  color: #ff8c5e;
+  position: absolute;
+  right: 8%;
+  top: -10px;
+  font-size: 0.9em;
+  font-weight: 400;
+}
+.talia-contact-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+  margin-top: 68px;
+  align-items: start;
+}
+.talia-contact-bottom > p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #bcaea5;
+}
+.talia-contact label {
+  font-size: 9px;
+  color: var(--talia-muted);
+  letter-spacing: 0.08em;
+}
+.talia-brief-row {
+  display: flex;
+  border-bottom: 1px solid #b99e8d;
+  margin-top: 16px;
+  gap: 10px;
+  padding-bottom: 8px;
+}
+.talia-brief-row select {
+  color: #f2e5dc;
+  background: #141110;
+  border: 0;
+  min-height: 48px;
+  min-width: 0;
+  flex: 1;
+  font-size: 14px;
+  padding-right: 8px;
+}
+.talia-brief-row button {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #bd8f77;
+  border-radius: 50%;
+  background: #4b2d23;
+  display: grid;
+  place-content: center;
+}
+.talia-brief-ready {
+  margin-top: 16px;
+}
+.talia-brief-ready p {
+  font-size: 12px;
+  color: #ffc5a9;
+  line-height: 1.7;
+}
+.talia-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-top: 100px;
+  padding-top: 24px;
+  border-top: 1px solid var(--talia-line);
+}
+.talia-footer > a:first-child {
+  font:
+    900 32px "Inter Tight",
+    sans-serif;
+  letter-spacing: -0.06em;
+}
+.talia-footer > a:first-child span {
+  vertical-align: super;
+  font-size: 10px;
+  margin-left: 4px;
+}
+.talia-footer p {
+  font-size: 8px;
+  color: var(--talia-muted);
+  letter-spacing: 0.08em;
+}
+.talia-footer > a:last-child {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 16px;
+  font-size: 8px;
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 1800px) {
+  .talia-title {
+    font-size: 16.4vw;
+  }
+}
+@media (max-width: 1000px) {
+  .talia-hero {
+    min-height: 760px;
+    max-height: 1000px;
+  }
+  .talia-title {
+    top: 110px;
+  }
+  .talia-character-stage {
+    top: 23%;
+    width: min(62vw, 56svh);
+  }
+  .talia-side-note {
+    display: none;
+  }
+  .talia-moods {
+    right: 3%;
+    top: 46%;
+    width: 110px;
+  }
+  .talia-eyebrow {
+    font-size: 7px;
+    letter-spacing: 0.05em;
+  }
+  .talia-moods button {
+    font-size: 10px;
+    gap: 9px;
+  }
+  .talia-play-hint {
+    margin-left: 0;
+    position: absolute;
+    bottom: 116px;
+    left: 0;
+  }
+  .talia-about-bottom {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .talia-project-grid {
+    gap: 18px;
+  }
+  .talia-project h3 {
+    font-size: 17px;
+  }
+  .talia-services-layout {
+    gap: 6%;
+  }
+  .talia-service-list h3 {
+    font-size: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .talia-header {
+    padding: 17px 6%;
+  }
+  .talia-header a {
+    font-size: 10px;
+    gap: 5px;
+  }
+  .talia-title {
+    top: 100px;
+    font-size: 16.5vw;
+    left: 3%;
+    right: 3%;
+  }
+  .talia-hero {
+    min-height: 810px;
+    max-height: none;
+    height: 100svh;
+  }
+  .talia-character-stage {
+    top: 21%;
+    width: min(94vw, 410px);
+  }
+  .talia-moods {
+    top: auto;
+    bottom: 210px;
+    left: 7%;
+    right: 7%;
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .talia-eyebrow {
+    display: none;
+  }
+  .talia-moods button {
+    width: auto;
+    gap: 7px;
+    font-size: 10px;
+  }
+  .talia-mood-mark {
+    display: none;
+  }
+  .talia-hero-bottom {
+    left: 6%;
+    right: 6%;
+    bottom: 100px;
+    align-items: flex-end;
+    gap: 15px;
+  }
+  .talia-intro {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .talia-contact-pill {
+    min-width: 146px;
+    min-height: 48px;
+    gap: 15px;
+    font-size: 9px;
+    padding: 0 16px;
+  }
+  .talia-play-hint {
+    bottom: 146px;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    font-size: 8px;
+    text-align: center;
+  }
+  .talia-play-hint > span {
+    display: none;
+  }
+  .talia-hint-sub {
+    font-size: 9px;
+  }
+  .talia-desktop-hint {
+    display: none;
+  }
+  .talia-touch-hint {
+    display: inline;
+  }
+  .talia-scroll {
+    display: none;
+  }
+  .talia-section {
+    margin: 0 6%;
+    padding: 25px 0 65px;
+  }
+  .talia-section-label {
+    font-size: 8px;
+    gap: 16px;
+    margin-bottom: 42px;
+  }
+  .talia-section-label > span:last-child {
+    text-align: right;
+  }
+  .talia-page h2 {
+    font-size: 35px;
+  }
+  .talia-about-bottom {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 30px;
+  }
+  .talia-about-bottom p {
+    font-size: 12px;
+  }
+  .talia-section-heading {
+    display: block;
+  }
+  .talia-section-heading > span {
+    display: block;
+    margin-top: 14px;
+  }
+  .talia-project-grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+  .talia-project-art {
+    aspect-ratio: 1;
+  }
+  .talia-project-word {
+    font-size: 12vw;
+  }
+  .talia-project h3 {
+    font-size: 22px;
+  }
+  .talia-project-meta {
+    font-size: 9px;
+  }
+  .talia-services-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .talia-service-list a {
+    gap: 15px;
+  }
+  .talia-service-list h3 {
+    font-size: 16px;
+  }
+  .talia-contact h2 {
+    font-size: 18vw;
+  }
+  .talia-contact-star {
+    right: 0;
+  }
+  .talia-contact-bottom {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    margin-top: 36px;
+  }
+  .talia-contact-bottom > p {
+    font-size: 12px;
+  }
+  .talia-brief-row select {
+    font-size: 12px;
+  }
+  .talia-contact {
+    padding-bottom: 100px;
+  }
+  .talia-footer {
+    flex-wrap: wrap;
+    margin-top: 60px;
+    gap: 16px;
+  }
+  .talia-footer p {
+    order: 3;
+    width: 100%;
+  }
+}
+@media (max-width: 380px) {
+  .talia-character-stage {
+    top: 22%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .talia-service-list a:hover svg {
+    transform: none;
+  }
+}
+html[data-motion="off"] .talia-service-list a:hover svg {
+  transform: none;
+}

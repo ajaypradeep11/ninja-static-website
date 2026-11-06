@@ -1,0 +1,554 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap");
+
+body:has(.bf-page) {
+  background: #170e15;
+  color: #f4e7dd;
+}
+.bf-page {
+  --bf-cream: #f4e7dd;
+  --bf-muted: #c0a9ad;
+  --bf-line: #e7c9c32a;
+  background: #170e15;
+  font-family: "DM Sans", sans-serif;
+}
+.bf-page a {
+  text-decoration: none;
+}
+.bf-garden {
+  position: relative;
+  min-height: 880px;
+  height: max(880px, 100svh);
+  max-height: 1180px;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 58%, var(--bf-glow) -60%, transparent 69%),
+    #170e15;
+  transition: background-color 0.5s;
+}
+.bf-garden:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    #170e1580,
+    transparent 24%,
+    transparent 76%,
+    #170e15c9
+  );
+}
+.bf-garden-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.bf-garden-art .motion-scene {
+  height: 100%;
+}
+.bf-garden-art .motion-scene-fallback {
+  background:
+    radial-gradient(ellipse at 25% 35%, #b46c8633, transparent 35%),
+    radial-gradient(ellipse at 80% 65%, #dca9b522, transparent 30%);
+}
+.bf-garden-art .motion-scene-fallback span {
+  width: 110px;
+  height: 200px;
+  opacity: 0.3;
+  border: 0;
+  border-radius: 60%;
+  background: #d7a0b3;
+  transform: translateX(-200px) rotate(-30deg);
+  box-shadow:
+    50px 20px 0 #d7a0b3,
+    -50px 20px 0 #d7a0b3,
+    0 50px 0 #d7a0b3,
+    420px 160px 0 #d5b19b,
+    470px 180px 0 #d5b19b,
+    370px 180px 0 #d5b19b;
+}
+.bf-header {
+  position: relative;
+  z-index: 3;
+  margin: 0 46px;
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--bf-line);
+  gap: 24px;
+}
+.bf-wordmark {
+  display: flex;
+  align-items: center;
+  font-family: "Instrument Serif", serif;
+  font-size: 32px;
+  letter-spacing: -1px;
+  gap: 9px;
+}
+.bf-wordmark svg {
+  width: 33px;
+  height: 33px;
+}
+.bf-wordmark > span {
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  align-self: flex-start;
+  margin-top: 5px;
+  margin-left: -4px;
+}
+.bf-header-note {
+  font-size: 11px;
+  color: var(--bf-muted);
+  letter-spacing: 0.01em;
+}
+.bf-notes-link {
+  font-size: 12px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.bf-notes-link span {
+  font-size: 20px;
+}
+.bf-edition {
+  position: relative;
+  z-index: 2;
+  margin: 25px 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  font:
+    9px "DM Mono",
+    monospace;
+  letter-spacing: 0.1em;
+  color: var(--bf-muted);
+}
+.bf-time {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.bf-time i {
+  display: block;
+  width: 5px;
+  height: 5px;
+  background: #d5cdb1;
+  border-radius: 50%;
+  box-shadow: 0 0 14px #e7d3a278;
+}
+.bf-center {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 45%;
+  width: min(650px, 90%);
+  text-align: center;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.bf-center a {
+  pointer-events: auto;
+}
+.bf-eyebrow {
+  font:
+    10px "DM Mono",
+    monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.bf-center > .bf-eyebrow {
+  color: #d9c6bd;
+}
+.bf-center h1 {
+  font:
+    clamp(90px, 9.8vw, 148px)/0.91 "Instrument Serif",
+    serif;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  margin: 32px 0 24px;
+  text-wrap: balance;
+  text-shadow: 0 2px 35px #170e1577;
+}
+.bf-center h1 em {
+  font-weight: 400;
+  color: #eec8bc;
+}
+.bf-description {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #e2cfc8;
+  margin: 0 auto;
+  max-width: 285px;
+  min-height: 41px;
+}
+.bf-enter {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  font-size: 11px;
+  margin-top: 22px;
+  min-height: 44px;
+  border-bottom: 1px solid #e7c9c34d;
+  padding-bottom: 6px;
+}
+.bf-enter span {
+  font-size: 21px;
+}
+.bf-controls {
+  position: absolute;
+  z-index: 3;
+  bottom: 58px;
+  left: 46px;
+  right: 46px;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  border-top: 1px solid var(--bf-line);
+  padding-top: 25px;
+}
+.bf-control-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font:
+    9px "DM Mono",
+    monospace;
+  letter-spacing: 0.13em;
+  color: #c9b5b3;
+  margin-bottom: 12px;
+}
+.bf-seasons {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid #e7c9c32f;
+  background: #170e1566;
+  border-radius: 30px;
+}
+.bf-seasons button {
+  position: relative;
+  isolation: isolate;
+  min-height: 44px;
+  border: 0;
+  padding: 0 17px;
+  color: #decbc6;
+  background: transparent;
+  border-radius: 24px;
+  font-size: 11px;
+}
+.bf-seasons button[aria-pressed="true"] {
+  color: #271820;
+}
+.bf-seasons button > span:last-child {
+  position: relative;
+  z-index: 1;
+}
+.bf-selected {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: #e6d2c5;
+}
+.bf-bloom-control {
+  display: block;
+  width: 200px;
+  min-width: 145px;
+}
+.bf-bloom-control input {
+  display: block;
+  accent-color: #e7c6bb;
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  cursor: pointer;
+}
+.bf-bloom-control output {
+  font-size: 10px;
+  letter-spacing: 0;
+  color: #e9d8cf;
+}
+.bf-made-note {
+  margin-left: auto;
+  text-align: right;
+  font:
+    11px/1.6 "DM Sans",
+    sans-serif;
+  color: #c0aaa8;
+}
+.bf-field-notes {
+  position: relative;
+  background: #eee7da;
+  color: #3f3b2f;
+  padding: 90px 7% 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 65px 10%;
+  scroll-margin-top: 20px;
+}
+.bf-field-title > .bf-eyebrow {
+  font-size: 9px;
+  color: #77705e;
+}
+.bf-field-title h2 {
+  font:
+    clamp(46px, 4.7vw, 70px)/1.04 "Instrument Serif",
+    serif;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+  margin: 27px 0;
+}
+.bf-field-title > p {
+  font-size: 13px;
+  line-height: 1.8;
+  max-width: 310px;
+  color: #635e4e;
+}
+.bf-observations article {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 24px;
+  padding: 24px 0;
+  border-top: 1px solid #4f50302e;
+}
+.bf-observations article:first-child {
+  padding-top: 0;
+  border: 0;
+}
+.bf-note-index {
+  font:
+    10px "DM Mono",
+    monospace;
+  color: #736b58;
+  padding-top: 7px;
+}
+.bf-observations h3 {
+  font:
+    29px "Instrument Serif",
+    serif;
+  margin: 0 0 13px;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+.bf-observations p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #635e4e;
+  margin: 0 0 15px;
+  max-width: 390px;
+}
+.bf-specimen-tag {
+  font:
+    8px "DM Mono",
+    monospace;
+  letter-spacing: 0.06em;
+  color: #67634d;
+}
+.bf-observations a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 12px;
+  border-bottom: 1px solid #b7ae99;
+  gap: 35px;
+}
+.bf-footer {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #4f50302e;
+  padding-top: 22px;
+  gap: 20px;
+}
+.bf-footer > span:first-child {
+  font:
+    32px "Instrument Serif",
+    serif;
+  letter-spacing: -1px;
+}
+.bf-footer > span:nth-child(2) {
+  font:
+    9px "DM Mono",
+    monospace;
+  color: #736b58;
+}
+.bf-footer svg {
+  width: 32px;
+  height: 32px;
+}
+@media (min-width: 1700px) {
+  .bf-garden-art {
+    inset: -10% -2%;
+  }
+  .bf-center {
+    top: 46%;
+  }
+}
+@media (max-width: 1000px) {
+  .bf-header {
+    margin-inline: 28px;
+  }
+  .bf-edition {
+    margin-inline: 28px;
+  }
+  .bf-header-note {
+    display: none;
+  }
+  .bf-controls {
+    left: 28px;
+    right: 28px;
+    gap: 28px;
+  }
+  .bf-made-note {
+    display: none;
+  }
+  .bf-bloom-control {
+    margin-left: auto;
+  }
+  .bf-field-notes {
+    padding: 70px 6% 100px;
+    gap: 50px 7%;
+  }
+  .bf-center h1 {
+    font-size: 120px;
+  }
+}
+@media (max-width: 600px) {
+  .bf-garden {
+    height: 920px;
+    min-height: 920px;
+  }
+  .bf-header {
+    margin-inline: 20px;
+    padding: 18px 0;
+    gap: 10px;
+  }
+  .bf-wordmark {
+    font-size: 27px;
+    gap: 6px;
+  }
+  .bf-wordmark svg {
+    width: 27px;
+    height: 27px;
+  }
+  .bf-notes-link {
+    font-size: 10px;
+    gap: 14px;
+  }
+  .bf-edition {
+    margin: 20px;
+    align-items: flex-start;
+    font-size: 8px;
+    line-height: 1.7;
+  }
+  .bf-edition > span:first-child {
+    max-width: 120px;
+  }
+  .bf-time {
+    gap: 7px;
+    font-size: 8px;
+  }
+  .bf-center {
+    top: 43%;
+    width: 92%;
+  }
+  .bf-center h1 {
+    font-size: 92px;
+    margin: 25px 0 23px;
+    letter-spacing: -0.055em;
+  }
+  .bf-center > .bf-eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.15em;
+  }
+  .bf-description {
+    font-size: 11px;
+    max-width: 235px;
+  }
+  .bf-enter {
+    margin-top: 14px;
+    font-size: 10px;
+  }
+  .bf-controls {
+    left: 20px;
+    right: 20px;
+    bottom: 43px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 21px;
+    padding-top: 21px;
+  }
+  .bf-control-label {
+    margin-bottom: 7px;
+    font-size: 8px;
+  }
+  .bf-seasons {
+    justify-content: space-between;
+  }
+  .bf-seasons button {
+    flex: 1;
+    padding: 0 14px;
+    font-size: 11px;
+  }
+  .bf-bloom-control {
+    width: 100%;
+    margin: 0;
+  }
+  .bf-bloom-control input {
+    min-height: 44px;
+  }
+  .bf-field-notes {
+    grid-template-columns: 1fr;
+    padding: 59px 24px 110px;
+    gap: 38px;
+  }
+  .bf-field-title h2 {
+    font-size: 51px;
+    margin-top: 24px;
+  }
+  .bf-field-title > p {
+    font-size: 12px;
+    max-width: 300px;
+  }
+  .bf-observations article {
+    gap: 16px;
+  }
+  .bf-footer {
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-top: 20px;
+  }
+  .bf-footer > span:nth-child(2) {
+    order: 3;
+    width: 100%;
+    font-size: 8px;
+  }
+  .bf-footer svg {
+    margin-left: auto;
+  }
+}
+/* Keep the controls readable when bright petals pass behind them. */
+.bf-controls {
+  background: linear-gradient(transparent, #170e15d9);
+  padding-bottom: 5px;
+}
+.bf-seasons {
+  background: #24151fec;
+}
+.bf-control-label {
+  color: #ead8d2;
+}
+.bf-garden:after {
+  background: linear-gradient(
+    #170e15b3,
+    transparent 25%,
+    transparent 68%,
+    #170e15e6
+  );
+}

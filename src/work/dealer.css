@@ -791,15 +791,16 @@
 
 .part-art {
   position: relative;
-  /* Ground for the inline part SVGs (they carry shapes only, so the gradient
-     is not repeated as a <defs> id on every card). */
-  background: linear-gradient(135deg, #31435c, #151f2c);
+  background: #151f2c;
   border-bottom: 1px solid var(--line);
 }
 
-.part-art svg {
+.part-photo {
+  display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
 }
 
 .art-tag {
@@ -2336,11 +2337,6 @@
   overflow: hidden;
   margin-bottom: 0.9rem;
   background: linear-gradient(135deg, #31435c, #151f2c);
-}
-
-.d-art svg {
-  width: 100%;
-  height: auto;
 }
 
 .d-h {

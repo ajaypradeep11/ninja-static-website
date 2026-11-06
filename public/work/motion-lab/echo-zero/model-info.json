@@ -1,0 +1,19 @@
+{
+  "source": "https://studio.blender.org/characters/rain/v3/",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "credit": "Rain Rig (CC) Blender Foundation | studio.blender.org",
+  "modifications": [
+    "Crouched pose",
+    "Matte charcoal top and dark denim",
+    "Ivory footwear",
+    "Forward gaze and relaxed hands",
+    "Gravity-curved ponytail",
+    "Static mesh evaluation",
+    "Baked and resized PBR color maps",
+    "Draco compressed glTF export",
+    "Explicit dark pupil-cap material for glTF"
+  ],
+  "meshes": 15,
+  "triangles": 543882,
+  "sizeBytes": 2497460
+}

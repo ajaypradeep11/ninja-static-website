@@ -1,0 +1,397 @@
+/* The experimental collection lives inside the existing UI / UX tab. */
+@media (min-width: 901px) {
+  .work-layout:has(#work-ui.is-active) .work-filters {
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
+  }
+}
+.design-lab {
+  --lab-bg: var(--studio-surface);
+  --lab-text: var(--studio-text);
+  --lab-muted: var(--studio-muted);
+  --lab-line: var(--studio-line);
+  --lab-accent: #3e6528;
+  --lab-selected-bg: #d4ed91;
+  --lab-selected-text: #171819;
+  grid-column: 1 / -1;
+  min-width: 0;
+  padding: clamp(20px, 3vw, 36px);
+  background: var(--lab-bg);
+  color: var(--lab-text);
+  border: 3px solid var(--studio-border);
+}
+.design-lab-head {
+  padding-bottom: 24px;
+}
+.design-lab-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font: 10px/1.6 var(--font-body);
+  letter-spacing: 1.2px;
+  color: var(--lab-muted);
+}
+.design-lab-kicker > span:first-child {
+  font-size: 28px;
+  line-height: 1;
+  color: var(--lab-accent);
+}
+.design-lab-kicker > span:last-child {
+  margin-left: auto;
+}
+.design-lab-intro {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  align-items: end;
+  gap: 24px;
+  margin: 38px 0;
+}
+.design-lab-intro h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.9vw, 52px);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -1.8px;
+}
+.design-lab-intro h2 em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  color: var(--lab-accent);
+}
+.design-lab-intro > p {
+  margin: 0 0 3px;
+  max-width: 26ch;
+  color: var(--lab-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.design-lab-tools {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  padding-top: 25px;
+  border-top: 1px solid var(--lab-line);
+}
+.design-lab-tools[hidden],
+.design-card[hidden],
+.design-empty[hidden] {
+  display: none;
+}
+.design-filters {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.design-filters button {
+  min-height: 44px;
+  padding: 7px 12px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--lab-muted);
+  background: transparent;
+  font: 11px var(--font-body);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.18s,
+    color 0.18s;
+}
+.motion-collection .design-filters button {
+  font: 700 1rem/1.3 var(--font-display);
+  text-transform: uppercase;
+}
+.design-filters button[aria-pressed="true"] {
+  color: var(--lab-selected-text);
+  background: var(--lab-selected-bg);
+}
+.design-filters button:hover:not([aria-pressed="true"]) {
+  background: var(--studio-hover);
+  color: var(--lab-text);
+}
+.design-filters button span {
+  padding-left: 6px;
+  opacity: 0.7;
+}
+.design-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 10px;
+  border: 1px solid var(--lab-line);
+  border-radius: 6px;
+  color: var(--lab-muted);
+}
+.design-search input {
+  width: 108px;
+  min-width: 0;
+  padding: 7px 0;
+  border: none;
+  background: transparent;
+  color: var(--lab-text);
+  font: 11px var(--font-body);
+}
+.design-search input::placeholder {
+  color: var(--lab-muted);
+  opacity: 1;
+}
+.design-search:focus-within {
+  outline: 2px solid var(--lab-accent);
+  outline-offset: 3px;
+}
+.design-search input:focus {
+  outline: none;
+}
+.design-collection {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 22px;
+}
+.design-card {
+  min-width: 0;
+  display: block;
+  text-decoration: none;
+}
+.design-preview {
+  position: relative;
+  aspect-ratio: 1.6;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--design-color);
+}
+.design-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.design-preview-label {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: var(--lab-selected-text);
+  background: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+.design-card:hover .design-preview img {
+  transform: scale(1.035);
+}
+.design-card:hover .design-preview-label,
+.design-card:focus-visible .design-preview-label {
+  opacity: 1;
+  transform: none;
+}
+.design-card-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 0 0;
+}
+.design-number {
+  font: 9px/1.4 var(--font-body);
+  letter-spacing: 1px;
+  color: var(--lab-muted);
+}
+.design-card h3 {
+  margin: 5px 0 6px;
+  font: 700 clamp(16px, 1.8vw, 23px)/1.2 var(--font-display);
+  letter-spacing: -0.4px;
+}
+.design-card p {
+  margin: 0;
+  color: var(--lab-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.design-card-arrow {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  margin-top: 5px;
+  border: 1px solid var(--lab-line);
+  border-radius: 50%;
+  color: var(--lab-text);
+  transition:
+    color 0.2s,
+    background 0.2s;
+}
+.design-card:hover .design-card-arrow {
+  color: var(--lab-selected-text);
+  background: var(--lab-selected-bg);
+}
+.design-lab :focus-visible {
+  outline: 2px solid var(--lab-accent);
+  outline-offset: 5px;
+}
+.design-empty {
+  padding: 50px 15px;
+  text-align: center;
+}
+.design-empty p {
+  font-size: 14px;
+}
+.design-empty button {
+  margin-top: 16px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--lab-selected-bg);
+  color: var(--lab-selected-text);
+  cursor: pointer;
+}
+.design-lab-note {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid var(--lab-line);
+}
+.design-lab-note > span:first-child {
+  font-size: 9px;
+  letter-spacing: 1px;
+  max-width: 13ch;
+}
+.design-lab-note > p {
+  max-width: 36ch;
+  margin: 0;
+  color: var(--lab-muted);
+  font-size: 10px;
+  line-height: 1.7;
+}
+.design-lab-note > span:last-child {
+  margin-left: auto;
+  font-size: 28px;
+  color: var(--lab-accent);
+}
+.design-existing-heading {
+  grid-column: 1 / -1;
+  margin-top: 30px;
+}
+.design-existing-heading h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 36px);
+}
+.design-lab .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+@media (max-width: 1100px) and (min-width: 901px) {
+  .design-lab-intro {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .design-lab-intro > p {
+    max-width: 40ch;
+  }
+}
+@media (max-width: 600px) {
+  .design-lab {
+    padding: 20px 16px;
+  }
+  .design-lab-intro {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin: 30px 0;
+  }
+  .design-lab-intro h2 {
+    font-size: clamp(31px, 9vw, 48px);
+    letter-spacing: -1px;
+  }
+  .design-lab-intro > p {
+    max-width: 34ch;
+    font-size: 12px;
+  }
+  .design-collection {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .design-lab-kicker {
+    font-size: 8px;
+    gap: 6px;
+  }
+  .design-lab-kicker > span:last-child {
+    font-size: 7px;
+  }
+  .design-filters button {
+    padding: 8px 10px;
+  }
+  .design-search {
+    width: 100%;
+  }
+  .design-search input {
+    width: 100%;
+    font-size: 16px;
+  }
+  .design-card h3 {
+    font-size: 22px;
+  }
+  .design-preview-label {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .design-lab * {
+    transition: none !important;
+  }
+  .design-card:hover .design-preview img {
+    transform: none;
+  }
+}
+
+/* Vol.02 keeps its warm-paper / vermilion identity in both modes. */
+.motion-collection {
+  --lab-bg: #f1eee7;
+  --lab-text: #20211e;
+  --lab-muted: #5e6258;
+  --lab-line: #b8b9b0;
+  --lab-accent: #bc3a20;
+  --lab-selected-bg: #20211e;
+  --lab-selected-text: #ffffff;
+  margin-bottom: 22px;
+}
+.motion-collection .design-search input { width: 145px; }
+.motion-collection .design-preview { border: 1px solid var(--lab-line); }
+:root[data-theme='dark'] .design-lab { --lab-bg: #000000; --lab-accent: #d4ed91; }
+:root[data-theme='dark'] .motion-collection {
+  --lab-bg: #000000;
+  --lab-text: #f5f5ef;
+  --lab-muted: #b8bfcc;
+  --lab-line: #454d5a;
+  --lab-accent: #ffa18a;
+  --lab-selected-bg: #f1eee7;
+  --lab-selected-text: #20211e;
+}
+/* Image-overlay labels always sit on white, independent of the gallery mode. */
+.design-preview-label { color: #171819; }
+
+/* The interactive collection starts directly with filters and thumbnails. */
+.motion-collection .design-lab-tools { border-top: 0; padding-top: 0; }

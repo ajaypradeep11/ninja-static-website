@@ -1,0 +1,727 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+body:has(.prism-page) {
+  background: #f4f3ee;
+  color: #242621;
+}
+.prism-page {
+  --prism-ink: #242621;
+  --prism-muted: #66675e;
+  --prism-line: #d2d2c8;
+  --prism-acid: #e5f371;
+  background: #f4f3ee;
+  color: var(--prism-ink);
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  padding: 0 48px 100px;
+  overflow: clip;
+}
+.prism-page a {
+  color: inherit;
+  text-decoration: none;
+}
+.prism-page button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.prism-page button:focus-visible,
+.prism-page a:focus-visible {
+  outline: 2px solid #475b1f;
+  outline-offset: 5px;
+}
+.prism-page p,
+.prism-page h1,
+.prism-page h2 {
+  margin: 0;
+}
+.prism-page svg {
+  display: block;
+}
+.prism-header {
+  height: 96px;
+  border-bottom: 1px solid var(--prism-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.prism-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 30px;
+  letter-spacing: -1.5px;
+  font-weight: 700;
+  min-height: 44px;
+}
+.prism-wordmark-dot {
+  font-size: 11px;
+  align-self: flex-start;
+  padding-top: 9px;
+  margin-left: -5px;
+  letter-spacing: 0;
+}
+.prism-mark {
+  display: block;
+  width: 26px;
+  height: 26px;
+  border: 1px solid currentColor;
+  transform: rotate(30deg);
+  position: relative;
+  margin-right: 5px;
+}
+.prism-mark:after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid currentColor;
+  transform: rotate(30deg);
+}
+.prism-header-note {
+  font-size: 12px;
+  color: var(--prism-muted);
+  margin-left: auto;
+  margin-right: 11vw;
+}
+.prism-nav-link {
+  display: flex;
+  gap: 26px;
+  align-items: center;
+  min-height: 44px;
+  font-size: 12px;
+}
+.prism-nav-link span {
+  font-size: 20px;
+}
+.prism-hero {
+  display: grid;
+  grid-template-columns: 44% 56%;
+  min-height: 760px;
+  padding-top: 38px;
+  gap: 0;
+}
+.prism-hero-copy {
+  padding: 13px 0 30px;
+  position: relative;
+  z-index: 1;
+}
+.prism-eyebrow {
+  font-size: 9px;
+  letter-spacing: 1.35px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.prism-eyebrow > span:not(.prism-product-name span) {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.prism-hero h1 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(96px, 10.8vw, 163px);
+  font-weight: 400;
+  letter-spacing: -0.072em;
+  line-height: 0.83;
+  margin: 47px 0 29px;
+  position: relative;
+}
+.prism-hero h1 em {
+  font-weight: 400;
+  letter-spacing: -0.07em;
+}
+.prism-intro {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #585b52;
+  margin-left: 5px;
+}
+.prism-discover {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  font-size: 10px;
+  line-height: 1.6;
+  margin-top: 37px;
+  width: fit-content;
+}
+.prism-arrow-circle {
+  width: 51px;
+  height: 51px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #a9ab9c;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.prism-arrow-circle svg {
+  width: 21px;
+  height: 21px;
+}
+.prism-discover:hover .prism-arrow-circle {
+  background: var(--prism-acid);
+}
+.prism-specimen {
+  min-width: 0;
+  padding-left: 20px;
+  position: relative;
+}
+.prism-specimen-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 13px 0 22px;
+}
+.prism-edition {
+  color: #66675e;
+}
+.prism-stage {
+  height: 530px;
+  position: relative;
+  background: radial-gradient(
+    ellipse at 49% 56%,
+    #ebeae1 0%,
+    #f2f1eb 48%,
+    #f4f3ee 76%
+  );
+  isolation: isolate;
+}
+.prism-stage:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  bottom: 35px;
+  left: 20%;
+  width: 60%;
+  height: 40px;
+  filter: blur(14px);
+  background: radial-gradient(ellipse, rgba(52, 56, 42, 0.2), transparent 67%);
+  transform: rotate(-12deg);
+}
+.prism-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.prism-object-number {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 125px;
+  line-height: 1;
+  position: absolute;
+  right: -6px;
+  top: 9px;
+  color: #d4d5c7;
+  letter-spacing: -8px;
+  z-index: -1;
+}
+.prism-dimension {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #6d7063;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.prism-dimension:after,
+.prism-dimension:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 1px;
+  height: 90px;
+  background: var(--prism-line);
+  margin: 16px 3px;
+}
+.prism-registration {
+  position: absolute;
+  height: 14px;
+  width: 14px;
+  border-color: #a8ab9e;
+  border-style: solid;
+  border-width: 0;
+}
+.prism-registration-tl {
+  top: 0;
+  left: 0;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+.prism-registration-tr {
+  top: 0;
+  right: 0;
+  border-top-width: 1px;
+  border-right-width: 1px;
+}
+.prism-registration-bl {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+.prism-registration-br {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+.prism-stage-caption {
+  position: absolute;
+  z-index: 2;
+  bottom: 13px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #626458;
+  pointer-events: none;
+}
+.prism-stage-caption > span:last-child {
+  font-size: 21px;
+}
+.prism-product-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 23px 0 14px;
+  border-bottom: 1px solid var(--prism-line);
+}
+.prism-product-name {
+  flex: 1;
+  min-width: 82px;
+}
+.prism-product-name > .prism-eyebrow {
+  color: var(--prism-muted);
+  font-size: 8px;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.prism-product-name > p:last-child {
+  font-size: 19px;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: baseline;
+  gap: 11px;
+}
+.prism-product-name > p:last-child > span {
+  font-size: 8px;
+  letter-spacing: 0.5px;
+  color: var(--prism-muted);
+}
+.prism-finishes {
+  display: flex;
+  gap: 2px;
+}
+.prism-swatch {
+  background: none;
+  border: 0;
+  width: 44px;
+  height: 53px;
+  padding: 3px 2px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 6px;
+}
+.prism-swatch > span:first-child {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--prism-swatch);
+  position: relative;
+  border: 1px solid #96998e;
+}
+.prism-swatch > span:first-child:after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  transition: border-color 0.2s;
+}
+.prism-swatch.is-selected > span:first-child:after {
+  border-color: var(--prism-ink);
+}
+.prism-swatch-label {
+  font-size: 8px;
+  color: #626458;
+}
+.prism-inspect {
+  min-height: 44px;
+  font-size: 10px !important;
+  border: 1px solid var(--prism-ink);
+  border-radius: 0;
+  background: transparent;
+  padding: 0 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+.prism-inspect > span {
+  font-size: 19px;
+  font-weight: 400;
+}
+.prism-inspect:hover,
+.prism-inspect.is-inspecting {
+  background: var(--prism-acid);
+}
+.prism-finish-caption {
+  font-size: 10px !important;
+  color: var(--prism-muted);
+  line-height: 1.5;
+  padding-top: 13px;
+  min-height: 44px;
+}
+.prism-notes {
+  display: grid;
+  grid-template-columns: 18% 46% 36%;
+  padding: 53px 0 65px;
+  margin-top: 34px;
+  border-top: 1px solid var(--prism-line);
+}
+.prism-notes-index {
+  font-size: 9px;
+  letter-spacing: 1px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.prism-notes-index > span:last-child {
+  color: var(--prism-muted);
+}
+.prism-notes-copy {
+  padding-right: 80px;
+}
+.prism-notes h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 400;
+  font-size: 52px;
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 24px;
+}
+.prism-notes h2 em {
+  font-weight: 400;
+}
+.prism-notes-copy > p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #626458;
+  max-width: 350px;
+}
+.prism-specs {
+  margin: 5px 0 0;
+  padding: 0;
+  align-self: center;
+  font-size: 10px;
+}
+.prism-specs > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid var(--prism-line);
+  padding: 17px 0;
+}
+.prism-specs dt {
+  color: var(--prism-muted);
+}
+.prism-specs dd {
+  margin: 0;
+  text-align: right;
+}
+.prism-footer {
+  border-top: 1px solid var(--prism-line);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 22px;
+  font-size: 8px;
+  letter-spacing: 0.8px;
+  color: #626458;
+}
+@media (min-width: 1700px) {
+  .prism-page {
+    padding-left: max(48px, calc((100vw - 1500px) / 2));
+    padding-right: max(48px, calc((100vw - 1500px) / 2));
+  }
+  .prism-stage {
+    height: 590px;
+  }
+}
+@media (max-width: 1100px) {
+  .prism-page {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .prism-hero {
+    grid-template-columns: 43% 57%;
+    min-height: 700px;
+  }
+  .prism-hero h1 {
+    font-size: 12vw;
+    margin-top: 60px;
+  }
+  .prism-stage {
+    height: 480px;
+  }
+  .prism-specimen {
+    padding-left: 10px;
+  }
+  .prism-edition {
+    display: none;
+  }
+  .prism-product-controls {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .prism-inspect {
+    margin-left: auto;
+  }
+  .prism-notes {
+    grid-template-columns: 16% 45% 39%;
+  }
+  .prism-notes-copy {
+    padding-right: 30px;
+  }
+  .prism-notes h2 {
+    font-size: 44px;
+  }
+  .prism-header-note {
+    margin-right: 4vw;
+  }
+  .prism-eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.6px;
+  }
+}
+@media (max-width: 760px) {
+  .prism-page {
+    padding: 0 22px 110px;
+  }
+  .prism-header {
+    height: 78px;
+    gap: 15px;
+  }
+  .prism-wordmark {
+    font-size: 26px;
+  }
+  .prism-mark {
+    width: 21px;
+    height: 21px;
+  }
+  .prism-header-note {
+    display: none;
+  }
+  .prism-nav-link {
+    font-size: 10px;
+    gap: 12px;
+  }
+  .prism-hero {
+    display: flex;
+    flex-direction: column;
+    padding-top: 24px;
+    min-height: 0;
+  }
+  .prism-hero-copy {
+    padding: 5px 0 20px;
+  }
+  .prism-hero h1 {
+    font-size: clamp(87px, 18vw, 130px);
+    line-height: 0.86;
+    margin: 32px 0 23px;
+  }
+  .prism-hero h1 br:nth-of-type(1) {
+    display: none;
+  }
+  .prism-hero h1 br:nth-of-type(1):after {
+    content: " ";
+  }
+  .prism-hero h1 {
+    max-width: 600px;
+  }
+  .prism-hero h1 em {
+    padding-left: 0;
+  }
+  .prism-intro {
+    font-size: 12px;
+    margin-left: 2px;
+  }
+  .prism-discover {
+    position: absolute;
+    right: 0;
+    bottom: 25px;
+    gap: 9px;
+    font-size: 8px;
+    max-width: 145px;
+  }
+  .prism-arrow-circle {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+  }
+  .prism-specimen {
+    padding-left: 0;
+    margin-top: 15px;
+  }
+  .prism-specimen-top {
+    font-size: 8px;
+    padding-bottom: 17px;
+  }
+  .prism-edition {
+    display: inline;
+    font-size: 7px;
+  }
+  .prism-stage {
+    height: 440px;
+  }
+  .prism-object-number {
+    font-size: 105px;
+  }
+  .prism-product-controls {
+    gap: 8px;
+    padding-top: 19px;
+  }
+  .prism-product-name > p:last-child {
+    font-size: 18px;
+  }
+  .prism-product-name > p:last-child > span {
+    display: none;
+  }
+  .prism-inspect {
+    font-size: 9px !important;
+    padding: 0 9px;
+    gap: 5px;
+  }
+  .prism-swatch {
+    width: 35px;
+  }
+  .prism-finishes {
+    gap: 0;
+  }
+  .prism-notes {
+    grid-template-columns: 1fr;
+    padding-top: 30px;
+    margin-top: 35px;
+    gap: 27px;
+    padding-bottom: 38px;
+  }
+  .prism-notes-index {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .prism-notes-copy {
+    padding-right: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+  }
+  .prism-notes h2 {
+    font-size: 40px;
+    margin-bottom: 0;
+  }
+  .prism-notes-copy > p {
+    font-size: 11px;
+    line-height: 1.8;
+  }
+  .prism-specs {
+    font-size: 11px;
+  }
+  .prism-footer {
+    font-size: 7px;
+    line-height: 1.8;
+  }
+  .prism-footer > span:last-child {
+    text-align: right;
+  }
+}
+@media (max-width: 430px) {
+  .prism-hero h1 {
+    font-size: 99px;
+    letter-spacing: -7px;
+  }
+  .prism-hero h1 br:nth-of-type(1) {
+    display: block;
+  }
+  .prism-hero-copy {
+    padding-bottom: 8px;
+  }
+  .prism-hero h1 {
+    margin-top: 29px;
+    margin-bottom: 23px;
+  }
+  .prism-intro {
+    font-size: 11px;
+    line-height: 1.8;
+  }
+  .prism-discover {
+    bottom: 14px;
+    max-width: 130px;
+  }
+  .prism-discover > span:last-child {
+    max-width: 75px;
+  }
+  .prism-stage {
+    height: 400px;
+  }
+  .prism-notes-copy {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .prism-notes h2 {
+    font-size: 47px;
+  }
+  .prism-notes-copy > p {
+    max-width: none;
+  }
+  .prism-product-name {
+    min-width: 55px;
+  }
+  .prism-product-controls {
+    gap: 5px;
+  }
+  .prism-swatch {
+    width: 32px;
+  }
+  .prism-inspect {
+    padding: 0 7px;
+    font-size: 8px !important;
+  }
+  .prism-inspect > span {
+    font-size: 17px;
+  }
+  .prism-stage-caption {
+    font-size: 6px;
+    left: 13px;
+    right: 13px;
+  }
+  .prism-dimension {
+    left: 3px;
+    font-size: 7px;
+  }
+  .prism-dimension:after,
+  .prism-dimension:before {
+    height: 55px;
+  }
+  .prism-edition {
+    font-size: 6px;
+    letter-spacing: 0.6px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prism-page * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}

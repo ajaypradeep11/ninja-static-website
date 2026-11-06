@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#d7cbdf" />
+    <title>Dreamscape — LocalNinja Design Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/work/designs/base.css" />
+    <link rel="stylesheet" href="/src/work/designs/dreamscape.css" />
+  </head>
+  <body data-design="dreamscape" data-world="dusk">
+    <header class="somnia-header">
+      <a class="somnia-logo" href="#home" aria-label="Somnia home"
+        >somnia<span>✳</span></a
+      >
+      <nav aria-label="Somnia navigation">
+        <a href="#worlds">Our worlds</a><a href="#journal">Field notes</a>
+      </nav>
+      <a class="nav-enter" href="#worlds">Find your elsewhere <span>↗</span></a>
+    </header>
+    <main>
+      <section class="hero" id="home" aria-labelledby="hero-title">
+        <div class="hero-sky" aria-hidden="true"></div>
+        <div class="hero-intro">
+          <span class="eyebrow"
+            ><span class="tiny-star">✳</span> THE ART OF BEING ELSEWHERE</span
+          >
+          <h1 id="hero-title">A place<br />between <em>places.</em></h1>
+          <p>For the part of you<br />that still knows how to dream.</p>
+        </div>
+        <div
+          class="dream-world"
+          role="img"
+          aria-label="A lavender arch opens onto a peach sun above a quiet blue sea, with floating spheres and sculptural steps."
+        >
+          <div class="horizon"></div>
+          <div class="floor"></div>
+          <div class="arch-shadow"></div>
+          <div class="arch">
+            <div class="arch-inner">
+              <div class="inner-sun"></div>
+              <div class="inner-sea"></div>
+              <div class="sun-reflection"></div>
+            </div>
+            <div class="arch-edge"></div>
+          </div>
+          <div class="steps"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="sphere sphere-one"></div>
+          <div class="sphere sphere-two"></div>
+          <div class="sphere sphere-three"></div>
+          <div class="sphere-shadow"></div>
+          <div class="orbit"></div>
+          <div class="floating-star">✧</div>
+        </div>
+        <div class="hero-caption">
+          <span class="caption-line"></span>
+          <p>
+            <span id="world-number">01 / 03</span
+            ><strong id="world-name">The lavender hour</strong
+            ><span id="world-location">Somewhere outside of time</span>
+          </p>
+        </div>
+        <a class="round-cta" href="#worlds"
+          ><span>Wander a little</span><span aria-hidden="true">↓</span></a
+        >
+        <div class="hero-foot">
+          <span>A COLLECTION OF IMAGINED ESCAPES</span
+          ><span>LESS DOING. MORE BEING.</span>
+        </div>
+      </section>
+      <section
+        class="worlds-section"
+        id="worlds"
+        aria-labelledby="worlds-title"
+      >
+        <div class="section-heading">
+          <span class="eyebrow">01 — CHOOSE YOUR STATE OF MIND</span>
+          <h2 id="worlds-title">
+            Where would you<br />like to <em>drift?</em>
+          </h2>
+          <p>
+            No itinerary. No wrong turn.<br />Just a different kind of
+            somewhere.
+          </p>
+        </div>
+        <div class="worlds-list" aria-label="Choose an imagined escape">
+          <button
+            class="world-option is-active"
+            data-world-choice="dusk"
+            aria-pressed="true"
+          >
+            <span class="world-mini mini-dusk" aria-hidden="true"><i></i></span
+            ><span class="world-description"
+              ><small>01 / STILLNESS</small><strong>The lavender hour</strong
+              ><span>Where the day forgets to end.</span></span
+            ><span class="world-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button
+            class="world-option"
+            data-world-choice="tide"
+            aria-pressed="false"
+          >
+            <span class="world-mini mini-tide" aria-hidden="true"><i></i></span
+            ><span class="world-description"
+              ><small>02 / CLARITY</small><strong>A softer horizon</strong
+              ><span>A little room to hear yourself.</span></span
+            ><span class="world-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button
+            class="world-option"
+            data-world-choice="rose"
+            aria-pressed="false"
+          >
+            <span class="world-mini mini-rose" aria-hidden="true"><i></i></span
+            ><span class="world-description"
+              ><small>03 / WONDER</small><strong>The waking dream</strong
+              ><span>Follow the beautiful unknown.</span></span
+            ><span class="world-arrow" aria-hidden="true">↗</span>
+          </button>
+        </div>
+        <div class="world-status" role="status" aria-live="polite">
+          You’re in the lavender hour. Select a world to change the view above.
+        </div>
+        <a class="text-link" href="#home">Return to your view <span>↑</span></a>
+      </section>
+      <section
+        class="journal-section"
+        id="journal"
+        aria-labelledby="journal-title"
+      >
+        <div class="journal-art" aria-hidden="true">
+          <div class="journal-orb"></div>
+          <div class="journal-plinth"></div>
+          <div class="journal-ring"></div>
+          <span>NOT ALL WHO WANDER<br />NEED A DESTINATION.</span>
+        </div>
+        <div class="journal-content">
+          <span class="eyebrow">02 — NOTES FROM ELSEWHERE</span
+          ><span class="journal-tag">THE SLOW JOURNAL · 3 MIN READ</span>
+          <h2 id="journal-title">In praise of<br /><em>getting lost.</em></h2>
+          <p>
+            There is a particular kind of magic in a day with no shape. A road
+            you didn’t plan to take. A colour you can’t quite name. A silence
+            that feels like coming home.
+          </p>
+          <details>
+            <summary>
+              Read the field note <span aria-hidden="true">+</span>
+            </summary>
+            <div class="journal-note">
+              <p>
+                We made these worlds as an invitation to pause. To look at the
+                space between one thought and the next, and find that it is
+                already full of possibility.
+              </p>
+              <p>
+                Here is a small experiment: look away from your screen. Find the
+                furthest point you can see. Stay there for three breaths. You
+                don’t have to go anywhere to arrive somewhere new.
+              </p>
+              <span
+                >With room to wander,<br /><em>The Somnia notebook</em></span
+              >
+            </div>
+          </details>
+        </div>
+      </section>
+      <footer class="somnia-footer">
+        <a class="somnia-logo" href="#home">somnia<span>✳</span></a>
+        <p>An imagined escape. A real moment of pause.</p>
+        <span>A FICTIONAL RETREAT · A DESIGN EXPLORATION</span>
+      </footer>
+    </main>
+    <script type="module" src="/src/work/designs/base.js"></script>
+    <script type="module" src="/src/work/designs/dreamscape.js"></script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+ECHO ZERO character asset
+
+Rain Rig (CC) Blender Foundation | studio.blender.org
+Original asset: Rain v3, downloaded as rain-v33.zip
+Source: https://studio.blender.org/characters/rain/v3/
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+Adapted for LocalNinja ECHO ZERO:
+- Posed the authored character rig into a crouch.
+- Adjusted chin, forward gaze, relaxed hands, and curved ponytail.
+- Changed wardrobe to a matte charcoal top, dark denim and ivory footwear.
+- Evaluated the rig into a static mesh for a web-based 360-degree viewer.
+- Baked color textures, resized maps, repaired pupil materials for glTF,
+  and compressed the geometry with Draco.
+
+The character's underlying sculpt, topology, rig, hair, clothing and original
+texture work are by Blender Studio/Blender Foundation. ECHO ZERO does not
+claim those assets as its own original modeling work.
+
+The local Draco decoder files in draco/ come from the installed Three.js
+package and are provided under the Apache License 2.0; see draco/LICENSE.

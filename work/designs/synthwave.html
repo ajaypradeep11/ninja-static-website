@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#100b25" />
+    <meta
+      name="description"
+      content="NIGHT DRIVE. A Synthwave design study by LocalNinja. Pick a frequency and find your after-hours state of mind."
+    />
+    <title>Synthwave — LocalNinja Design Lab</title>
+    <link rel="stylesheet" href="/src/work/designs/base.css" />
+    <link rel="stylesheet" href="/src/work/designs/synthwave.css" />
+  </head>
+  <body data-design="synthwave" data-station="night">
+    <header class="nd-header">
+      <a class="nd-logo" href="#home" aria-label="Night Drive home"
+        ><span>NIGHT</span>DRIVE<span class="logo-star" aria-hidden="true"
+          >✦</span
+        ></a
+      >
+      <nav aria-label="Main navigation">
+        <a href="#frequencies">The frequencies</a
+        ><a href="#manifesto">Our wavelength</a>
+      </nav>
+      <a class="header-frequency" href="#station"
+        ><span class="signal-dot" aria-hidden="true"></span
+        ><span data-frequency>88.4 FM</span
+        ><span class="header-arrow" aria-hidden="true">↗</span></a
+      >
+    </header>
+    <main id="home">
+      <section class="night-hero" aria-labelledby="hero-title">
+        <div class="night-sky" aria-hidden="true"></div>
+        <svg
+          class="night-landscape"
+          viewBox="0 0 1440 800"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="sunset" x2="0" y2="1">
+              <stop class="sun-top" offset="0" />
+              <stop class="sun-bottom" offset="1" />
+            </linearGradient>
+            <linearGradient id="road-fade" x2="0" y2="1">
+              <stop stop-color="#130c36" />
+              <stop offset="1" stop-color="#1a0c2c" />
+            </linearGradient>
+            <linearGradient id="car-body" x2="0" y2="1">
+              <stop stop-color="#6e4b91" />
+              <stop offset=".45" stop-color="#130d2d" />
+              <stop offset="1" stop-color="#070617" />
+            </linearGradient>
+            <linearGradient id="car-glass" x2="0" y2="1">
+              <stop stop-color="#f458c7" />
+              <stop offset="1" stop-color="#302253" />
+            </linearGradient>
+            <mask id="sun-stripes">
+              <rect width="1440" height="800" fill="white" />
+              <path
+                d="M500 352H940M500 375H940M500 401H940M500 431H940M500 465H940M500 500H940"
+                stroke="black"
+                stroke-width="9"
+              />
+            </mask>
+            <filter id="soft-glow"><feGaussianBlur stdDeviation="4" /></filter>
+          </defs>
+          <circle class="sun-halo" cx="720" cy="358" r="213" />
+          <circle
+            cx="720"
+            cy="358"
+            r="174"
+            fill="url(#sunset)"
+            mask="url(#sun-stripes)"
+          />
+          <path
+            class="mountain-back"
+            d="M0 394 81 429 160 362 245 431 296 411 387 478 488 442 548 487 675 478 720 490 805 471 879 449 928 462 1004 388 1065 427 1148 352 1243 424 1320 391 1440 452V800H0Z"
+          />
+          <path
+            class="mountain-front"
+            d="M0 425 95 485 160 439 215 468 287 452 390 494 452 481 581 510 720 492 839 507 945 476 1008 489 1104 441 1190 470 1280 431 1355 476 1440 442V800H0Z"
+          />
+          <g class="mountain-lines" fill="none">
+            <path
+              d="M0 425 95 485 160 439 215 468 287 452 390 494 452 481 581 510M839 507 945 476 1008 489 1104 441 1190 470 1280 431 1355 476 1440 442M160 439 175 479 95 485M287 452 300 481 390 494M1104 441 1080 483 1008 489M1280 431 1254 479 1190 470"
+            />
+          </g>
+          <path d="M0 516H1440V800H0Z" fill="url(#road-fade)" />
+          <g class="grid-lines" fill="none">
+            <path
+              d="M0 523H1440M0 539H1440M0 563H1440M0 597H1440M0 645H1440M0 710H1440M0 797H1440M720 514 0 605M720 514 0 710M720 514 185 800M720 514 445 800M720 514 625 800M720 514 815 800M720 514 995 800M720 514 1255 800M720 514 1440 710M720 514 1440 605"
+            />
+          </g>
+          <path class="horizon" d="M0 516H1440" />
+          <path d="M697 516 520 800H920L743 516Z" fill="#0b0820" opacity=".9" />
+          <path class="road-edge" d="M697 516 520 800M743 516 920 800" />
+          <path
+            class="road-center"
+            d="M720 532V543M720 564V587M720 629V673M720 738V795"
+          />
+          <ellipse
+            cx="720"
+            cy="664"
+            rx="154"
+            ry="17"
+            class="car-glow"
+            filter="url(#soft-glow)"
+          />
+          <g class="retro-car">
+            <path
+              d="m619 616 32-62h138l32 62 27 13-9 39H601l-9-39Z"
+              fill="url(#car-body)"
+              stroke="#b45aca"
+              stroke-width="1.4"
+            />
+            <path
+              d="m635 610 25-47h120l25 47Z"
+              fill="url(#car-glass)"
+              stroke="#c46ac7"
+            />
+            <path
+              d="M646 589H794M642 599H798M652 577H788"
+              stroke="#231335"
+              stroke-width="3"
+            />
+            <path
+              d="m605 624 109 6v12H607Zm230 0-109 6v12h107Z"
+              fill="#ff53c0"
+            />
+            <path
+              d="m605 628 109 6M835 628l-109 6"
+              stroke="#ffd6fa"
+              stroke-width="3"
+            />
+            <path d="M606 651H834" stroke="#7f6096" />
+            <path d="M698 649h44v13h-44Z" fill="#ddd8e8" />
+            <path
+              d="M608 667v8h24v-8M808 667v8h24v-8"
+              stroke="#080614"
+              stroke-width="8"
+            />
+          </g>
+        </svg>
+        <div class="hero-heading">
+          <p class="eyebrow">Independent frequencies. Infinite nights.</p>
+          <h1 id="hero-title"><span>THE NIGHT</span><span>IS YOURS.</span></h1>
+          <p class="hero-subtitle">
+            Somewhere between the last light<br />and the first feeling.
+          </p>
+        </div>
+        <div class="scene-coordinate coordinate-left" aria-hidden="true">
+          <span>EST. 1986 / REBORN 2026</span
+          ><b>NO DESTINATION<br />NECESSARY.</b>
+        </div>
+        <div class="scene-coordinate coordinate-right" aria-hidden="true">
+          <span>YOUR LOCAL TIME</span><b>ALWAYS<br />AFTER HOURS.</b>
+        </div>
+        <div class="station-console" id="station">
+          <div class="station-current">
+            <span class="station-icon" aria-hidden="true">◉</span>
+            <div>
+              <p class="console-label">YOUR FREQUENCY</p>
+              <h2 data-station-name>Midnight run</h2>
+            </div>
+          </div>
+          <div
+            class="station-presets"
+            role="group"
+            aria-label="Choose a station mood"
+          >
+            <button
+              type="button"
+              data-select-station="night"
+              aria-pressed="true"
+            >
+              <span>01</span> Night drive</button
+            ><button
+              type="button"
+              data-select-station="coast"
+              aria-pressed="false"
+            >
+              <span>02</span> Coastline</button
+            ><button
+              type="button"
+              data-select-station="after"
+              aria-pressed="false"
+            >
+              <span>03</span> After hours
+            </button>
+          </div>
+          <a
+            class="console-link"
+            href="#frequencies"
+            aria-label="Explore the frequencies"
+            ><span aria-hidden="true">↘</span></a
+          >
+        </div>
+      </section>
+      <section
+        class="frequencies section-width"
+        id="frequencies"
+        aria-labelledby="frequency-title"
+      >
+        <div class="section-topline">
+          <span class="eyebrow">SELECT YOUR STATE OF MIND</span
+          ><span class="section-number">01 — 03</span>
+        </div>
+        <div class="section-heading">
+          <h2 id="frequency-title">Find your<br /><em>frequency.</em></h2>
+          <p>
+            Three routes out of the ordinary.<br />Choose a station. Change the
+            atmosphere.
+          </p>
+        </div>
+        <div class="frequency-cards">
+          <button
+            class="frequency-card"
+            type="button"
+            data-select-station="night"
+            aria-pressed="true"
+          >
+            <div class="cover cover-night" aria-hidden="true">
+              <span class="cover-orbit"></span
+              ><span class="cover-title">MIDNIGHT<br />RUN</span
+              ><span class="cover-tag">VOL. 001 / 88.4 FM</span>
+            </div>
+            <div class="card-caption">
+              <span
+                ><b>Midnight run</b
+                ><small>Neon streets. No looking back.</small></span
+              ><span class="card-arrow" aria-hidden="true">↗</span>
+            </div>
+            <span class="card-meta">SYNTHWAVE · OUTRUN <span>01</span></span>
+          </button>
+          <button
+            class="frequency-card"
+            type="button"
+            data-select-station="coast"
+            aria-pressed="false"
+          >
+            <div class="cover cover-coast" aria-hidden="true">
+              <span class="coast-sun"></span><span class="coast-grid"></span
+              ><span class="cover-title">PACIFIC<br />HORIZON</span
+              ><span class="cover-tag">VOL. 002 / 96.2 FM</span>
+            </div>
+            <div class="card-caption">
+              <span
+                ><b>Pacific horizon</b
+                ><small>Salt in the air. Gold on the dash.</small></span
+              ><span class="card-arrow" aria-hidden="true">↗</span>
+            </div>
+            <span class="card-meta">CHILLWAVE · DREAM POP <span>02</span></span>
+          </button>
+          <button
+            class="frequency-card"
+            type="button"
+            data-select-station="after"
+            aria-pressed="false"
+          >
+            <div class="cover cover-after" aria-hidden="true">
+              <span class="after-portal"></span
+              ><span class="cover-title">AFTER<br />HOURS</span
+              ><span class="cover-tag">VOL. 003 / 104.8 FM</span>
+            </div>
+            <div class="card-caption">
+              <span
+                ><b>After hours</b
+                ><small>When the city finally belongs to you.</small></span
+              ><span class="card-arrow" aria-hidden="true">↗</span>
+            </div>
+            <span class="card-meta"
+              >DARKSYNTH · ELECTRONIC <span>03</span></span
+            >
+          </button>
+        </div>
+        <p class="station-status" role="status" data-station-status>
+          Midnight run selected. A pink horizon for the road ahead. Visual
+          station preview.
+        </p>
+      </section>
+      <section
+        class="manifesto section-width"
+        id="manifesto"
+        aria-labelledby="manifesto-title"
+      >
+        <span class="manifesto-star" aria-hidden="true">✦</span>
+        <p class="eyebrow">FOR THE ONES WHO TAKE THE LONG WAY HOME</p>
+        <h2 id="manifesto-title">Less noise.<br />More <em>feeling.</em></h2>
+        <p>
+          We believe the best part of the day happens after it ends. Night Drive
+          is a love letter to glowing dashboards, empty highways, and the sound
+          of somewhere else.
+        </p>
+        <a href="#station"
+          >Back to your frequency <span aria-hidden="true">↗</span></a
+        >
+      </section>
+    </main>
+    <footer class="nd-footer section-width">
+      <a class="nd-logo" href="#home"><span>NIGHT</span>DRIVE</a>
+      <p>A world built for your after hours.</p>
+      <span>© 2026 NIGHT DRIVE</span>
+    </footer>
+    <script type="module" src="/src/work/designs/synthwave.js"></script>
+    <script type="module" src="/src/work/designs/base.js"></script>
+  </body>
+</html>

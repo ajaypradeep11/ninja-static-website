@@ -1,5 +1,5 @@
 // LocalNinja - site interactions
-// Contracts: JS only toggles classes / builds URLs; CSS owns all transitions.
+// CSS owns transitions/animation; JS initializes content and interaction state.
 
 /* ---------------------------------------------------------------- *
  * 1. Scroll reveal - .reveal gains .is-visible once in view        *
@@ -91,40 +91,49 @@ function initNav() {
 }
 
 /* ---------------------------------------------------------------- *
- * 3. Services accordion - toggles .is-open on .service-row         *
+ * 3. Service wheel - CSS rotation with lifecycle pause              *
  * ---------------------------------------------------------------- */
-function initServices() {
-  const rows = document.querySelectorAll('.service-row');
-  if (!rows.length) return;
+function initServiceWheel() {
+  const hero = document.querySelector('.service-hero');
+  if (!hero) return;
 
-  rows.forEach((row) => {
-    const toggle = row.querySelector('.service-toggle');
-    if (!toggle) return;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let visible = true;
 
-    const setOpen = (open) => {
-      row.classList.toggle('is-open', open);
-      toggle.setAttribute('aria-expanded', String(open));
-    };
-
-    // The whole row is a hit target, but clicks inside the details
-    // (e.g. selecting text) shouldn't collapse it.
-    row.addEventListener('click', (event) => {
-      if (event.target.closest('.service-details')) return;
-      setOpen(!row.classList.contains('is-open'));
-    });
-
-    row._setOpen = setOpen;
+  // Repeat the seven services around a continuous ring, as in the reference.
+  // Copies are visual links only; keyboard/screen-reader users get seven items.
+  const ring = hero.querySelector('.service-wheel-ring');
+  [...ring.children].forEach((spoke) => {
+    const copy = spoke.cloneNode(true);
+    copy.classList.add('is-copy');
+    copy.setAttribute('aria-hidden', 'true');
+    copy.querySelector('a').tabIndex = -1;
+    ring.append(copy);
+  });
+  [...ring.children].forEach((spoke, index) => {
+    spoke.style.setProperty('--mobile-angle', spoke.style.getPropertyValue('--angle'));
+    spoke.style.setProperty('--angle', `${index * 360 / ring.children.length}deg`);
+    const card = spoke.querySelector('.wheel-card');
+    const back = card.firstElementChild.cloneNode(true);
+    back.classList.add('wheel-card-back');
+    back.setAttribute('aria-hidden', 'true');
+    card.append(back);
   });
 
-  // Arriving via a #svc-* link (header dropdown) opens that row.
-  const openFromHash = () => {
-    const id = location.hash.slice(1);
-    if (!id) return;
-    const row = document.getElementById(id);
-    if (row?.classList.contains('service-row')) row._setOpen(true);
+  const sync = () => {
+    hero.classList.toggle('is-running', visible && !document.hidden && !reducedMotion.matches);
   };
-  window.addEventListener('hashchange', openFromHash);
-  openFromHash();
+
+  hero.classList.add('is-enhanced');
+  reducedMotion.addEventListener('change', sync);
+  document.addEventListener('visibilitychange', sync);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      sync();
+    }).observe(hero);
+  }
+  sync();
 }
 
 /* ---------------------------------------------------------------- *
@@ -244,7 +253,7 @@ function initContactForm() {
 function init() {
   initReveal();
   initNav();
-  initServices();
+  initServiceWheel();
   initWorkTabs();
   initVoiceShowcase();
   initContactForm();

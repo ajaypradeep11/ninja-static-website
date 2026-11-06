@@ -1,0 +1,906 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap");
+
+body:has(.mina-page) {
+  background: #171718;
+}
+.mina-page {
+  --mina-ink: #171718;
+  --mina-paper: #e5e3e5;
+  --mina-muted: #aaa7ad;
+  --mina-line: #ffffff28;
+  background: var(--mina-ink);
+  color: var(--mina-paper);
+  font-family: "Manrope", sans-serif;
+}
+.mina-page ::selection {
+  background: #c8b3ec;
+  color: #171718;
+}
+.mina-page a {
+  text-decoration: none;
+}
+.mina-page button {
+  color: inherit;
+}
+.mina-page svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.mina-page p,
+.mina-page h1,
+.mina-page h2,
+.mina-page h3 {
+  margin: 0;
+}
+.mina-page button:focus-visible,
+.mina-page a:focus-visible,
+.mina-page select:focus-visible {
+  outline: 2px solid #c0b1ff;
+  outline-offset: 6px;
+}
+.mina-hero {
+  min-height: 800px;
+  height: 100svh;
+  max-height: 1180px;
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+.mina-header {
+  padding: 24px 4%;
+  position: relative;
+  z-index: 5;
+}
+.mina-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mina-header a {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mina-header a:hover {
+  color: #bcb3ff;
+}
+.mina-title {
+  position: absolute;
+  top: 96px;
+  left: 2.6%;
+  right: 2.6%;
+  font-family: "Inter Tight", "Arial Black", sans-serif;
+  font-size: 16.5vw;
+  font-weight: 900;
+  letter-spacing: -0.065em;
+  line-height: 0.91;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 0.06em;
+}
+.mina-title span {
+  display: block;
+  background: linear-gradient(180deg, #f4f2f3, #a19fa8);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.mina-character-stage {
+  position: absolute;
+  z-index: 2;
+  top: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(49vw, 70svh, 770px);
+  aspect-ratio: 1;
+  perspective: 1100px;
+}
+.mina-character-reveal,
+.mina-character-frame,
+.mina-character {
+  width: 100%;
+  height: 100%;
+}
+.mina-character {
+  position: relative;
+}
+.mina-character-images,
+.mina-face-warp {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.mina-face-warp {
+  opacity: 0;
+  filter: drop-shadow(0 20px 35px #0002);
+}
+.mina-face-warp canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.mina-character[data-warp="ready"] .mina-face-warp {
+  opacity: 1;
+}
+.mina-character[data-warp="ready"] .mina-character-images {
+  opacity: 0;
+}
+.mina-character img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(0 20px 35px #0002);
+}
+.mina-character-fallback {
+  height: 100%;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  font:
+    800 300px/1 "Inter Tight",
+    sans-serif;
+  color: #b7a1d8;
+}
+.mina-character-fallback span {
+  font:
+    14px "Manrope",
+    sans-serif;
+}
+.mina-zone {
+  position: absolute;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  z-index: 2;
+  padding: 0;
+  cursor: pointer;
+}
+.mina-zone-hair {
+  left: 16%;
+  top: 3%;
+  width: 70%;
+  height: 32%;
+}
+.mina-zone-cheek {
+  top: 55%;
+  width: 17%;
+  height: 19%;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.mina-zone-cheek-left {
+  left: 27%;
+}
+.mina-zone-cheek-right {
+  left: 60%;
+}
+.mina-character[data-dragging="true"] .mina-zone-cheek {
+  cursor: grabbing;
+}
+.mina-zone-cheek:disabled {
+  cursor: default;
+}
+.mina-zone-nose {
+  left: 45%;
+  top: 53%;
+  width: 12%;
+  height: 23%;
+}
+.mina-zone:focus-visible {
+  outline-offset: 0 !important;
+  background: #bfb2ff12;
+}
+.mina-side-note {
+  position: absolute;
+  left: 4.3%;
+  top: 49%;
+  font-size: 10px;
+  line-height: 1.7;
+  letter-spacing: 0.09em;
+  color: var(--mina-muted);
+}
+.mina-live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c4b1e8;
+  margin-right: 9px;
+  box-shadow: 0 0 12px #c4b1e840;
+}
+.mina-side-note .mina-live-dot {
+  display: block;
+  margin-bottom: 14px;
+}
+.mina-moods {
+  position: absolute;
+  right: 4.2%;
+  top: 46%;
+  width: 152px;
+  z-index: 4;
+}
+.mina-eyebrow {
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  color: var(--mina-muted);
+  display: block;
+  margin-bottom: 13px;
+}
+.mina-moods button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  padding: 4px 0;
+  color: #aaa7ad;
+  font-size: 11px;
+  text-align: left;
+}
+.mina-moods button[aria-pressed="true"],
+.mina-moods button:hover {
+  color: #fff;
+}
+.mina-mood-dot {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #b2a2cd;
+  color: #171718;
+  display: grid;
+  place-content: center;
+  font-size: 16px;
+  font-family: sans-serif;
+  border: 1px solid #ffffff48;
+}
+.mina-mood-dot-neutral {
+  background: radial-gradient(circle at 30% 30%, #b38c6d, #554032);
+}
+.mina-mood-dot-blue {
+  background: radial-gradient(circle at 30% 30%, #a1a9ff, #515cb0);
+}
+.mina-mood-mark {
+  margin-left: auto;
+  font-size: 16px;
+}
+.mina-hero-bottom {
+  position: absolute;
+  z-index: 4;
+  left: 4.2%;
+  right: 4.2%;
+  bottom: 112px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+}
+.mina-intro {
+  font-size: clamp(11px, 1.05vw, 15px);
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: 0.035em;
+}
+.mina-play-hint {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-left: 38px;
+  color: #d1ccd5;
+  font-size: 9px;
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+}
+.mina-play-hint > span {
+  font-size: 26px;
+  color: #b7a0dd;
+}
+.mina-hint-sub {
+  color: #a8a2ad;
+  letter-spacing: 0;
+  font-size: 10px;
+}
+.mina-touch-hint {
+  display: none;
+}
+.mina-contact-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 38px;
+  min-width: 185px;
+  min-height: 52px;
+  border: 1px solid #b4a0ce;
+  border-radius: 100px;
+  background: linear-gradient(110deg, #514263, #73679e 48%, #77634e);
+  box-shadow:
+    inset 0 0 8px #c8b1f665,
+    0 0 20px #9f7cbb1c;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0 22px;
+}
+.mina-contact-pill svg {
+  width: 17px;
+  height: 17px;
+}
+.mina-scroll {
+  position: absolute;
+  bottom: 28px;
+  left: 4.2%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 44px;
+  font-size: 20px;
+}
+.mina-scroll span {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: var(--mina-muted);
+}
+.mina-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.mina-section {
+  margin: 0 4.2%;
+  padding: 42px 0 100px;
+  scroll-margin-top: 25px;
+  border-top: 1px solid var(--mina-line);
+}
+.mina-section-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--mina-muted);
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  margin-bottom: 80px;
+  line-height: 1.6;
+}
+.mina-page h2 {
+  font-family: "Inter Tight", sans-serif;
+  font-weight: 600;
+  font-size: clamp(34px, 5.3vw, 82px);
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+}
+.mina-about h2 span,
+.mina-services h2 span {
+  color: #918b97;
+}
+.mina-about-bottom {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr auto;
+  gap: 8%;
+  align-items: end;
+  margin-top: 50px;
+}
+.mina-about-bottom p {
+  color: #b7b1bc;
+  font-size: 13px;
+  line-height: 1.85;
+  max-width: 410px;
+}
+.mina-text-link {
+  display: inline-flex;
+  min-height: 44px;
+  gap: 20px;
+  align-items: center;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.mina-text-link:hover {
+  color: #bda5e2;
+}
+.mina-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.mina-section-heading > span {
+  color: var(--mina-muted);
+  font-size: 11px;
+}
+.mina-project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+.mina-project-wrap {
+  min-width: 0;
+}
+.mina-project-open {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+.mina-project-art {
+  background: var(--mina-project-color);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 0.86;
+  display: flex;
+  align-items: center;
+}
+.mina-project-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(145deg, #fff2, transparent 60%, #17171815);
+}
+.mina-project-art img {
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+}
+.mina-project-word {
+  position: absolute;
+  font-family: "Inter Tight", sans-serif;
+  font-size: clamp(40px, 5.1vw, 90px);
+  color: #171718;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  top: 24px;
+  left: 5%;
+  width: 90%;
+  text-align: center;
+  line-height: 0.9;
+}
+.mina-project-plus {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #171718;
+  display: grid;
+  place-content: center;
+  color: #fff;
+  font-size: 26px;
+  z-index: 2;
+}
+.mina-project-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 8px;
+  letter-spacing: 0.04em;
+  color: var(--mina-muted);
+  margin: 22px 0 10px;
+}
+.mina-project h3 {
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+}
+.mina-project p {
+  color: #b9b3bd;
+  font-size: 12px;
+  line-height: 1.8;
+  margin-top: 18px;
+}
+.mina-services-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+}
+.mina-services h2 {
+  font-size: clamp(36px, 4.5vw, 68px);
+}
+.mina-services-layout > div > p {
+  font-size: 13px;
+  color: var(--mina-muted);
+  line-height: 1.8;
+  max-width: 315px;
+  margin-top: 25px;
+}
+.mina-service-list a {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--mina-line);
+}
+.mina-service-list a:first-child {
+  padding-top: 0;
+}
+.mina-service-list a > span {
+  color: var(--mina-muted);
+  font-size: 10px;
+}
+.mina-service-list h3 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+.mina-service-list p {
+  font-size: 11px;
+  line-height: 1.65;
+  color: var(--mina-muted);
+  margin-top: 7px;
+}
+.mina-service-list svg {
+  margin-left: auto;
+  transition: transform 0.2s ease;
+}
+.mina-service-list a:hover svg {
+  transform: rotate(45deg);
+}
+.mina-contact {
+  padding-bottom: 95px;
+}
+.mina-contact h2 {
+  position: relative;
+  font-size: clamp(86px, 15.3vw, 250px);
+  line-height: 0.88;
+  letter-spacing: -0.07em;
+  font-weight: 800;
+}
+.mina-contact h2 em {
+  font-style: normal;
+  color: #b7a0d5;
+}
+.mina-contact-star {
+  color: #b7a0d5;
+  position: absolute;
+  right: 8%;
+  top: -10px;
+  font-size: 0.9em;
+  font-weight: 400;
+}
+.mina-contact-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+  margin-top: 68px;
+  align-items: start;
+}
+.mina-contact-bottom > p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #b9b3bd;
+}
+.mina-contact label {
+  font-size: 9px;
+  color: var(--mina-muted);
+  letter-spacing: 0.08em;
+}
+.mina-brief-row {
+  display: flex;
+  border-bottom: 1px solid #aaa1b4;
+  margin-top: 16px;
+  gap: 10px;
+  padding-bottom: 8px;
+}
+.mina-brief-row select {
+  color: #e5e3e5;
+  background: #171718;
+  border: 0;
+  min-height: 48px;
+  min-width: 0;
+  flex: 1;
+  font-size: 14px;
+  padding-right: 8px;
+}
+.mina-brief-row button {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #a79bb7;
+  border-radius: 50%;
+  background: #3b304a;
+  display: grid;
+  place-content: center;
+}
+.mina-brief-ready {
+  margin-top: 16px;
+}
+.mina-brief-ready p {
+  font-size: 12px;
+  color: #c9b7df;
+  line-height: 1.7;
+}
+.mina-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-top: 100px;
+  padding-top: 24px;
+  border-top: 1px solid var(--mina-line);
+}
+.mina-footer > a:first-child {
+  font:
+    900 32px "Inter Tight",
+    sans-serif;
+  letter-spacing: -0.06em;
+}
+.mina-footer > a:first-child span {
+  vertical-align: super;
+  font-size: 10px;
+  margin-left: 4px;
+}
+.mina-footer p {
+  font-size: 8px;
+  color: var(--mina-muted);
+  letter-spacing: 0.08em;
+}
+.mina-footer > a:last-child {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 16px;
+  font-size: 8px;
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 1800px) {
+  .mina-title {
+    font-size: 16.4vw;
+  }
+}
+@media (max-width: 1000px) {
+  .mina-hero {
+    min-height: 760px;
+    max-height: 1000px;
+  }
+  .mina-title {
+    top: 110px;
+  }
+  .mina-character-stage {
+    top: 23%;
+    width: min(66vw, 58svh);
+  }
+  .mina-side-note {
+    display: none;
+  }
+  .mina-moods {
+    right: 3%;
+    top: 46%;
+    width: 110px;
+  }
+  .mina-eyebrow {
+    font-size: 7px;
+    letter-spacing: 0.05em;
+  }
+  .mina-moods button {
+    font-size: 10px;
+    gap: 9px;
+  }
+  .mina-play-hint {
+    margin-left: 0;
+    position: absolute;
+    bottom: 116px;
+    left: 0;
+  }
+  .mina-about-bottom {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .mina-project-grid {
+    gap: 18px;
+  }
+  .mina-project h3 {
+    font-size: 17px;
+  }
+  .mina-services-layout {
+    gap: 6%;
+  }
+  .mina-service-list h3 {
+    font-size: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .mina-header {
+    padding: 17px 6%;
+  }
+  .mina-header a {
+    font-size: 10px;
+    gap: 5px;
+  }
+  .mina-title {
+    top: 100px;
+    font-size: 16.5vw;
+    left: 3%;
+    right: 3%;
+  }
+  .mina-hero {
+    min-height: 810px;
+    max-height: none;
+    height: 100svh;
+  }
+  .mina-character-stage {
+    top: 21%;
+    width: min(100vw, 430px);
+  }
+  .mina-moods {
+    top: auto;
+    bottom: 210px;
+    left: 7%;
+    right: 7%;
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .mina-eyebrow {
+    display: none;
+  }
+  .mina-moods button {
+    width: auto;
+    gap: 7px;
+    font-size: 10px;
+  }
+  .mina-mood-mark {
+    display: none;
+  }
+  .mina-hero-bottom {
+    left: 6%;
+    right: 6%;
+    bottom: 100px;
+    align-items: flex-end;
+    gap: 15px;
+  }
+  .mina-intro {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .mina-contact-pill {
+    min-width: 146px;
+    min-height: 48px;
+    gap: 15px;
+    font-size: 9px;
+    padding: 0 16px;
+  }
+  .mina-play-hint {
+    bottom: 146px;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    font-size: 8px;
+    text-align: center;
+  }
+  .mina-play-hint > span {
+    display: none;
+  }
+  .mina-hint-sub {
+    font-size: 9px;
+  }
+  .mina-desktop-hint {
+    display: none;
+  }
+  .mina-touch-hint {
+    display: inline;
+  }
+  .mina-scroll {
+    display: none;
+  }
+  .mina-section {
+    margin: 0 6%;
+    padding: 25px 0 65px;
+  }
+  .mina-section-label {
+    font-size: 8px;
+    gap: 16px;
+    margin-bottom: 42px;
+  }
+  .mina-section-label > span:last-child {
+    text-align: right;
+  }
+  .mina-page h2 {
+    font-size: 35px;
+  }
+  .mina-about-bottom {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 30px;
+  }
+  .mina-about-bottom p {
+    font-size: 12px;
+  }
+  .mina-section-heading {
+    display: block;
+  }
+  .mina-section-heading > span {
+    display: block;
+    margin-top: 14px;
+  }
+  .mina-project-grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+  .mina-project-art {
+    aspect-ratio: 1;
+  }
+  .mina-project-word {
+    font-size: 12vw;
+  }
+  .mina-project h3 {
+    font-size: 22px;
+  }
+  .mina-project-meta {
+    font-size: 9px;
+  }
+  .mina-services-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .mina-service-list a {
+    gap: 15px;
+  }
+  .mina-service-list h3 {
+    font-size: 16px;
+  }
+  .mina-contact h2 {
+    font-size: 18vw;
+  }
+  .mina-contact-star {
+    right: 0;
+  }
+  .mina-contact-bottom {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    margin-top: 36px;
+  }
+  .mina-contact-bottom > p {
+    font-size: 12px;
+  }
+  .mina-brief-row select {
+    font-size: 12px;
+  }
+  .mina-contact {
+    padding-bottom: 100px;
+  }
+  .mina-footer {
+    flex-wrap: wrap;
+    margin-top: 60px;
+    gap: 16px;
+  }
+  .mina-footer p {
+    order: 3;
+    width: 100%;
+  }
+}
+@media (max-width: 380px) {
+  .mina-character-stage {
+    top: 22%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mina-service-list a:hover svg {
+    transform: none;
+  }
+}
+html[data-motion="off"] .mina-service-list a:hover svg {
+  transform: none;
+}

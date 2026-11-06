@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap");
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+}
+a {
+  color: inherit;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 5px;
+}
+img {
+  max-width: 100%;
+}
+button:disabled {
+  cursor: default;
+}
+::selection {
+  background: #c8fd80;
+  color: #111;
+}
+.motion-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  isolation: isolate;
+  overflow: hidden;
+}
+.motion-scene canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.motion-scene-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  background: radial-gradient(ellipse at center, #a9a4ca33, transparent 65%);
+}
+.motion-scene-fallback span {
+  width: 160px;
+  height: 160px;
+  border: 2px solid currentColor;
+  opacity: 0.3;
+  transform: rotate(-30deg);
+  border-radius: 30% 70% 60% 40%;
+  box-shadow: 12px 12px 0 -4px currentColor;
+}
+.motion-scene[data-status="ready"] .motion-scene-fallback {
+  display: none;
+}
+.motion-toolbar {
+  position: fixed;
+  z-index: 999;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 9px;
+  background: #171917f2;
+  color: #f7f8ef;
+  border: 1px solid #ffffff30;
+  border-radius: 100px;
+  box-shadow: 0 7px 35px #0003;
+  backdrop-filter: blur(18px);
+  font:
+    11px/1.2 "DM Sans",
+    sans-serif;
+  white-space: nowrap;
+  max-width: calc(100vw - 20px);
+}
+.motion-toolbar a {
+  text-decoration: none;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 12px;
+}
+.motion-toolbar select {
+  appearance: auto;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font: inherit;
+  max-width: 172px;
+  min-height: 38px;
+  cursor: pointer;
+  padding: 0 7px;
+}
+.motion-toolbar option {
+  background: #171917;
+  color: #fff;
+}
+.motion-toolbar-divider {
+  height: 20px;
+  border-left: 1px solid #ffffff30;
+}
+.motion-toolbar button {
+  border: 1px solid #ffffff30;
+  background: transparent;
+  color: inherit;
+  border-radius: 30px;
+  min-height: 38px;
+  padding: 0 13px;
+  font: inherit;
+}
+.motion-toolbar .motion-next {
+  color: #c8fd80;
+}
+.motion-toolbar a:hover,
+.motion-toolbar button:hover {
+  background: #ffffff15;
+  border-radius: 30px;
+}
+.motion-toolbar button:disabled {
+  opacity: 0.65;
+}
+.motion-sr {
+  position: absolute;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.motion-skip {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  transform: translateY(-180%);
+  background: #fff;
+  color: #111;
+  padding: 14px;
+  border-radius: 4px;
+}
+.motion-skip:focus {
+  transform: translateY(0);
+}
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  animation-play-state: paused !important;
+  scroll-behavior: auto !important;
+}
+@media (max-width: 600px) {
+  .motion-toolbar {
+    gap: 2px;
+    bottom: 10px;
+    padding: 5px;
+  }
+  .motion-toolbar a {
+    padding: 0 9px;
+  }
+  .motion-toolbar select {
+    max-width: 112px;
+    padding: 0 2px;
+  }
+  .motion-toolbar button {
+    padding: 0 8px;
+    font-size: 10px;
+  }
+  .motion-toolbar-divider {
+    display: none;
+  }
+  .motion-back span:first-child {
+    display: none;
+  }
+  .motion-toolbar .motion-next {
+    font-size: 0;
+    gap: 0;
+  }
+  .motion-toolbar .motion-next span {
+    font-size: 18px;
+  }
+  .motion-toolbar a,
+  .motion-toolbar button,
+  .motion-toolbar select {
+    min-height: 44px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

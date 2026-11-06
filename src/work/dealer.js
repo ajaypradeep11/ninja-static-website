@@ -182,14 +182,31 @@ const PARTS = [
   },
 ];
 
-const ART = {
-  brakes: '<svg viewBox="0 0 140 100" role="img" aria-label="Brake part"><circle cx="70" cy="50" r="34" fill="none" stroke="#7d92ad" stroke-width="6"/><circle cx="70" cy="50" r="17" fill="none" stroke="#9fb3cc" stroke-width="4"/><circle cx="70" cy="50" r="5" fill="#9fb3cc"/><circle cx="70" cy="26" r="3" fill="#0f1722"/><circle cx="90" cy="62" r="3" fill="#0f1722"/><circle cx="50" cy="62" r="3" fill="#0f1722"/><rect x="96" y="34" width="16" height="32" rx="4" fill="#ff6a1f"/></svg>',
-  filters: '<svg viewBox="0 0 140 100" role="img" aria-label="Filter part"><rect x="52" y="24" width="36" height="52" rx="4" fill="#8ea0b8"/><ellipse cx="70" cy="76" rx="18" ry="6" fill="#63779a"/><path d="M58 30v40M64 30v40M70 30v40M76 30v40M82 30v40" stroke="#3a4b66" stroke-width="2"/><ellipse cx="70" cy="24" rx="18" ry="6" fill="#ff6a1f"/></svg>',
-  suspension: '<svg viewBox="0 0 140 100" role="img" aria-label="Suspension part"><rect x="66" y="14" width="8" height="20" rx="4" fill="#9fb3cc"/><path d="M56 36h28l-28 8h28l-28 8h28l-28 8h28l-28 8h28" fill="none" stroke="#ff6a1f" stroke-width="5" stroke-linejoin="round"/><rect x="60" y="76" width="20" height="12" rx="3" fill="#9fb3cc"/></svg>',
-  electrical: '<svg viewBox="0 0 140 100" role="img" aria-label="Electrical part"><rect x="40" y="32" width="60" height="42" rx="5" fill="#63779a"/><rect x="48" y="24" width="10" height="9" rx="2" fill="#ff6a1f"/><rect x="82" y="24" width="10" height="9" rx="2" fill="#9fb3cc"/><path d="M70 40l-9 16h8l-3 12 13-18h-8z" fill="#ffb020"/></svg>',
-  body: '<svg viewBox="0 0 140 100" role="img" aria-label="Body part"><path d="M34 36h58l14 14-14 16H34z" fill="#8ea0b8"/><path d="M42 44h44l8 6-8 8H42z" fill="#0f1722"/><circle cx="62" cy="52" r="7" fill="#ffb020"/><path d="M106 44l16-6M106 52h18M106 60l16 6" stroke="#ff6a1f" stroke-width="3" stroke-linecap="round"/></svg>',
-  fluids: '<svg viewBox="0 0 140 100" role="img" aria-label="Fluid product"><rect x="52" y="30" width="36" height="52" rx="6" fill="#8ea0b8"/><rect x="64" y="18" width="12" height="14" rx="2" fill="#63779a"/><rect x="62" y="14" width="16" height="7" rx="2" fill="#ff6a1f"/><rect x="58" y="44" width="24" height="22" rx="3" fill="#0f1722"/><path d="M62 56h16" stroke="#ffb020" stroke-width="3"/></svg>',
+const PART_IMAGES = {
+  p1: 'ceramic-brake-pads',
+  p2: 'vented-brake-rotor',
+  p3: 'rear-brake-caliper',
+  p4: 'engine-oil-filter',
+  p5: 'engine-air-filter',
+  p6: 'charcoal-cabin-filter',
+  p7: 'gas-shock-absorber',
+  p8: 'upper-control-arm',
+  p9: 'stabilizer-link',
+  p10: 'agm-battery',
+  p11: 'alternator',
+  p12: 'iridium-spark-plugs',
+  p13: 'right-headlamp',
+  p14: 'bumper-air-deflector',
+  p15: 'beam-wiper-blades',
+  p16: 'synthetic-engine-oil',
+  p17: 'dot3-brake-fluid',
+  p18: 'orange-coolant',
 };
+
+function partImage(part, { sizes = '(max-width: 640px) calc(100vw - 32px), (max-width: 1080px) 44vw, 30vw', loading = 'lazy' } = {}) {
+  const src = `/work/dealer/parts/${PART_IMAGES[part.id]}`;
+  return `<img class="part-photo" src="${src}-480.webp" srcset="${src}-480.webp 480w, ${src}.webp 960w" sizes="${sizes}" width="960" height="640" alt="${escapeHtml(part.name)}" loading="${loading}" decoding="async" />`;
+}
 
 /* ---------- service ---------- */
 
@@ -441,14 +458,14 @@ function stockLine(va) {
   return { cls: 'is-out', text: 'Back-ordered · ask the counter for an ETA' };
 }
 
-function partCard(part) {
+function partCard(part, index) {
   const va = variant(part);
   const st = stockLine(va);
   const ok = fits(part);
   const out = onHand(va) === 0;
   const tier = va.price * (1 - TIER);
   return `<article class="part" data-type="${part.cat}" data-dl-card="${part.id}">
-    <div class="part-art">${ART[part.cat]}<span class="art-tag">${state.mode === 'oem' ? 'OEM' : 'Aftermarket'}</span></div>
+    <div class="part-art">${partImage(part, { loading: index < 3 ? 'eager' : 'lazy' })}<span class="art-tag">${state.mode === 'oem' ? 'OEM' : 'Aftermarket'}</span></div>
     <div class="part-main">
       <p class="part-cat">${escapeHtml(CATS[part.cat])}</p>
       <h3>${escapeHtml(part.name)}</h3>
@@ -500,7 +517,7 @@ function renderRecent() {
     .map((pid) => {
       const part = byId(pid);
       const va = variant(part);
-      return `<button type="button" class="recent-chip" data-dl-detail="${part.id}"><span class="ra">${ART[part.cat]}</span><span class="rt"><b>${escapeHtml(part.name)}</b><span>${escapeHtml(va.pn)} · ${money(va.price)}</span></span></button>`;
+      return `<button type="button" class="recent-chip" data-dl-detail="${part.id}"><span class="ra">${partImage(part, { sizes: '56px' })}</span><span class="rt"><b>${escapeHtml(part.name)}</b><span>${escapeHtml(va.pn)} · ${money(va.price)}</span></span></button>`;
     })
     .join('');
 }
@@ -561,7 +578,7 @@ function renderDrawer(pid) {
   $('[data-dl-drawer-cat]').textContent = CATS[part.cat];
   $('[data-dl-drawer-title]').textContent = part.name;
   $('[data-dl-drawer-body]').innerHTML = `
-    <div class="d-art">${ART[part.cat]}</div>
+    <div class="d-art">${partImage(part, { sizes: '(max-width: 640px) calc(100vw - 36px), 404px', loading: 'eager' })}</div>
     <p class="fit ${ok ? 'is-ok' : 'is-no'}">${ok ? `✓ Fits your ${escapeHtml(vehFull(state.vehicle))}` : `⚠ Does not fit your ${escapeHtml(vehLabel(state.vehicle))}`}</p>
 
     <h3 class="d-h">Two ways to buy it</h3>
@@ -670,7 +687,7 @@ function renderCart() {
       const va = part[l.mode];
       const bo = isBackordered(l);
       return `<li class="cline">
-        <span class="cl-art">${ART[part.cat]}</span>
+        <span class="cl-art">${partImage(part, { sizes: '54px' })}</span>
         <div class="cl-main">
           <b>${escapeHtml(part.name)}</b>
           <span class="cl-pn"><code>${escapeHtml(va.pn)}</code> · ${l.mode === 'oem' ? 'OEM' : 'Aftermarket'} · ${escapeHtml(va.brand)}</span>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="0 0 1254 1254">
+  <rect width="1254" height="1254" fill="black"/>
+  <defs><filter id="soft"><feGaussianBlur stdDeviation="0.45"/></filter></defs>
+  <!-- Eye whites inside MINA's original eyelids; corners and lashes remain fixed. -->
+  <g fill="white" filter="url(#soft)">
+    <path d="M442 604 C458 585 478 578 497 579 C522 576 543 592 554 614 C530 625 477 634 452 616 Q446 610 442 604Z"/>
+    <path d="M721 613 C732 592 749 577 771 575 C794 572 818 581 833 595 C816 617 780 631 737 619Z"/>
+  </g>
+</svg>

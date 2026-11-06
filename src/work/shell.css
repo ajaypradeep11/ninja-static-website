@@ -1,11 +1,12 @@
-/* Shared shell for /work/* demo pages: the LocalNinja bar on top, the
-   sample product below. Each page brings its own stylesheet for the
-   product itself. */
+@import "../theme.css";
+
+/* Shared reset, theme and optional portfolio bar for /work/ demo pages.
+   Each page brings its own stylesheet for the product itself. */
 
 :root {
-  --ln-ink: #000;
-  --ln-paper: #fff;
-  --ln-accent: #4da3ff;
+  --ln-ink: var(--studio-text);
+  --ln-paper: var(--studio-bg);
+  --ln-accent: var(--studio-accent);
   --ln-font: 'Manrope', system-ui, sans-serif;
   --ln-display: 'Syne', 'Arial Black', sans-serif;
   --ln-bar-h: 56px;
@@ -21,6 +22,11 @@ body {
   margin: 0;
   font-family: var(--ln-font);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Standalone project demos use the full viewport without the portfolio bar. */
+body[data-project-standalone] {
+  --ln-bar-h: 0px;
 }
 
 img,
@@ -53,7 +59,7 @@ textarea {
   padding: 0 clamp(1rem, 3vw, 2rem);
   background: var(--ln-paper);
   color: var(--ln-ink);
-  border-bottom: 3px solid var(--ln-ink);
+  border-bottom: 3px solid var(--studio-border);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.8px;
@@ -93,7 +99,7 @@ textarea {
   font-weight: 500;
   letter-spacing: 0.4px;
   text-transform: none;
-  color: #555;
+  color: var(--studio-muted);
   text-align: center;
 }
 
@@ -101,27 +107,34 @@ textarea {
   color: var(--ln-ink);
 }
 
-.ln-bar-back {
+.ln-bar .ln-bar-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0.45rem 0.9rem;
-  border: 3px solid var(--ln-ink);
-  box-shadow: 3px 3px 0 var(--ln-ink);
+  border: 3px solid var(--studio-border);
+  box-shadow: 3px 3px 0 var(--studio-shadow);
   background: var(--ln-accent);
+  color: var(--studio-on-accent);
   white-space: nowrap;
 }
 
 .ln-tag {
   display: inline-block;
   padding: 0.2rem 0.5rem;
-  border: 2px solid var(--ln-ink);
+  border: 2px solid var(--studio-border);
   background: var(--ln-accent);
+  color: var(--studio-on-accent);
   font-size: 0.65rem;
 }
 
 .ln-foot {
   padding: 1.25rem clamp(1rem, 3vw, 2rem);
-  border-top: 3px solid var(--ln-ink);
+  border-top: 3px solid var(--studio-border);
   background: var(--ln-paper);
-  color: #555;
+  color: var(--studio-muted);
   font-size: 0.85rem;
   display: flex;
   flex-wrap: wrap;
@@ -140,4 +153,21 @@ textarea {
   .ln-bar-title {
     display: none;
   }
+}
+
+/* Sample products retain their native form appearance; Studio chrome follows the theme. */
+body:has(.ln-bar):not(:has(.gal)),
+body[data-project-standalone]:not(:has(.gal)) { color-scheme: light; }
+:root[data-theme='dark'] .ln-bar,
+:root[data-theme='dark'] .ln-foot { color-scheme: dark; }
+.ln-bar .theme-toggle { margin-left: auto; }
+@media (max-width: 900px) {
+  .ln-bar-title { display: none; }
+}
+@media (max-width: 480px) {
+  .ln-bar { gap: 10px; padding: 8px 16px; }
+  .ln-bar-brand { font-size: 1rem; }
+  .ln-bar-brand img { width: 32px; height: 32px; }
+  .ln-back-label { display: none; }
+  .ln-bar-back { padding: 6px; }
 }

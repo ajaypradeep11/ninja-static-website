@@ -1,11 +1,11 @@
 /* Screen gallery for shipped products we can't demo live (auth-gated apps). */
 .gal {
-  --ink: #0b0f1a;
-  --muted: #5b6270;
-  --line: #e4e7ee;
+  --ink: var(--studio-text);
+  --muted: var(--studio-muted);
+  --line: var(--studio-line);
   --accent: #3b3bd6;
   min-height: calc(100vh - var(--ln-bar-h));
-  background: #f6f7fb;
+  background: var(--studio-bg);
   color: var(--ink);
 }
 
@@ -48,9 +48,9 @@
   display: grid;
   gap: 0.6rem;
   padding: 1.1rem 1.25rem;
-  border: 2px solid var(--ink);
-  background: #fff;
-  box-shadow: 4px 4px 0 var(--ink);
+  border: 2px solid var(--studio-border);
+  background: var(--studio-raised);
+  box-shadow: 4px 4px 0 var(--studio-shadow);
   font-size: 0.88rem;
 }
 
@@ -107,10 +107,10 @@
 .frame {
   display: block;
   padding: 0;
-  border: 2px solid var(--ink);
+  border: 2px solid var(--studio-border);
   border-radius: 12px;
-  background: #fff;
-  box-shadow: 8px 8px 0 var(--ink);
+  background: var(--studio-raised);
+  box-shadow: 8px 8px 0 var(--studio-shadow);
   overflow: hidden;
   cursor: zoom-in;
   text-align: left;
@@ -121,14 +121,14 @@
   gap: 6px;
   padding: 0.55rem 0.8rem;
   border-bottom: 1px solid var(--line);
-  background: #f1f2f7;
+  background: var(--studio-surface);
 }
 
 .frame .bar i {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #cfd3dd;
+  background: var(--studio-border);
 }
 
 .frame img {
@@ -145,8 +145,9 @@
   display: inline-block;
   margin-bottom: 0.6rem;
   padding: 0.2rem 0.5rem;
-  border: 2px solid var(--ink);
-  background: #4da3ff;
+  border: 2px solid var(--studio-border);
+  background: var(--studio-accent);
+  color: var(--studio-on-accent);
   font-family: var(--ln-display);
   font-weight: 700;
   font-size: 0.8rem;
@@ -212,3 +213,5 @@
     order: 0;
   }
 }
+
+:root[data-theme='dark'] .gal { --accent: var(--studio-accent-link); }

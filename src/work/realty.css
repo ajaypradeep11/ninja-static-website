@@ -134,7 +134,15 @@
 .photo {
   height: 160px;
   position: relative;
-  background: var(--photo, linear-gradient(160deg, #cfe9f7, #7cc4e8));
+  overflow: hidden;
+  background: #e6e9ee;
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .photo::after {
@@ -147,6 +155,7 @@
 
 .photo .badge {
   position: absolute;
+  z-index: 1;
   top: 0.75rem;
   left: 0.75rem;
   padding: 0.25rem 0.6rem;
@@ -203,6 +212,18 @@
   height: 100%;
 }
 
+.map-canvas {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.map-canvas > svg {
+  display: block;
+  min-width: 480px;
+}
+
 .pin {
   cursor: pointer;
 }
@@ -220,6 +241,15 @@
 
 .pin:hover rect {
   fill: var(--sky);
+}
+
+.pin:focus-visible {
+  outline: none;
+}
+
+.pin:focus-visible rect {
+  stroke: var(--sky);
+  stroke-width: 3px;
 }
 
 /* Detail overlay */
@@ -1067,7 +1097,8 @@
   width: 56px;
   height: 44px;
   border-radius: 8px;
-  background: var(--photo, var(--sky-soft));
+  object-fit: cover;
+  background: var(--sky-soft);
   flex: none;
 }
 
@@ -1879,7 +1910,7 @@
 @media (max-width: 900px) {
   .map {
     position: relative;
-    height: 300px;
+    height: 360px;
   }
 
   .map.has-hood {
