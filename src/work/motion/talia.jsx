@@ -516,7 +516,7 @@ export default function Ava() {
             ALL CHARACTER.
           </p>
           <div className="talia-play-hint">
-            <span aria-hidden="true">✳</span>
+
             <p>
               <span className="talia-desktop-hint">
                 {chosenMood === "offline" ? "OFFLINE. TAKING A BREATHER." : "GENTLE PULL. BIG ATTITUDE."}
@@ -728,9 +728,7 @@ export default function Ava() {
           <h2>
             GOT A<br />
             <em>SIGNAL?</em>
-            <span className="talia-contact-star" aria-hidden="true">
-              ✳
-            </span>
+
           </h2>
         </Reveal>
         <div className="talia-contact-bottom">

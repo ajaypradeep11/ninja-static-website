@@ -274,9 +274,7 @@ export default function Totem() {
     <div className="totem-page">
       <header className="totem-header">
         <a className="totem-brand" href="#main" aria-label="Totem, back to top">
-          <span className="totem-brand-mark" aria-hidden="true">
-            ✳
-          </span>{" "}
+          {" "}
           TOTEM<span className="totem-registered">®</span>
         </a>
         <span className="totem-header-note">
@@ -337,7 +335,7 @@ export default function Totem() {
           </div>
           <div className="totem-side-right">
             <div className="totem-orbit-stamp" aria-hidden="true">
-              <span>✳</span>
+
               <span>
                 MADE OF
                 <br />
@@ -430,7 +428,7 @@ export default function Totem() {
           <div className="totem-passport" aria-live="polite">
             <div className="totem-passport-top">
               <span>CREATURE PASSPORT</span>
-              <span>✳</span>
+
             </div>
             <AnimatePresence mode="wait">
               <motion.div

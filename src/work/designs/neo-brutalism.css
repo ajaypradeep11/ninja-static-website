@@ -253,11 +253,6 @@ body[data-design="neo-brutalism"] {
   font-size: clamp(15px, 2.5vw, 36px);
   letter-spacing: -1px;
 }
-.gc-band span:nth-child(even) {
-  font-size: 34px;
-  line-height: 1;
-  color: var(--gc-blue);
-}
 .gc-section {
   padding: 80px 6%;
 }
@@ -721,9 +716,6 @@ body[data-design="neo-brutalism"] {
     padding: 16px 5%;
     font-size: 16px;
     letter-spacing: -0.5px;
-  }
-  .gc-band span:nth-child(even) {
-    font-size: 23px;
   }
   .gc-band span:nth-last-child(-n + 2) {
     display: none;

@@ -22,6 +22,8 @@ The remaining tours are grouped in three modules. All use actual page controls, 
 
 The UI gallery follows the visible Work catalog automatically, with one preview per design. New catalog designs therefore need a matching MP4 and still poster before being added.
 
+The November 6 decorative-asterisk cleanup refreshes the eight affected Design Lab tours and seven visible Motion Lab tours, along with their WebP posters and Work PNG thumbnails. These use cache version `no-asterisks-1`. MINA and ECHO ZERO also have the decoration removed in their source pages but remain hidden from the galleries. Northshore's refreshed tour uses `northshore-map-1` and waits for its street tiles before recording.
+
 To regenerate an individual live recording, install Playwright, Chrome and ffmpeg (plus Python/Pillow for tour posters), then run the corresponding command:
 
 ```sh

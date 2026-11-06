@@ -193,65 +193,6 @@
   color: var(--ink);
 }
 
-/* Map placeholder */
-.map {
-  position: sticky;
-  top: calc(var(--ln-bar-h) + 1rem);
-  height: min(70vh, 640px);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  overflow: hidden;
-  background:
-    linear-gradient(#eef2f6 1px, transparent 1px) 0 0 / 40px 40px,
-    linear-gradient(90deg, #eef2f6 1px, transparent 1px) 0 0 / 40px 40px,
-    #f7f9fb;
-}
-
-.map svg {
-  width: 100%;
-  height: 100%;
-}
-
-.map-canvas {
-  width: 100%;
-  height: 100%;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-}
-
-.map-canvas > svg {
-  display: block;
-  min-width: 480px;
-}
-
-.pin {
-  cursor: pointer;
-}
-
-.pin text {
-  font-family: 'Manrope', sans-serif;
-  font-weight: 800;
-  font-size: 12px;
-  fill: #fff;
-}
-
-.pin rect {
-  fill: var(--ink);
-}
-
-.pin:hover rect {
-  fill: var(--sky);
-}
-
-.pin:focus-visible {
-  outline: none;
-}
-
-.pin:focus-visible rect {
-  stroke: var(--sky);
-  stroke-width: 3px;
-}
-
 /* Detail overlay */
 .detail {
   position: fixed;
@@ -348,11 +289,6 @@
     grid-template-columns: 1fr;
   }
 
-  .map {
-    position: static;
-    height: 260px;
-    order: -1;
-  }
 
   .ns-top .search {
     display: none;
@@ -738,70 +674,7 @@
   cursor: pointer;
 }
 
-/* Map: pins + clickable neighbourhood labels + snapshot card */
-.map {
-  isolation: isolate;
-}
-
-.pin,
-.area {
-  transition: opacity 0.2s;
-}
-
-.pin.is-dim {
-  opacity: 0.22;
-  pointer-events: none;
-}
-
-.pin.is-hot rect {
-  fill: var(--sky);
-}
-
-.area {
-  cursor: pointer;
-}
-
-.area rect {
-  fill: #fff;
-  stroke: var(--line);
-}
-
-.area text {
-  font-family: 'Manrope', sans-serif;
-  font-weight: 700;
-  font-size: 10px;
-  fill: var(--muted);
-}
-
-.area:hover rect,
-.area:focus-visible rect,
-.area.is-active rect {
-  fill: var(--sky-soft);
-  stroke: var(--sky);
-}
-
-.area:hover text,
-.area.is-active text {
-  fill: #0369a1;
-}
-
-.area:focus-visible {
-  outline: none;
-}
-
-.map-hint {
-  position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  margin: 0;
-  padding: 0.35rem 0.7rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid var(--line);
-  font-size: 0.72rem;
-  color: var(--muted);
-}
-
+/* Neighbourhood snapshot */
 .hood {
   position: absolute;
   left: 0.75rem;
@@ -1833,14 +1706,6 @@
   color: #b45309 !important;
 }
 
-.pin.is-offer rect {
-  fill: #b45309;
-}
-
-.pin.is-offer:hover rect {
-  fill: var(--sky);
-}
-
 .listing-list {
   list-style: none;
   margin: 0;
@@ -1908,20 +1773,6 @@
 
 /* Responsive */
 @media (max-width: 900px) {
-  .map {
-    position: relative;
-    height: 360px;
-  }
-
-  .map.has-hood {
-    height: 440px;
-  }
-
-  .hood {
-    inset: 0.5rem;
-    max-height: none;
-  }
-
   .sell-form {
     grid-template-columns: 1fr 1fr;
   }
@@ -2014,8 +1865,6 @@
 @media (prefers-reduced-motion: reduce) {
   .pill-btn,
   .heart,
-  .pin,
-  .area,
   .hood,
   .hood.is-open,
   .drawer,

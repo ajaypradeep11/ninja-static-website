@@ -32,11 +32,6 @@
   letter-spacing: 1.2px;
   color: var(--lab-muted);
 }
-.design-lab-kicker > span:first-child {
-  font-size: 28px;
-  line-height: 1;
-  color: var(--lab-accent);
-}
 .design-lab-kicker > span:last-child {
   margin-left: auto;
 }

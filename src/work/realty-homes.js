@@ -1,7 +1,9 @@
 // Fictional Vancouver-area listing data for the Northshore sample project.
+// Coordinates illustrate the neighbourhoods of these fictional homes.
 export const homeListings = [
   {
     "id": 1,
+    "coordinates": [49.2682, -123.157],
     "addr": "2288 W 4th Ave",
     "hood": "kits",
     "type": "condo",
@@ -23,6 +25,7 @@ export const homeListings = [
   },
   {
     "id": 2,
+    "coordinates": [49.281, -123.0138],
     "addr": "4120 Hastings St",
     "hood": "heights",
     "type": "townhouse",
@@ -44,6 +47,7 @@ export const homeListings = [
   },
   {
     "id": 3,
+    "coordinates": [49.3231, -123.0608],
     "addr": "1560 Grand Blvd",
     "hood": "northvan",
     "type": "detached",
@@ -65,6 +69,7 @@ export const homeListings = [
   },
   {
     "id": 4,
+    "coordinates": [49.2821, -123.1035],
     "addr": "55 E Cordova St",
     "hood": "gastown",
     "type": "loft",
@@ -86,6 +91,7 @@ export const homeListings = [
   },
   {
     "id": 5,
+    "coordinates": [49.2644, -123.1461],
     "addr": "301 · 1825 W 8th Ave",
     "hood": "kits",
     "type": "condo",
@@ -107,6 +113,7 @@ export const homeListings = [
   },
   {
     "id": 6,
+    "coordinates": [49.28, -123.0181],
     "addr": "3936 Pender St",
     "hood": "heights",
     "type": "townhouse",
@@ -128,6 +135,7 @@ export const homeListings = [
   },
   {
     "id": 7,
+    "coordinates": [49.3249, -123.0464],
     "addr": "1745 Rufus Dr",
     "hood": "northvan",
     "type": "detached",
@@ -149,6 +157,7 @@ export const homeListings = [
   },
   {
     "id": 8,
+    "coordinates": [49.2845, -123.109],
     "addr": "204 · 345 Water St",
     "hood": "gastown",
     "type": "loft",
@@ -170,6 +179,7 @@ export const homeListings = [
   },
   {
     "id": 9,
+    "coordinates": [49.2636, -123.1587],
     "addr": "402 · 2355 W Broadway",
     "hood": "kits",
     "type": "condo",
@@ -191,6 +201,7 @@ export const homeListings = [
   },
   {
     "id": 10,
+    "coordinates": [49.2791, -123.0098],
     "addr": "4288 Frances St",
     "hood": "heights",
     "type": "townhouse",
@@ -212,6 +223,7 @@ export const homeListings = [
   },
   {
     "id": 11,
+    "coordinates": [49.3339, -123.0484],
     "addr": "2688 William Ave",
     "hood": "northvan",
     "type": "detached",
@@ -233,6 +245,7 @@ export const homeListings = [
   },
   {
     "id": 12,
+    "coordinates": [49.2832, -123.1036],
     "addr": "306 · 28 Powell St",
     "hood": "gastown",
     "type": "loft",
@@ -254,6 +267,7 @@ export const homeListings = [
   },
   {
     "id": 13,
+    "coordinates": [49.2665, -123.1641],
     "addr": "207 · 2525 W 6th Ave",
     "hood": "kits",
     "type": "condo",
@@ -275,6 +289,7 @@ export const homeListings = [
   },
   {
     "id": 14,
+    "coordinates": [49.283, -123.0025],
     "addr": "4455 Albert St",
     "hood": "heights",
     "type": "townhouse",
@@ -296,6 +311,7 @@ export const homeListings = [
   },
   {
     "id": 15,
+    "coordinates": [49.3228, -123.0418],
     "addr": "1320 E 15th St",
     "hood": "northvan",
     "type": "detached",
@@ -317,6 +333,7 @@ export const homeListings = [
   },
   {
     "id": 16,
+    "coordinates": [49.2824, -123.1052],
     "addr": "502 · 66 W Cordova St",
     "hood": "gastown",
     "type": "loft",
@@ -338,6 +355,7 @@ export const homeListings = [
   },
   {
     "id": 17,
+    "coordinates": [49.2727, -123.1543],
     "addr": "105 · 2160 Cornwall Ave",
     "hood": "kits",
     "type": "condo",
@@ -359,6 +377,7 @@ export const homeListings = [
   },
   {
     "id": 18,
+    "coordinates": [49.2862, -123.0204],
     "addr": "3868 Oxford St",
     "hood": "heights",
     "type": "townhouse",
@@ -380,6 +399,7 @@ export const homeListings = [
   },
   {
     "id": 19,
+    "coordinates": [49.3299, -123.0381],
     "addr": "2205 Mountain Hwy",
     "hood": "northvan",
     "type": "detached",
@@ -401,6 +421,7 @@ export const homeListings = [
   },
   {
     "id": 20,
+    "coordinates": [49.2837, -123.1033],
     "addr": "304 · 36 Alexander St",
     "hood": "gastown",
     "type": "loft",

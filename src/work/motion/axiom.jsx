@@ -188,9 +188,7 @@ export default function Axiom() {
     <div className="axiom-page">
       <header className="axiom-header">
         <a className="axiom-brand" href="#main" aria-label="AXIOM home">
-          <span className="axiom-mark" aria-hidden="true">
-            ✳
-          </span>{" "}
+          {" "}
           AXIOM<span className="axiom-brand-index">®</span>
         </a>
         <span className="axiom-header-discipline">

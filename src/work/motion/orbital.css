@@ -425,7 +425,7 @@ body:has(.orb-page) {
 .orb-about {
   padding: 100px 8% 90px;
   display: grid;
-  grid-template-columns: 0.7fr 1fr;
+  grid-template-columns: 1fr;
   position: relative;
   scroll-margin-top: 20px;
 }

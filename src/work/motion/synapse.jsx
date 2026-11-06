@@ -270,9 +270,7 @@ export default function Synapse() {
     <div className="synapse-root">
       <header className="synapse-nav">
         <a className="synapse-brand" href="#main" aria-label="Synapse home">
-          <span className="synapse-symbol" aria-hidden="true">
-            ✳
-          </span>{" "}
+          {" "}
           synapse
         </a>
         <a className="synapse-nav-note" href="#synapse-about">
@@ -450,9 +448,7 @@ export default function Synapse() {
         </section>
         <footer className="synapse-footer" id="synapse-about">
           <span className="synapse-brand">
-            <span className="synapse-symbol" aria-hidden="true">
-              ✳
-            </span>{" "}
+            {" "}
             synapse
           </span>
           <p>Less noise. More possibility.</p>

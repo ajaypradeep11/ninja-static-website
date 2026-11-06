@@ -169,10 +169,6 @@ body:has(.totem-page) {
   gap: 7px;
   transform: rotate(12deg);
 }
-.totem-orbit-stamp > span:first-child {
-  font-size: 33px;
-  line-height: 0.9;
-}
 .totem-orbit-stamp > span:last-child {
   font-size: 8px;
   line-height: 1.15;
@@ -528,9 +524,6 @@ body:has(.totem-page) {
     width: 88px;
     height: 88px;
     margin-bottom: 15px;
-  }
-  .totem-orbit-stamp > span:first-child {
-    font-size: 25px;
   }
   .totem-orbit-stamp > span:last-child {
     font-size: 6px;

@@ -319,9 +319,7 @@ export default function Ribbon() {
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               >
                 Ideas in <em>motion.</em>
-                <span className="ribbon-title-star" aria-hidden="true">
-                  ✳
-                </span>
+
               </motion.span>
             </h1>
             <motion.p

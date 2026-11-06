@@ -225,10 +225,6 @@ body[data-design="vector-surrealism"] button {
   letter-spacing: 3px;
   white-space: nowrap;
 }
-.vs-ribbon span:nth-child(even) {
-  font-size: 30px;
-  line-height: 1;
-}
 .vs-selected {
   padding: 88px 5% 76px;
   max-width: 1540px;
@@ -320,7 +316,7 @@ body[data-design="vector-surrealism"] button {
   border-bottom: 1px solid #252b253b;
   padding: 65px 5%;
   display: grid;
-  grid-template-columns: 0.35fr 1fr auto;
+  grid-template-columns: 1fr auto;
   gap: 30px;
   max-width: 1540px;
   margin: auto;
@@ -489,7 +485,7 @@ body[data-design="vector-surrealism"] button {
     max-width: none;
   }
   .vs-studio {
-    grid-template-columns: 100px 1fr auto;
+    grid-template-columns: 1fr auto;
   }
   .vs-studio-star {
     font-size: 90px;

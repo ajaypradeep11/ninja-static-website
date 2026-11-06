@@ -309,7 +309,7 @@ body:has(.out-page) {
 }
 .out-studio-bottom {
   display: grid;
-  grid-template-columns: 0.7fr 1fr 0.7fr;
+  grid-template-columns: 1fr 0.7fr;
   gap: 60px;
   align-items: end;
 }
@@ -515,7 +515,7 @@ body:has(.out-page) {
   }
   .out-studio-bottom {
     gap: 30px;
-    grid-template-columns: 0.4fr 1fr;
+    grid-template-columns: 1fr 0.7fr;
   }
   .out-studio-cta {
     grid-column: 2;

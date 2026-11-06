@@ -76,7 +76,11 @@
         </div>
       </div>
 
-      <div class="ns-body">
+      <div class="listing-view" role="group" aria-label="Browse homes">
+        <button type="button" data-listing-view="list" aria-pressed="true">List view</button>
+        <button type="button" data-listing-view="map" aria-pressed="false">Map view</button>
+      </div>
+      <div class="ns-body" data-listing-layout>
         <section class="results" data-filter-target>
           <h2><span data-count>20 homes</span> <span>· sorted by <span data-sort-label>newest</span></span></h2>
           <div class="cards" data-cards></div>
@@ -128,15 +132,23 @@
         </section>
 
         <aside class="map" aria-label="Map of listings">
-          <div class="map-canvas" tabindex="0" role="region" aria-label="Property markers by neighbourhood; scroll sideways for more">
-          <svg viewBox="0 0 480 360" role="group" aria-label="Neighbourhood overview with 20 home markers">
-            <path d="M0 300 C120 260 180 330 300 290 S440 240 480 270 V360 H0 Z" fill="#cfe5f2" />
-            <path d="M0 40 C90 70 140 20 230 60 S380 30 480 70" fill="none" stroke="#dde3ea" stroke-width="10" />
-            <path d="M60 0 V360 M240 0 V360 M400 0 V360 M0 150 H480 M0 230 H480" stroke="#e6ebf0" stroke-width="6" />
-            <g data-home-pins></g>
-          </svg>
+          <div class="map-heading">
+            <div><p class="eyebrow">Greater Vancouver</p><h2 data-map-count aria-live="polite">20 homes to explore</h2><button type="button" class="map-guide" data-map-snapshot hidden>Neighbourhood guide</button></div>
+            <button type="button" class="map-reset" data-map-reset aria-label="Show all matching homes on the map" title="Show all matching homes">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 1v4m0 14v4M1 12h4m14 0h4"/></svg>
+            </button>
           </div>
-          <p class="map-hint" aria-hidden="true">Tap a neighbourhood for schools, transit and prices</p>
+          <div class="map-neighbourhoods" aria-label="Explore neighbourhoods">
+            <button type="button" data-map-neighbourhood="kits" aria-pressed="false">Kitsilano</button>
+            <button type="button" data-map-neighbourhood="gastown" aria-pressed="false">Gastown</button>
+            <button type="button" data-map-neighbourhood="northvan" aria-pressed="false">North Vancouver</button>
+            <button type="button" data-map-neighbourhood="heights" aria-pressed="false">Burnaby Heights</button>
+          </div>
+          <div class="map-stage">
+            <div class="map-canvas" data-listing-map role="region" aria-label="Interactive Vancouver property map. Use arrow keys to pan and plus or minus to zoom."></div>
+            <p class="map-status" data-map-status role="status">Loading the map…</p>
+          </div>
+          <div class="map-caption"><span>Approximate locations · Sample homes</span></div>
 
           <div class="hood" data-hood-panel aria-live="polite">
             <div class="hood-head">

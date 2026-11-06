@@ -7,9 +7,6 @@
   --petal-dark: #e21d78;
 }
 @media (max-width: 1000px) {
-  .bloom-hero {
-    overflow: clip;
-  }
   .season-swatch {
     min-width: 44px;
     min-height: 44px;
@@ -79,6 +76,7 @@ p {
   margin-left: 8px;
 }
 .bloom-hero {
+  overflow: clip;
   max-width: 1600px;
   margin: auto;
   display: grid;
@@ -254,10 +252,6 @@ h1 em::after {
   letter-spacing: 1.6px;
   border-top: 1px solid #2927a91f;
   border-bottom: 1px solid #2927a91f;
-}
-.flower-ribbon > span:nth-child(even) {
-  font-size: 25px;
-  line-height: 1;
 }
 .collection {
   padding: 94px 5% 100px;

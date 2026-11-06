@@ -457,9 +457,7 @@ export default function Orbital() {
           ))}
         </section>
         <section className="orb-about" id="orb-about">
-          <span className="orb-about-asterisk" aria-hidden="true">
-            ✳
-          </span>
+
           <div>
             <span className="orb-project-category">
               A person, not a planet.

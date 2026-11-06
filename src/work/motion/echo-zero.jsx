@@ -391,9 +391,7 @@ export default function EchoZero() {
         </div>
         <aside className="echo-profile" aria-label="Character information">
           <div className="echo-profile-heading">
-            <span className="echo-symbol" aria-hidden="true">
-              ✳
-            </span>
+
             <div>
               <span className="echo-eyebrow">SUBJECT 001</span>
               <h1>ECHO</h1>

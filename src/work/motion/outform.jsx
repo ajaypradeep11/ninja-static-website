@@ -252,9 +252,7 @@ export default function Outform() {
             OUT OF <span>LINE.</span>
           </motion.h2>
           <div className="out-studio-bottom">
-            <span className="out-asterisk" aria-hidden="true">
-              ✳
-            </span>
+
             <p>
               We’re a creative studio for brands with something to say.
               Strategy, identity, digital experiences — all shaped by curiosity,

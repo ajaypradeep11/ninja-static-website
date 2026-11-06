@@ -31,6 +31,9 @@ const sites = {
   ...Object.fromEntries(localTours.flatMap(tour => tour.slugs.map(slug => [slug, {
     url: new URL(`/work/${tour.directory}${slug}.html`, process.env.PREVIEW_BASE_URL || 'http://localhost:5174').href,
     localTour: tour,
+    // The long, photo-heavy property tour captures directly at delivery size
+    // to keep its temporary JPEG frames from exhausting local disk space.
+    capture: slug === 'realty' ? { maxWidth: 960, maxHeight: 600, quality: 82 } : {},
   }]))),
 };
 const slug = process.argv[2] || 'conversy-site';
@@ -105,6 +108,7 @@ try {
   });
   await cdp.send('Page.startScreencast', {
     format: 'jpeg', quality: 90, maxWidth: 1280, maxHeight: 800, everyNthFrame: 1,
+    ...site.capture,
   });
   await page.waitForTimeout(2000);
   const scroll = async (duration, top) => {

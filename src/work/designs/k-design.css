@@ -251,7 +251,7 @@ body[data-design="k-design"] * {
 }
 .form-belief {
   display: grid;
-  grid-template-columns: 1fr 2fr auto;
+  grid-template-columns: 1fr 2fr;
   align-items: start;
   padding: 44px 0 51px;
   border-top: 1px solid var(--form-line);
@@ -735,7 +735,7 @@ body[data-design="k-design"] * {
     font-size: 6px;
   }
   .form-belief {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     padding: 28px 0;
     gap: 18px;
   }

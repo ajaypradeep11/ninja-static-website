@@ -1,4 +1,12 @@
 import { homeListings } from './realty-homes.js';
+import { createListingMap } from './realty-map.js';
+
+let propertyMap;
+const showMapView = () => {
+  document.querySelector('[data-listing-layout]').classList.add('is-map-view');
+  document.querySelectorAll('[data-listing-view]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.listingView === 'map')));
+  propertyMap?.show();
+};
 
 // Northshore Realty - page-specific behaviour. Loaded after mockups.js,
 // which still owns the generic hooks (data-filter, data-open, data-close,
@@ -189,13 +197,8 @@ const applyFilters = () => {
     wrap.classList.toggle('is-hidden', !ok);
     cards.appendChild(wrap); // reorder in place
     if (ok) shown += 1;
-    const pin = $(`.pin[data-home="${h.id}"]`);
-    if (pin) {
-      pin.classList.toggle('is-dim', !ok);
-      pin.setAttribute('tabindex', ok ? '0' : '-1');
-      pin.setAttribute('aria-disabled', String(!ok));
-    }
   });
+  propertyMap?.filter(order.filter(matches).map(home => home.id));
   const count = $('[data-count]');
   if (count) count.textContent = shown === 1 ? '1 home' : `${shown} homes`;
   const sortLabel = $('[data-sort-label]');
@@ -287,14 +290,6 @@ function renderCatalogue() {
         </div>
       </div>
     </div>`).join('');
-
-  const mapOrder = ['kits', 'northvan', 'gastown', 'heights'];
-  $('[data-home-pins]').innerHTML = mapOrder.map((hood, column) => {
-    const x = 60 + column * 120;
-    const homes = homeListings.filter(home => home.hood === hood);
-    return `<g class="area" data-hood-open="${hood}" tabindex="0" role="button" aria-label="${HOODS[hood].name} neighbourhood snapshot" transform="translate(${x} 66)"><rect x="-57" y="-10" width="114" height="20" rx="10" /><text x="0" y="4" text-anchor="middle">${HOODS[hood].name}</text></g>` +
-      homes.map((home, row) => `<g class="pin" data-home-open="${home.id}" data-home="${home.id}" tabindex="0" role="button" aria-label="View ${escapeHtml(home.addr)}, ${money(home.price)}" transform="translate(${x} ${112 + row * 53})"><rect x="-44" y="-20" width="88" height="40" rx="20" /><text x="0" y="5" text-anchor="middle">${short(home.price)}</text></g>`).join('');
-  }).join('');
 }
 
 function openHome(id) {
@@ -513,7 +508,6 @@ const openHood = (key) => {
   const { line, fill } = sparkPath(hood.trend);
   $('[data-hood-spark]', panel)?.setAttribute('d', line);
   $('[data-hood-spark-fill]', panel)?.setAttribute('d', fill);
-  $$('.area').forEach((a) => a.classList.toggle('is-active', a.dataset.hoodOpen === key));
   panel.classList.add('is-open');
   $('.map')?.classList.add('has-hood');
 };
@@ -521,7 +515,6 @@ const openHood = (key) => {
 const closeHood = () => {
   $('[data-hood-panel]')?.classList.remove('is-open');
   $('.map')?.classList.remove('has-hood');
-  $$('.area').forEach((a) => a.classList.remove('is-active'));
 };
 
 /* ---------- booking ---------- */
@@ -686,7 +679,7 @@ const syncFlags = (id) => {
         ? `Open house ${OPEN_HOUSE} · hosted by Ravi Dhillon. Just drop in, no booking needed.`
         : '';
   }
-  $(`.pin[data-home="${id}"]`)?.classList.toggle('is-offer', offer);
+  propertyMap?.setOffer(id, offer);
 };
 
 const renderListings = () => {
@@ -802,6 +795,22 @@ const toggleDesk = () => {
 
 function init() {
   renderCatalogue();
+  createListingMap({ homes: homeListings, neighbourhoods: HOODS, onOpenHome: openHome, onSnapshot: openHood, onCloseSnapshot: closeHood })
+    .then(map => { propertyMap = map; applyFilters(); IDS.forEach(syncFlags); })
+    .catch(error => {
+      console.error('Northshore map could not load', error);
+      const status = $('[data-map-status]');
+      status.hidden = false;
+      status.textContent = 'The map could not load. Browse all homes in the list view.';
+      $$('[data-map-neighbourhood], [data-map-reset]').forEach(button => { button.disabled = true; });
+    });
+  $$('[data-listing-view]').forEach(button => button.addEventListener('click', () => {
+    if (button.dataset.listingView === 'map') showMapView();
+    else {
+      $('[data-listing-layout]').classList.remove('is-map-view');
+      $$('[data-listing-view]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    }
+  }));
   // Per-sheet extras (mortgage calculator, similar homes)
   IDS.forEach((id) => {
     const host = $(`[data-extras="${id}"]`);
@@ -888,6 +897,8 @@ function init() {
     if ((el = hit('[data-hood-open]'))) {
       const fromSheet = el.closest('.detail');
       if (fromSheet) fromSheet.classList.remove('is-open');
+      showMapView();
+      propertyMap?.focusNeighbourhood(el.dataset.hoodOpen);
       openHood(el.dataset.hoodOpen);
       if (fromSheet || window.innerWidth <= 900) $('.map')?.scrollIntoView({ block: 'nearest', behavior: scrollBehavior() });
       return;
@@ -1075,30 +1086,21 @@ function init() {
   document.addEventListener('mouseover', (event) => {
     const wrap = event.target instanceof Element ? event.target.closest('[data-cards] [data-home]') : null;
     if (!wrap) return;
-    $$('.pin.is-hot').forEach((p) => p.classList.remove('is-hot'));
-    $(`.pin[data-home="${wrap.dataset.home}"]`)?.classList.add('is-hot');
+    propertyMap?.highlight(wrap.dataset.home);
   });
   document.addEventListener('mouseout', (event) => {
     const wrap = event.target instanceof Element ? event.target.closest('[data-cards] [data-home]') : null;
     if (!wrap || wrap.contains(event.relatedTarget)) return;
-    $(`.pin[data-home="${wrap.dataset.home}"]`)?.classList.remove('is-hot');
+    propertyMap?.highlight(null);
   });
 
-  // Keyboard: SVG neighbourhood labels act as buttons; Escape closes the top overlay
+  // Leaflet handles map keyboard controls; Escape closes the top page overlay.
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       if (closeTopmost()) event.preventDefault();
       return;
     }
-    if ((event.key === 'Enter' || event.key === ' ') && event.target instanceof Element && event.target.matches('.pin[data-home-open]')) {
-      event.preventDefault();
-      if (!event.target.classList.contains('is-dim')) openHome(Number(event.target.dataset.homeOpen));
-      return;
-    }
-    if ((event.key === 'Enter' || event.key === ' ') && event.target instanceof Element && event.target.matches('.area[data-hood-open]')) {
-      event.preventDefault();
-      openHood(event.target.dataset.hoodOpen);
-    }
+
   });
 }
 

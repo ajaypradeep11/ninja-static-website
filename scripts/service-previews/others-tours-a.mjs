@@ -16,6 +16,10 @@ export async function prepareOthersTourA(page, slug) {
     // Dinner-service demo clock: keep RAF/timers real and pickup ETAs in hours.
     await page.clock.setFixedTime(new Date('2026-11-07T18:00:00-05:00'));
   }
+  if (slug === 'realty') {
+    await page.locator('[data-listing-map][data-map-ready="true"]').waitFor();
+    await page.locator('[data-map-status][hidden]').waitFor({ state: 'attached' });
+  }
   await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
   await page.mouse.move(20, 70);
   await page.waitForTimeout(700);

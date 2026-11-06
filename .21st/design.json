@@ -79,15 +79,15 @@
     },
     {
       "date": "2026-11-03",
-      "decision": "Keep MINA\u2019s head steady when the mouse moves. Remove pointer-driven head tilt and rotation while preserving eye tracking and cheek interaction."
+      "decision": "Keep MINA’s head steady when the mouse moves. Remove pointer-driven head tilt and rotation while preserving eye tracking and cheek interaction."
     },
     {
       "date": "2026-11-03",
-      "decision": "MINA\u2019s eyes should follow the cursor on both axes independently of the head, with eye tracking suspended during the angry cheek-pull reaction."
+      "decision": "MINA’s eyes should follow the cursor on both axes independently of the head, with eye tracking suspended during the angry cheek-pull reaction."
     },
     {
       "date": "2026-11-03",
-      "decision": "User rejected ECHO ZERO\u2019s procedural figure as too crude. Replace it with a high-quality authored human character, prepared in Blender with convincing pose, detailed materials and genuine full rotation."
+      "decision": "User rejected ECHO ZERO’s procedural figure as too crude. Replace it with a high-quality authored human character, prepared in Blender with convincing pose, detailed materials and genuine full rotation."
     },
     {
       "date": "2026-11-03",
@@ -143,7 +143,7 @@
     },
     {
       "date": "2026-11-04",
-      "decision": "User requested hiding the entire Hi I\u2019m MINA design. Keep its gallery markup inert in a template, remove MINA from the visible Motion Lab catalog and homepage featured order, and update counts to 15 visible Motion studies / 25 designs overall. Preserve the standalone implementation for possible restoration."
+      "decision": "User requested hiding the entire Hi I’m MINA design. Keep its gallery markup inert in a template, remove MINA from the visible Motion Lab catalog and homepage featured order, and update counts to 15 visible Motion studies / 25 designs overall. Preserve the standalone implementation for possible restoration."
     },
     {
       "date": "2026-11-04",
@@ -207,7 +207,7 @@
     },
     {
       "date": "2026-11-05",
-      "decision": "User clarified that Get in touch refers to the contact section, not the hero button, then requested a much darker blue. Use deep navy #0b2447 in both themes with light copy for contrast. Preserve the themed form and the hero Get in touch button\u2019s original secondary style."
+      "decision": "User clarified that Get in touch refers to the contact section, not the hero button, then requested a much darker blue. Use deep navy #0b2447 in both themes with light copy for contrast. Preserve the themed form and the hero Get in touch button’s original secondary style."
     },
     {
       "date": "2026-11-05",
@@ -220,6 +220,14 @@
     {
       "date": "2026-11-05",
       "decision": "Reuse every existing animated project preview across all homepage service tabs through one shared media catalog. Conversy marketing/app and other repeated projects use the same recording and poster URLs in AI & Voice Bots, Software, Consulting and Support as in their existing galleries. Keep per-gallery pause controls, lazy playback, reduced-motion/data-saver defaults, and deduplication within each category."
+    },
+    {
+      "date": "2026-11-06",
+      "decision": "Replace Northshore Realty’s schematic price grid with a Vancouver street map using Leaflet and clustered markers. Keep all 20 fictional listings, filters, detail views and neighbourhood snapshots connected. Add a mobile List/Map switch, visible OpenStreetMap attribution and approximate-location labelling; minimize the assistant when the map is used."
+    },
+    {
+      "date": "2026-11-06",
+      "decision": "Remove decorative eight-spoked asterisk characters across Design Lab and Motion Lab because iOS displays them as green emoji. Remove their empty layout slots and positional text styles, and refresh visible showcase posters and recordings. Preserve other authored artwork."
     }
   ],
   "evidence": [

@@ -512,7 +512,7 @@ export default function Mina() {
             WITH A PULSE.
           </p>
           <div className="mina-play-hint">
-            <span aria-hidden="true">✳</span>
+
             <p>
               <span className="mina-desktop-hint">DRAG MY CHEEKS. LET GO.</span>
               <span className="mina-touch-hint">
@@ -726,9 +726,7 @@ export default function Mina() {
           <h2>
             GOT A<br />
             <em>FEELING?</em>
-            <span className="mina-contact-star" aria-hidden="true">
-              ✳
-            </span>
+
           </h2>
         </Reveal>
         <div className="mina-contact-bottom">
